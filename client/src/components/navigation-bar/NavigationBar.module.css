@@ -1,0 +1,37 @@
+a {
+    text-decoration: none;
+}
+
+.line {
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid rgb(221, 221, 221);
+    bottom: 0%;
+    height: 10%;
+    right: 0%;
+    left: 0%;
+    overflow: hidden;
+    position: fixed;
+    z-index: 100;
+}
+
+.nav-bar {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-around;
+    background: yellow;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.size-icon {
+    width: 10%;
+}
