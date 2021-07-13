@@ -1,22 +1,36 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/SearchIcon";
+import HeartIcon from "../UI/icons/HeartIcon";
+import UserIcon from "../UI/icons/UserIcon";
 
 const NavigationBar = () => {
 
     return (
-        <nav className={classes.line}>
-                <ul className={classes['nav-bar']}>
-                    <li>
-                        <NavLink className={classes.item} to="/">
-                            <SearchIcon />
-                            <div>Esplora</div>
-                        </NavLink>
-                    </li>
-                    <NavLink to="/preferiti">Preferiti</NavLink>
-                    <NavLink to="/accedi">Accedi</NavLink>
-                </ul>
+        <nav>
+            <ul className={classes['nav-bar']}>
+                <li>
+                    <NavLink to='/' exact activeClassName={classes.active} className={classes.item}>
+                        <SearchIcon />
+                        <div>Esplora</div>
+                    </NavLink>
+                </li>
+
+                <li>
+                    <NavLink to='/preferiti' activeClassName={classes.active} className={classes.item}>
+                        <HeartIcon className={classes.heart} />
+                        <div>Preferiti</div>
+                    </NavLink>
+                </li>
+
+                <li>
+                    <NavLink to='/accedi' activeClassName={classes.active} className={classes.item}>
+                        <UserIcon />
+                        <div>Accedi</div>
+                    </NavLink>
+                </li>
+            </ul>
         </nav>
     );
 };
