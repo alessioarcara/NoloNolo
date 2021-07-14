@@ -1,4 +1,4 @@
-exports.bodyLogin = (email, password) => {
+exports.body_login = (email, password) => {
     return {
         query: `
           query($email: String!, $password: String!) {
@@ -13,7 +13,7 @@ exports.bodyLogin = (email, password) => {
     }
 };
 
-exports.bodySignup = (userData) => {
+exports.body_signup = ({enteredEmail, enteredPassword}) => {
     return {
         query: `
           mutation($userData: UserInput!) {
@@ -24,6 +24,6 @@ exports.bodySignup = (userData) => {
             }  
           }
         `,
-        variables: {userData}
+        variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
