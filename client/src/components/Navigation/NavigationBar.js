@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
-import SearchIcon from "../UI/icons/SearchIcon";
 
 const NavigationBar = () => {
 
@@ -12,7 +11,7 @@ const NavigationBar = () => {
                     <div>Esplora</div>
                 </NavLink>
                 <NavLink to="/preferiti">Preferiti</NavLink>
-                <NavLink to="/accedi">Accedi</NavLink>
+                <NavLink to="/auth">Accedi</NavLink>
             </div>
         </nav>
     );

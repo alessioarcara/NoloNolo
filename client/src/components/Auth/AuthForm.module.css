@@ -1,0 +1,108 @@
+.auth {
+    width: 95%;
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 50rem;
+}
+
+.auth h1 {
+    text-align: center;
+}
+
+.control {
+    margin: 1rem 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+
+.control label,
+.control input {
+    display: block;
+}
+
+.control label {
+    font-weight: bold;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0.5rem;
+}
+
+.control input {
+    flex: 3;
+    font: inherit;
+    padding: 0.55rem 0.55rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.control input:focus {
+    outline: none;
+    border-color: #3A3FF0;
+    background: #e9efff;
+}
+
+.control.invalid input {
+    border-color: red;
+    background: #fbdada;
+}
+
+.actions {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actions button {
+    cursor: pointer;
+    font: inherit;
+    color: #FF2677;
+    background-color: white;
+    border: 1px solid #FF2677;
+    border-radius: 6px;
+    padding: 0.5rem 2.5rem;
+    width: 100%;
+}
+
+.actions button:hover {
+    background-color: #FF2677;
+    color: white;
+}
+
+.actions .toggle {
+    margin-top: 2rem;
+    background-color: transparent;
+    color: #FF2677;
+    border: none;
+    padding: 0.15rem 1.5rem;
+    text-decoration: underline;
+}
+
+.actions .toggle:hover {
+    background-color: transparent;
+    color: #FF2677;
+    opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+    .auth {
+        margin: 4rem auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    }
+
+    .auth h1 {
+        text-align: left;
+    }
+
+    .control {
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .actions button {
+        width: auto;
+        flex-direction: row;
+    }
+}
