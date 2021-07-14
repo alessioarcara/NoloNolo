@@ -1,5 +1,6 @@
 import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
+import AuthPage from "./pages/AuthPage";
 
 function App() {
     return (
@@ -14,8 +15,8 @@ function App() {
                         <p>Preferiti</p>
                     </Route>
 
-                    <Route path='/accedi'>
-                        <p>Accedi</p>
+                    <Route path='/auth'>
+                        <AuthPage />
                     </Route>
 
                     <Route path='*'>

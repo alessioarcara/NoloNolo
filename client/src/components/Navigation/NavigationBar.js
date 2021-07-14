@@ -25,7 +25,7 @@ const NavigationBar = () => {
                 </li>
 
                 <li>
-                    <NavLink to='/accedi' activeClassName={classes.active} className={classes.item}>
+                    <NavLink to='/auth' activeClassName={classes.active} className={classes.item}>
                         <UserIcon />
                         <div>Accedi</div>
                     </NavLink>
