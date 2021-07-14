@@ -2,36 +2,57 @@ a {
     text-decoration: none;
 }
 
-.line {
-    -webkit-box-align: center;
+nav ul {
+    height: 100%;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
     align-items: center;
-    background-color: rgb(255, 255, 255);
-    border-top: 1px solid rgb(221, 221, 221);
-    bottom: 0%;
-    height: 10%;
-    right: 0%;
-    left: 0%;
-    overflow: hidden;
-    position: fixed;
-    z-index: 100;
+    justify-content: center;
 }
 
 .nav-bar {
-    display: flex;
-    height: 5.5rem;
+    display: inline-flex;
+    gap: 10%;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0rem;
+    height: 4rem;
+    right: 0rem;
+    left: 0rem;
     align-items: center;
-    justify-content: space-around;
-    background: yellow;
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid rgb(221, 221, 221);
+    z-index: 100;
 }
 
 .item {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     cursor: pointer;
+    color: #D1C9CD;
+    height: 3.5rem;
+    font-size: 0.9em;
 }
 
-.size-icon {
-    width: 10%;
+a:active, a:hover, a.active {
+    color: #FF2677;
+}
+
+a:active div, a:hover div, a.active div {
+    color: black;
+}
+
+.heart {
+    color: white;
+    stroke: #D1C9CD;
+    stroke-width: 1.4;
+}
+
+li:nth-child(2) > a:active > svg,
+li:nth-child(2) > a:hover > svg,
+li:nth-child(2) > a.active > svg {
+    stroke: #FF2677;
 }
