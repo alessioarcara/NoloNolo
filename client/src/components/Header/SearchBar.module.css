@@ -1,0 +1,41 @@
+.title {
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    margin: 0;
+}
+
+.background-searchbar {
+    background: rgb(255, 255, 255);
+    position: sticky;
+    top: 0;
+    padding: 0.2rem;
+}
+
+.search-bar {
+    display: flex;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background-color: #efefef;
+    border-radius: 2rem;
+    margin: 0.8rem;
+    padding: 0.05rem;
+    padding-left: 1rem;
+}
+
+div > svg {
+    color: #b1a4a4;
+    width: 2rem;
+}
+
+div > input[type=search] {
+    color: black;
+    flex: 8;
+    border: none;
+    margin: 0.7rem;
+    outline: none;
+    font-size: 1rem;
+    background-color: #efefef;
+}

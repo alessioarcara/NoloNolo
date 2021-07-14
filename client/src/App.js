@@ -1,6 +1,7 @@
 import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AuthPage from "./pages/AuthPage";
+import Header from "./components/Header/Header";
 
 function App() {
     return (
@@ -8,7 +9,34 @@ function App() {
             <main>
                 <Switch>
                     <Route path='/' exact>
-                        <p>Home</p>
+                        <Header/>
+                        <section id='back'>
+                            <h1></h1>
+                        </section>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
+                        <p>Ciao</p>
                     </Route>
 
                     <Route path='/preferiti'>
@@ -16,7 +44,7 @@ function App() {
                     </Route>
 
                     <Route path='/auth'>
-                        <AuthPage />
+                        <AuthPage/>
                     </Route>
 
                     <Route path='*'>
