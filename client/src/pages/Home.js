@@ -1,6 +1,7 @@
 import Header from "../components/Home/Header";
-import classes from "../components/Home/Home.module.css";
-import backImage from "../images/background.jpg";
+import classes from "../components/Home/Header.module.css";
+import backImage from "../assets/background.jpg";
+import ImageList from "../components/ImageList/ImageList";
 
 const Home = () => {
     return (
@@ -9,6 +10,7 @@ const Home = () => {
             <div className={classes[`main-image`]}>
                 <img src={backImage} alt="An image with a boat"/>
             </div>
+            <ImageList />
         </>
     );
 };

@@ -1,7 +1,6 @@
 import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AuthPage from "./pages/AuthPage";
-import Header from "./components/Home/Header";
 import Home from "./pages/Home";
 
 function App() {

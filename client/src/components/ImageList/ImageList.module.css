@@ -1,0 +1,12 @@
+.list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    position: relative;
+    top: 600px;
+    padding: 1rem 0 1rem 0.7rem;
+}
+
+.list::-webkit-scrollbar {
+    display: none;
+}

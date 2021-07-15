@@ -1,0 +1,19 @@
+.image-card {
+    position: relative;
+    /*text-align: center;*/
+    /*color: white;*/
+    border: 1px solid black;
+    width: 200px;
+    height: 100px;
+    z-index: 100;
+    flex: 0 0 auto;
+    margin-right: 15px;
+
+}
+
+.image-card p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

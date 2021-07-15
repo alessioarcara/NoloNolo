@@ -1,10 +1,18 @@
-.background-searchbar {
+.search-active {
+    background-color: rgb(255, 255, 255);
+}
+
+.search {
     background-color: rgba(255, 255, 255, 0.4);
+}
+
+.background-searchbar {
     padding: 0.02rem;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: 0.4s;
 }
 
 .search-bar {
