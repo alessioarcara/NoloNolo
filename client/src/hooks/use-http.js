@@ -26,20 +26,14 @@ const httpReducer = (state, action) => {
 
 const useHttp = (startWithPending = false) => {
     const [httpState, dispatch] = useReducer(httpReducer, {
-        status: startWithPending ? 'pending' : null,
-        data: null,
-        error: null
-    });
+        status: startWithPending ? 'pending' : null, data: null, error: null });
 
     const sendRequest = useCallback(async (requestConfig, applyData = () => {}) => {
         dispatch({type: "SEND"})
         try {
             const res = await fetch(GRAPHQL_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: requestConfig.headers
-                },
+                headers: {'Content-Type': 'application/json', Authorization: requestConfig.headers},
                 body: JSON.stringify(requestConfig.body)
             })
 
@@ -49,15 +43,10 @@ const useHttp = (startWithPending = false) => {
 
             const resData = await res.json();
 
-            dispatch({
-                type: 'SUCCESS',
-                responseData: applyData(resData)
-            });
+            dispatch({ type: 'SUCCESS', responseData: applyData(resData) });
         } catch (err) {
-            dispatch({
-                type: "ERROR",
-                error: err.message || 'Something went wrong!'
-            });
+            console.log(err)
+            dispatch({ type: "ERROR", error: err.message || 'Something went wrong!' });
         }
     }, []);
 
