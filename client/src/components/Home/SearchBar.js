@@ -3,8 +3,8 @@ import SearchIcon from "../UI/icons/SearchIcon";
 
 const SearchBar = () => {
     return (
-        <div className={classes[`background-searchbar`]}>
-            <div className={classes[`search-bar`]}>
+        <div className={classes['background-searchbar']}>
+            <div className={classes['search-bar']}>
                 <SearchIcon/>
                 <input type='search' placeholder='Qual è la tua meta?'/>
             </div>
