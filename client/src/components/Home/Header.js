@@ -1,6 +1,5 @@
 import SearchBar from "./SearchBar";
-import classes from "./SearchBar.module.css";
-import backImage from "../../images/background.jpg";
+import classes from "./Home.module.css";
 
 const Header = () => {
     return (

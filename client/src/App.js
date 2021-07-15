@@ -10,34 +10,34 @@ function App() {
             <main>
                 <Switch>
                     <Route path='/' exact>
-                        <Header/>
-                        <section id='back'>
-                            <h1></h1>
-                        </section>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
-                        <p>Ciao</p>
+                        <Home />
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
+                        <p>AAA</p>
                     </Route>
 
                     <Route path='/preferiti'>
