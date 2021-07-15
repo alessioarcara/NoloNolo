@@ -10,6 +10,7 @@ const NavigationBar = () => {
     return (
         <nav>
             <ul className={classes['nav-bar']}>
+
                 <li>
                     <NavLink to='/' exact activeClassName={classes.active} className={classes.item}>
                         <SearchIcon />
