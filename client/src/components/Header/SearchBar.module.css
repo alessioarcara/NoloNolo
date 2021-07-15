@@ -1,17 +1,20 @@
 .title {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-top: 0.5rem;
+}
+
+.title p {
     font-family: 'Lobster', cursive;
     font-size: 30px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    top: 0;
     margin: 0;
 }
 
 .background-searchbar {
-    background: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.7);
     position: sticky;
     top: 0;
-    padding: 0.2rem;
+    padding: 0.02rem;
 }
 
 .search-bar {
@@ -21,8 +24,7 @@
     background-color: #efefef;
     border-radius: 2rem;
     margin: 0.8rem;
-    padding: 0.05rem;
-    padding-left: 1rem;
+    padding: 0.05rem 0.05rem 0.05rem 1rem;
 }
 
 div > svg {
@@ -38,4 +40,18 @@ div > input[type=search] {
     outline: none;
     font-size: 1rem;
     background-color: #efefef;
+}
+
+.main-image {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 600px;
+    z-index: -1;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
