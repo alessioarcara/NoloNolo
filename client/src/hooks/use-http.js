@@ -34,6 +34,7 @@ const useHttp = (startWithPending = false) => {
             const res = await fetch(GRAPHQL_API_URL, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json', Authorization: requestConfig.headers},
+                credentials: 'include',
                 body: JSON.stringify(requestConfig.body)
             })
 
@@ -45,7 +46,6 @@ const useHttp = (startWithPending = false) => {
 
             dispatch({ type: 'SUCCESS', responseData: applyData(resData) });
         } catch (err) {
-            console.log(err)
             dispatch({ type: "ERROR", error: err.message || 'Something went wrong!' });
         }
     }, []);

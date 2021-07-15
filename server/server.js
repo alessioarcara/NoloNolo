@@ -1,5 +1,4 @@
 const express = require('express');
-const {graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
 
 // Schema & Resolvers
@@ -8,13 +7,16 @@ const graphQlResolvers = require('./graphql/resolvers/index')
 
 // Middleware
 const isAuth = require('./middleware/is-auth')
+const {graphqlHTTP} = require('express-graphql');
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
 app.use((req,
          res,
          next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header("Access-Control-Allow-Credentials", true);
     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     if (req.method === 'OPTIONS') {
@@ -23,16 +25,18 @@ app.use((req,
     next();
 })
 
+app.use(cookieParser())
 app.use(isAuth)
 
 app.use(
-    '/api', graphqlHTTP({
+    '/api', graphqlHTTP((req, res) => ({
         schema: graphQlSchema,
         rootValue: graphQlResolvers,
-        graphiql: true })
-)
+        graphiql: true,
+        context: {req, res}
+})));
 
-mongoose.connect(`mongodb://localhost:27017/${process.env.MONGO_DB}`, {
+mongoose.connect(`mongodb://argonauta.synology.me:49153/${process.env.MONGO_DB}`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true })

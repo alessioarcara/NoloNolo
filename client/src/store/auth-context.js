@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const AuthContext = React.createContext({
    token: '',
@@ -14,12 +14,16 @@ export const AuthContextProvider = props => {
     const userIsLoggedIn = !!token;
 
     const logoutHandler = () => {
-
+        setToken(null)
     };
 
     const loginHandler = (token, expirationTime) => {
         setToken({token, expiry: expirationTime})
     };
+
+    useEffect(() => {
+        console.log("ciao")
+    }, []);
 
     const contextValue = {
         isLoggedIn: userIsLoggedIn,
