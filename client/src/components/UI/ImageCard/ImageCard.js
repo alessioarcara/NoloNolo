@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import classes from './ImageCard.module.css';
 
 const ImageCard = (props) => {
@@ -12,7 +12,7 @@ const ImageCard = (props) => {
         <>
             <div className={classes[`image-card`]}>
                 <img
-                    src={props.image}
+                    src={require(`../../../assets/${props.text}.jpg`).default}
                     onClick={clickHandler}
                     alt=""
                 />

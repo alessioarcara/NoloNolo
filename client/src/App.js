@@ -2,6 +2,7 @@ import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AuthPage from "./pages/AuthPage";
 import Home from "./pages/Home";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
     return (
@@ -9,34 +10,7 @@ function App() {
             <main>
                 <Switch>
                     <Route path='/' exact>
-                        <Home />
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
+                        <Home/>
                     </Route>
 
                     <Route path='/preferiti'>
