@@ -21,6 +21,10 @@ function App() {
                         <AuthPage/>
                     </Route>
 
+                    <Route path='/search'>
+                        <SearchPage/>
+                    </Route>
+
                     <Route path='*'>
                         <Redirect to='/'/>
                     </Route>
