@@ -1,0 +1,8 @@
+.line {
+    display: flex;
+    flex-direction: row;
+}
+
+.line > div:first-child {
+    top: 50%;
+}
