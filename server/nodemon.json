@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_DB": "nolonolo",
+    "ACCESS_TOKEN_KEY": "asjdsajdadhuasjadshjahdasdjasdjsakkdjhashjdhjasdsdhkdas",
+    "REFRESH_TOKEN_KEY": "asdsadsadasdsadszxkcxzkjczxjkciasodsiaoiodsiodisadddsads"
+  }
+}
