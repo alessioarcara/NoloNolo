@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from "react";
+import {body_refresh, invalidate} from "../helpers/query"
+import useHttp from "../hooks/use-http";
 
 const AuthContext = React.createContext({
    token: '',
@@ -9,23 +11,32 @@ const AuthContext = React.createContext({
 
 export const AuthContextProvider = props => {
 
-    const [token, setToken] = useState()
+    const [token, setToken] = useState('')
+    const {sendRequest} = useHttp()
 
     const userIsLoggedIn = !!token;
 
+    const loginHandler = (token) => {
+        setToken(token)
+    }
+
     const logoutHandler = () => {
+        sendRequest({body: invalidate, token})
         setToken(null)
     };
 
-    const loginHandler = (token, expirationTime) => {
-        setToken({token, expiry: expirationTime})
-    };
-
     useEffect(() => {
-        console.log("ciao")
-    }, []);
+        if (!token) {
+            const transformData = resData => {
+                const authData = resData.refreshToken
+                setToken(authData["token"])
+            }
+            sendRequest({body: body_refresh}, transformData)
+        }
+    }, [token, sendRequest]);
 
     const contextValue = {
+        token: token,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
         logout: logoutHandler

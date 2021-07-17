@@ -5,11 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import {AuthContextProvider} from "./store/auth-context";
+import AxiosMiddleware from "./middleware/axiosMiddleware";
 
 ReactDOM.render(
     <BrowserRouter>
         <AuthContextProvider>
-            <App/>
+            <AxiosMiddleware>
+                <App/>
+            </AxiosMiddleware>
         </AuthContextProvider>,
     </BrowserRouter>,
     document.getElementById('root')

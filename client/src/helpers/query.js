@@ -5,14 +5,12 @@ exports.body_login = (email, password) => {
             login(email: $email, password: $password) {
               userId
               token
-              tokenExpiration
             }
           }
         `,
         variables: {email, password}
     }
 };
-
 exports.body_signup = ({enteredEmail, enteredPassword}) => {
     return {
         query: `
@@ -20,10 +18,26 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
             createUser(inputUser: $userData) {
               userId
               token
-              tokenExpiration
             }  
           }
         `,
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
+};
+exports.body_refresh =  {
+        query: `
+          query {
+            refreshToken {
+              userId
+              token
+            }  
+          }
+        `,
+};
+exports.invalidate =  {
+    query: `
+          mutation {
+            invalidateTokens
+          }
+        `,
 };

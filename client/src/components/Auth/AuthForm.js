@@ -1,5 +1,4 @@
 import {useContext, useRef, useState} from "react";
-import {useHistory} from "react-router-dom"
 import classes from "./AuthForm.module.css"
 import useHttp from "../../hooks/use-http";
 
@@ -7,7 +6,7 @@ import {body_login, body_signup} from '../../helpers/query'
 import AuthContext from "../../store/auth-context";
 
 const transformData = (resData) => {
-    const authData = resData.data[Object.keys(resData.data)]
+    const authData = resData[Object.keys(resData)]
     return authData
 }
 
@@ -18,7 +17,6 @@ const AuthForm = () => {
     const {data: authData, status, error,  sendRequest: authenticate} = useHttp(true)
 
     const authCtx = useContext(AuthContext)
-    const history = useHistory()
 
     const switchAuthModeHandler = () => {
         setIsLogin(prevState => !prevState);
@@ -38,8 +36,7 @@ const AuthForm = () => {
     }
 
     if (status === 'completed' && !error) {
-        authCtx.login(authData.token, authData.tokenExpiration)
-        history.replace('/')
+        authCtx.login(authData.token)
     }
 
     return (

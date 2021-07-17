@@ -1,7 +1,6 @@
 import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AuthPage from "./pages/AuthPage";
-import Header from "./components/Home/Header";
 import Home from "./pages/Home";
 import {useContext} from "react";
 import AuthContext from "./store/auth-context";
@@ -15,7 +14,7 @@ function App() {
             <main>
                 <Switch>
                     <Route path='/' exact>
-                        <Home />
+                        <Home/>
                         <p>AAA</p>
                         <p>AAA</p>
                         <p>AAA</p>
@@ -45,11 +44,14 @@ function App() {
                         <p>AAA</p>
                     </Route>
                     <Route path='/preferiti'>
-                        <p>Preferiti</p>
+                        <div className="centered">
+                            <h1>Preferiti</h1>
+                            <p>No favorites found.</p>
+                        </div>
                     </Route>
                     {!isLoggedIn &&
                     <Route path='/auth'>
-                        <AuthPage />
+                        <AuthPage/>
                     </Route>}
                     <Route path='/profile'>
                         {isLoggedIn && <ProfilePage/>}

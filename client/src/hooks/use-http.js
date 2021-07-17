@@ -1,26 +1,13 @@
-import { useReducer, useCallback } from "react";
-
-const GRAPHQL_API_URL = "http://localhost:3001/api"
+import {useReducer, useCallback} from "react";
+import http from "../middleware/axios-config";
 
 const httpReducer = (state, action) => {
     if (action.type === "SEND") {
-        return {
-            data: null,
-            status: 'pending',
-            error: null}
-    }
+        return { data: null, status: 'pending', error: null} }
     if (action.type === "SUCCESS") {
-        return {
-            data: action.responseData,
-            status: 'completed',
-            error: null}
-    }
+        return { data: action.responseData, status: 'completed', error: null} }
     if (action.type === "ERROR") {
-        return {
-            data: null,
-            status: 'completed',
-            error: action.error}
-    }
+        return { data: null, status: 'completed', error: action.error} }
     return state;
 }
 
@@ -31,22 +18,19 @@ const useHttp = (startWithPending = false) => {
     const sendRequest = useCallback(async (requestConfig, applyData = () => {}) => {
         dispatch({type: "SEND"})
         try {
-            const res = await fetch(GRAPHQL_API_URL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', Authorization: requestConfig.headers},
-                credentials: 'include',
-                body: JSON.stringify(requestConfig.body)
+            const res = await http({
+                data: requestConfig.body,
+                headers: { 'Authorization': `Bearer ${requestConfig.token}` },
             })
+            const resData = await res.data.data
 
             if (res.status !== 200 && res.status !== 201) {
-                throw new Error(res.statusText);
+                throw new Error(resData.errors[0].message);
             }
-
-            const resData = await res.json();
 
             dispatch({ type: 'SUCCESS', responseData: applyData(resData) });
         } catch (err) {
-            dispatch({ type: "ERROR", error: err.message || 'Something went wrong!' });
+            dispatch({ type: "ERROR", error: err.message || 'Something went wrong!'});
         }
     }, []);
 

@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken')
 
-// middleware just checks if we got valid token or not,
-// never throw an error, but just set extra data
+/*
+ * middleware just checks if we got valid access token or not,
+ * never throw an error, but just set extra data for api check
+*/
+
 module.exports = (req, res, next) => {
-    const authHeader = req.get('Authorization') // Authorization Bearer token
+    const authHeader = req.get('Authorization') // [Authorization]: Bearer token
     if (!authHeader) {
         req.isAuth = false;
         return next()

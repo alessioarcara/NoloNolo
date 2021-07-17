@@ -7,7 +7,7 @@ const Home = () => {
         <>
             <Header/>
             <div className={classes[`main-image`]}>
-                <img src={backImage} alt="An image with a boat"/>
+                <img src={backImage} alt="Some boats"/>
             </div>
         </>
     );

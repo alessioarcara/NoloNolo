@@ -3,37 +3,42 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 
-const ACCESS_EXPIRE_TIME = '1h'
+const ACCESS_EXPIRE_TIME = '15s'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {
     const accessToken = jwt.sign({ userId, email }, process.env.ACCESS_TOKEN_KEY, {
         expiresIn: ACCESS_EXPIRE_TIME});
 
-    if (res !== undefined) {
-        const refreshToken = jwt.sign({userId, count}, process.env.REFRESH_TOKEN_KEY, {
-            expiresIn: REFRESH_EXPIRE_TIME});
+    const refreshToken = jwt.sign({userId, count}, process.env.REFRESH_TOKEN_KEY, {
+        expiresIn: REFRESH_EXPIRE_TIME});
 
-        const expirationTime = new Date(new Date().getTime() + (+REFRESH_EXPIRE_TIME[0]) * 24 * 60 * 60 * 1000)
-        res.cookie('refresh-token', refreshToken, {expires: expirationTime, httpOnly: true})
-    }
+    const expirationTime = new Date(new Date().getTime() + (parseInt(REFRESH_EXPIRE_TIME) * 24 * 60 * 60 * 1000));
+    res.cookie('refresh-token', refreshToken, {expires: expirationTime, httpOnly: true})
+
     return accessToken
 }
 
 module.exports = {
-    login: async ({email, password}, res) => {
+    users: async (_, {req}) => {
+        if (!req.isAuth) {
+            throw Error("Unauthenticated.")
+        }
+        const users = await User.find()
+        return users
+    },
+    login: async ({email, password}, {_, res}) => {
         try {
             const user = await User.findOne({email});
-
             if (!user) { throw new Error('User does not exist!'); }
 
             const isEqual = bcrypt.compare(password, user.password)
             if (!isEqual) { throw new Error('Password is incorrect!'); }
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
-
-            return {userId: user._id, token: accessToken, tokenExpiration: +ACCESS_EXPIRE_TIME[0] };
-        } catch (err) { throw new Error(`Can't login. ${err}`); }
+            return {userId: user._id, token: accessToken};
+        } catch (err) {
+            throw new Error(`Can't login. ${err}`); }
     },
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
@@ -46,13 +51,12 @@ module.exports = {
             await user.save();
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
-
-            return {userId: user._id, token: accessToken, tokenExpiration: +ACCESS_EXPIRE_TIME[0]}
+            return {userId: user._id, token: accessToken}
         } catch (err) {
             throw new Error(`Can't create user. ${err}`)
         }
     },
-    refreshToken: async (_, {req, __}) => {
+    refreshToken: async (_, {req, res}) => {
         const refreshToken = req.cookies["refresh-token"];
         if (!refreshToken || refreshToken === '') {
             throw new Error("Can't find refresh token.")
@@ -66,10 +70,15 @@ module.exports = {
         if (!user || user.count !== decodedToken.count) {
             throw new Error('Invalid or expired refresh token.')
         }
-        user.count += 1
+        user.count += 1;
         await user.save();
 
-        const accessToken = createTokens(user._id, user.email)
-        return {userId: user._id, token: accessToken, tokenExpiration: +ACCESS_EXPIRE_TIME[0]}
+        const accessToken = createTokens(user._id, user.email, user.count, res)
+        return {userId: user._id, token: accessToken}
+    },
+    invalidateTokens: async (_, {req}) => {
+        if (!req.userId) { return false }
+        await User.findByIdAndUpdate(req.userId, { $inc: { count: 1 } })
+        return true
     }
 }

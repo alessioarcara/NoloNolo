@@ -28,13 +28,14 @@ app.use((req,
 app.use(cookieParser())
 app.use(isAuth)
 
-app.use(
-    '/api', graphqlHTTP((req, res) => ({
+app.use('/api', (req, res) => {
+    graphqlHTTP({
         schema: graphQlSchema,
         rootValue: graphQlResolvers,
         graphiql: true,
-        context: {req, res}
-})));
+        context: {req, res},
+    })(req, res)
+});
 
 mongoose.connect(`mongodb://argonauta.synology.me:49153/${process.env.MONGO_DB}`, {
         useNewUrlParser: true,
