@@ -12,7 +12,7 @@ const ImageCard = (props) => {
         <>
             <div className={classes[`image-card`]}>
                 <img
-                    src={require(`../../../assets/${props.text}.jpg`).default}
+                    src={require(`../../assets/${props.text}.jpg`).default}
                     onClick={clickHandler}
                     alt=""
                 />

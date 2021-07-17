@@ -1,4 +1,4 @@
-import ImageCard from "../UI/ImageCard/ImageCard";
+import ImageCard from "./ImageCard";
 import classes from './ImageList.module.css';
 
 const ImageList = () => {
