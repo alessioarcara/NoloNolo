@@ -1,0 +1,14 @@
+.places {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.places div {
+    padding-left: 0.5rem;
+    cursor: pointer;
+}
+
+.places > svg {
+    width: 2rem;
+}

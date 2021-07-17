@@ -15,33 +15,6 @@ function App() {
                 <Switch>
                     <Route path='/' exact>
                         <Home/>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
-                        <p>AAA</p>
                     </Route>
                     <Route path='/preferiti'>
                         <div className="centered">
