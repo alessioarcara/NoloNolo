@@ -11,3 +11,19 @@ html {
 body {
   margin: 0;
 }
+
+button {
+  cursor: pointer;
+  font: inherit;
+  color: #FF2677;
+  background-color: white;
+  border: 1px solid #FF2677;
+  border-radius: 6px;
+  padding: 0.5rem 2.5rem;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #FF2677;
+  color: white;
+}

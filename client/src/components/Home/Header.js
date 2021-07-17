@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 import SearchBar from "./SearchBar";
 import Modal from "./Modal";
 import classes from "./Header.module.css";

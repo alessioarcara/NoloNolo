@@ -3,7 +3,7 @@
 }
 
 .search {
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .background-searchbar {
@@ -19,6 +19,7 @@
 
 .search-bar {
     display: flex;
+    flex: 1;
     font-size: 14px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     background-color: #efefef;
@@ -27,7 +28,7 @@
     padding: 0.05rem 0.05rem 0.05rem 1rem;
 }
 
-div > svg {
+.search-bar > svg {
     color: #b1a4a4;
     width: 2rem;
 }
@@ -40,4 +41,9 @@ div > input[type=search] {
     outline: none;
     font-size: 1rem;
     background-color: #efefef;
+}
+
+.btn-exit {
+    padding-right: 0.7rem;
+    cursor: pointer;
 }
