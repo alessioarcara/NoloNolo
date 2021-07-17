@@ -9,7 +9,6 @@ const REFRESH_EXPIRE_TIME = '7d'
 const createTokens = (userId, email, count, res) => {
     const accessToken = jwt.sign({ userId, email }, process.env.ACCESS_TOKEN_KEY, {
         expiresIn: ACCESS_EXPIRE_TIME});
-
     const refreshToken = jwt.sign({userId, count}, process.env.REFRESH_TOKEN_KEY, {
         expiresIn: REFRESH_EXPIRE_TIME});
 

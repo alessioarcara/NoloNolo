@@ -26,14 +26,13 @@ export const AuthContextProvider = props => {
     };
 
     useEffect(() => {
-        if (!token) {
-            const transformData = resData => {
-                const authData = resData.refreshToken
-                setToken(authData["token"])
-            }
-            sendRequest({body: body_refresh}, transformData)
+        const transformData = resData => {
+            const authData = resData.refreshToken
+            setToken(authData["token"])
         }
-    }, [token, sendRequest]);
+
+        sendRequest({body: body_refresh}, transformData)
+    }, [sendRequest]);
 
     const contextValue = {
         token: token,
