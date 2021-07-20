@@ -1,0 +1,31 @@
+.foot {
+    background-color: #efefef;
+    position: absolute;
+    text-align: center;
+    top: 71rem;
+    width: 100%;
+    z-index: 99;
+    padding: 1.5rem 0 2rem 0;
+    border-top: 2px solid rgb(221, 221, 221);
+}
+
+.foot > div {
+    color: #b1a4a4;
+    font-size: 0.75em;
+    margin: 0.5rem;
+}
+
+.grid-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .foot {
+        top: 85rem;
+    }
+    .grid-footer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
