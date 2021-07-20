@@ -15,6 +15,7 @@ const ImageList = () => {
 
     return (
         <>
+            <div className={`${classes.top} ${'subtitle'}`}>Naviga nelle nostre località</div>
             <div className={classes.list}>
                 {DUMMY_LOCATION.map(place =>
                     <ImageCard

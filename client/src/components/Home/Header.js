@@ -3,6 +3,7 @@ import {useState} from "react";
 import SearchBar from "./SearchBar";
 import Modal from "./Modal";
 import classes from "./Header.module.css";
+import backImage from "../../assets/background.jpg";
 
 const Header = (props) => {
     const [click, setClick] = useState(false);

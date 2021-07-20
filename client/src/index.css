@@ -4,13 +4,35 @@
 }
 
 html {
-  font-family: sans-serif;
   background: white;
 }
 
 body {
   margin: 0;
 }
+
+.title {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding-top: 0.8rem;
+  position: relative;
+  z-index: 100;
+}
+
+.title p {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Lobster', cursive;
+  font-size: 1.55rem;
+  left: 0.7rem;
+  z-index: 99;
+}
+
+
 
 /* PROVVISORIO */
 .centered {
@@ -20,7 +42,6 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
 
 button {
   cursor: pointer;
