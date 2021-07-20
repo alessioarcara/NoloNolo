@@ -8,6 +8,11 @@
     z-index: 99;
 }
 
+.top {
+    position: absolute;
+    top: 38rem;
+}
+
 .list::-webkit-scrollbar {
     display: none;
 }

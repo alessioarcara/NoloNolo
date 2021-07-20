@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 import Modal from "./Modal";
 import classes from "./Header.module.css";
 
-const Header = () => {
+const Header = (props) => {
     const [click, setClick] = useState(false);
 
     const clickChangeHandler = () => {
@@ -18,8 +18,13 @@ const Header = () => {
     return (
         <>
             {!click &&
-                <div className={classes.title}>
-                    <p>NoloNolo Boat</p>
+                <div>
+                    <div className='title'>
+                        <p>NoloNolo Boat</p>
+                    </div>
+                    <div className={classes[`main-image`]}>
+                        <img src={backImage} alt="Some boats"/>
+                    </div>
                 </div>
             }
             <SearchBar onClicked={clickChangeHandler} click={click} onClose={clickHomeHandler}/>

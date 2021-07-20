@@ -1,0 +1,36 @@
+.boat-type {
+
+}
+
+.boat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: rgba(3, 121, 166, 0.8);
+    position: absolute;
+    top: 52.5rem;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+    color: white;
+}
+
+.boat {
+    font-size: 1.2em;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.boat:hover {
+    color: black;
+}
+
+.top {
+    position: absolute;
+    top: 49.5rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .boat-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

@@ -13,7 +13,7 @@ ReactDOM.render(
             <AxiosMiddleware>
                 <App/>
             </AxiosMiddleware>
-        </AuthContextProvider>,
+        </AuthContextProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );
