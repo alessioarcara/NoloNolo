@@ -6,7 +6,7 @@ module.exports = buildSchema(`
             email: String!
             password: String
         }
-        
+
         type AuthData {
             userId: ID!
             token: String!

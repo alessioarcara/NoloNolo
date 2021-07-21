@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 
-const ACCESS_EXPIRE_TIME = '15s'
+const ACCESS_EXPIRE_TIME = '5s'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {
@@ -56,6 +56,7 @@ module.exports = {
         }
     },
     refreshToken: async (_, {req, res}) => {
+        // TODO: middleware/code clean
         const refreshToken = req.cookies["refresh-token"];
         if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
 
@@ -72,8 +73,15 @@ module.exports = {
         return {userId: user._id, token: accessToken}
     },
     invalidateTokens: async (_, {req, res}) => {
-        if (!req.userId) { return false }
-        await User.findByIdAndUpdate(req.userId, { $inc: { count: 1 } })
+        // TODO: middleware/code clean
+        const refreshToken = req.cookies["refresh-token"];
+        if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
+
+        let decodedToken;
+        try { decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
+        } catch (err) { throw new Error('Invalid or expired refresh token.') }
+
+        await User.findByIdAndUpdate(decodedToken.userId, { $inc: { count: 1 } })
         res.clearCookie('refresh-token')
         return true
     }
