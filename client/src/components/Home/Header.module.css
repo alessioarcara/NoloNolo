@@ -1,6 +1,7 @@
 .title {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding-top: 0.8rem;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+    margin-top: 0.8rem;
+    /*padding-top: 0.8rem;*/
     position: relative;
     z-index: 100;
 }

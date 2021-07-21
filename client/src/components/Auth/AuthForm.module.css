@@ -42,11 +42,6 @@
     background: #e9efff;
 }
 
-.control.invalid input {
-    border-color: red;
-    background: #fbdada;
-}
-
 .actions {
     margin-top: 2.5rem;
     display: flex;
@@ -98,7 +93,20 @@
 
     .control {
         align-items: center;
-        flex-direction: row;
+        flex-flow: row wrap;
+    }
+
+    .control label {
+        width: 25%;
+    }
+
+    .control input {
+        width: 75%;
+        flex: 0 0 auto;
+    }
+
+    .control span {
+        margin-left: 25%;
     }
 
     .actions button {

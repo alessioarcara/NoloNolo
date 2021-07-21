@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {body_refresh, invalidate} from "../helpers/query"
+import React, {useCallback, useEffect, useState} from "react";
+import {body_refresh, invalidate} from "../helpers/httpConfig"
 import useHttp from "../hooks/use-http";
 
 const AuthContext = React.createContext({
@@ -16,9 +16,9 @@ export const AuthContextProvider = props => {
 
     const userIsLoggedIn = !!token;
 
-    const loginHandler = (token) => {
+    const loginHandler = useCallback((token) => {
         setToken(token)
-    }
+    }, [])
 
     const logoutHandler = () => {
         sendRequest({body: invalidate, token})

@@ -6,11 +6,11 @@ import ImageList from "../components/ImageList/ImageList";
 const Home = () => {
     return (
         <>
-            <Header/>
+            <Header className={classes.blur}/>
             <div className={classes[`main-image`]}>
                 <img src={backImage} alt="Some boats"/>
             </div>
-            <ImageList />
+            <ImageList/>
         </>
     );
 };

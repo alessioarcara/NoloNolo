@@ -1,5 +1,5 @@
 import {useReducer, useCallback} from "react";
-import http from "../middleware/axios-config";
+import http from "../middleware/axiosConfig";
 
 const httpReducer = (state, action) => {
     if (action.type === "SEND") {

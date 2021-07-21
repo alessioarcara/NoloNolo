@@ -15,7 +15,7 @@ const app = express();
 app.use((req,
          res,
          next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGIN);
     res.header("Access-Control-Allow-Credentials", true);
     res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -37,12 +37,12 @@ app.use('/api', (req, res) => {
     })(req, res)
 });
 
-mongoose.connect(`mongodb://argonauta.synology.me:49153/${process.env.MONGO_DB}`, {
+mongoose.connect(process.env.DATABASE_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true })
     .then(() => {
-        app.listen(3001); })
+        app.listen(process.env.PORT); })
     .catch(err => {
         console.log(err) }
 )

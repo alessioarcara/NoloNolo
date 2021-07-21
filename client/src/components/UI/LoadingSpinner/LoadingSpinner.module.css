@@ -1,17 +1,11 @@
-.spinner {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-}
 .spinner:after {
-    content: ' ';
+    content: " ";
     display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 3px solid #FF2677;
+    border-color: #FF2677 transparent #FF2677 transparent;
     animation: spinner 1.2s linear infinite;
 }
 @keyframes spinner {

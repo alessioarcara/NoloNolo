@@ -57,27 +57,24 @@ module.exports = {
     },
     refreshToken: async (_, {req, res}) => {
         const refreshToken = req.cookies["refresh-token"];
-        if (!refreshToken || refreshToken === '') {
-            throw new Error("Can't find refresh token.")
-        }
+        if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
+
         let decodedToken;
-        try {
-            decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
+        try { decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
         } catch (err) { throw new Error('Invalid or expired refresh token.') }
 
         const user = await User.findById(decodedToken.userId)
-        if (!user || user.count !== decodedToken.count) {
-            throw new Error('Invalid or expired refresh token.')
-        }
+        if (!user || user.count !== decodedToken.count) { throw new Error('Invalid or expired refresh token.') }
         user.count += 1;
         await user.save();
 
         const accessToken = createTokens(user._id, user.email, user.count, res)
         return {userId: user._id, token: accessToken}
     },
-    invalidateTokens: async (_, {req}) => {
+    invalidateTokens: async (_, {req, res}) => {
         if (!req.userId) { return false }
         await User.findByIdAndUpdate(req.userId, { $inc: { count: 1 } })
+        res.clearCookie('refresh-token')
         return true
     }
 }
