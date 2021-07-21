@@ -17,6 +17,16 @@ const createTokens = (userId, email, count, res) => {
 
     return accessToken
 }
+const decodeRefreshToken = (req) => {
+    const refreshToken = req.cookies["refresh-token"];
+    if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
+
+    let decodedToken;
+    try { decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
+    } catch (err) { throw new Error('Invalid or expired refresh token.') }
+
+    return decodedToken
+}
 
 module.exports = {
     users: async (_, {req}) => {
@@ -56,13 +66,7 @@ module.exports = {
         }
     },
     refreshToken: async (_, {req, res}) => {
-        // TODO: middleware/code clean
-        const refreshToken = req.cookies["refresh-token"];
-        if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
-
-        let decodedToken;
-        try { decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
-        } catch (err) { throw new Error('Invalid or expired refresh token.') }
+        const decodedToken = decodeRefreshToken(req)
 
         const user = await User.findById(decodedToken.userId)
         if (!user || user.count !== decodedToken.count) { throw new Error('Invalid or expired refresh token.') }
@@ -73,13 +77,7 @@ module.exports = {
         return {userId: user._id, token: accessToken}
     },
     invalidateTokens: async (_, {req, res}) => {
-        // TODO: middleware/code clean
-        const refreshToken = req.cookies["refresh-token"];
-        if (!refreshToken || refreshToken === '') { throw new Error("Can't find refresh token.") }
-
-        let decodedToken;
-        try { decodedToken = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY)
-        } catch (err) { throw new Error('Invalid or expired refresh token.') }
+        const decodedToken = decodeRefreshToken(req)
 
         await User.findByIdAndUpdate(decodedToken.userId, { $inc: { count: 1 } })
         res.clearCookie('refresh-token')
