@@ -5,9 +5,7 @@
 .boat-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    background-color: rgba(3, 121, 166, 0.8);
-    position: absolute;
-    top: 52.5rem;
+    background: linear-gradient(90deg, #71B9E1, #089AC1);
     text-align: center;
     width: 100%;
     padding: 1rem;
@@ -22,11 +20,6 @@
 
 .boat:hover {
     color: black;
-}
-
-.top {
-    position: absolute;
-    top: 49.5rem;
 }
 
 @media only screen and (max-width: 768px) {

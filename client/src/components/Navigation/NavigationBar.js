@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/SearchIcon";
@@ -9,7 +9,7 @@ const NavigationBar = () => {
     const [navbar, setNavbar] = useState(true);
     const [scroll, setScroll] = useState(0);
 
-    const changeNavHandler = () => {
+    const changeNavHandler = useCallback(() => {
         if (window.scrollY > scroll  ) {
             setNavbar(false)
         } else {
@@ -17,9 +17,11 @@ const NavigationBar = () => {
         }
 
         setScroll(window.scrollY)
-    }
+    }, [scroll])
 
-    window.addEventListener('scroll', changeNavHandler);
+    useEffect(() => {
+        window.addEventListener('scroll', changeNavHandler);
+    }, [changeNavHandler])
 
     return (
         <nav>

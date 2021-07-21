@@ -2,7 +2,7 @@
     position: relative;
     width: 300px;
     height: 125px;
-    z-index: 100;
+    z-index: 99;
     flex: 0 0 auto;
     margin-right: 1rem;
 }

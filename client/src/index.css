@@ -28,7 +28,7 @@ body {
 .subtitle {
   font-family: 'Lobster', cursive;
   font-size: 1.55rem;
-  left: 0.7rem;
+  margin-left: 1rem;
   z-index: 99;
 }
 

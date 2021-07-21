@@ -2,15 +2,8 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    position: relative;
-    top: 32rem;
     padding: 0.6rem 0.8rem 0 1.8rem;
     z-index: 99;
-}
-
-.top {
-    position: absolute;
-    top: 38rem;
 }
 
 .list::-webkit-scrollbar {

@@ -11,30 +11,30 @@ function App() {
 
     return (
         <>
-            <main>
-                <Switch>
-                    <Route path='/' exact>
-                        <Home/>
-                    </Route>
-                    <Route path='/preferiti'>
-                        <div className="centered">
-                            <h1>Preferiti</h1>
-                            <p>No favorites found.</p>
-                        </div>
-                    </Route>
-                    {!isLoggedIn &&
-                    <Route path='/auth'>
-                        <AuthPage/>
-                    </Route>}
-                    <Route path='/profile'>
-                        {isLoggedIn && <ProfilePage/>}
-                        {!isLoggedIn && <Redirect to='/auth'/>}
-                    </Route>
-                    <Route path='*'>
-                        <Redirect to='/'/>
-                    </Route>
-                </Switch>
-            </main>
+
+            <Switch>
+                <Route path='/' exact>
+                    <Home/>
+                </Route>
+
+                <Route path='/preferiti'>
+                    <div className="centered">
+                        <h1>Preferiti</h1>
+                        <p>No favorites found.</p>
+                    </div>
+                </Route>
+                {!isLoggedIn &&
+                <Route path='/auth'>
+                    <AuthPage/>
+                </Route>}
+                <Route path='/profile'>
+                    {isLoggedIn && <ProfilePage/>}
+                    {!isLoggedIn && <Redirect to='/auth'/>}
+                </Route>
+                <Route path='*'>
+                    <Redirect to='/'/>
+                </Route>
+            </Switch>
             <NavigationBar/>
         </>
     );

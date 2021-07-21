@@ -1,21 +1,26 @@
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/SearchIcon";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 const SearchBar = (props) => {
     const [navbar, setNavbar] = useState(false);
 
-    useEffect(() => {
-        const changeBackground = () => {
-            if (window.scrollY >= 60) {
-                setNavbar(true);
-            } else {
-                setNavbar(false);
-            }
+    const changeBackground = useCallback(() => {
+        if (window.scrollY >= 60) {
+            setNavbar(true);
+        } else {
+            setNavbar(false);
         }
+    }, [])
 
+    useEffect(() => {
         window.addEventListener('scroll', changeBackground);
-    }, [navbar])
+        return () => {
+            window.removeEventListener('scroll', changeBackground);
+        }
+    }, [changeBackground])
+
+
 
     return (
         <>
