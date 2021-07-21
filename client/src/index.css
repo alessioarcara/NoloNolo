@@ -12,7 +12,8 @@ body {
 }
 
 .title {
-  background-color: rgba(255, 255, 255, 0.2);
+  /*background-color: rgba(255, 255, 255, 0.2);*/
+  background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
   padding-top: 0.8rem;
   position: relative;
   z-index: 100;
@@ -30,6 +31,7 @@ body {
   font-size: 1.55rem;
   margin-left: 1rem;
   z-index: 99;
+  margin-top: 1rem;
 }
 
 

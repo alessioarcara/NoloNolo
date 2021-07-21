@@ -1,12 +1,11 @@
 .foot {
     background-color: #efefef;
-    position: absolute;
     text-align: center;
-    top: 71rem;
     width: 100%;
     z-index: 99;
     padding: 1.5rem 0 2rem 0;
     border-top: 2px solid rgb(221, 221, 221);
+    margin-top: 1.5rem;
 }
 
 .foot > div {
@@ -22,9 +21,6 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .foot {
-        top: 85rem;
-    }
     .grid-footer {
         grid-template-columns: repeat(1, 1fr);
     }
