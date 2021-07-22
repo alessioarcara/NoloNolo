@@ -12,7 +12,6 @@ body {
 }
 
 .title {
-  /*background-color: rgba(255, 255, 255, 0.2);*/
   background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
   padding-top: 0.8rem;
   position: relative;
@@ -59,4 +58,10 @@ button {
 button:hover {
   background-color: #FF2677;
   color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .title {
+    background: linear-gradient(90deg, #CDE7F6, #54ADD9, #72BCDF, #9ED0EB, #68B4D6);
+  }
 }
