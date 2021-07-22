@@ -1,8 +1,8 @@
 import {useContext, useMemo} from "react";
 import AuthContext from "../store/auth-context";
 import axios from "axios";
-import {body_refresh} from "../helpers/query"
-import http from "./axios-config"
+import {body_refresh} from "../helpers/httpConfig"
+import http from "./axiosConfig"
 
 const AxiosMiddleware = ({children}) => {
 

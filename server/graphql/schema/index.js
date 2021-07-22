@@ -6,7 +6,7 @@ module.exports = buildSchema(`
             email: String!
             password: String
         }
-        
+
         type AuthData {
             userId: ID!
             token: String!
@@ -31,6 +31,6 @@ module.exports = buildSchema(`
         schema {
             query: RootQuery
             mutation: RootMutation
-        }
+        }      
 `)
 

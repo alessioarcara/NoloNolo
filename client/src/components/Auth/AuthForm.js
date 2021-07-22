@@ -1,20 +1,18 @@
-import {useContext, useRef, useState} from "react";
+import React, {useContext, useState} from "react";
+import Button from "../UI/Button/Button";
 import classes from "./AuthForm.module.css"
+import useForm from "../../hooks/use-form";
 import useHttp from "../../hooks/use-http";
 
-import {body_login, body_signup} from '../../helpers/query'
+import {body_login, body_signup} from '../../helpers/httpConfig'
+import {authForm} from "../../helpers/formConfig";
 import AuthContext from "../../store/auth-context";
 
-const transformData = (resData) => {
-    const authData = resData[Object.keys(resData)]
-    return authData
-}
 
 const AuthForm = () => {
-    const emailInputRef = useRef()
-    const passwordInputRef = useRef()
     const [isLogin, setIsLogin] = useState(true)
-    const {data: authData, status, error,  sendRequest: authenticate} = useHttp(true)
+    const {status, error,  sendRequest: authenticate} = useHttp()
+    const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(authForm)
 
     const authCtx = useContext(AuthContext)
 
@@ -25,49 +23,43 @@ const AuthForm = () => {
     const submitHandler = event => {
         event.preventDefault();
 
-        const enteredEmail = emailInputRef.current.value;
-        const enteredPassword = passwordInputRef.current.value;
+        const enteredEmail = formValues[0]
+        const enteredPassword = formValues[1]
+
+        const transformData = (resData) => {
+            const authData = resData[Object.keys(resData)]
+            authCtx.login(authData.token)
+            return authData
+        }
 
         if (isLogin) {
             authenticate({body: body_login(enteredEmail, enteredPassword)}, transformData)
         } else {
             authenticate({body: body_signup({enteredEmail, enteredPassword})}, transformData)
         }
+        resetForm()
     }
 
     if (status === 'completed' && !error) {
-        authCtx.login(authData.token)
     }
 
     return (
-        <section className={classes.auth} onSubmit={submitHandler}>
+        <section className={classes.auth}>
             <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
-            <form>
-                <div className={classes.control}>
-                    <label htmlFor="email">Email</label>
-                    <input type="email"
-                           ref={emailInputRef}
-                           id="email"/>
-                </div>
-                <div className={classes.control}>
-                    <label htmlFor="password">Password</label>
-                    <input type="password"
-                           ref={passwordInputRef}
-                           id="password"/>
-                </div>
+            <form onSubmit={submitHandler}>
+                { renderFormInputs(classes.control) }
                 <div className={classes.actions}>
-                    <button>Continua</button>
-                    <button
+                    <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
+                    <Button
                         type="button"
                         className={classes.toggle}
-                        onClick={switchAuthModeHandler}
-                    >
+                        onClick={switchAuthModeHandler} >
                         {isLogin ? "Crea nuovo account" : "Entra con un account esistente"}
-                    </button>
+                    </Button>
                 </div>
             </form>
         </section>
     )
 }
 
-export default AuthForm;
+export default React.memo(AuthForm);
