@@ -18,8 +18,8 @@ nav ul {
     overflow: hidden;
     position: fixed;
     height: 4rem;
-    right: 0rem;
-    left: 0rem;
+    right: 0;
+    left: 0;
     align-items: center;
     background-color: rgb(255, 255, 255);
     border-top: 1px solid rgb(221, 221, 221);
@@ -27,7 +27,7 @@ nav ul {
 }
 
 .action {
-    bottom: 0rem;
+    bottom: 0;
     transition: 0.2s;
 }
 

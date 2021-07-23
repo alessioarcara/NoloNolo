@@ -1,10 +1,8 @@
 import SearchBar from "./SearchBar";
-import Modal from "./Modal";
+import Search from "./Search";
 import classes from "./Header.module.css";
-import backImage from "../../assets/background.jpg";
 
 const Header = (props) => {
-
     return (
         <>
             {!props.click &&
@@ -13,15 +11,8 @@ const Header = (props) => {
                 </div>
             }
             <SearchBar onClicked={props.changeHandler} click={props.click} onClose={props.homeHandler}/>
-            {!props.click &&
-                <div>
-                    <div className={classes[`main-image`]}>
-                        {/*<img src={backImage} alt="Background boat"/>*/}
-                    </div>
-                </div>
-            }
-
-            {props.click && <Modal/>}
+            {!props.click && <div className={classes[`main-image`]}/> }
+            {props.click && <Search/>}
         </>
     );
 };

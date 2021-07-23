@@ -11,12 +11,10 @@ function App() {
 
     return (
         <>
-
             <Switch>
                 <Route path='/' exact>
                     <Home/>
                 </Route>
-
                 <Route path='/preferiti'>
                     <div className="centered">
                         <h1>Preferiti</h1>
