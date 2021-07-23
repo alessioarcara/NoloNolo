@@ -1,5 +1,5 @@
 import classes from './SearchBar.module.css';
-import SearchIcon from "../UI/icons/SearchIcon";
+import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useCallback, useEffect, useState} from "react";
 
 const SearchBar = (props) => {

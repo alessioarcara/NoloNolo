@@ -1,8 +1,8 @@
 import classes from './BoatType.module.css';
-import SailBoatIcon from "../UI/icons/SailBoatIcon";
-import BoatIcon from "../UI/icons/BoatIcon";
-import CatamaranIcon from "../UI/icons/CatamaranIcon";
-import InflatableBoatIcon from "../UI/icons/InflatableBoatIcon";
+import SailBoatIcon from "../UI/icons/BoatIcons/SailBoatIcon";
+import BoatIcon from "../UI/icons/BoatIcons/BoatIcon";
+import CatamaranIcon from "../UI/icons/BoatIcons/CatamaranIcon";
+import InflatableBoatIcon from "../UI/icons/BoatIcons/InflatableBoatIcon";
 
 const BoatType = () => {
     return (

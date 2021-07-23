@@ -7,6 +7,7 @@ import useHttp from "../../hooks/use-http";
 import {body_login, body_signup} from '../../helpers/httpConfig'
 import {authForm} from "../../helpers/formConfig";
 import AuthContext from "../../store/auth-context";
+import Modal from "../UI/Modal/Modal";
 
 
 const AuthForm = () => {
@@ -40,7 +41,8 @@ const AuthForm = () => {
         resetForm()
     }
 
-    if (status === 'completed' && !error) {
+    if (status === 'completed' && error) {
+        return <Modal title={error}>sdasd</Modal>
     }
 
     return (

@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from './NavigationBar.module.css';
-import SearchIcon from "../UI/icons/SearchIcon";
-import HeartIcon from "../UI/icons/HeartIcon";
-import UserIcon from "../UI/icons/UserIcon";
+import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
+import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
+import UserIcon from "../UI/icons/MenuIcons/UserIcon";
 
 const NavigationBar = () => {
     const [navbar, setNavbar] = useState(true);

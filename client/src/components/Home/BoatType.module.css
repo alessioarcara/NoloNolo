@@ -19,6 +19,13 @@
     color: black;
 }
 
+.boat:hover svg path,
+.boat:active svg path,
+.boat:hover svg line {
+    stroke: black
+}
+
+
 @media only screen and (max-width: 768px) {
     .boat-grid {
         grid-template-columns: repeat(1, 1fr);
