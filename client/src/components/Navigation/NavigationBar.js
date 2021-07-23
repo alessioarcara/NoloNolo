@@ -26,7 +26,6 @@ const NavigationBar = () => {
     return (
         <nav>
             <ul className={navbar ? `${classes['nav-bar']} ${classes.action}` : `${classes['nav-bar']} ${classes['no-action']}`}>
-
                 <li>
                     <NavLink to='/' exact activeClassName={classes.active} className={classes.item}>
                         <SearchIcon />
