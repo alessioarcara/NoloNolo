@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [navbar, setNavbar] = useState(false);
