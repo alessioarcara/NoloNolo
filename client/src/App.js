@@ -1,4 +1,3 @@
-import NavigationBar from "./components/Navigation/NavigationBar";
 import {Route, Switch, Redirect} from 'react-router-dom';
 import AuthPage from "./pages/AuthPage";
 import Home from "./pages/Home";
@@ -33,7 +32,6 @@ function App() {
                     <Redirect to='/'/>
                 </Route>
             </Switch>
-            <NavigationBar/>
         </>
     );
 }

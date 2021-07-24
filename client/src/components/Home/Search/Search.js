@@ -1,6 +1,8 @@
 import Location from "./Location";
-import Modal from "../UI/Modal/Modal";
+import Modal from "../../UI/Modal/Modal";
 import {useEffect} from "react";
+import SearchDatePicker from "./SearchDatePicker";
+import classes from "./SearchDatePicker.css"
 
 const DUMMY_LOCATIONS = [
     {
@@ -27,6 +29,7 @@ const Search = ({children, searchRef}) => {
                     key={place.id}
                     text={place.name}/>)
             }
+            <SearchDatePicker className={classes.myClassname}/>
         </Modal>
     );
 };
