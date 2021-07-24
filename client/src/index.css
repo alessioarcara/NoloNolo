@@ -11,20 +11,6 @@ body {
   margin: 0;
 }
 
-.title {
-  background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
-  padding-top: 0.8rem;
-  position: relative;
-  z-index: 100;
-}
-
-.title p {
-  font-family: 'Lobster', cursive;
-  font-size: 30px;
-  text-align: center;
-  margin: 0;
-}
-
 .subtitle {
   font-family: 'Lobster', cursive;
   font-size: 1.55rem;
@@ -36,7 +22,6 @@ body {
 
 
 /* PROVVISORIO */
-
 .centered {
   margin: 3rem auto;
   text-align: center;
@@ -44,9 +29,4 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
-@media only screen and (max-width: 768px) {
-  .title {
-    background: linear-gradient(90deg, #CDE7F6, #54ADD9, #72BCDF, #9ED0EB, #68B4D6);
-  }
-}
+/* PROVVISORIO */

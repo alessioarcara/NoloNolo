@@ -7,7 +7,7 @@ import InflatableBoatIcon from "../UI/icons/BoatIcons/InflatableBoatIcon";
 const BoatType = () => {
     return (
         <>
-            <div className='subtitle'>Scegli la tipologia di barca</div>
+            <div className="subtitle">Scegli la tipologia di barca</div>
             <div className={classes['boat-grid']}>
                 <div className={classes.boat}>
                     <BoatIcon/>

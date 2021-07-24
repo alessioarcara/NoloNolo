@@ -1,5 +1,4 @@
 import Location from "./Location";
-// import classes from './Search.module.css';
 import Modal from "../UI/Modal/Modal";
 
 const DUMMY_LOCATIONS = [

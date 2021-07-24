@@ -2,36 +2,45 @@ import Header from "../components/Home/Header";
 import ImageList from "../components/ImageList/ImageList";
 import BoatType from "../components/Home/BoatType";
 import Footer from "../components/Home/Footer";
-import { useState } from "react";
+import Search from "../components/Home/Search";
+import SearchBar from "../components/Home/SearchBar";
 
 const Home = () => {
-    const [click, setClick] = useState(false);
 
-    const clickChangeHandler = () => {
-        setClick(true);
+    const [isShown, setIsShown] = useState(false);
+    const searchRef = useRef()
+
+    const openModalHandler = () => {
+        setIsShown(true)
     }
-
-    const clickHomeHandler = () => {
-        setClick(false);
+    const closeModalHandler = () => {
+        setIsShown(false)
     }
 
     return (
         <>
-            <Header
-                click={click}
-                changeHandler={clickChangeHandler}
-                homeHandler={clickHomeHandler}
-            />
-            {!click &&
-                <div>
-                    <ImageList/>
-                    <BoatType/>
+            {isShown &&
+                <Search searchRef={searchRef}>
+                    <SearchBar
+                        ref={searchRef}
+                        isShow={isShown}
+                        openModalHandler={openModalHandler}
+                        closeModalHandler={closeModalHandler}
+                    />
+                </Search>}
+            {!isShown &&
+                <>
+                    <Header
+                        isShow={isShown}
+                        openModalHandler={openModalHandler}
+                        closeModalHandler={closeModalHandler}
+                    />
+                    <Main/>
                     <Footer/>
-                </div>
+                </>
             }
         </>
     );
-}
-;
+};
 
 export default Home;
