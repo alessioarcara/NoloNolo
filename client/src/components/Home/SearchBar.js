@@ -4,13 +4,13 @@ import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import { useCallback, useEffect, useState } from "react";
 
 const SearchBar = React.forwardRef((props, ref) => {
-    const [navbar, setNavbar] = useState(false);
+    const [isScrolling, setIsScrolling] = useState(false);
 
     const listenToScroll = useCallback(() => {
         if (window.scrollY >= 60) {
-            setNavbar(true);
+            setIsScrolling(true);
         } else {
-            setNavbar(false);
+            setIsScrolling(false);
         }
     }, [])
 
@@ -24,7 +24,7 @@ const SearchBar = React.forwardRef((props, ref) => {
     }, [listenToScroll])
 
     const searchClasses =
-        props.isShow || navbar
+        props.isShow || {isScrolling}
             ? `${classes['background-searchbar']} ${classes['search-active']}`
             : `${classes['background-searchbar']} ${classes['search']}`
 
