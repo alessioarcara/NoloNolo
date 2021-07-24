@@ -1,7 +1,7 @@
 import SearchBar from "./SearchBar";
 import classes from "./Header.module.css";
 
-const Header = (props) => {
+const Header = props => {
     return (
         <>
             <div className={classes.title}>NoloNolo Boat</div>

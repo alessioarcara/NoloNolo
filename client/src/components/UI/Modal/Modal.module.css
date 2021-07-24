@@ -5,11 +5,9 @@
     height: 100%;
     background-color: white;
     z-index: 100;
-    top: 4.3rem;
-    padding-left: 1rem;
-    padding-top: 1rem;
 }
 
+/* Modal not-overlay */
 .modal {
     position: fixed;
     top: 15vh;

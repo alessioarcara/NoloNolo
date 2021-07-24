@@ -1,6 +1,6 @@
+import {useRef, useState} from "react";
 import Header from "../components/Home/Header";
-import ImageList from "../components/ImageList/ImageList";
-import BoatType from "../components/Home/BoatType";
+import Main from "../components/Home/Main"
 import Footer from "../components/Home/Footer";
 import Search from "../components/Home/Search";
 import SearchBar from "../components/Home/SearchBar";

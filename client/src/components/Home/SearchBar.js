@@ -1,8 +1,9 @@
+import React from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useCallback, useEffect, useState} from "react";
 
-const SearchBar = (props) => {
+const SearchBar = React.forwardRef((props, ref) => {
     const [navbar, setNavbar] = useState(false);
 
     const listenToScroll = useCallback(() => {
@@ -20,19 +21,25 @@ const SearchBar = (props) => {
         }
     }, [listenToScroll])
 
+    const searchClasses =
+        props.isShow || navbar
+            ? `${classes['background-searchbar']} ${classes['search-active']}`
+            : `${classes['background-searchbar']} ${classes['search']}`
+
     return (
         <div
-            className={(props.click || navbar) ? `${classes['background-searchbar']} ${classes['search-active']}` : `${classes['background-searchbar']} ${classes['search']}`}>
-            <div onClick={props.onClicked} className={classes['search-bar']}>
+            className={searchClasses}>
+            <div onClick={props.openModalHandler} className={classes['search-bar']}>
                 <SearchIcon/>
                 <input
+                    ref={ref}
                     type='search'
                     placeholder='Da dove vuoi partire?'
                 />
             </div>
-            {props.click && <p className={classes['btn-exit']} onClick={props.onClose}>Annulla</p>}
+            {props.isShow && <p className={classes['btn-exit']} onClick={props.closeModalHandler}>Annulla</p>}
         </div>
     );
-};
+});
 
 export default SearchBar;
