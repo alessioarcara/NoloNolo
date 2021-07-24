@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import "./SearchDatePicker.css"
 
+
 const SearchDatePicker = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(null);
@@ -15,6 +16,7 @@ const SearchDatePicker = () => {
 
     return (
             <DatePicker
+                wrapperClassName={"MyClassName"}
                 selected={startDate}
                 onChange={onChange}
                 dateFormat="dd/MM/yyyy"

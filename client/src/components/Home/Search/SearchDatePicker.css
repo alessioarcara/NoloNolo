@@ -1,67 +1,63 @@
 .myClassname,
 .react-datepicker {
+
     border: none;
     background-color: white;
 }
 
 .myClassname,
+.react-datepicker__month-container{
+    width: 100%;
+}
+
+/*.myClassname,*/
+/*.react-datepicker__navigation-icon react-datepicker__navigation-icon--next {*/
+/*    color: black !important;*/
+/*}*/
+
+.myClassname,
 .react-datepicker__day--selected {
-    background-color: #1648c3 !important;
+    background-color: black;
+    border-radius: 28px;
+    color: #fff;
 }
 
 /* Styles for On Hover of selected */
 .myClassname,
-.react-datepicker__day--selected:hover {
-    background-color: #1648c3 !important;
+.react-datepicker__day:hover {
+    border: 1px solid black;
+    background-color: #fff;
+    border-radius: 48px;
+    color: black;
+}
+
+/*.myClassname,*/
+/*.react-datepicker__day--in-range {*/
+/*    background-color: #efefef;*/
+/*    color: black;*/
+/*}*/
+
+.myClassname,
+.react-datepicker__day--in-selecting-range {
+    background-color: #fff;
+    color: black;
 }
 
 .myClassname,
 .react-datepicker__header {
-    /* background-color: transparent; */
-    background-color: white;
+     background-color: white;
     border-bottom: white;
 }
+
+/*.myClassname,*/
+/*.react-datepicker__day-name,*/
+/*.react-datepicker__day,*/
+/*.react-datepicker__time-name {*/
+/*    width: 2rem;*/
+/*    height: 2rem;*/
+/*}*/
 
 .myClassname,
 .react-datepicker__day-names {
     font-weight: 700;
 }
-
-.myClassname,
-.react-datepicker__day--today {
-    border: 2px solid;
-    border-radius: 0.3rem;
-    background: linear-gradient(
-            174deg,
-            rgba(255, 165, 0, 0.7357317927170868) 32%,
-            rgba(249, 239, 170, 1) 100%
-    );
-}
-
-.myClassname,
-.react-datepicker__navigation--previous {
-    left: -70px !important;
-    border-right-color: black;
-}
-
-.myClassname,
-.react-datepicker__navigation--next {
-    right: -70px;
-    border-left-color: black;
-}
-
-.myClassname,
-button:not(.ant-btn-round):not(.ant-btn-link):not(.ant-btn) {
-    height: 0px;
-    min-width: 100px;
-    outline: none;
-}
-
-.myClassname,
-.react-datepicker__day-name,
-.react-datepicker__day,
-.react-datepicker__time-name {
-
-}
-
-/* COLOR FOR SELECTED DATE: #1648C3 */

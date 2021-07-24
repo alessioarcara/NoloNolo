@@ -14,6 +14,8 @@ const SearchBar = React.forwardRef((props, ref) => {
         }
     }, [])
 
+    console.log(window.scrollY)
+
     useEffect(() => {
         window.addEventListener('scroll', listenToScroll);
         return () => {

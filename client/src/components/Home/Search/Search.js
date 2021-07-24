@@ -1,8 +1,8 @@
 import Location from "./Location";
 import Modal from "../../UI/Modal/Modal";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
-import classes from "./SearchDatePicker.css"
+import Button from "../../UI/Button/Button";
 
 const DUMMY_LOCATIONS = [
     {
@@ -16,22 +16,38 @@ const DUMMY_LOCATIONS = [
 ]
 
 const Search = ({children, searchRef}) => {
+    const [isNextPage, setNextPage] = useState(false)
+
+    const clickHandler = () => {
+        setNextPage(prevState => !prevState)
+    }
 
     useEffect(() => {
         searchRef.current.focus();
-    }, [])
+    }, [searchRef])
 
     return (
         <Modal fullScreen={true}>
-            {children}
-            {DUMMY_LOCATIONS.map(place =>
-                <Location
-                    key={place.id}
-                    text={place.name}/>)
+            {!isNextPage &&
+            <>
+                {children}
+                {DUMMY_LOCATIONS.map(place =>
+                    <Location
+                        onClick={clickHandler}
+                        key={place.id}
+                        text={place.name}/>)
+                }
+            </>
             }
-            <SearchDatePicker className={classes.myClassname}/>
+            {isNextPage &&
+            <>
+                <SearchDatePicker/>
+                <Button onClick={clickHandler} type="button">Torna indietro</Button>
+            </>
+            }
         </Modal>
     );
-};
+}
+;
 
 export default Search;

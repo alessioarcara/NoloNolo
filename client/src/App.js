@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
+import NavigationBar from "./components/Navigation/NavigationBar";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -32,6 +33,7 @@ function App() {
                     <Redirect to='/'/>
                 </Route>
             </Switch>
+            <NavigationBar/>
         </>
     );
 }

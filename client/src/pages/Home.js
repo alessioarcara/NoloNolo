@@ -4,7 +4,6 @@ import Main from "../components/Home/Main"
 import Footer from "../components/Home/Footer";
 import Search from "../components/Home/Search/Search";
 import SearchBar from "../components/Home/SearchBar";
-import NavigationBar from "../components/Navigation/NavigationBar";
 
 const Home = () => {
 
@@ -38,7 +37,6 @@ const Home = () => {
                     />
                     <Main/>
                     <Footer/>
-                    <NavigationBar/>
                 </>
             }
         </>
