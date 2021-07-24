@@ -9,19 +9,21 @@ const NavigationBar = () => {
     const [navbar, setNavbar] = useState(true);
     const [scroll, setScroll] = useState(0);
 
-    const changeNavHandler = useCallback(() => {
-        if (window.scrollY > scroll  ) {
-            setNavbar(false)
-        } else {
-            setNavbar(true)
-        }
-        setScroll(window.scrollY)
-    }, [scroll])
-
-    useEffect(() => {
-        window.addEventListener('scroll', changeNavHandler);
-        return () => window.removeEventListener('scroll', changeNavHandler);
-    }, [changeNavHandler])
+    // const changeNavHandler = useCallback(() => {
+    //     if (window.scrollY > scroll  ) {
+    //         setNavbar(false)
+    //     } else {
+    //         setNavbar(true)
+    //     }
+    //     setScroll(window.scrollY)
+    // }, [scroll])
+    //
+    // useEffect(() => {
+    //     window.addEventListener('scroll', changeNavHandler);
+    //     return () => {
+    //         window.removeEventListener('scroll', changeNavHandler);
+    //     }
+    // }, [changeNavHandler])
 
     return (
         <nav>

@@ -42,7 +42,7 @@ const AuthForm = () => {
     }
 
     if (status === 'completed' && error) {
-        return <Modal title={error}>sdasd</Modal>
+        return <Modal fullScreen={false} title={error}>sdasd</Modal>
     }
 
     return (

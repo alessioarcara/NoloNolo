@@ -1,5 +1,5 @@
 import Location from "./Location";
-import classes from './Modal.module.css';
+// import classes from './Search.module.css';
 import Modal from "../UI/Modal/Modal";
 
 const DUMMY_LOCATIONS = [
@@ -15,9 +15,11 @@ const DUMMY_LOCATIONS = [
 
 const Search = () => {
     return (
-        <Modal fullscreen className={classes.modal}>
+        <Modal fullScreen={true}>
             {DUMMY_LOCATIONS.map(place =>
-                <Location text={place.name}/>)
+                <Location
+                    key={place.id}
+                    text={place.name}/>)
             }
         </Modal>
     );

@@ -20,8 +20,6 @@ const SearchBar = (props) => {
         }
     }, [listenToScroll])
 
-
-
     return (
         <div
             className={(props.click || navbar) ? `${classes['background-searchbar']} ${classes['search-active']}` : `${classes['background-searchbar']} ${classes['search']}`}>

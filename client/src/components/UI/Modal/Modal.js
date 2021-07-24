@@ -1,11 +1,10 @@
 import React from "react";
 import classes from "./Modal.module.css"
 
-const Modal = props => {
-    const {title, children, fullScreen} = props
+const Modal = ({title, children, fullScreen = true}) => {
 
     if (fullScreen) {
-        return
+        return <div className={classes["modal-fullscreen"]}>{children}</div>
     }
 
     return (
