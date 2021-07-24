@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./Modal.module.css"
 
-const Modal = ({title, children, fullScreen = true}) => {
+const Modal = ({title, children, overlay = 100}) => {
 
-    if (fullScreen) {
+    if (overlay) {
         return <div className={classes["modal-fullscreen"]}>{children}</div>
     }
 
