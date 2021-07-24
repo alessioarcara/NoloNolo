@@ -1,5 +1,6 @@
 import ImageCard from "./ImageCard";
 import classes from './ImageList.module.css';
+import '../Home/Main.module.css';
 
 const ImageList = () => {
     const DUMMY_LOCATION = [
@@ -15,7 +16,7 @@ const ImageList = () => {
 
     return (
         <>
-            <div className='subtitle'>Naviga nelle nostre località</div>
+            <div className="subtitle">Naviga nelle nostre località</div>
             <div className={classes.list}>
                 {DUMMY_LOCATION.map(place =>
                     <ImageCard

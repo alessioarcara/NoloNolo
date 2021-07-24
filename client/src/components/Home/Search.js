@@ -1,6 +1,6 @@
 import Location from "./Location";
-// import classes from './Search.module.css';
 import Modal from "../UI/Modal/Modal";
+import {useEffect} from "react";
 
 const DUMMY_LOCATIONS = [
     {
@@ -13,9 +13,15 @@ const DUMMY_LOCATIONS = [
     }
 ]
 
-const Search = () => {
+const Search = ({children, searchRef}) => {
+
+    useEffect(() => {
+        searchRef.current.focus();
+    }, [])
+
     return (
         <Modal fullScreen={true}>
+            {children}
             {DUMMY_LOCATIONS.map(place =>
                 <Location
                     key={place.id}

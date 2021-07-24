@@ -1,9 +1,16 @@
-.main-image {
-    background-image: url("../../assets/background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    width: 100%;
-    height: 650px;
+.title {
+    background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
+    padding-top: 0.8rem;
+    position: relative;
+    z-index: 100;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .title {
+        background: linear-gradient(90deg, #CDE7F6, #54ADD9, #72BCDF, #9ED0EB, #68B4D6);
+    }
 }

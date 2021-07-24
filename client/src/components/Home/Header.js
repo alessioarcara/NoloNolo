@@ -1,18 +1,15 @@
 import SearchBar from "./SearchBar";
-import Search from "./Search";
 import classes from "./Header.module.css";
 
-const Header = (props) => {
+const Header = props => {
     return (
         <>
-            {!props.click &&
-                <div className='title'>
-                    <p>NoloNolo Boat</p>
-                </div>
-            }
-            <SearchBar onClicked={props.changeHandler} click={props.click} onClose={props.homeHandler}/>
-            {!props.click && <div className={classes[`main-image`]}/> }
-            {props.click && <Search/>}
+            <div className={classes.title}>NoloNolo Boat</div>
+            <SearchBar
+                openModalHandler={props.openModalHandler}
+                closeModalHandler={props.closeModalHandler}
+                isShow={props.isShow}
+            />
         </>
     );
 };
