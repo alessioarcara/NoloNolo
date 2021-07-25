@@ -4,6 +4,7 @@ import BoatIcon from "../UI/icons/BoatIcons/BoatIcon";
 import CatamaranIcon from "../UI/icons/BoatIcons/CatamaranIcon";
 import InflatableBoatIcon from "../UI/icons/BoatIcons/InflatableBoatIcon";
 
+
 const BoatType = () => {
     return (
         <>

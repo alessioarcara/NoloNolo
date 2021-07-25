@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
 
+
 const DUMMY_LOCATIONS = [
     {
         id: 'l1',

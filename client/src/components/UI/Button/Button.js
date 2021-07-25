@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./Button.module.css"
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
+
 const Button = (props) => {
     const {type, className, onClick, disabled, isLoading, children} = props;
 

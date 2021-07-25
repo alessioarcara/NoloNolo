@@ -1,7 +1,6 @@
-import React from "react";
-import classes from './SearchBar.module.css';
+import React, { useCallback, useEffect, useState } from "react";
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
-import { useCallback, useEffect, useState } from "react";
+import classes from './SearchBar.module.css';
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [isScrolling, setIsScrolling] = useState(false);
@@ -27,8 +26,7 @@ const SearchBar = React.forwardRef((props, ref) => {
             : `${classes['background-searchbar']} ${classes['search']}`
 
     return (
-        <div
-            className={searchClasses}>
+        <div className={searchClasses}>
             <div onClick={props.openModalHandler} className={classes['search-bar']}>
                 <SearchIcon/>
                 <input

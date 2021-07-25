@@ -21,8 +21,6 @@
     padding: 0.03rem;
     position: sticky;
     position: -webkit-sticky;
-    /*background-color: transparent;*/
-    /*background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);*/
     top: 0;
     z-index: 100;
 }
@@ -32,7 +30,6 @@
     flex: 1;
     font-size: 14px;
     height: 3rem;
-    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);*/
     background-color: #fff;
     /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);*/
     border-radius: 2rem;
@@ -58,13 +55,6 @@ div > input[type=search] {
 .btn-exit {
     padding-right: 0.7rem;
     cursor: pointer;
-}
-
-@keyframes colorchange {
-    from {
-        background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
-    }
-    to {background-color: white;}
 }
 
 @media only screen and (max-width: 768px) {
