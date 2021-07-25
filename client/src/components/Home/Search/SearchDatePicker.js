@@ -16,15 +16,17 @@ const SearchDatePicker = () => {
 
     return (
         <>
-            <ul className="days-text">
-                <li>lu</li>
-                <li>ma</li>
-                <li>me</li>
-                <li>gi</li>
-                <li>ve</li>
-                <li>sa</li>
-                <li>do</li>
-            </ul>
+            <div>
+                <ul className="days-text">
+                    <li>lu</li>
+                    <li>ma</li>
+                    <li>me</li>
+                    <li>gi</li>
+                    <li>ve</li>
+                    <li>sa</li>
+                    <li>do</li>
+                </ul>
+            </div>
             <DatePicker
                 wrapperClassName={"input-container"}
                 selected={startDate}
@@ -32,7 +34,7 @@ const SearchDatePicker = () => {
                 dateFormat="dd/MM/yyyy"
                 startDate={startDate}
                 endDate={endDate}
-                monthsShown={3}
+                monthsShown={2}
                 selectsRange
                 inline
             />

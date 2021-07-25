@@ -3,6 +3,9 @@ import Modal from "../../UI/Modal/Modal";
 import {useEffect, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
+import BackIcon from "../../UI/icons/BackIcon";
+import classes from "./Search.module.css";
+import NavigationBar from "../../Navigation/NavigationBar";
 
 
 const DUMMY_LOCATIONS = [
@@ -19,8 +22,20 @@ const DUMMY_LOCATIONS = [
 const Search = ({children, searchRef}) => {
     const [isNextPage, setNextPage] = useState(false)
 
-    const clickHandler = () => {
+    const moveClickHandler = () => {
         setNextPage(prevState => !prevState)
+    }
+
+    const cancelSelectionHandler = () => {
+
+    }
+
+    const skipClickHandler = () => {
+
+    }
+
+    const goForwardClickHandler = () => {
+
     }
 
     useEffect(() => {
@@ -34,16 +49,24 @@ const Search = ({children, searchRef}) => {
                 {children}
                 {DUMMY_LOCATIONS.map(place =>
                     <Location
-                        onClick={clickHandler}
+                        onClick={moveClickHandler}
                         key={place.id}
                         text={place.name}/>)
                 }
+                <NavigationBar/>
             </>
             }
             {isNextPage &&
             <>
+                <div className={classes[`actions-top`]}>
+                    <Button className={classes[`btn-back`]} onClick={moveClickHandler} type="button"><BackIcon/></Button>
+                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler} type="button">Cancella</Button>
+                </div>
                 <SearchDatePicker/>
-                <Button onClick={clickHandler} type="button">Torna indietro</Button>
+                <div className={classes[`actions-bottom`]}>
+                    <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">Salta</Button>
+                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler} type="button">Avanti</Button>
+                </div>
             </>
             }
         </Modal>

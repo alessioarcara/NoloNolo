@@ -33,7 +33,7 @@ function App() {
                     <Redirect to='/'/>
                 </Route>
             </Switch>
-            <NavigationBar/>
+            {/*<NavigationBar/>*/}
         </>
     );
 }
