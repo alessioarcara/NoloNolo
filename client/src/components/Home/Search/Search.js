@@ -47,7 +47,6 @@ const Search = ({children, searchRef}) => {
             }
         </Modal>
     );
-}
-;
+};
 
 export default Search;

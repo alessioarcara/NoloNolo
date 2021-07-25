@@ -14,8 +14,6 @@ const SearchBar = React.forwardRef((props, ref) => {
         }
     }, [])
 
-    console.log(window.scrollY)
-
     useEffect(() => {
         window.addEventListener('scroll', listenToScroll);
         return () => {
@@ -24,7 +22,7 @@ const SearchBar = React.forwardRef((props, ref) => {
     }, [listenToScroll])
 
     const searchClasses =
-        props.isShow || {isScrolling}
+        props.isShow || isScrolling
             ? `${classes['background-searchbar']} ${classes['search-active']}`
             : `${classes['background-searchbar']} ${classes['search']}`
 

@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Verdana', sans-serif;
+  /*-webkit-font-smoothing: antialiased;*/
 }
 
 html {
