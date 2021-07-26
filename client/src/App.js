@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
+import ResultsPage from "./pages/ResultsPage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -28,6 +29,9 @@ function App() {
                 <Route path='/profile'>
                     {isLoggedIn && <ProfilePage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
+                </Route>
+                <Route path='/results'>
+                    <ResultsPage/>
                 </Route>
                 <Route path='*'>
                     <Redirect to='/'/>
