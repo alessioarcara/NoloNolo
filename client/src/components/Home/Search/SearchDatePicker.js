@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './SearchDatePicker.css';
+// import it from "date-fns/local/it";
 
 
 const SearchDatePicker = () => {
@@ -18,13 +19,13 @@ const SearchDatePicker = () => {
         <>
             <div>
                 <ul className="days-text">
-                    <li>lu</li>
-                    <li>ma</li>
-                    <li>me</li>
-                    <li>gi</li>
-                    <li>ve</li>
-                    <li>sa</li>
-                    <li>do</li>
+                    <li>Su</li>
+                    <li>Mo</li>
+                    <li>Tu</li>
+                    <li>We</li>
+                    <li>Th</li>
+                    <li>Fr</li>
+                    <li>Sa</li>
                 </ul>
             </div>
             <DatePicker
