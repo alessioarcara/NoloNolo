@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import ReactDOM from "react-dom"
 
 import classes from "./Modal.module.css"
-import useWindowSize from "../../../hooks/use-windowsize";
+import useMediaQuery from "../../../hooks/use-mediaquery";
 
 
 const Backdrop = (props) => {
@@ -10,10 +10,10 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
-    const windowSize = useWindowSize()
-    if (adapterSize === "adaptable") { adapterSize = windowSize }
+    const breakpoint = useMediaQuery()
+    if (adapterSize === "adaptable") { adapterSize = breakpoint }
 
-    if (adapterSize === "tablet" || adapterSize === "smartphone") {
+    if (adapterSize === "smartphone") {
         return <div className={classes["modal-fullscreen"]}>{children}</div>
     }
 

@@ -31,7 +31,7 @@
     flex: 1;
     font-size: 14px;
     height: 3rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);*/
     background-color: #fff;
     border-radius: 2rem;
     margin: 0.8rem;

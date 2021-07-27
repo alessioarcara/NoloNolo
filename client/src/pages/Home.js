@@ -4,6 +4,7 @@ import Main from "../components/Home/Main"
 import Footer from "../components/Home/Footer";
 import Search from "../components/Home/Search";
 import SearchBar from "../components/Home/SearchBar";
+import Modal from "../components/UI/Modal/Modal";
 
 const Home = () => {
 
@@ -20,6 +21,7 @@ const Home = () => {
     return (
         <>
             {isShown &&
+            <Modal adapterSize="adaptable">
                 <Search searchRef={searchRef}>
                     <SearchBar
                         ref={searchRef}
@@ -27,18 +29,18 @@ const Home = () => {
                         openModalHandler={openModalHandler}
                         closeModalHandler={closeModalHandler}
                     />
-                </Search>}
-            {!isShown &&
-                <>
-                    <Header
-                        isShow={isShown}
-                        openModalHandler={openModalHandler}
-                        closeModalHandler={closeModalHandler}
-                    />
-                    <Main/>
-                    <Footer/>
-                </>
+                </Search>
+            </Modal>
             }
+            {!isShown &&
+            <Header
+                isShow={isShown}
+                openModalHandler={openModalHandler}
+                closeModalHandler={closeModalHandler}
+            />
+            }
+            <Main/>
+            <Footer/>
         </>
     );
 };
