@@ -2,15 +2,18 @@ import React, {useState} from "react";
 import ReactDOM from "react-dom"
 
 import classes from "./Modal.module.css"
+import useWindowSize from "../../../hooks/use-windowsize";
 
 
 const Backdrop = (props) => {
     return <div className={classes.backdrop} onClick={props.onCancel} />;
 };
 
-const ModalOverlay = ({title, children, onCancel, fullScreen = true}) => {
+const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
+    const windowSize = useWindowSize()
+    if (adapterSize === "adaptable") { adapterSize = windowSize }
 
-    if (fullScreen) {
+    if (adapterSize === "tablet" || adapterSize === "smartphone") {
         return <div className={classes["modal-fullscreen"]}>{children}</div>
     }
 
@@ -42,7 +45,7 @@ const Modal = (props) => {
                 <ModalOverlay
                     title={props.title}
                     children={props.children}
-                    fullScreen={props.fullScreen}
+                    adapterSize={props.adapterSize}
                     onCancel={showHandler}
                 />,
                 document.getElementById('overlay-root')

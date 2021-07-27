@@ -1,6 +1,5 @@
 import Location from "./Location";
 // import classes from './Search.module.css';
-import Modal from "../UI/Modal/Modal";
 
 const DUMMY_LOCATIONS = [
     {
@@ -15,13 +14,13 @@ const DUMMY_LOCATIONS = [
 
 const Search = () => {
     return (
-        <Modal fullScreen={true}>
+        <>
             {DUMMY_LOCATIONS.map(place =>
                 <Location
                     key={place.id}
                     text={place.name}/>)
             }
-        </Modal>
+        </>
     );
 };
 
