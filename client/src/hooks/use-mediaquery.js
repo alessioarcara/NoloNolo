@@ -11,7 +11,7 @@ const useMediaQuery = () => {
             else { setBreakpoint("smartphone") }
         }
 
-        mediaQuery.addEventListener('change', handleQueryListener)
+        mediaQuery.addEventListener('change', handleQueryListener, { passive: true })
         return () => mediaQuery.removeEventListener('change', handleQueryListener);
     }, [])
 

@@ -1,32 +1,27 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import UserIcon from "../UI/icons/MenuIcons/UserIcon";
+import {throttle} from "../../helpers/utils";
 
 const NavigationBar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
 
-    const scrollHandler = useCallback(() => {
-        if (showNavbar) {
-            setShowNavbar(false)
-        }
+    const scrollHandler = useMemo(() => throttle(() => {
+        if (showNavbar) { setShowNavbar(false) }
 
         const timer = setTimeout(() => {
             setShowNavbar(true)
         }, 1000)
 
-        if (!showNavbar) {
-            clearTimeout(timer)
-        }
-    }, [showNavbar])
+        if (!showNavbar) { clearTimeout(timer) }
+    }, 20), [showNavbar])
 
     useEffect(() => {
-        window.addEventListener('scroll', scrollHandler);
-        return () => {
-            window.removeEventListener('scroll', scrollHandler);
-        }
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        return () => window.removeEventListener('scroll', scrollHandler);
     }, [scrollHandler])
 
     return (

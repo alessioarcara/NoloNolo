@@ -1,24 +1,23 @@
-import React from "react";
+import React, {useMemo} from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
-import { useCallback, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
+import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [navbar, setNavbar] = useState(false);
 
-    const listenToScroll = useCallback(() => {
+    const listenToScroll = useMemo(()=> throttle(() => {
         if (window.scrollY >= 60) {
             setNavbar(true);
         } else {
             setNavbar(false);
         }
-    }, [])
+    }, 20), [])
 
     useEffect(() => {
-        window.addEventListener('scroll', listenToScroll);
-        return () => {
-            window.removeEventListener('scroll', listenToScroll);
-        }
+        window.addEventListener('scroll', listenToScroll, { passive: true });
+        return () => window.removeEventListener('scroll', listenToScroll);
     }, [listenToScroll])
 
     const searchClasses =
