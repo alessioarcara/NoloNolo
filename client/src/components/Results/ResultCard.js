@@ -10,24 +10,33 @@ const ResultCard = (props) => {
         setIsClicked(state => !state);
     }
 
-    return(
+    return (
         <div className={classes.card}>
             <div className={classes.container}>
-                <img src={props.image} class={classes['card-image']}/>
-                <div onClick={changeClickHandler} className={isClicked ? `${classes.icon} ${classes.clicked}` : classes.icon}>
+                <div className={`${classes['scroll-container']} ${classes['x-scroll']} ${classes['x-mandatory']}`}>
+                    <div className={classes.wrapper}>
+                        <div className={classes.element}><img src={props.image} className={classes['card-image']}/></div>
+                        <div className={classes.element}><img src={props.image} className={classes['card-image']}/></div>
+                    </div>
+                </div>
+
+                <div onClick={changeClickHandler}
+                     className={isClicked ? `${classes.icon} ${classes.clicked}` : classes.icon}>
                     <HeartIcon className={classes.heart}/>
                 </div>
             </div>
 
             <h3 className={classes['card-title']}>{props.name}</h3>
+            <div className={classes['card-description']}>{props.description}</div>
+
             <div className={classes.info}>
                 <StarIcon/>
                 <span>4,6</span>
-                <span>(12)</span>
+                <span>(2 recensioni)</span>
             </div>
-            <div className={classes.price}>{`€ ${props.price}`}</div>
 
-            {/*<p className={classes['card-description']}>{props.description}</p>*/}
+            <div className={classes.price}>{`€ ${props.price}/al giorno`}</div>
+
         </div>
     );
 };
