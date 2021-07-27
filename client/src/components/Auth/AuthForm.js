@@ -12,7 +12,7 @@ import Modal from "../UI/Modal/Modal";
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true)
-    const {status, error,  sendRequest: authenticate} = useHttp()
+    const {status, error, sendRequest: authenticate} = useHttp()
     const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(authForm)
 
     const authCtx = useContext(AuthContext)
@@ -41,26 +41,25 @@ const AuthForm = () => {
         resetForm()
     }
 
-    if (status === 'completed' && error) {
-        return <Modal fullScreen={false} title={error}>sdasd</Modal>
-    }
-
     return (
-        <section className={classes.auth}>
-            <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
-            <form onSubmit={submitHandler}>
-                { renderFormInputs(classes.control) }
-                <div className={classes.actions}>
-                    <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
-                    <Button
-                        type="button"
-                        className={classes.toggle}
-                        onClick={switchAuthModeHandler} >
-                        {isLogin ? "Crea nuovo account" : "Entra con un account esistente"}
-                    </Button>
-                </div>
-            </form>
-        </section>
+        <>
+            {status === 'completed' && error && <Modal fullScreen={false} title="Error">{error}</Modal>}
+            <section className={classes.auth}>
+                <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
+                <form onSubmit={submitHandler}>
+                    {renderFormInputs(classes.control)}
+                    <div className={classes.actions}>
+                        <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
+                        <Button
+                            type="button"
+                            className={classes.toggle}
+                            onClick={switchAuthModeHandler}>
+                            {isLogin ? "Crea nuovo account" : "Entra con un account esistente"}
+                        </Button>
+                    </div>
+                </form>
+            </section>
+        </>
     )
 }
 
