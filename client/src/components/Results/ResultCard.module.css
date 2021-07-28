@@ -23,34 +23,6 @@
     margin-bottom: 0.5rem;
 }
 
-.card-image {
-    height: 12rem;
-    width: 100%;
-    object-fit: cover;
-}
-
-.heart {
-    color: white;
-    stroke: #F20574;
-    stroke-width: 1;
-    width: 2rem;
-}
-
-.icon svg {
-    cursor: pointer;
-    color: white;
-    stroke: #fff;
-}
-
-.icon svg path {
-    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .5));
-}
-
-.clicked svg {
-    color: #F20574;
-    stroke: #F20574;
-}
-
 .info {
     display: flex;
     align-items: center;
@@ -63,61 +35,8 @@
     width: 1.2rem;
 }
 
-.container {
-    position: relative;
-}
-
-.container svg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-right: 0.5rem;
-}
-
 .price {
     font-weight: bold;
     padding: 0 1rem;
     margin: 0.5rem;
-}
-
-.scroll-container {
-    overflow: scroll;
-    position: relative;
-}
-
-.x-mandatory {
-    scroll-snap-type: x mandatory;
-}
-
-.x-scroll .wrapper {
-    width: fit-content;
-    display: flex;
-    /*animation: marquee 10s linear infinite;*/
-}
-
-@keyframes marquee {
-    0%   { transform: translateX(0%); }
-    100% { transform: translateX(-50%); }
-}
-
-.element {
-    width: 340px;
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-    justify-content: center;
-    align-items: center;
-}
-
-.scroll-container::-webkit-scrollbar {
-    display: none;
-}
-
-@media only screen and (min-width: 800px) {
-    .element {
-        width: 40rem;
-    }
-
-    .card-image {
-        height: 15rem;
-    }
 }

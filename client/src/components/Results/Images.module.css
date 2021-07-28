@@ -1,0 +1,28 @@
+.slide {
+    display: inline-block;
+    width: 100%;
+    border-radius: 40px;
+}
+
+.card-image {
+    height: 12rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+@media only screen and (max-width: 800px) {
+    .slide {
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .slide {
+        width: 40rem;
+    }
+
+    .card-image {
+        height: 15rem;
+    }
+}

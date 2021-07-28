@@ -1,0 +1,87 @@
+.slideshowSlider {
+    white-space: nowrap;
+}
+
+.slideshow {
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100%;
+    object-fit: cover;
+}
+
+.slideshowSlider {
+    white-space: nowrap;
+}
+
+.icon svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0.5rem;
+}
+
+
+.slideshowDots {
+    text-align: center;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 1rem;
+}
+
+.heart {
+    color: white;
+    stroke: #F20574;
+    stroke-width: 1;
+    width: 2rem;
+}
+
+.icon svg {
+    cursor: pointer;
+    color: white;
+    stroke: #fff;
+}
+
+.icon svg path {
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .5));
+}
+
+.clicked svg {
+    color: #F20574;
+    stroke: #F20574;
+}
+
+.style-arrow svg {
+    position: absolute;
+    top: 0;
+    margin-top: 6rem;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    stroke-width: 1;
+    width: 2rem;
+    cursor: pointer;
+}
+
+.show-right svg {
+    right: 1rem;
+}
+
+.show-left svg {
+    left: 1rem;
+}
+
+@media only screen and (max-width: 800px) {
+    .style-arrow {
+        display: none;
+    }
+
+    .slideshowSlider {
+        overflow: scroll;
+        scroll-snap-type: x mandatory;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
