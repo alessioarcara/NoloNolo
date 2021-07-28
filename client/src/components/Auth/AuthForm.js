@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Button from "../UI/Button/Button";
 import classes from "./AuthForm.module.css"
 import useForm from "../../hooks/use-form";
@@ -12,7 +12,7 @@ import Modal from "../UI/Modal/Modal";
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true)
-    const {status, error, sendRequest: authenticate} = useHttp()
+    const {status, data: payload, sendRequest: authenticate} = useHttp()
     const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(authForm)
 
     const authCtx = useContext(AuthContext)
@@ -27,11 +27,7 @@ const AuthForm = () => {
         const enteredEmail = formValues[0]
         const enteredPassword = formValues[1]
 
-        const transformData = (resData) => {
-            const authData = resData[Object.keys(resData)]
-            authCtx.login(authData.token)
-            return authData
-        }
+        const transformData = resData => resData[Object.keys(resData)]
 
         if (isLogin) {
             authenticate({body: body_login(enteredEmail, enteredPassword)}, transformData)
@@ -41,9 +37,14 @@ const AuthForm = () => {
         resetForm()
     }
 
+    useEffect(() => {
+        if (payload && payload["authData"])
+            authCtx.login(payload.authData.token)
+    }, [authCtx, payload])
+
     return (
         <>
-            {status === 'completed' && error && <Modal fullScreen={false} title="Error">{error}</Modal>}
+            {status === 'completed' && payload && <Modal fullScreen={false} title="Error">{payload.authProblem}</Modal>}
             <section className={classes.auth}>
                 <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
                 <form onSubmit={submitHandler}>

@@ -3,8 +3,11 @@ exports.body_login = (email, password) => {
         query: `
           query($email: String!, $password: String!) {
             login(email: $email, password: $password) {
-              userId
-              token
+              authData {
+                userId
+                token
+              }
+              authProblem
             }
           }
         `,
@@ -16,8 +19,11 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
         query: `
           mutation($userData: UserInput!) {
             createUser(inputUser: $userData) {
-              userId
-              token
+              authData {
+                userId
+                token
+              }
+              authProblem
             }  
           }
         `,

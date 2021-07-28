@@ -5,9 +5,9 @@ import useHttp from "../hooks/use-http";
 const bodyRequest = {
     query: `
     query {
-        users {
+        user {
             _id
-            email 
+            email
         }
     }`
 };
@@ -18,28 +18,27 @@ const ProfilePage = () => {
 
     /* PROVVISORIO */
 
-    const {status, error, data: users, sendRequest: fetchUsers} = useHttp(true)
+    const {status, error, data: user, sendRequest: fetchUser} = useHttp(true)
 
     useEffect(() => {
-        const transformData = resData => resData.users
+        const transformData = resData => resData.user
 
-        fetchUsers({body: bodyRequest, token: authCtx.token}, transformData)
-    }, [fetchUsers, authCtx.token])
+        fetchUser({body: bodyRequest, token: authCtx.token}, transformData)
+    }, [fetchUser, authCtx.token])
 
     let content = <p>No users found.</p>;
 
     if (status === 'completed' && !error) {
-        content =
-            <ul> {users.map(user =>
-                <li key={user._id}>
-                    <p>{user.email}</p>
-                </li>)}
-            </ul>
+        content = (
+            <div>
+                <h3>{user.email}</h3>
+            </div>
+        )
     }
 
     return (
         <div className="centered">
-            <h1>Pagina profilo</h1>
+            <h1>Profilo</h1>
             {content}
             <button onClick={authCtx.logout} type="button">Logout</button>
         </div>
