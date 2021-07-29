@@ -4,6 +4,7 @@ import useHttp from "../hooks/use-http";
 import ProfileOption from "../components/Profile/ProfileOption";
 import Button from "../components/UI/Button/Button";
 import classes from "./ProfilePage.module.css"
+import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 
 const bodyRequest = {
     query: `
@@ -17,21 +18,26 @@ const bodyRequest = {
 
 const ProfilePage = () => {
 
-    const authCtx = useContext(AuthContext)
-
     /* PROVVISORIO */
+
+    const authCtx = useContext(AuthContext)
 
     const {status, error, data: user, sendRequest: fetchUser} = useHttp(true)
 
+    let content = <LoadingSpinner/>
+
     useEffect(() => {
         const transformData = resData => resData.user
-
         fetchUser({body: bodyRequest, token: authCtx.token}, transformData)
     }, [fetchUser, authCtx.token])
+
+    if (status === "completed" && user) { content = user.email }
+    if (status === "completed" && error) { content = <p>User not found.</p>}
 
     return (
         <div className="centered">
             <h1>Profilo</h1>
+            <div>{content}</div>
             <div className={classes.container}>
                 <ProfileOption
                     title="Informazioni personali"
