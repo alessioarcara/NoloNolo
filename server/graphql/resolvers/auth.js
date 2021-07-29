@@ -38,7 +38,7 @@ module.exports = {
             if (!user) { return { authProblem: userNotFound } }
 
             return user
-        } catch (err) {`Can't retrieve user info. ${err}`}
+        } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
     },
     login: async ({email, password}, {_, res}) => {
         try {
@@ -50,8 +50,7 @@ module.exports = {
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
             return {authData: {userId: user._id, token: accessToken} };
-        } catch (err) {
-            throw new Error(`Can't login. ${err}`); }
+        } catch (err) { throw new Error(`Can't login. ${err}`); }
     },
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
@@ -65,9 +64,7 @@ module.exports = {
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
             return {authData: {userId: user._id, token: accessToken} }
-        } catch (err) {
-            throw new Error(`Can't create user. ${err}`)
-        }
+        } catch (err) { throw new Error(`Can't create user. ${err}`); }
     },
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)

@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.action {
+    margin-top: 1rem;
+    height: 100%;
+    width: 30%;
+    border-radius: 13px;
+}
+
+.action button {
+    background-color: #3f3f3f;
+    border: 1px solid #3f3f3f;
+    color: white;
+    font-size: 1.1em;
+}

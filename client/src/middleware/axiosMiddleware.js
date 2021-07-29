@@ -32,7 +32,7 @@ const AxiosMiddleware = ({children}) => {
                         }
                     }
                     return Promise.reject(error)
-                } catch (err) { throw new Error("Il server non risponde")}
+                } catch (err) { throw new Error("Il server non risponde. ")}
             })
     }, [authCtx])
 

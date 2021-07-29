@@ -12,7 +12,7 @@ import Modal from "../UI/Modal/Modal";
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true)
-    const {status, data: payload, sendRequest: authenticate} = useHttp()
+    const {error, status, data: payload, sendRequest: authenticate} = useHttp()
     const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(authForm)
 
     const authCtx = useContext(AuthContext)
@@ -44,7 +44,8 @@ const AuthForm = () => {
 
     return (
         <>
-            {status === 'completed' && payload && <Modal fullScreen={false} title="Error">{payload.authProblem}</Modal>}
+            {status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}
+            {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
             <section className={classes.auth}>
                 <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
                 <form onSubmit={submitHandler}>
