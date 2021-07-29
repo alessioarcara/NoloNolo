@@ -38,5 +38,45 @@
 .price {
     font-weight: bold;
     padding: 0 1rem;
-    margin: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.adapter {
+    width: 100%;
+}
+
+.btn-ctn {
+    padding: 0 1rem;
+}
+
+.btn-details {
+    display: none;
+    cursor: pointer;
+    font: inherit;
+    color: #FF2677;
+    background-color: white;
+    border: 1px solid #FF2677;
+    border-radius: 0.7rem;
+    padding: 0.5rem 1.5rem;
+    width: 50%;
+}
+
+.btn-details:hover {
+    background-color: #FF2677;
+    color: white;
+}
+
+@media only screen and (min-width: 800px) {
+    .card {
+        flex-direction: row;
+        box-shadow: none;
+    }
+
+    .adapter {
+        width: 70%;
+    }
+
+    .btn-details {
+        display: block;
+    }
 }

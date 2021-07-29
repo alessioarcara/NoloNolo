@@ -31,7 +31,7 @@ const SlideShow = (props) => {
     return (
         <>
             <div className={classes.slideshow}>
-                <div className={classes.slideshowSlider} style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                <div className={classes.slideshowSlider} style={{ transform: `translate3d(${-index * 100}%, 0, 0)`}}>
                     <Images
                         photos={images}
                     />

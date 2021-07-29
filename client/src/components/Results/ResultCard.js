@@ -11,19 +11,21 @@ const ResultCard = (props) => {
                     image={props.image}
                 />
 
-                <h3 className={classes['card-title']}>{props.name}</h3>
-                <div className={classes['card-description']}>{props.description}</div>
+                <div className={classes.adapter}>
+                    <h3 className={classes['card-title']}>{props.name}</h3>
+                    <div className={classes['card-description']}>{props.description}</div>
 
-                <div className={classes.info}>
-                    <StarIcon/>
-                    <span>4,6</span>
-                    <span>(2 recensioni)</span>
+                    <div className={classes.info}>
+                        <StarIcon/>
+                        <span>4,6</span>
+                        <span>(2 recensioni)</span>
+                    </div>
+
+                    <div className={classes.price}>{`€ ${props.price}/al giorno`}</div>
+                    <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
                 </div>
-
-                <div className={classes.price}>{`€ ${props.price}/al giorno`}</div>
             </div>
         </>
-
     );
 };
 

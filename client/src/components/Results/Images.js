@@ -1,8 +1,9 @@
+import React from 'react';
 import classes from "./Images.module.css";
 
-const Images = (props) => {
+const Images = React.forwardRef((props, ref) => {
     return (
-        <>
+        <div ref={ref}>
             {props.photos.map((image, index) =>
                 <div key={index} className={classes.slide}>
                     <img
@@ -11,8 +12,8 @@ const Images = (props) => {
                     />
                 </div>
             )}
-        </>
+        </div>
     );
-};
+});
 
 export default Images;

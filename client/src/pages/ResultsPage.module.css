@@ -1,0 +1,51 @@
+.header-title {
+    font-family: 'Lobster', cursive;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.style-back svg {
+    width: 2rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.style-back svg:hover {
+    background-color: rgba(135, 132, 132, 0.5);
+    border-radius: 50%;
+}
+
+.filters-container {
+    overflow: scroll;
+    scroll-snap-type: x mandatory;
+    white-space: nowrap;
+    /*margin-left: 0.8rem;*/
+    /*margin-right: 0.8rem;*/
+    display: flex;
+    column-gap: 1rem;
+    justify-content: center;
+}
+
+.btn-filter {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 2rem;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    outline: none;
+    color: rgb(34, 34, 34);
+    position: relative;
+    padding: 10px 16px;
+    font-size: 12px;
+    line-height: 16px;
+    width: auto;
+    cursor: pointer;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+.btn-filter:hover {
+    border-color: #FF2677;
+    color: #FF2677;
+}

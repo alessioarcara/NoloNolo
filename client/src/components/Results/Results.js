@@ -25,6 +25,17 @@ const DUMMY_SEARCHES = [
             'https://newsmondo.it/wp-content/uploads/2021/03/viaggio_barca_vela.jpg.webp'
         ],
         price: 220.00
+    },
+    {
+        id: 's3',
+        shipowner: 'Mario Verdi',
+        name: 'Achille III',
+        description: '2 letti, 2 bagni',
+        image: [
+            'https://www.mondovela.it/content/images/thumbs/0013293_valium-62-luxury-catamaran-crociera-in-catamarano-mediterraneo_870.jpeg',
+            'https://www.skipperclub.it/media/k2/items/cache/806b6e1806566ad52df50ee6cecd90ef_L.jpg'
+        ],
+        price: 220.00
     }
 ]
 
