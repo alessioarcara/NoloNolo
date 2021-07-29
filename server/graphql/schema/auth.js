@@ -5,6 +5,7 @@ const AuthType = `
             password: String
             address: Address
             avatar: String
+            userType: String!
         }
         
         type Address {

@@ -32,7 +32,6 @@ const decodeRefreshToken = (req) => {
 module.exports = {
     user: async (_, {req}) => {
         if (!req.isAuth) { throw new Error("Unauthenticated.") }
-
         try {
             const user = await User.findById(req.userId)
             if (!user) { return { authProblem: userNotFound } }

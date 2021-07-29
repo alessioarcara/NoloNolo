@@ -10,8 +10,8 @@ const bodyRequest = {
     query: `
     query {
         user {
-            _id
             email
+            userType
         }
     }`
 };
@@ -24,20 +24,17 @@ const ProfilePage = () => {
 
     const {status, error, data: user, sendRequest: fetchUser} = useHttp(true)
 
-    let content = <LoadingSpinner/>
-
     useEffect(() => {
         const transformData = resData => resData.user
         fetchUser({body: bodyRequest, token: authCtx.token}, transformData)
     }, [fetchUser, authCtx.token])
 
-    if (status === "completed" && user) { content = user.email }
-    if (status === "completed" && error) { content = <p>User not found.</p>}
+    let content = <LoadingSpinner/>
 
-    return (
-        <div className="centered">
-            <h1>Profilo</h1>
-            <div>{content}</div>
+    if (status === "completed" && user && user.userType === "shipowner") {
+        content = (
+            <>
+            <div>{user.email}</div>
             <div className={classes.container}>
                 <ProfileOption
                     title="Informazioni personali"
@@ -63,9 +60,43 @@ const ProfilePage = () => {
                     title="6"
                     content="lorem ipsum dolor sit amet"
                 />
-                <div className={classes.action}>
-                    <Button onClick={authCtx.logout} type="button">Logout</Button>
+            </div>
+        </>
+        )
+    }
+
+    if (status === "completed" && user && user.userType === "customer") {
+        content = (
+            <>
+                <div>{user.email}</div>
+                <div className={classes.container}>
+                    <ProfileOption
+                        title="Informazioni personali"
+                        content="Comunicaci i tuoi dati personali e le informazioni per contattarti"
+                    />
+                    <ProfileOption
+                        title="Noleggi"
+                        content="Visualizza i tuoi noleggi o modifica e cancella un noleggio"
+                    />
+                    <ProfileOption
+                        title="3"
+                        content="lorem ipsum dolor sit amet"
+                    />
                 </div>
+            </>
+        )
+    }
+
+    if (status === "completed" && error) {
+        content = <p>User not found.</p>
+    }
+
+    return (
+        <div className="centered">
+            <h1>Profilo</h1>
+            {content}
+            <div className={classes.action}>
+                <Button onClick={authCtx.logout} type="button">Logout</Button>
             </div>
         </div>
     );
