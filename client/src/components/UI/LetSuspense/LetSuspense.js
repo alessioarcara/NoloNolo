@@ -32,7 +32,7 @@ const LetSuspense = ({
             let tempComponent = [];
             multiplier = multiplier || 1;
 
-            for (let i = 0; i< multiplier; i++) {
+            for (let i = 0; i < multiplier; i++) {
                 tempComponent.push(<Placeholder key={i}/>);
             }
             setComponent(tempComponent);
