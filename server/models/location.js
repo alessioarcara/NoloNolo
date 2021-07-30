@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-export const locationSchema = new Schema({
+const locationSchema = new Schema({
     geometry: {
         type: {
             type: String,
@@ -20,3 +20,6 @@ export const locationSchema = new Schema({
         required: [true, 'Please provide harbour']
     },
 })
+
+module.exports = mongoose.model('Location', locationSchema)
+

@@ -1,10 +1,10 @@
-import {reviewSchema} from "./review";
-
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-export const advertisementSchema = new Schema({
+const reviewSchema = require('./review').schema
+
+const advertisementSchema = new Schema({
     preferredBy: [{
         type: Schema.Types.ObjectId,
         ref: "User"
@@ -14,13 +14,15 @@ export const advertisementSchema = new Schema({
         required: [true, 'Please provide a description']
     },
     fixedFee: {
-      type: Number,
+      type: mongoose.Types.Decimal128,
       required: [true, 'Please provide a fixed fee']
     },
     dailyFee: {
-        type: Number,
+        type: mongoose.Types.Decimal128,
         required: [true, 'Please provide a daily fee']
     },
     images: [String],
     reviews: [reviewSchema]
 })
+
+module.exports = mongoose.model('Advertisement', advertisementSchema)

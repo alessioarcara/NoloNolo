@@ -5,16 +5,8 @@ import ProfileOption from "../components/Profile/ProfileOption";
 import Button from "../components/UI/Button/Button";
 import classes from "./ProfilePage.module.css"
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
+import {body_user} from "../helpers/httpConfig";
 
-const bodyRequest = {
-    query: `
-    query {
-        user {
-            email
-            userType
-        }
-    }`
-};
 
 const ProfilePage = () => {
 
@@ -26,7 +18,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         const transformData = resData => resData.user
-        fetchUser({body: bodyRequest, token: authCtx.token}, transformData)
+        fetchUser({body: body_user, token: authCtx.token}, transformData)
     }, [fetchUser, authCtx.token])
 
     let content = <LoadingSpinner/>
@@ -90,6 +82,7 @@ const ProfilePage = () => {
     if (status === "completed" && error) {
         content = <p>User not found.</p>
     }
+    console.log(user)
 
     return (
         <div className="centered">

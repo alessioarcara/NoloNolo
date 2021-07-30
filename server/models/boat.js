@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
-const {advertisementSchema} = require("./advertisement");
-const {locationSchema} = require("./location");
 
 const Schema = mongoose.Schema;
+
+const advertisementSchema = require('./advertisement').schema;
+const locationSchema = require('./location').schema;
 
 const boatSchema = new Schema({
     shipowner: {
@@ -11,22 +12,29 @@ const boatSchema = new Schema({
     },
     length: {
         type: String,
-        required: true
+        required: [true, 'Please provide a length']
     },
     yard: {
         type: String,
-        required: true
+        required: [true, 'Please provide a yard']
     },
     model: {
         type: String,
-        required: true
+        required: [true, 'Please provide a model']
     },
     maximumCapacity: {
         type: Number,
-        required: true
+        required: [true, 'Please provide a maximum capacity']
     },
-    location: locationSchema,
-    advertisement: advertisementSchema
+    boatType: {
+        type: String,
+        enum : ['sailboat', 'motorboat', 'catamaran', 'dinghy']
+    },
+    advertisement: advertisementSchema,
+    location: {
+        type: locationSchema,
+        required: [true, 'Please provide a location']
+    }
 })
 
 module.exports = mongoose.model('Boat', boatSchema)

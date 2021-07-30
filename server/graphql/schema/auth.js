@@ -2,7 +2,6 @@ const AuthType = `
         type User {
             _id: ID!
             email: String!
-            password: String
             address: Address
             avatar: String
             userType: String!
@@ -37,4 +36,4 @@ const AuthType = `
         }
 `
 
-module.exports = AuthType
+module.exports = AuthType;

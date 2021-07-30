@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-export const reviewSchema = new Schema({
+const reviewSchema = new Schema({
     review: {
         type: String,
         required: [true, "Review can't be empty"]
@@ -22,3 +22,5 @@ export const reviewSchema = new Schema({
         ref: 'User'
     },
 })
+
+module.exports = mongoose.model('Review', reviewSchema)
