@@ -9,7 +9,7 @@ const LetSuspense = ({
                          children}) => {
     const [component, setComponent] = useState([]);
     const [isChecked, setIsChecked] = useState(false);
-
+    console.log(component)
     useEffect(() => {
         if (checkOnce && isChecked) {
             setComponent([children])

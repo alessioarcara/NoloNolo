@@ -35,6 +35,7 @@ exports.body_boats = ({where, skip}) => {
         query: `
           query($filter: BoatFilter) {
               boats(filter: $filter){
+                _id
                 model
                 hasAdvertisement {
                   description

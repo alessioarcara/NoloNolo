@@ -1,5 +1,6 @@
 const boatType = `  
         type Boat {
+            _id: ID!
             owner: User!
             yard: String!
             model: String!

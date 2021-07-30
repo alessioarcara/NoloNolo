@@ -8,21 +8,31 @@ import {useEffect, useState} from "react";
 import {body_boats} from "../../helpers/httpConfig";
 
 const Results = () => {
+    const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
+
+    useEffect(() => {
+        const transformData = resData => resData.boats
+        fetchResults({body: body_boats({where: "marina", skip: 3})}, transformData)
+    }, [])
+
+    console.log(status)
+
     return (
         <div className={classes.wrap}>
             <LetSuspense
                 condition={ status === 'completed' }
                 placeholder={PlaceholderConfig}
                 multiplier={2}
-                initialDelay={1000}
+                initialDelay={ 1000 }
             >
                 {boats && boats.map(boat => (
                     <ResultCard
-                        key={results.id}
-                        image={results.image}
-                        name={results.name}
-                        description={results.description}
-                        price={results.price}
+                        key={boat._id}
+                        image={boat.hasAdvertisement.images}
+                        name={boat.model}
+                        description={boat.hasAdvertisement.description}
+                        price={boat.hasAdvertisement.dailyFee}
+                        reviews={boat.hasAdvertisement.reviews}
                     />
                 ))}
             </LetSuspense>
