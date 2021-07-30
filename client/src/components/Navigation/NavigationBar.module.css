@@ -23,7 +23,7 @@ nav ul {
     align-items: center;
     background-color: rgb(255, 255, 255);
     border-top: 1px solid rgb(221, 221, 221);
-    z-index: 100;
+    z-index: 5;
 }
 
 .action {

@@ -12,26 +12,27 @@ const AxiosMiddleware = ({children}) => {
         http.interceptors.response.use(
             async res => res,
             async error => {
+                try {
+                    const errorMessage = await error.response.data.errors[0].message;
 
-                const errorMessage = await error.response.data.errors[0].message;
+                    if (errorMessage.includes('Unauthenticated')) {
+                        try {
+                            const res = await http({data: body_refresh})
+                            const resData = res.data.data.refreshToken;
 
-                if (errorMessage.includes('Unauthenticated')) {
-                    try {
-                        const res = await http({data: body_refresh})
-                        const resData = res.data.data.refreshToken;
+                            const tokenData = resData.token;
+                            authCtx.login(tokenData)
 
-                        const tokenData = resData.token;
-                        authCtx.login(tokenData)
-
-                        const config = error.config;
-                        config.headers['Authorization'] = "Bearer " + tokenData
-                        return axios.request(config)
-                    } catch (err) {
-                        authCtx.logout()
-                        throw new Error("'Invalid or expired refresh token.'")
+                            const config = error.config;
+                            config.headers['Authorization'] = "Bearer " + tokenData
+                            return axios.request(config)
+                        } catch (err) {
+                            authCtx.logout()
+                            throw new Error("'Invalid or expired refresh token.'")
+                        }
                     }
-                }
-                return Promise.reject(error)
+                    return Promise.reject(error)
+                } catch (err) { throw new Error("Il server non risponde. ")}
             })
     }, [authCtx])
 

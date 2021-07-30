@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
+const {userNotFound, invalidPassword, duplicateEmail} = require("../../helpers/problemMessages");
 
 const ACCESS_EXPIRE_TIME = '60m'
 const REFRESH_EXPIRE_TIME = '7d'
@@ -29,41 +30,40 @@ const decodeRefreshToken = (req) => {
 }
 
 module.exports = {
-    users: async (_, {req}) => {
-        if (!req.isAuth) {
-            throw Error("Unauthenticated.")
-        }
-        const users = await User.find()
-        return users
+    user: async (_, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        try {
+            const user = await User.findById(req.userId)
+            if (!user) { return { authProblem: userNotFound } }
+
+            return user
+        } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
     },
     login: async ({email, password}, {_, res}) => {
         try {
             const user = await User.findOne({email});
-            if (!user) { throw new Error('User does not exist!'); }
+            if (!user) { return { authProblem: userNotFound } }
 
             const isEqual = bcrypt.compare(password, user.password)
-            if (!isEqual) { throw new Error('Password is incorrect!'); }
+            if (!isEqual) { return { authProblem: invalidPassword } }
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
-            return {userId: user._id, token: accessToken};
-        } catch (err) {
-            throw new Error(`Can't login. ${err}`); }
+            return {authData: {userId: user._id, token: accessToken} };
+        } catch (err) { throw new Error(`Can't login. ${err}`); }
     },
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
         try {
             const existingUser = await User.findOne({email})
-            if (existingUser) { throw new Error(`User already exists.`); }
+            if (existingUser) { return { authProblem: duplicateEmail} }
 
             const hashedPassword = await bcrypt.hash(password, 12);
             const user = new User({email: email, password: hashedPassword})
             await user.save();
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
-            return {userId: user._id, token: accessToken}
-        } catch (err) {
-            throw new Error(`Can't create user. ${err}`)
-        }
+            return {authData: {userId: user._id, token: accessToken} }
+        } catch (err) { throw new Error(`Can't create user. ${err}`); }
     },
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)

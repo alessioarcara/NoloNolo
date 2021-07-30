@@ -1,33 +1,32 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import UserIcon from "../UI/icons/MenuIcons/UserIcon";
+import {throttle} from "../../helpers/utils";
 
 const NavigationBar = () => {
-    const [navbar, setNavbar] = useState(true);
-    const [scroll, setScroll] = useState(0);
+    const [showNavbar, setShowNavbar] = useState(true);
 
-    // const changeNavHandler = useCallback(() => {
-    //     if (window.scrollY > scroll  ) {
-    //         setNavbar(false)
-    //     } else {
-    //         setNavbar(true)
-    //     }
-    //     setScroll(window.scrollY)
-    // }, [scroll])
-    //
-    // useEffect(() => {
-    //     window.addEventListener('scroll', changeNavHandler);
-    //     return () => {
-    //         window.removeEventListener('scroll', changeNavHandler);
-    //     }
-    // }, [changeNavHandler])
+    const scrollHandler = useMemo(() => throttle(() => {
+        if (showNavbar) { setShowNavbar(false) }
+
+        const timer = setTimeout(() => {
+            setShowNavbar(true)
+        }, 1000)
+
+        if (!showNavbar) { clearTimeout(timer) }
+    }, 20), [showNavbar])
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        return () => window.removeEventListener('scroll', scrollHandler);
+    }, [scrollHandler])
 
     return (
         <nav>
-            <ul className={navbar ? `${classes['nav-bar']} ${classes.action}` : `${classes['nav-bar']} ${classes['no-action']}`}>
+            <ul className={showNavbar ? `${classes['nav-bar']} ${classes.action}` : `${classes['nav-bar']} ${classes['no-action']}`}>
                 <li>
                     <NavLink to='/' exact activeClassName={classes.active} className={classes.item}>
                         <SearchIcon/>

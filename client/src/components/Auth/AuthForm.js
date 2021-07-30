@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Button from "../UI/Button/Button";
 import classes from "./AuthForm.module.css"
 import useForm from "../../hooks/use-form";
@@ -12,7 +12,7 @@ import Modal from "../UI/Modal/Modal";
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true)
-    const {status, error,  sendRequest: authenticate} = useHttp()
+    const {error, status, data: payload, sendRequest: authenticate} = useHttp()
     const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(authForm)
 
     const authCtx = useContext(AuthContext)
@@ -27,11 +27,7 @@ const AuthForm = () => {
         const enteredEmail = formValues[0]
         const enteredPassword = formValues[1]
 
-        const transformData = (resData) => {
-            const authData = resData[Object.keys(resData)]
-            authCtx.login(authData.token)
-            return authData
-        }
+        const transformData = resData => resData[Object.keys(resData)]
 
         if (isLogin) {
             authenticate({body: body_login(enteredEmail, enteredPassword)}, transformData)
@@ -41,26 +37,31 @@ const AuthForm = () => {
         resetForm()
     }
 
-    if (status === 'completed' && error) {
-        return <Modal fullScreen={false} title={error}>sdasd</Modal>
-    }
+    useEffect(() => {
+        if (payload && payload["authData"])
+            authCtx.login(payload.authData.token)
+    }, [authCtx, payload])
 
     return (
-        <section className={classes.auth}>
-            <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
-            <form onSubmit={submitHandler}>
-                { renderFormInputs(classes.control) }
-                <div className={classes.actions}>
-                    <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
-                    <Button
-                        type="button"
-                        className={classes.toggle}
-                        onClick={switchAuthModeHandler} >
-                        {isLogin ? "Crea nuovo account" : "Entra con un account esistente"}
-                    </Button>
-                </div>
-            </form>
-        </section>
+        <>
+            {status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}
+            {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
+            <section className={classes.auth}>
+                <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
+                <form onSubmit={submitHandler}>
+                    {renderFormInputs(classes.control)}
+                    <div className={classes.actions}>
+                        <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
+                        <Button
+                            type="button"
+                            className={classes.toggle}
+                            onClick={switchAuthModeHandler}>
+                            {isLogin ? "Crea nuovo account" : "Entra con un account esistente"}
+                        </Button>
+                    </div>
+                </form>
+            </section>
+        </>
     )
 }
 

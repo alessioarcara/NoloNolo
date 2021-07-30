@@ -1,10 +1,13 @@
 exports.body_login = (email, password) => {
     return {
         query: `
-          query($email: String!, $password: String!) {
+          mutation($email: String!, $password: String!) {
             login(email: $email, password: $password) {
-              userId
-              token
+              authData {
+                userId
+                token
+              }
+              authProblem
             }
           }
         `,
@@ -16,16 +19,39 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
         query: `
           mutation($userData: UserInput!) {
             createUser(inputUser: $userData) {
-              userId
-              token
+              authData {
+                userId
+                token
+              }
+              authProblem
             }  
           }
         `,
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
-exports.body_refresh =  {
+exports.body_boats = ({where, skip}) => {
+    return {
         query: `
+          query($filter: BoatFilter) {
+              boats(filter: $filter){
+                model
+                hasAdvertisement {
+                  description
+                  images
+                  dailyFee
+                  reviews {
+                    rating
+                  }
+                }
+              }
+          }
+      `,
+        variables: {filter: {where, skip}}
+    }
+};
+exports.body_refresh = {
+    query: `
           query {
             refreshToken {
               userId
@@ -34,10 +60,19 @@ exports.body_refresh =  {
           }
         `,
 };
-exports.invalidate =  {
+exports.invalidate = {
     query: `
           mutation {
             invalidateTokens
           }
         `,
+};
+exports.body_user = {
+    query: `
+    query {
+        user {
+            email
+            userType
+        }
+    }`
 };

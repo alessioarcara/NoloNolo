@@ -1,0 +1,12 @@
+.option {
+    background-color: #b37aec;
+    border-radius: 16px;
+    width: 30%;
+    margin: 0.5rem;
+}
+
+@media all and (max-width: 768px) {
+    .option {
+        width: 100%;
+    }
+}

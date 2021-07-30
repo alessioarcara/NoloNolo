@@ -1,36 +1,28 @@
-const {buildSchema} = require('graphql')
+const {buildSchema} = require('graphql');
+const authType = require('./auth')
+const boatType = require('./boat')
 
-module.exports = buildSchema(`
-        type User {
-            _id: ID!
-            email: String!
-            password: String
-        }
-
-        type AuthData {
-            userId: ID!
-            token: String!
-        }
-        
-        input UserInput {
-            email: String!
-            password: String!
-        }
+const rootSchema = `
+        ${authType}
+        ${boatType}
         
         type RootQuery {
-            login(email: String!, password: String!): AuthData!
             refreshToken: AuthData!
-            users: [User!]!
+            user: User!
+            boats(filter: BoatFilter): [Boat!]
         }
         
         type RootMutation {
-            createUser(inputUser: UserInput!): AuthData!
+            login(email: String!, password: String!): AuthenticationPayload!
+            createUser(inputUser: UserInput!): AuthenticationPayload!
             invalidateTokens: Boolean!
+            addBoat(inputBoat: BoatInput!): addBoatPayload!
+            publishAdvertisement(inputAdvertisement: AdvertisementInput!): createAdvertisementPayload!
         }
         
         schema {
             query: RootQuery
             mutation: RootMutation
         }      
-`)
-
+`
+module.exports = buildSchema(rootSchema);
