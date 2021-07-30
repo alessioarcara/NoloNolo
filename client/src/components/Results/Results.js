@@ -1,5 +1,8 @@
 import classes from './Results.module.css';
 import ResultCard from "./ResultCard";
+import LetSuspense from "../UI/LetSuspense/LetSuspense";
+import '../Results/Placeholder.css';
+import {PlaceholderConfig} from "../../helpers/placeholderConfig";
 
 const DUMMY_SEARCHES = [
     {
@@ -42,15 +45,22 @@ const DUMMY_SEARCHES = [
 const Results = () => {
     return (
         <div className={classes.wrap}>
-            {DUMMY_SEARCHES.map(results => (
-                <ResultCard
-                    key={results.id}
-                    image={results.image}
-                    name={results.name}
-                    description={results.description}
-                    price={results.price}
-                />
-            ))}
+            <LetSuspense
+                condition={false}
+                placeholder={PlaceholderConfig}
+                multiplier={2}
+                initialDelay={1000}
+            >
+                {DUMMY_SEARCHES.map(results => (
+                    <ResultCard
+                        key={results.id}
+                        image={results.image}
+                        name={results.name}
+                        description={results.description}
+                        price={results.price}
+                    />
+                ))}
+            </LetSuspense>
         </div>
     );
 };

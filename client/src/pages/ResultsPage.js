@@ -1,7 +1,6 @@
 import Results from "../components/Results/Results";
 import BackIcon from "../components/UI/icons/BackIcon";
 import classes from './ResultsPage.module.css';
-import Footer from "../components/Home/Footer";
 
 const ResultsPage = () => {
     return (
@@ -15,7 +14,6 @@ const ResultsPage = () => {
                 <button className={classes['btn-filter']} type="button">Ospiti</button>
             </div>
             <Results/>
-            <Footer/>
         </>
     );
 };
