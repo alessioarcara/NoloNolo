@@ -46,7 +46,7 @@ const Results = () => {
     return (
         <div className={classes.wrap}>
             <LetSuspense
-                condition={false}
+                condition={true}
                 placeholder={PlaceholderConfig}
                 multiplier={2}
                 initialDelay={1000}
