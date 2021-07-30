@@ -11,36 +11,9 @@ const boatType = `
             hasAdvertisement: Advertisement
         }
         
-        type Location {
-            city: String!
-            harbour: String!
-        }
-              
-        type Advertisement {
-            _id: ID!
-            preferredBy: [User!]
-            description: String!
-            fixedFee: Float!
-            dailyFee: Float!
-            images: [String!]
-            reviews: [Review!]
-        }
-        
-        type Review {
-            body: String!
-            rating: Int!
-            createdAt: String!
-            creator: User!
-        }
-        
         type addBoatPayload {
             addBoatData: Boat
             addBoatProblem: String
-        }
-        
-        type createAdvertisementPayload {
-            createAdvertisementData: Advertisement
-            createAdvertisementProblem: String
         }
         
         input BoatInput {
@@ -51,18 +24,6 @@ const boatType = `
             boatType: BoatType!
             isDocked: LocationInput!
             publishAdvertisement: AdvertisementInput
-        }
-        
-        input LocationInput {
-            city: String!
-            harbour: String!
-        }
-        
-        input AdvertisementInput {
-            description: String
-            fixedFee: Float
-            dailyFee: Float
-            images: [String!]
         }
         
         input BoatFilter {

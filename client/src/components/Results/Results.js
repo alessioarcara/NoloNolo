@@ -4,7 +4,7 @@ import LetSuspense from "../UI/LetSuspense/LetSuspense";
 import '../Results/Placeholder.css';
 import {PlaceholderConfig} from "../../helpers/placeholderConfig";
 import useHttp from "../../hooks/use-http";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {body_boats} from "../../helpers/httpConfig";
 
 const Results = () => {
@@ -13,16 +13,14 @@ const Results = () => {
     useEffect(() => {
         const transformData = resData => resData.boats
         fetchResults({body: body_boats({where: "marina", skip: 3})}, transformData)
-    }, [])
-
-    console.log(status)
+    }, [fetchResults])
 
     return (
         <div className={classes.wrap}>
             <LetSuspense
                 condition={ status === 'completed' }
                 placeholder={PlaceholderConfig}
-                multiplier={2}
+                multiplier={10}
                 initialDelay={ 1000 }
             >
                 {boats && boats.map(boat => (

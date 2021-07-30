@@ -2,7 +2,6 @@ const Boat = require('../../models/boat');
 
 module.exports = {
     boats: async args => {
-        console.log(args.filter)
         const {where, skip, take} = args.filter
         try {
             const boats = await Boat

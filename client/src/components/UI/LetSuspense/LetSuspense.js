@@ -1,15 +1,9 @@
 import {Fragment, useEffect, useState} from "react";
 
-const LetSuspense = ({
-                         condition,
-                         placeholder: Placeholder,
-                         multiplier,
-                         initialDelay,
-                         checkOnce,
-                         children}) => {
+const LetSuspense = ({ condition, placeholder: Placeholder, multiplier = 1, initialDelay, checkOnce, children}) => {
     const [component, setComponent] = useState([]);
     const [isChecked, setIsChecked] = useState(false);
-    console.log(component)
+
     useEffect(() => {
         if (checkOnce && isChecked) {
             setComponent([children])
@@ -30,7 +24,7 @@ const LetSuspense = ({
             setIsChecked(true);
         } else {
             let tempComponent = [];
-            multiplier = multiplier || 1;
+            // multiplier = multiplier || 1;
 
             for (let i = 0; i < multiplier; i++) {
                 tempComponent.push(<Placeholder key={i}/>);

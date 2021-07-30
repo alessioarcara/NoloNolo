@@ -8,6 +8,7 @@ const Images = React.forwardRef((props, ref) => {
                 <div key={index} className={classes.slide}>
                     <img
                         src={image}
+                        alt={''}
                         className={classes['card-image']}
                     />
                 </div>

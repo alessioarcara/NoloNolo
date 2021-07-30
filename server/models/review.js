@@ -19,7 +19,8 @@ const reviewSchema = new Schema({
     },
     customer: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        index: true
     },
 })
 

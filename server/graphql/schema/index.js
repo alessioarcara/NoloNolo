@@ -1,10 +1,17 @@
 const {buildSchema} = require('graphql');
 const authType = require('./auth')
 const boatType = require('./boat')
+const locationType = require('./location')
+const advertisementType = require('./advertisement')
+const reviewType = require('./review')
+
 
 const rootSchema = `
         ${authType}
         ${boatType}
+        ${locationType}
+        ${advertisementType}
+        ${reviewType}
         
         type RootQuery {
             refreshToken: AuthData!
@@ -17,7 +24,8 @@ const rootSchema = `
             createUser(inputUser: UserInput!): AuthenticationPayload!
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
-            publishAdvertisement(inputAdvertisement: AdvertisementInput!): createAdvertisementPayload!
+            publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
+            publishReview(inputReview: ReviewInput!): publishReviewPayload!
         }
         
         schema {

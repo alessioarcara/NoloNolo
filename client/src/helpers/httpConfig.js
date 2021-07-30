@@ -33,20 +33,20 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
 exports.body_boats = ({where, skip}) => {
     return {
         query: `
-          query($filter: BoatFilter) {
+           query($filter: BoatFilter) {
               boats(filter: $filter){
-                _id
-                model
-                hasAdvertisement {
-                  description
-                  images
-                  dailyFee
-                  reviews {
-                    rating
-                  }
-                }
+                 _id
+                 model
+                 hasAdvertisement {
+                    description
+                    images
+                    dailyFee
+                    reviews {
+                      rating
+                    }
+                 }
               }
-          }
+           }
       `,
         variables: {filter: {where, skip}}
     }
