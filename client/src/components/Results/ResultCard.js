@@ -3,6 +3,8 @@ import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "./SlideShow";
 
 const ResultCard = (props) => {
+    const averageReviews = () => props.reviews.reduce((acc, curr) => acc + curr ) / props.reviews.length;
+
     return (
         <>
             <div className={classes.card}>
@@ -17,8 +19,8 @@ const ResultCard = (props) => {
 
                     <div className={classes.info}>
                         <StarIcon/>
-                        <span>4,6</span>
-                        <span>(2 recensioni)</span>
+                        <span>{props.reviews.length > 0 ? averageReviews : '0.0'}</span>
+                        <span>({props.reviews.length})</span>
                     </div>
 
                     <div className={classes.price}>{`€ ${props.price}/al giorno`}</div>
