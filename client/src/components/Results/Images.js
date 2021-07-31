@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import classes from "./Images.module.css";
+import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 
-const Images = React.forwardRef((props, ref) => {
+const Images = (props) => {
+    const [isLoading, setIsLoading] = useState(true)
+
+    const handleImageLoaded = useCallback(() => setIsLoading(false), []);
     return (
-        <div ref={ref}>
+        <>
             {props.photos.map((image, index) =>
                 <div key={index} className={classes.slide}>
+                    {isLoading && <LoadingSpinner/>}
                     <img
+                        onLoad={handleImageLoaded}
                         src={image}
                         alt={''}
                         className={classes['card-image']}
                     />
                 </div>
             )}
-        </div>
+        </>
     );
-});
+};
 
 export default Images;

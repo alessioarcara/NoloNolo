@@ -16,7 +16,7 @@ const LetSuspense = ({
                          multiplier = 1,
                          delay = 0,
                          checkOnce,
-                         children}) => {
+                         children }) => {
     const [{component, isChecked} , dispatch] = useReducer(suspenseReducer, initialState)
 
     useEffect(() => {

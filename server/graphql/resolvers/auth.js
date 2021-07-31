@@ -78,9 +78,15 @@ module.exports = {
     },
     invalidateTokens: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)
+        try {
+            await User.findByIdAndUpdate(
+                {_id: decodedToken.userId},
+                { $inc: { count: 1 } },
+                {useFindAndModify: false}
+            )
+            res.clearCookie('refresh-token')
 
-        await User.findByIdAndUpdate(decodedToken.userId, { $inc: { count: 1 } })
-        res.clearCookie('refresh-token')
-        return true
+            return true
+        } catch (err) {`Can't invalide tokens. ${err}`}
     }
 }
