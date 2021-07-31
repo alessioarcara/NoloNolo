@@ -13,11 +13,11 @@ const ResultCard = (props) => {
             <div className={classes.card}>
                 <SlideShow
                     key={props.id}
-                    image={props.image}
+                    images={props.images}
                 />
 
                 <div className={classes.adapter}>
-                    <h3 className={classes['card-title']}>{props.name}</h3>
+                    <h3 className={classes['card-title']}>{props.model}</h3>
                     <div className={classes['card-description']}>{props.description}</div>
 
                     <div className={classes.info}>
@@ -26,7 +26,7 @@ const ResultCard = (props) => {
                         <span>({props.reviews.length})</span>
                     </div>
 
-                    <div className={classes.price}>{`€ ${props.price}/al giorno`}</div>
+                    <div className={classes.price}>{`€ ${props.dailyFee}/al giorno`}</div>
                     <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
                 </div>
             </div>

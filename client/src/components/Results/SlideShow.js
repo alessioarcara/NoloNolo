@@ -5,12 +5,12 @@ import {useState} from "react";
 import LeftArrowIcon from "../UI/icons/LeftArrowIcon";
 import RightArrowIcon from "../UI/icons/RightArrowIcon";
 import Images from "./Images";
-import Dots from "./Dots";
+import SlideShowDots from "./SlideShowDots";
 
 const SlideShow = (props) => {
     const [isClicked, setIsClicked] = useState(false);
     const [index, setIndex] = useState(0);
-    const images = props.image;
+    const images = props.images;
 
     // const imageRef = useRef(null)
     // const [isVisible, setIsVisible] = useState(false)
@@ -38,17 +38,18 @@ const SlideShow = (props) => {
     const changeClickHandler = () => {
         setIsClicked(state => !state);
     }
+
     const leftClickHandler = () => {
         index === 0
             ? setIndex(images.length - 1)
             : setIndex(index - 1)
     }
+
     const rightClickHandler = () => {
         index === images.length - 1
             ? setIndex(0)
             : setIndex(index + 1)
     }
-
 
     return (
         <>
@@ -60,7 +61,7 @@ const SlideShow = (props) => {
                     />
                 </div>
                 <div className={classes.slideshowDots}>
-                    <Dots
+                    <SlideShowDots
                         photos={images}
                         onCurrentIndex={index}
                     />

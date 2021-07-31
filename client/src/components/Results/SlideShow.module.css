@@ -75,7 +75,7 @@
     left: 1rem;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
     .style-arrow {
         display: none;
     }

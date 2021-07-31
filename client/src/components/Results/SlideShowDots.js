@@ -1,6 +1,6 @@
-import classes from "./Dots.module.css";
+import classes from "./SlideShowDots.module.css";
 
-const Dots = (props) => {
+const SlideShowDots = (props) => {
     return(
         <>
             {props.photos.map((_, idx) => (
@@ -13,4 +13,4 @@ const Dots = (props) => {
     );
 };
 
-export default Dots;
+export default SlideShowDots;

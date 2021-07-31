@@ -12,7 +12,7 @@ const Results = () => {
 
     useEffect(() => {
         const transformData = resData => resData.boats
-        fetchResults({body: body_boats({where: "marina", skip: 3})}, transformData)
+        fetchResults({body: body_boats({where: "marina", skip: 0})}, transformData)
     }, [fetchResults])
 
     return (
@@ -26,10 +26,10 @@ const Results = () => {
                 {boats && boats.map(boat => (
                     <ResultCard
                         key={boat._id}
-                        image={boat.hasAdvertisement.images}
-                        name={boat.model}
+                        images={boat.hasAdvertisement.images}
+                        model={boat.model}
                         description={boat.hasAdvertisement.description}
-                        price={boat.hasAdvertisement.dailyFee}
+                        dailyFee={boat.hasAdvertisement.dailyFee}
                         reviews={boat.hasAdvertisement.reviews}
                     />
                 ))}

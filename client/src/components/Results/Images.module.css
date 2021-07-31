@@ -10,14 +10,14 @@
     object-fit: cover;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
     .slide {
         scroll-snap-align: start;
         scroll-snap-stop: normal;
     }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 769px) {
     .card-image {
         height: 15rem;
         border-radius: 1rem;
