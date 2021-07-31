@@ -1,6 +1,5 @@
 import ImageCard from "./ImageCard";
 import classes from './ImageList.module.css';
-import '../Home/Main.module.css';
 
 const ImageList = () => {
     const DUMMY_LOCATION = [

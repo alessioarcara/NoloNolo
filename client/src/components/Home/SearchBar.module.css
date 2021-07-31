@@ -19,11 +19,10 @@
     display: flex;
     align-items: center;
     padding: 0.03rem;
-    position: -webkit-sticky;
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
     z-index: 100;
-    transition: 0.4s;
 }
 
 .search-bar {
