@@ -42,7 +42,7 @@ const Search = ({children, searchRef}) => {
     }, [searchRef])
 
     return (
-        <Modal fullScreen={true}>
+        <>
             {!isNextPage &&
             <>
                 {children}
@@ -57,17 +57,20 @@ const Search = ({children, searchRef}) => {
             {isNextPage &&
             <>
                 <div className={classes[`actions-top`]}>
-                    <Button className={classes[`btn-back`]} onClick={moveClickHandler} type="button"><BackIcon/></Button>
-                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler} type="button">Cancella</Button>
+                    <Button className={classes[`btn-back`]} onClick={moveClickHandler}
+                            type="button"><BackIcon/></Button>
+                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler}
+                            type="button">Cancella</Button>
                 </div>
                 <SearchDatePicker/>
                 <div className={classes[`actions-bottom`]}>
                     <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">Salta</Button>
-                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler} type="button">Avanti</Button>
+                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler}
+                            type="button">Avanti</Button>
                 </div>
             </>
             }
-        </Modal>
+        </>
     );
 };
 
