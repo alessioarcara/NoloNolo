@@ -11,5 +11,4 @@ const Location = props => {
     );
 };
 
-
 export default Location;

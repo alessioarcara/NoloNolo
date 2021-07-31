@@ -34,6 +34,7 @@ const SearchDatePicker = () => {
                 onChange={onChange}
                 dateFormat="dd/MM/yyyy"
                 startDate={startDate}
+                minDate={new Date()}
                 endDate={endDate}
                 monthsShown={2}
                 selectsRange

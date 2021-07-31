@@ -15,7 +15,7 @@
     list-style-type: none;
 }
 .days-text > li:first-child {
-    grid-colums-start: 2;
+    grid-column-start: 2;
     grid-column-end: 3;
 }
 /*Calendar days of week*/
@@ -82,14 +82,14 @@
 }
 /*Selected first range date*/
 .react-datepicker__day--range-start {
-    box-shadow: #efefef 15px 0px 0px !important;
+    box-shadow: #efefef 15px 0 0 !important;
 }
 /*Selected last range date*/
 .react-datepicker__day--range-end {
     background-color: black !important;
     border-radius: 28px !important;
     color: #fff !important;
-    box-shadow: #efefef -13px 0px 0px !important;
+    box-shadow: #efefef -13px 0 0 !important;
 }
 /*.react-datepicker__day--range-start.react-datepicker__day--weekend, .react-datepicker__day--range-end.react-datepicker__day--weekend {*/
 /*    box-shadow: none !important;*/
@@ -99,9 +99,9 @@
 .react-datepicker__day--outside-month {
     color: transparent !important;
 }
-/*.react-datepicker__day--001.react-datepicker__day--outside-month.react-datepicker__day--in-range {*/
-/*    background: linear-gradient(to right, #efefef, #fff) !important;*/
-/*}*/
+.react-datepicker__day--001.react-datepicker__day--outside-month.react-datepicker__day--in-range {
+    background: linear-gradient(to right, #efefef, #fff) !important;
+}
 
 /*Reverse dates selection*/
 .react-datepicker__day--in-selecting-range {

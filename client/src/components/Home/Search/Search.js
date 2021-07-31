@@ -5,7 +5,6 @@ import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
 import BackIcon from "../../UI/icons/BackIcon";
 import classes from "./Search.module.css";
-import NavigationBar from "../../Navigation/NavigationBar";
 
 
 const DUMMY_LOCATIONS = [
@@ -53,7 +52,6 @@ const Search = ({children, searchRef}) => {
                         key={place.id}
                         text={place.name}/>)
                 }
-                <NavigationBar/>
             </>
             }
             {isNextPage &&
