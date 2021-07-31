@@ -21,7 +21,7 @@ const Results = () => {
                 condition={ status === 'completed' }
                 placeholder={PlaceholderConfig}
                 multiplier={10}
-                initialDelay={ 1000 }
+                delay={ 1000 }
             >
                 {boats && boats.map(boat => (
                     <ResultCard

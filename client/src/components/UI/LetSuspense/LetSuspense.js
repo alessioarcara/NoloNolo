@@ -1,42 +1,50 @@
-import {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useReducer} from "react";
 
-const LetSuspense = ({ condition, placeholder: Placeholder, multiplier = 1, initialDelay, checkOnce, children}) => {
-    const [component, setComponent] = useState([]);
-    const [isChecked, setIsChecked] = useState(false);
+const initialState = { isChecked: false, component: [] }
+
+const suspenseReducer = (state, action) => {
+    switch (action.type) {
+        case "CHILDREN": return { isChecked: true, component: action.component };
+        case "PLACEHOLDER": return { isChecked: false, component: action.component };
+        default: return initialState;
+    }
+}
+
+const LetSuspense = ({
+                         condition,
+                         placeholder: Placeholder,
+                         multiplier = 1,
+                         delay = 0,
+                         checkOnce,
+                         children}) => {
+    const [{component, isChecked} , dispatch] = useReducer(suspenseReducer, initialState)
 
     useEffect(() => {
-        if (checkOnce && isChecked) {
-            setComponent([children])
-            return ;
-        }
+        // checkOnce && dispatch( {type: "CHILDREN", component: [children]} )
+        if (isChecked) { return; }
 
-        let delay = initialDelay || 0;
         let delayedTimeout = null;
-
         if (condition) {
-            if (initialDelay) {
+            if (delay) {
                 delayedTimeout = setTimeout(() => {
-                    setComponent([children]);
+                    dispatch({type: "CHILDREN", component: [children]})
                 }, delay);
             } else {
-                setComponent([children]);
+                dispatch({type: "CHILDREN", component: [children]})
             }
-            setIsChecked(true);
         } else {
             let tempComponent = [];
-            // multiplier = multiplier || 1;
-
             for (let i = 0; i < multiplier; i++) {
                 tempComponent.push(<Placeholder key={i}/>);
             }
-            setComponent(tempComponent);
+            dispatch({type: "PLACEHOLDER", component: tempComponent});
         }
         return () => {
             if (delayedTimeout) {
                 clearTimeout(delayedTimeout);
             }
         };
-    }, [condition, children]);
+    }, [checkOnce, delay, isChecked, multiplier, condition, children]);
 
     return (
         <>

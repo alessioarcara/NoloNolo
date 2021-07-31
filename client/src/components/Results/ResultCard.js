@@ -1,9 +1,12 @@
+import React, {useCallback} from "react"
 import classes from './ResultCard.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "./SlideShow";
 
 const ResultCard = (props) => {
-    const averageReviews = () => props.reviews.reduce((acc, curr) => acc + curr ) / props.reviews.length;
+    const averageReviews = useCallback(
+        () => props.reviews.reduce((acc, curr) => acc + curr ) / props.reviews.length,
+        [props.reviews] );
 
     return (
         <>
