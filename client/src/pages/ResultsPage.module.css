@@ -1,3 +1,8 @@
+.header {
+    display: flex;
+    align-self: center;
+}
+
 .header-title {
     font-family: 'Lobster', cursive;
     font-size: 1.4rem;
@@ -64,4 +69,17 @@
 
 .position-scroll svg:hover {
     opacity: 0.3;
+}
+
+.dates-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    text-align: center;
+    gap: 1rem;
+}
+
+.dates-table span {
+    width: 100%;
 }

@@ -27,6 +27,7 @@ const ResultCard = (props) => {
                     </div>
 
                     <div className={classes.price}>{`€ ${props.dailyFee}/al giorno`}</div>
+                    {props.totalFare !== 0 && <div className={classes.total}>{`€ ${props.totalFare}/totale`}</div>}
                     <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
                 </div>
             </div>

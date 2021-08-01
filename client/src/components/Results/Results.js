@@ -7,7 +7,7 @@ import useHttp from "../../hooks/use-http";
 import {useEffect} from "react";
 import {body_boats} from "../../helpers/httpConfig";
 
-const Results = () => {
+const Results = (props) => {
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
 
     useEffect(() => {
@@ -30,6 +30,7 @@ const Results = () => {
                         model={boat.model}
                         description={boat.hasAdvertisement.description}
                         dailyFee={boat.hasAdvertisement.dailyFee}
+                        totalFare={+props.missingDays * +boat.hasAdvertisement.dailyFee}
                         reviews={boat.hasAdvertisement.reviews}
                     />
                 ))}
