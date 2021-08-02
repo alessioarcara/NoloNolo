@@ -1,23 +1,34 @@
 const Boat = require('../../models/boat');
 
 module.exports = {
-    publishReview: async ({boatId, body, rating}, {req}) => {
+    publishReview: async (args, {req}) => {
+        const {boatId, body, rating} = args.inputReview;
         try {
-            req.userId = "61013cd2cbcb99c21fbe91e2"
-            // const review = await Boat.findOneAndUpdate(
-            //     { _id: boatId },
-            //     { $push: { "advertisement.reviews": { customer: req.userId, body, rating } } },
-            //     { new: true, runValidators: true }
-            // )
-            const review = await Boat.findOne({_id: boatId})
-            const review2 = await Boat.findById(boatId)
-            console.log(req.userId)
+            req.userId = "6101ba0e9edb920b862e8c46"
+            const boat = await Boat.findOne({ _id: boatId } )
+            console.log(boat.advertisement.reviews)
+            boat.advertisement.reviews.push( { customer: req.userId, body, rating } )
+            boat.save()
 
-            console.log(review)
-            console.log(review2)
-            return { publishReviewData: {...review} }
-        } catch (err) { `Can't publish review. ${err}`}
+            if (!boat) { return { publishReviewProblem: "Advertisement is still active?" } }
+            const review = boat.advertisement.reviews.slice(-1)[0]
+
+            return { publishReviewData: { ...review._doc, creator: review.customer } }
+        } catch (err) { `Can't publish review. ${err}` }
     }
 }
 // if (!req.isAuth) { throw new Error("Unauthenticated.") }
 
+// const review = await Boat.findOneAndUpdate(
+//     { _id: boatId },
+//     { $push: { "advertisement.reviews": { customer: req.userId, body, rating } } },
+//     { new: true, runValidators: true,
+//         projection: { "advertisement.reviews": {$slice: -1} }
+//     }
+// )
+
+// req.userId = "6101ba0e9edb920b862e8c46"
+// const boat = await Boat.findOneAndUpdate(
+//     { _id: boatId },
+//     { $push: { "advertisement.reviews": { customer: req.userId, body, rating } } },
+//     { new: true, runValidators: true, useFindAndModify: false } )

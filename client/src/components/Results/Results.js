@@ -6,6 +6,7 @@ import {PlaceholderConfig} from "../../helpers/placeholderConfig";
 import useHttp from "../../hooks/use-http";
 import {useEffect} from "react";
 import {body_boats} from "../../helpers/httpConfig";
+import Pagination from "../UI/Pagination/Pagination";
 
 const Results = (props) => {
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
@@ -35,6 +36,30 @@ const Results = (props) => {
                     />
                 ))}
             </LetSuspense>
+            {boats &&
+                <Pagination   data={boats}
+                              pageLimit={5}
+                              dataLimit={10}
+                >
+                </Pagination>
+                }
+                <LetSuspense
+                    condition={ status === 'completed' }
+                    placeholder={PlaceholderConfig}
+                    multiplier={10}
+                    delay={ 1000 }
+                >
+                    {boats && boats.map(boat => (
+                        <ResultCard
+                            key={boat._id}
+                            image={boat.hasAdvertisement.images}
+                            name={boat.model}
+                            description={boat.hasAdvertisement.description}
+                            price={boat.hasAdvertisement.dailyFee}
+                            reviews={boat.hasAdvertisement.reviews}
+                        />
+                    ))}
+                </LetSuspense>
         </div>
     );
 };

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-    review: {
+    body: {
         type: String,
         required: [true, "Review can't be empty"]
     },
@@ -20,7 +20,8 @@ const reviewSchema = new Schema({
     customer: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        index: true
+        index: true,
+        unique: true
     },
 })
 
