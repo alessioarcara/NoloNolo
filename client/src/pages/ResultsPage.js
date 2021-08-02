@@ -3,24 +3,20 @@ import BackIcon from "../components/UI/icons/BackIcon";
 import classes from './ResultsPage.module.css';
 // import ScrollSmooth from "../components/UI/ScrollSmooth/ScrollSmooth";
 // import ArrowTopIcon from "../components/UI/icons/ArrowTopIcon";
-import {useEffect, useState} from "react";
-import { useLocation } from 'react-router-dom';
+import {useEffect, useMemo, useState} from "react";
 
 const ResultsPage = () => {
     const [allParams, setAllParams] = useState(false);
     const [days, setDays] = useState(0);
-    const URL = new URLSearchParams(window.location.search);
+    const URL = useMemo(() => new URLSearchParams(window.location.search), []);
 
-    const local = useLocation();
-    console.log(local)
-
-    const start = URL.get('start')
+    const start = useMemo(() => URL.get('start')
         ? new Date(URL.get('start'))
-        : Object.null;
+        : Object.null, [URL]);
 
-    const end = URL.get('end')
+    const end = useMemo(() => URL.get('end')
         ? new Date(URL.get('end'))
-        : Object.null;
+        : Object.null,[URL]);
 
     const time = (start && end)
         ? new Date(end).getTime() - new Date(start).getTime()

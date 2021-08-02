@@ -35,31 +35,14 @@ const Results = (props) => {
                         reviews={boat.hasAdvertisement.reviews}
                     />
                 ))}
-            </LetSuspense>
-            {boats &&
+                {boats &&
                 <Pagination   data={boats}
                               pageLimit={5}
                               dataLimit={10}
                 >
                 </Pagination>
                 }
-                <LetSuspense
-                    condition={ status === 'completed' }
-                    placeholder={PlaceholderConfig}
-                    multiplier={10}
-                    delay={ 1000 }
-                >
-                    {boats && boats.map(boat => (
-                        <ResultCard
-                            key={boat._id}
-                            image={boat.hasAdvertisement.images}
-                            name={boat.model}
-                            description={boat.hasAdvertisement.description}
-                            price={boat.hasAdvertisement.dailyFee}
-                            reviews={boat.hasAdvertisement.reviews}
-                        />
-                    ))}
-                </LetSuspense>
+            </LetSuspense>
         </div>
     );
 };

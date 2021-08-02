@@ -3,7 +3,7 @@ import classes from './ResultCard.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "./SlideShow";
 
-const ResultCard = ({ id, image, name, description, price, reviews }) => {
+const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFare }) => {
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
         [reviews]);
@@ -14,11 +14,11 @@ const ResultCard = ({ id, image, name, description, price, reviews }) => {
             <div className={classes.card}>
                 <SlideShow
                     key={id}
-                    image={image}
+                    images={images}
                 />
 
                 <div className={classes.adapter}>
-                    <h3 className={classes['card-title']}>{name}</h3>
+                    <h3 className={classes['card-title']}>{model}</h3>
                     <div className={classes['card-description']}>{description}</div>
 
                     <div className={classes.info}>
@@ -27,7 +27,8 @@ const ResultCard = ({ id, image, name, description, price, reviews }) => {
                         <span>({reviews.length})</span>
                     </div>
 
-                    <div className={classes.price}>{`€ ${price}/al giorno`}</div>
+                    <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
+                    {totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}
                     <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
                 </div>
             </div>

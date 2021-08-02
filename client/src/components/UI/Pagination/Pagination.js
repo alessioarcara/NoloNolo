@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import classes from "./Pagination.module.css"
 
 const Pagination = ({data, pageLimit, dataLimit}) => {
-    const [pages] = useState(Math.round(data.length / dataLimit));
+    // const [pages] = useState(Math.round(data.length / dataLimit));
     const [currentPage, setCurrentPage] = useState(1);
 
     const goToNextPage = () => setCurrentPage(page => page + 1);
@@ -48,5 +48,4 @@ export default Pagination;
 
 // ${currentPage === item ? classes.active : null}`
 // `next ${currentPage === pages ? 'disabled' : ''}`
-{/*`prev ${currentPage === 1 ? 'disabled' : ''}`*/
-}
+// `prev ${currentPage === 1 ? 'disabled' : ''}`

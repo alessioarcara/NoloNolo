@@ -1,12 +1,10 @@
-const BackIcon = props => {
+const BackIcon = () => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
             viewBox="0 0 20 20"
-            width="auto"
-            height="auto"
             stroke="currentColor">
             <path
                 strokeLinecap="round"

@@ -1,5 +1,4 @@
 import Location from "./Location";
-import Modal from "../../UI/Modal/Modal";
 import {useEffect, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";

@@ -57,12 +57,12 @@ const SlideShow = (props) => {
                 <div className={classes.slideshowSlider} style={{ transform: `translate3d(${-index * 100}%, 0, 0)`}}>
                     <Images
                         // ref={imageRef}
-                        photos={images}
+                        images={images}
                     />
                 </div>
                 <div className={classes.slideshowDots}>
                     <SlideShowDots
-                        photos={images}
+                        images={images}
                         onCurrentIndex={index}
                     />
                 </div>
