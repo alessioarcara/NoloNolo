@@ -1,14 +1,18 @@
 import Results from "../components/Results/Results";
 import BackIcon from "../components/UI/icons/BackIcon";
 import classes from './ResultsPage.module.css';
-import ScrollSmooth from "../components/UI/ScrollSmooth/ScrollSmooth";
-import ArrowTopIcon from "../components/UI/icons/ArrowTopIcon";
+// import ScrollSmooth from "../components/UI/ScrollSmooth/ScrollSmooth";
+// import ArrowTopIcon from "../components/UI/icons/ArrowTopIcon";
 import {useEffect, useState} from "react";
+import { useLocation } from 'react-router-dom';
 
 const ResultsPage = () => {
     const [allParams, setAllParams] = useState(false);
     const [days, setDays] = useState(0);
     const URL = new URLSearchParams(window.location.search);
+
+    const local = useLocation();
+    console.log(local)
 
     const start = URL.get('start')
         ? new Date(URL.get('start'))
@@ -27,7 +31,7 @@ const ResultsPage = () => {
             setDays(time / (1000 * 3600 * 24));
             setAllParams(true);
         }
-    }, []);
+    }, [start, end, time]);
 
     return (
         <>
@@ -50,12 +54,12 @@ const ResultsPage = () => {
                 <button className={classes['btn-filter']} type="button">Skipper</button>
                 <button className={classes['btn-filter']} type="button">Ospiti</button>
             </div>
-            <ScrollSmooth
-                // x={document.getElementById('ccc').offsetTop}
-                className={classes['position-scroll']} btn="true"
-            >
-                <ArrowTopIcon/>
-            </ScrollSmooth>
+            {/*<ScrollSmooth*/}
+            {/*    // x={document.getElementById('ccc').offsetTop}*/}
+            {/*    className={classes['position-scroll']} btn="true"*/}
+            {/*>*/}
+            {/*    <ArrowTopIcon/>*/}
+            {/*</ScrollSmooth>*/}
             <Results missingDays={days} onParams={allParams}/>
         </>
     );
