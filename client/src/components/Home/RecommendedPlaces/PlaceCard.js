@@ -1,7 +1,7 @@
 import {useHistory} from 'react-router-dom';
-import classes from './ImageCard.module.css';
+import classes from './PlaceCard.module.css';
 
-const ImageCard = (props) => {
+const PlaceCard = (props) => {
     const history = useHistory();
 
     const clickHandler = () => {
@@ -20,4 +20,4 @@ const ImageCard = (props) => {
     );
 };
 
-export default ImageCard;
+export default PlaceCard;

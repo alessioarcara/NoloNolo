@@ -1,7 +1,7 @@
 .image-card {
     position: relative;
     width: 250px;
-    height: 250px;
+    height: 225px;
     /*z-index: 99;*/
     flex: 0 0 auto;
     margin-right: 1rem;

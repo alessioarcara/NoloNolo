@@ -1,7 +1,7 @@
-import ImageCard from "./ImageCard";
-import classes from './ImageList.module.css';
+import PlaceCard from "./PlaceCard";
+import classes from './RecommendedPlaces.module.css';
 
-const ImageList = () => {
+const RecommendedPlaces = () => {
     const DUMMY_LOCATION = [
         {
             id: 'l1',
@@ -9,14 +9,18 @@ const ImageList = () => {
         },
         {
             id: 'l2',
-            text: 'Emilia-Romagna'
-        },
-        {
-            id: 'l3',
             text: 'Liguria'
         },
         {
+            id: 'l3',
+            text: 'Sardegna'
+        },
+        {
             id: 'l4',
+            text: 'Sicilia'
+        },
+        {
+            id: 'l5',
             text: 'Toscana'
         }
     ]
@@ -26,7 +30,7 @@ const ImageList = () => {
             <div className="subtitle">Naviga nelle nostre località</div>
             <div className={classes.list}>
                 {DUMMY_LOCATION.map(place =>
-                    <ImageCard
+                    <PlaceCard
                         key={place.id}
                         id={place.id}
                         text={place.text}
@@ -38,4 +42,4 @@ const ImageList = () => {
     );
 };
 
-export default ImageList;
+export default RecommendedPlaces;
