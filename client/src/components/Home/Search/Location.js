@@ -1,14 +1,17 @@
 import classes from './Location.module.css';
-import LocationIcon from "../../UI/icons/LocationIcon";
+import RegionIcon from "../../UI/icons/RegionIcon";
+import CityIcon from "../../UI/icons/CityIcon";
 
 
 const Location = ({onClick, city, region}) => {
     return (
         <div className={classes.places}>
-            <LocationIcon/>
-            <div onClick={onClick}>{city ? city : region}</div>
+            {city ? <CityIcon/> : <RegionIcon/>}
+            <div onClick={onClick}>
+                {city ? `${city}, ${region}` : `${region}`}
+            </div>
         </div>
-    );
-};
+    )
+}
 
 export default Location;

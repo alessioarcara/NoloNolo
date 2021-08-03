@@ -46,27 +46,20 @@ const Search = ({children, searchRef, text}) => {
             <>
                 {children}
                 {status === "completed" && locations.length > 0 && locations.map(location => {
-                    if (location.city) {
                     return (
                         <Location
                             onClick={moveClickHandler}
                             key={location.city}
-                            region={location.city}/>
-                    ) } else {
-                        return (
-                            <Location
-                                onClick={moveClickHandler}
-                                key={location.city}
-                                city={location.region}/>
-                        )
-                    }
+                            city={location.city}
+                            region={location.region}/>
+                    )
+                })
                 }
-                )}
                 {status === "completed" && locations.length === 0 && <p>Nessun risultato</p>}
             </>
             }
             {isNextPage &&
-            <>
+            <div className={classes[`datepicker-container`]}>
                 <div className={classes[`actions-top`]}>
                     <Button className={classes[`btn-back`]} onClick={moveClickHandler}
                             type="button"><BackIcon/></Button>
@@ -75,11 +68,14 @@ const Search = ({children, searchRef, text}) => {
                 </div>
                 <SearchDatePicker/>
                 <div className={classes[`actions-bottom`]}>
-                    <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">Salta</Button>
-                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler}
-                            type="button">Avanti</Button>
+                    <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">
+                        Salta
+                    </Button>
+                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler} type="button">
+                        Avanti
+                    </Button>
                 </div>
-            </>
+            </div>
             }
         </>
     );
