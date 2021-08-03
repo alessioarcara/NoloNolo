@@ -5,7 +5,7 @@ import {useEffect, useState } from "react";
 import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
-    const [navbar, setNavbar] = useState(false);
+    const [navbar, setNavbar] = useState(props.navbar);
 
     const listenToScroll = useMemo(() => throttle(() => {
         if (window.scrollY >= 60) {

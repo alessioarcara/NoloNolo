@@ -1,5 +1,5 @@
 import Location from "./Location";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import BackIcon from "../../UI/icons/BackIcon";
 import classes from "./Search.module.css";
@@ -7,17 +7,25 @@ import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
 import {debounce} from "../../../helpers/utils";
 import SearchActionButtons from "./SearchActionButtons";
+import SearchBar from "../SearchBar";
 
 const transformData = resData => resData.listAllLocations
 
-const Search = ({children, searchRef, searchTerm}) => {
+const Search = () => {
 
     const [isNextPage, setNextPage] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('')
+
     const {status, data: locations, sendRequest: listAllLocations} = useHttp(true)
 
+    const searchRef = useRef()
     const debouncedListAllLocations = useRef(debounce(
-            (searchTerm) => listAllLocations({ body: body_search(searchTerm) }, transformData),
-            300));
+        (searchTerm) => listAllLocations({body: body_search(searchTerm)}, transformData),
+        300));
+
+    const changeHandler = useCallback(event => {
+        setSearchTerm(event.target.value)
+    }, [])
 
     const moveClickHandler = () => {
         setNextPage(prevState => !prevState)
@@ -44,7 +52,12 @@ const Search = ({children, searchRef, searchTerm}) => {
         <>
             {!isNextPage &&
             <div className={classes['datepicker-container']}>
-                {children}
+                <SearchBar
+                    navbar={true}
+                    ref={searchRef}
+                    searchTerm={searchTerm}
+                    changeHandler={changeHandler}
+                />
                 {status === "completed" && locations.length > 0 && locations.map(location => {
                     return (
                         <Location
@@ -85,4 +98,4 @@ const Search = ({children, searchRef, searchTerm}) => {
     );
 };
 
-export default Search;
+export default React.memo(Search);
