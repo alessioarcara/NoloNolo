@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useCallback, useRef, useState} from "react";
 import Header from "../components/Home/Header";
 import Main from "../components/Home/Main"
 import Footer from "../components/Home/Footer";
@@ -11,6 +11,12 @@ const Home = () => {
     const [isShown, setIsShown] = useState(false);
     const searchRef = useRef()
 
+    const [searchText, setSearchText] = useState('')
+
+    const changeHandler = useCallback(event => {
+        setSearchText(event.target.value)
+    }, [])
+
     const openModalHandler = () => {
         setIsShown(true)
     }
@@ -22,10 +28,12 @@ const Home = () => {
         <>
             {isShown &&
             <Modal adapterSize="adaptable">
-                <Search searchRef={searchRef}>
+                <Search text={searchText} searchRef={searchRef}>
                     <SearchBar
                         ref={searchRef}
                         isShow={isShown}
+                        text={searchText}
+                        changeHandler={changeHandler}
                         openModalHandler={openModalHandler}
                         closeModalHandler={closeModalHandler}
                     />

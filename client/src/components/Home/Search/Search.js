@@ -8,7 +8,7 @@ import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
 
 
-const Search = ({children, searchRef}) => {
+const Search = ({children, searchRef, text}) => {
     const [isNextPage, setNextPage] = useState(false)
     const {data: locations, sendRequest: listAllLocations} = useHttp(true)
 
@@ -33,9 +33,9 @@ const Search = ({children, searchRef}) => {
 
         const transformData = resData => resData.listAllLocations
 
-        listAllLocations({body: body_search(searchRef.current.value)}, transformData)
+        if (text.length > 0) { listAllLocations({body: body_search(text)}, transformData) }
 
-    }, [searchRef, listAllLocations])
+    }, [searchRef, text, listAllLocations])
 
     return (
         <>
