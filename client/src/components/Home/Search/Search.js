@@ -4,21 +4,13 @@ import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
 import BackIcon from "../../UI/icons/BackIcon";
 import classes from "./Search.module.css";
+import useHttp from "../../../hooks/use-http";
+import {body_search} from "../../../helpers/httpConfig";
 
-
-const DUMMY_LOCATIONS = [
-    {
-        id: 'l1',
-        name: 'Campania'
-    },
-    {
-        id: 'l2',
-        name: 'Liguria'
-    }
-]
 
 const Search = ({children, searchRef}) => {
     const [isNextPage, setNextPage] = useState(false)
+    const {data: locations, sendRequest: listAllLocations} = useHttp(true)
 
     const moveClickHandler = () => {
         setNextPage(prevState => !prevState)
@@ -38,18 +30,23 @@ const Search = ({children, searchRef}) => {
 
     useEffect(() => {
         searchRef.current.focus();
-    }, [searchRef])
+
+        const transformData = resData => resData.listAllLocations
+
+        listAllLocations({body: body_search(searchRef.current.value)}, transformData)
+
+    }, [searchRef, listAllLocations])
 
     return (
         <>
             {!isNextPage &&
             <>
                 {children}
-                {DUMMY_LOCATIONS.map(place =>
+                {locations && locations.map(location =>
                     <Location
                         onClick={moveClickHandler}
-                        key={place.id}
-                        text={place.name}/>)
+                        key={location.city}
+                        text={location.city}/>)
                 }
             </>
             }
