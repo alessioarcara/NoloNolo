@@ -1,4 +1,5 @@
 const Boat = require('../../models/boat');
+const {transformBoat} = require("./merge");
 
 module.exports = {
     boats: async args => {
@@ -8,17 +9,7 @@ module.exports = {
                     .find({ "location.city": { $regex: where, $options: "i" } } )
                     .skip(skip)
                     .limit(take);
-            return boats.map(boat => {
-                return {
-                    ...boat._doc,
-                    hasAdvertisement: {
-                        ...boat._doc.advertisement._doc,
-                        dailyFee: parseFloat(boat.advertisement.dailyFee),
-                        fixedFee: parseFloat(boat.advertisement.fixedFee)
-                    },
-                    isDocked: boat.location
-                }
-            })
+            return boats.map(transformBoat)
         } catch (err) { console.log(err)
             throw new Error(`Can't find boats. ${err}`) }
     },

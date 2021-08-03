@@ -11,6 +11,10 @@ const locationSchema = new Schema({
         },
         coordinates: [Number],
     },
+    region: {
+      type: String,
+      required: [true, 'Please provide a region']
+    },
     city: {
         type: String,
         required: [true, 'Please provide a city']
