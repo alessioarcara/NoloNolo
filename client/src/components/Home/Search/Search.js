@@ -40,31 +40,29 @@ const Search = ({children, searchRef}) => {
     return (
         <>
             {!isNextPage &&
-            <>
+            <div>
                 {children}
                 {locations && locations.map(location =>
                     <Location
                         onClick={moveClickHandler}
                         key={location.city}
-                        text={location.city}/>)
+                        textCity={location.city}
+                        textRegion={location.region}/>)
                 }
-            </>
+            </div>
             }
             {isNextPage &&
-            <>
+            <div className={classes[`datepicker-container`]}>
                 <div className={classes[`actions-top`]}>
-                    <Button className={classes[`btn-back`]} onClick={moveClickHandler}
-                            type="button"><BackIcon/></Button>
-                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler}
-                            type="button">Cancella</Button>
+                    <Button className={classes[`btn-back`]} onClick={moveClickHandler} type="button"><BackIcon/></Button>
+                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler} type="button">Cancella</Button>
                 </div>
                 <SearchDatePicker/>
                 <div className={classes[`actions-bottom`]}>
                     <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">Salta</Button>
-                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler}
-                            type="button">Avanti</Button>
+                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler} type="button">Avanti</Button>
                 </div>
-            </>
+            </div>
             }
         </>
     );
