@@ -1,12 +1,12 @@
 import Location from "./Location";
 import React, {useEffect, useRef, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
-import Button from "../../UI/Button/Button";
 import BackIcon from "../../UI/icons/BackIcon";
 import classes from "./Search.module.css";
 import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
 import {debounce} from "../../../helpers/utils";
+import SearchActionButtons from "./SearchActionButtons";
 
 const transformData = resData => resData.listAllLocations
 
@@ -60,21 +60,25 @@ const Search = ({children, searchRef, searchTerm}) => {
             }
             {isNextPage &&
             <div className={classes[`datepicker-container`]}>
-                <div className={classes[`actions-top`]}>
-                    <Button className={classes[`btn-back`]} onClick={moveClickHandler}
-                            type="button"><BackIcon/></Button>
-                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler}
-                            type="button">Cancella</Button>
-                </div>
+                <SearchActionButtons
+                    actionClassName={classes[`actions-top`]}
+                    firstButtonClassName={classes[`btn-back`]}
+                    firstButtonClickHandler={moveClickHandler}
+                    firstButtonText={<BackIcon/>}
+                    secondButtonClassName={classes[`btn-cancel`]}
+                    secondButtonClickHandler={cancelSelectionHandler}
+                    secondButtonText='Cancella'
+                />
                 <SearchDatePicker/>
-                <div className={classes[`actions-bottom`]}>
-                    <Button className={classes[`btn-skip`]} onClick={skipClickHandler} type="button">
-                        Salta
-                    </Button>
-                    <Button className={classes[`btn-forward`]} onClick={goForwardClickHandler} type="button">
-                        Avanti
-                    </Button>
-                </div>
+                <SearchActionButtons
+                    actionClassName={classes[`actions-bottom`]}
+                    firstButtonClassName={classes[`btn-skip`]}
+                    firstButtonClickHandler={skipClickHandler}
+                    firstButtonText='Salta'
+                    secondButtonClassName={classes[`btn-forward`]}
+                    secondButtonClickHandler={goForwardClickHandler}
+                    secondButtonText='Avanti'
+                />
             </div>
             }
         </>
