@@ -9,7 +9,15 @@ const ImageList = () => {
         },
         {
             id: 'l2',
+            text: 'Emilia-Romagna'
+        },
+        {
+            id: 'l3',
             text: 'Liguria'
+        },
+        {
+            id: 'l4',
+            text: 'Toscana'
         }
     ]
 

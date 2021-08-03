@@ -11,6 +11,7 @@ import {debounce} from "../../../helpers/utils";
 const transformData = resData => resData.listAllLocations
 
 const Search = ({children, searchRef, searchTerm}) => {
+
     const [isNextPage, setNextPage] = useState(false)
     const {status, data: locations, sendRequest: listAllLocations} = useHttp(true)
 

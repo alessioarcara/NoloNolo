@@ -2,16 +2,12 @@ import React, {useState} from "react";
 import ReactDOM from "react-dom"
 
 import classes from "./Modal.module.css"
-import useMediaQuery from "../../../hooks/use-mediaquery";
-
 
 const Backdrop = (props) => {
     return <div className={classes.backdrop} onClick={props.onCancel} />;
 };
 
 const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
-    const breakpoint = useMediaQuery()
-    if (adapterSize === "adaptable") { adapterSize = breakpoint }
 
     if (adapterSize === "smartphone") {
         return <div className={classes["modal-fullscreen"]}>{children}</div>

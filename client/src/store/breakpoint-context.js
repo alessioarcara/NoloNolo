@@ -1,6 +1,10 @@
-import {useEffect, useState} from "react";
+import {createContext, useEffect, useState} from "react";
 
-const useMediaQuery = () => {
+const BreakpointContext = createContext({
+    breakpoint: '',
+})
+
+export const BreakpointContextProvider = ({children}) => {
     const [breakpoint, setBreakpoint] = useState(window.innerWidth > 768 ? "desktop" : "smartphone")
 
     useEffect(() => {
@@ -15,7 +19,16 @@ const useMediaQuery = () => {
         return () => mediaQuery.removeEventListener('change', handleQueryListener);
     }, [])
 
-    return breakpoint;
+
+    const contextValue = {
+        breakpoint
+    }
+
+    return (
+        <BreakpointContext.Provider value={contextValue}>
+            {children}
+        </BreakpointContext.Provider>
+    )
 }
 
-export default useMediaQuery;
+export default BreakpointContext
