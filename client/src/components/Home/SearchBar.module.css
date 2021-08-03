@@ -52,6 +52,16 @@ div > input[type=search] {
     background-color: #fff;
 }
 
+div > input[type=search]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+div > input[type=search]::-webkit-search-cancel-button:after {
+    content: 'X';
+    font-style: italic;
+    color: red;
+}
+
 .btn-exit {
     padding-right: 0.7rem;
     cursor: pointer;

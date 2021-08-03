@@ -8,9 +8,9 @@ const Boat = require("../../models/boat");
 
 const transformBoat = boat => {
     return {
-        ...boat._doc,
+        ...boat,
         hasAdvertisement: {
-            ...boat._doc.advertisement._doc,
+            ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee)
         },

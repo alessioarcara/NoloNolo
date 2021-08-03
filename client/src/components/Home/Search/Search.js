@@ -6,6 +6,7 @@ import BackIcon from "../../UI/icons/BackIcon";
 import classes from "./Search.module.css";
 import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
+import {debounce} from "../../../helpers/utils";
 
 
 const Search = ({children, searchRef, text}) => {
@@ -35,7 +36,7 @@ const Search = ({children, searchRef, text}) => {
 
         const transformData = resData => resData.listAllLocations
 
-        if (text.length > 0) { listAllLocations({body: body_search(text)}, transformData) }
+        if (text.length > 0) { debounce(listAllLocations({body: body_search(text)}, transformData), 250) }
 
     }, [searchRef, text, listAllLocations])
 

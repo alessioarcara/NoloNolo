@@ -26,8 +26,7 @@ const SearchBar = React.forwardRef((props, ref) => {
             : `${classes['background-searchbar']} ${classes['search']}`
 
     return (
-        <div
-            className={searchClasses}>
+        <div className={searchClasses}>
             <div onClick={props.openModalHandler} className={classes['search-bar']}>
                 <SearchIcon/>
                 <input
