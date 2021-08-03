@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from "react";
+import React, {useMemo} from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useEffect, useState } from "react";
@@ -6,11 +6,6 @@ import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [navbar, setNavbar] = useState(false);
-    const [searchText, setSearchText] = useState('')
-
-    const changeHandler = useCallback(event => {
-        setSearchText(event.target.value)
-    }, [])
 
     const listenToScroll = useMemo(() => throttle(() => {
         if (window.scrollY >= 60) {
@@ -38,8 +33,8 @@ const SearchBar = React.forwardRef((props, ref) => {
                 <input
                     ref={ref}
                     type='search'
-                    value={searchText}
-                    onChange={changeHandler}
+                    value={props.text}
+                    onChange={props.changeHandler}
                     placeholder='Da dove vuoi partire?'
                 />
             </div>

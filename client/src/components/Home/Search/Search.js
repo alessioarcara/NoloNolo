@@ -1,5 +1,5 @@
 import Location from "./Location";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
 import BackIcon from "../../UI/icons/BackIcon";
@@ -8,9 +8,9 @@ import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
 
 
-const Search = ({children, searchRef}) => {
+const Search = ({children, searchRef, text}) => {
     const [isNextPage, setNextPage] = useState(false)
-    const {data: locations, sendRequest: listAllLocations} = useHttp(true)
+    const {status, data: locations, sendRequest: listAllLocations} = useHttp(true)
 
     const moveClickHandler = () => {
         setNextPage(prevState => !prevState)
@@ -29,27 +29,40 @@ const Search = ({children, searchRef}) => {
     }
 
     useEffect(() => {
-        searchRef.current.focus();
+        if (searchRef.current !== document.activeElement) {
+            searchRef.current.focus();
+        }
 
         const transformData = resData => resData.listAllLocations
 
-        listAllLocations({body: body_search(searchRef.current.value)}, transformData)
+        if (text.length > 0) { listAllLocations({body: body_search(text)}, transformData) }
 
-    }, [searchRef, listAllLocations])
+    }, [searchRef, text, listAllLocations])
 
     return (
         <>
             {!isNextPage &&
-            <div>
+            <>
                 {children}
-                {locations && locations.map(location =>
-                    <Location
-                        onClick={moveClickHandler}
-                        key={location.city}
-                        textCity={location.city}
-                        textRegion={location.region}/>)
+                {status === "completed" && locations.length > 0 && locations.map(location => {
+                    if (location.city) {
+                    return (
+                        <Location
+                            onClick={moveClickHandler}
+                            key={location.city}
+                            region={location.city}/>
+                    ) } else {
+                        return (
+                            <Location
+                                onClick={moveClickHandler}
+                                key={location.city}
+                                city={location.region}/>
+                        )
+                    }
                 }
-            </div>
+                )}
+                {status === "completed" && locations.length === 0 && <p>Nessun risultato</p>}
+            </>
             }
             {isNextPage &&
             <div className={classes[`datepicker-container`]}>
