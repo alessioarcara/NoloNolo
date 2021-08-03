@@ -32,7 +32,7 @@ const SearchBar = React.forwardRef((props, ref) => {
                 <input
                     ref={ref}
                     type='search'
-                    value={props.text}
+                    value={props.searchTerm}
                     onChange={props.changeHandler}
                     placeholder='Da dove vuoi partire?'
                 />

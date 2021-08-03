@@ -1,5 +1,5 @@
 import Location from "./Location";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import SearchDatePicker from "./SearchDatePicker";
 import Button from "../../UI/Button/Button";
 import BackIcon from "../../UI/icons/BackIcon";
@@ -8,10 +8,15 @@ import useHttp from "../../../hooks/use-http";
 import {body_search} from "../../../helpers/httpConfig";
 import {debounce} from "../../../helpers/utils";
 
+const transformData = resData => resData.listAllLocations
 
-const Search = ({children, searchRef, text}) => {
+const Search = ({children, searchRef, searchTerm}) => {
     const [isNextPage, setNextPage] = useState(false)
     const {status, data: locations, sendRequest: listAllLocations} = useHttp(true)
+
+    const debouncedListAllLocations = useRef(debounce(
+            (searchTerm) => listAllLocations({ body: body_search(searchTerm) }, transformData),
+            300));
 
     const moveClickHandler = () => {
         setNextPage(prevState => !prevState)
@@ -30,20 +35,14 @@ const Search = ({children, searchRef, text}) => {
     }
 
     useEffect(() => {
-        if (searchRef.current !== document.activeElement) {
-            searchRef.current.focus();
-        }
-
-        const transformData = resData => resData.listAllLocations
-
-        if (text.length > 0) { debounce(listAllLocations({body: body_search(text)}, transformData), 250) }
-
-    }, [searchRef, text, listAllLocations])
+        searchRef.current !== document.activeElement && searchRef.current.focus();
+        searchTerm && searchTerm.length > 0 && debouncedListAllLocations.current(searchTerm);
+    }, [searchRef, searchTerm])
 
     return (
         <>
             {!isNextPage &&
-            <>
+            <div className={classes['datepicker-container']}>
                 {children}
                 {status === "completed" && locations.length > 0 && locations.map(location => {
                     return (
@@ -56,7 +55,7 @@ const Search = ({children, searchRef, text}) => {
                 })
                 }
                 {status === "completed" && locations.length === 0 && <p>Nessun risultato</p>}
-            </>
+            </div>
             }
             {isNextPage &&
             <div className={classes[`datepicker-container`]}>

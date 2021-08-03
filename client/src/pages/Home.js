@@ -8,13 +8,13 @@ import Modal from "../components/UI/Modal/Modal";
 
 const Home = () => {
 
+    const [searchTerm, setSearchTerm] = useState('')
     const [isShown, setIsShown] = useState(false);
+
     const searchRef = useRef()
 
-    const [searchText, setSearchText] = useState('')
-
     const changeHandler = useCallback(event => {
-        setSearchText(event.target.value)
+        setSearchTerm(event.target.value)
     }, [])
 
     const openModalHandler = () => {
@@ -28,11 +28,11 @@ const Home = () => {
         <>
             {isShown &&
             <Modal adapterSize="adaptable">
-                <Search text={searchText} searchRef={searchRef}>
+                <Search searchTerm={searchTerm} searchRef={searchRef}>
                     <SearchBar
                         ref={searchRef}
                         isShow={isShown}
-                        text={searchText}
+                        searchTerm={searchTerm}
                         changeHandler={changeHandler}
                         openModalHandler={openModalHandler}
                         closeModalHandler={closeModalHandler}

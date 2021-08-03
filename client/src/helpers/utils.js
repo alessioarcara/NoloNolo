@@ -15,7 +15,7 @@ export const debounce = (callback, delay) => {
     return (...args) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-            callback.apply(this, ...args)
+            callback.apply(this, args)
         }, delay);
     }
 };

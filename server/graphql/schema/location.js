@@ -3,7 +3,6 @@ const locationType = `
             region: String!
             city: String
             harbour: String
-            boats: [Boat!]!
         }
         
         input LocationInput {

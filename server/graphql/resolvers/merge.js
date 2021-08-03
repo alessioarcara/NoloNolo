@@ -1,11 +1,3 @@
-const DataLoader = require('dataloader')
-const Boat = require("../../models/boat");
-
-// const boats = new DataLoader(cities => {
-//
-// })
-
-
 const transformBoat = boat => {
     return {
         ...boat,

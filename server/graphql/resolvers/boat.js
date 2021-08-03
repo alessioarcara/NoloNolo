@@ -8,7 +8,7 @@ module.exports = {
             const boats = await Boat.aggregate([
                 {$facet: {
                         "Boats": [
-                            {$match: {"location.city": {$regex: where, $options: "i"}}},
+                            {$match: {"location.city": {$regex: `^${where}`, $options: "i"}}},
                             {$skip: skip},
                             {$limit: take}
                         ],
