@@ -35,7 +35,9 @@ const Search = ({children, searchRef, text}) => {
 
         const transformData = resData => resData.listAllLocations
 
-        if (text.length > 0) { listAllLocations({body: body_search(text)}, transformData) }
+        if (text.length > 0) {
+            listAllLocations({body: body_search(text)}, transformData)
+        }
 
     }, [searchRef, text, listAllLocations])
 
@@ -67,8 +69,10 @@ const Search = ({children, searchRef, text}) => {
             {isNextPage &&
             <div className={classes[`datepicker-container`]}>
                 <div className={classes[`actions-top`]}>
-                    <Button className={classes[`btn-back`]} onClick={moveClickHandler} type="button"><BackIcon/></Button>
-                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler} type="button">Cancella</Button>
+                    <Button className={classes[`btn-back`]} onClick={moveClickHandler}
+                            type="button"><BackIcon/></Button>
+                    <Button className={classes[`btn-cancel`]} onClick={cancelSelectionHandler}
+                            type="button">Cancella</Button>
                 </div>
                 <SearchDatePicker/>
                 <div className={classes[`actions-bottom`]}>
