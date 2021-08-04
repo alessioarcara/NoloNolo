@@ -5,7 +5,7 @@ import {useEffect, useState } from "react";
 import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
-    const [navbar, setNavbar] = useState(props.navbar);
+    const [isWhite, setIsWhite] = useState(props.isWhite);
     const inputRef = useRef()
 
     useImperativeHandle(ref, () => ({
@@ -16,9 +16,9 @@ const SearchBar = React.forwardRef((props, ref) => {
 
     const listenToScroll = useMemo(() => throttle(() => {
         if (window.scrollY >= 60) {
-            setNavbar(true);
+            setIsWhite(true);
         } else {
-            setNavbar(false);
+            setIsWhite(false);
         }
     }, 20), [])
 
@@ -28,7 +28,7 @@ const SearchBar = React.forwardRef((props, ref) => {
     }, [listenToScroll])
 
     const searchClasses =
-        props.isShow || navbar
+        props.isShow || isWhite
             ? `${classes['background-searchbar']} ${classes['search-active']}`
             : `${classes['background-searchbar']} ${classes['search']}`
 
@@ -44,7 +44,6 @@ const SearchBar = React.forwardRef((props, ref) => {
                     placeholder='Da dove vuoi partire?'
                 />
             </div>
-            {props.isShow && <p className={classes['btn-exit']} onClick={props.closeModalHandler}>Annulla</p>}
         </div>
     );
 });

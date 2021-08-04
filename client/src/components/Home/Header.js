@@ -7,7 +7,6 @@ const Header = props => {
             <div className={classes.title}>NoloNolo Boat</div>
             <SearchBar
                 openModalHandler={props.openModalHandler}
-                closeModalHandler={props.closeModalHandler}
                 isShow={props.isShow}
             />
         </>

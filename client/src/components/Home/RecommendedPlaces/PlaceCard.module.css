@@ -15,7 +15,7 @@
 }
 
 .place-card p {
-    box-shadow: 2px 2px #9e9d9d;
+    box-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
     font-family: 'Lobster', cursive;
     background-color: #fff;
     padding: 0.1rem 0.8rem 0.1rem 0.8rem;

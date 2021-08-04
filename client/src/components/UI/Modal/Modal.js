@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ReactDOM from "react-dom"
 
 import classes from "./Modal.module.css"
@@ -8,6 +8,11 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => { document.body.style.overflow = 'unset' };
+    }, [])
 
     if (adapterSize === "smartphone") {
         return <div className={classes["modal-fullscreen"]}>{children}</div>
