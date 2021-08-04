@@ -5,23 +5,27 @@ const RecommendedPlaces = () => {
     const DUMMY_LOCATION = [
         {
             id: 'l1',
-            text: 'Campania'
+            title: 'Campania'
         },
         {
             id: 'l2',
-            text: 'Liguria'
+            title: 'Liguria'
         },
         {
             id: 'l3',
-            text: 'Sardegna'
+            title: 'Sardegna'
         },
         {
             id: 'l4',
-            text: 'Sicilia'
+            title: 'Sicilia'
         },
         {
             id: 'l5',
-            text: 'Toscana'
+            title: 'Toscana'
+        },
+        {
+            id: 'l6',
+            title: 'Puglia'
         }
     ]
 
@@ -32,9 +36,7 @@ const RecommendedPlaces = () => {
                 {DUMMY_LOCATION.map(place =>
                     <PlaceCard
                         key={place.id}
-                        id={place.id}
-                        text={place.text}
-                        image={place.image}
+                        title={place.title}
                     />
                 )}
             </div>

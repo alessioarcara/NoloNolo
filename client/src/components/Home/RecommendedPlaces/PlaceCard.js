@@ -5,17 +5,17 @@ const PlaceCard = (props) => {
     const history = useHistory();
 
     const clickHandler = () => {
-        history.push(`/${props.text}`);
+        history.push(`/${props.title}`);
     }
 
     return (
-        <div className={classes[`image-card`]}>
+        <div className={classes[`place-card`]}>
             <img
-                src={require(`../../../assets/${props.text}.jpg`).default}
+                src={require(`../../../assets/${props.title}.jpg`).default}
                 onClick={clickHandler}
                 alt=""
             />
-            <p>{props.text}</p>
+            <p>{props.title}</p>
         </div>
     );
 };
