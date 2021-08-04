@@ -1,4 +1,4 @@
-import React, {useMemo} from "react";
+import React, {useImperativeHandle, useMemo, useRef} from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useEffect, useState } from "react";
@@ -6,6 +6,13 @@ import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [navbar, setNavbar] = useState(props.navbar);
+    const inputRef = useRef()
+
+    useImperativeHandle(ref, () => ({
+        focus: () => {
+            inputRef.current.focus();
+        }
+    }));
 
     const listenToScroll = useMemo(() => throttle(() => {
         if (window.scrollY >= 60) {
@@ -30,7 +37,7 @@ const SearchBar = React.forwardRef((props, ref) => {
             <div onClick={props.openModalHandler} className={classes['search-bar']}>
                 <SearchIcon/>
                 <input
-                    ref={ref}
+                    ref={inputRef}
                     type='search'
                     value={props.searchTerm}
                     onChange={props.changeHandler}

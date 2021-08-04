@@ -20,7 +20,9 @@ const Home = () => {
     return (
         <>
             {isShown &&
-            <Modal adapterSize={breakpointCtx.breakpoint}>
+            <Modal adapterSize={breakpointCtx.breakpoint}
+                closeModalHandler={closeModalHandler}
+            >
                 <Search/>
             </Modal>
             }
@@ -28,7 +30,7 @@ const Home = () => {
             <Header
                 isShow={isShown}
                 openModalHandler={openModalHandler}
-                closeModalHandler={closeModalHandler}
+                // closeModalHandler={closeModalHandler}
             />
             }
             <Main/>
