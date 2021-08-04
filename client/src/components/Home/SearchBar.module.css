@@ -17,6 +17,7 @@
 
 .background-searchbar {
     display: flex;
+    flex: 1;
     align-items: center;
     padding: 0.03rem;
     position: sticky;
@@ -52,9 +53,15 @@ div > input[type=search] {
     background-color: #fff;
 }
 
-.btn-exit {
-    padding-right: 0.7rem;
-    cursor: pointer;
+div > input[type=search]::-webkit-search-cancel-button {
+    position: relative;
+    right: 6px;
+/*    -webkit-appearance: none;*/
+/*    height: 20px;*/
+/*    width: 20px;*/
+/*    color: #9e9d9d;*/
+/*    border-radius:10px;*/
+/*    background: red;*/
 }
 
 @media only screen and (max-width: 768px) {

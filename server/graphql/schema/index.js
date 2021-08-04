@@ -16,7 +16,8 @@ const rootSchema = `
         type RootQuery {
             refreshToken: AuthData!
             user: User!
-            boats(filter: BoatFilter): [Boat!]
+            boats(filter: BoatFilter!): [Boat!]
+            listAllLocations(filter: LocationFilter!): [Location!]
         }
         
         type RootMutation {

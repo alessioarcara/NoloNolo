@@ -1,42 +1,34 @@
-import {useRef, useState} from "react";
+import {useCallback, useContext, useState} from "react";
 import Header from "../components/Home/Header";
 import Main from "../components/Home/Main"
 import Footer from "../components/Home/Footer";
-import Search from "../components/Home/Search/Search";
-import SearchBar from "../components/Home/SearchBar";
+import Search from "../components/Search/Search";
 import Modal from "../components/UI/Modal/Modal";
+import BreakpointContext from "../store/breakpoint-context";
+
 
 const Home = () => {
-
     const [isShown, setIsShown] = useState(false);
-    const searchRef = useRef()
+    const breakpointCtx = useContext(BreakpointContext)
 
-    const openModalHandler = () => {
-        setIsShown(true)
-    }
-    const closeModalHandler = () => {
-        setIsShown(false)
-    }
+    const showHandler = useCallback(() => {
+        setIsShown(prevState => !prevState)
+    }, [])
 
     return (
         <>
             {isShown &&
-            <Modal adapterSize="adaptable">
-                <Search searchRef={searchRef}>
-                    <SearchBar
-                        ref={searchRef}
-                        isShow={isShown}
-                        openModalHandler={openModalHandler}
-                        closeModalHandler={closeModalHandler}
-                    />
-                </Search>
+            <Modal
+                adapterSize={breakpointCtx.breakpoint}
+                closeModalHandler={showHandler}
+            >
+                <Search closeModalHandler={showHandler}/>
             </Modal>
             }
             {!isShown &&
             <Header
                 isShow={isShown}
-                openModalHandler={openModalHandler}
-                closeModalHandler={closeModalHandler}
+                openModalHandler={showHandler}
             />
             }
             <Main/>

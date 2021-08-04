@@ -131,6 +131,9 @@
     .days-text {
         display: none;
     }
+    .react-datepicker__month-container{
+        width: 50%;
+    }
     .react-datepicker__day-names{
         display: inline;
         font-size: 1em;

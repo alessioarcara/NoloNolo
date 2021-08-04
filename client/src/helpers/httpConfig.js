@@ -33,8 +33,8 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
 exports.body_boats = ({where, skip}) => {
     return {
         query: `
-           query($filter: BoatFilter) {
-              boats(filter: $filter){
+           query($filter: BoatFilter!) {
+              boats(filter: $filter) {
                  _id
                  model
                  hasAdvertisement {
@@ -47,10 +47,23 @@ exports.body_boats = ({where, skip}) => {
                  }
               }
            }
-      `,
+        `,
         variables: {filter: {where, skip}}
     }
 };
+exports.body_search = (contains) => {
+    return {
+        query: `
+            query($filter: LocationFilter!) {
+                listAllLocations(filter: $filter) {
+                    region
+                    city
+                }
+            }
+        `,
+        variables: {filter: {contains}}
+    }
+}
 exports.body_refresh = {
     query: `
           query {

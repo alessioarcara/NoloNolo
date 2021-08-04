@@ -39,8 +39,7 @@ const Results = (props) => {
                 <Pagination   data={boats}
                               pageLimit={5}
                               dataLimit={10}
-                >
-                </Pagination>
+                />
                 }
             </LetSuspense>
         </div>

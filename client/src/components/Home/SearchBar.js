@@ -1,17 +1,24 @@
-import React, {useMemo} from "react";
+import React, {useImperativeHandle, useMemo, useRef} from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useEffect, useState } from "react";
 import {throttle} from "../../helpers/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
-    const [navbar, setNavbar] = useState(false);
+    const [isWhite, setIsWhite] = useState(props.isWhite);
+    const inputRef = useRef()
+
+    useImperativeHandle(ref, () => ({
+        focus: () => {
+            inputRef.current.focus();
+        }
+    }));
 
     const listenToScroll = useMemo(() => throttle(() => {
         if (window.scrollY >= 60) {
-            setNavbar(true);
+            setIsWhite(true);
         } else {
-            setNavbar(false);
+            setIsWhite(false);
         }
     }, 20), [])
 
@@ -21,22 +28,22 @@ const SearchBar = React.forwardRef((props, ref) => {
     }, [listenToScroll])
 
     const searchClasses =
-        props.isShow || navbar
+        props.isShow || isWhite
             ? `${classes['background-searchbar']} ${classes['search-active']}`
             : `${classes['background-searchbar']} ${classes['search']}`
 
     return (
-        <div
-            className={searchClasses}>
+        <div className={searchClasses}>
             <div onClick={props.openModalHandler} className={classes['search-bar']}>
                 <SearchIcon/>
                 <input
-                    ref={ref}
+                    ref={inputRef}
                     type='search'
+                    value={props.searchTerm}
+                    onChange={props.changeHandler}
                     placeholder='Da dove vuoi partire?'
                 />
             </div>
-            {props.isShow && <p className={classes['btn-exit']} onClick={props.closeModalHandler}>Annulla</p>}
         </div>
     );
 });
