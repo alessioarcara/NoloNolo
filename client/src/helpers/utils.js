@@ -19,3 +19,6 @@ export const debounce = (callback, delay) => {
         }, delay);
     }
 };
+export const circularSlice = (arr, start, end) => {
+    return end < start ? arr.slice(start).concat(arr.slice(0, end + 1)) : arr.slice(start, end + 1)
+}

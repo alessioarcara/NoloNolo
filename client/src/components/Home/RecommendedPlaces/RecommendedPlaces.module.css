@@ -8,3 +8,33 @@
 .list::-webkit-scrollbar {
     display: none;
 }
+
+.left-button, .right-button {
+    width: 3rem;
+    height: 1.5rem;
+    position: absolute;
+    z-index: 5;
+    background-color: snow;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.57);
+    border: 1px solid snow;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    text-align: center;
+    color: black;
+}
+
+.left-button {
+    left: 1rem;
+    margin-top: 8rem;
+}
+
+.right-button {
+    right: 1rem;
+    margin-top: 8rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-button, .right-button {
+        display: none;
+    }
+}
