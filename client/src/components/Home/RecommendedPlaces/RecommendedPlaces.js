@@ -2,6 +2,8 @@ import PlaceCard from "./PlaceCard";
 import classes from './RecommendedPlaces.module.css';
 import {useCallback, useState} from "react";
 import {circularSlice} from "../../../helpers/utils";
+import LeftArrowIcon from "../../UI/icons/LeftArrowIcon";
+import RightArrowIcon from "../../UI/icons/RightArrowIcon";
 
 
 const places = ['Campania', 'Liguria', 'Sardegna', 'Sicilia', 'Toscana', 'Puglia']
@@ -31,8 +33,8 @@ const RecommendedPlaces = () => {
                         title={place}
                     />)
                 )}
-                <div onClick={leftClickHandler} className={classes['left-button']}>Prev</div>
-                <div onClick={rightClickHandler} className={classes['right-button']}>Next</div>
+                <div onClick={leftClickHandler} className={classes['left-button']}><LeftArrowIcon/></div>
+                <div onClick={rightClickHandler} className={classes['right-button']}><RightArrowIcon/></div>
             </div>
         </>
     );
