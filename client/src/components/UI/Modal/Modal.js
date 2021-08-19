@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom"
 
 import classes from "./Modal.module.css"
@@ -30,16 +30,16 @@ const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
 };
 
 const Modal = (props) => {
-    // const [show, setShow] = useState(true)
-    //
-    // const showHandler = () => { setShow(false) }
-    //
-    // if (!isShow) { return null}
+    const [isShown, setIsShown] = useState(true)
+
+    const showHandler = () => { setIsShown(false) }
+
+    if (!isShown) { return null}
 
     return (
         <>
             {ReactDOM.createPortal(
-                <Backdrop onCancel={props.closeModalHandler}/>,
+                <Backdrop onCancel={props.closeModalHandler || showHandler}/>,
                 document.getElementById('backdrop-root')
             )}
             {ReactDOM.createPortal(
@@ -47,7 +47,7 @@ const Modal = (props) => {
                     title={props.title}
                     children={props.children}
                     adapterSize={props.adapterSize}
-                    onCancel={props.closeModalHandler}
+                    onCancel={props.closeModalHandler || showHandler}
                 />,
                 document.getElementById('overlay-root')
             )}
