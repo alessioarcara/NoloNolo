@@ -22,3 +22,10 @@ export const debounce = (callback, delay) => {
 export const circularSlice = (arr, start, end) => {
     return end < start ? arr.slice(start).concat(arr.slice(0, end + 1)) : arr.slice(start, end + 1)
 }
+/* Settiamo lo style come valuta e prendiamo la valuta Euro. de-DE sta per Germania */
+export const formatNumber = (number) => {
+    return new Intl.NumberFormat('de-DE', {
+        style: 'currency',
+        currency: 'EUR'
+    }).format(number);
+};

@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-filter {
+    align-self: center;
+}
+
+.btn-filter:hover {
+    color: white;
+    background-color: #FF2677;
+}

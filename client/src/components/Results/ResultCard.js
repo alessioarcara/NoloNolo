@@ -28,7 +28,7 @@ const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFa
                     </div>
 
                     <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
-                    {totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}
+                    {/*{totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}*/}
                     <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
                 </div>
             </div>

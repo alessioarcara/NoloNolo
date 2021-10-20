@@ -12,6 +12,12 @@ body {
   margin: 0;
 }
 
+hr {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
 .subtitle {
   font-family: 'Lobster', cursive;
   font-size: 1.55rem;
@@ -28,4 +34,20 @@ body {
   flex-direction: column;
   align-items: center;
 }
-/* PROVVISORIO */
+
+/* Bottone generico */
+.btn {
+  border: 1px solid #FF2677;
+  background-color: white;
+  color: #FF2677;
+  border-radius: 1rem;
+  padding: 0.425rem 2rem;
+  cursor: pointer;
+  transition: all 0.425s ease;
+}
+
+/* Letter spacing subtitle generico */
+.filter-subtitle {
+  letter-spacing: 0.08rem;
+  font-size: 0.9rem;
+}

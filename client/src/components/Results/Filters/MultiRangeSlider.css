@@ -1,0 +1,75 @@
+.slider {
+    position: relative;
+    width: 200px;
+}
+
+/* Sovrapponiamo il track e il range per creare una nuova barra */
+.slider__track,
+.slider__range {
+    border-radius: 3px;
+    height: 5px;
+    position: absolute;
+}
+
+/* Possiamo dare dei colori diversi alle barre per vedere (se disattiviamo position: absolute) le due barre sovrapposte */
+.slider__track {
+    background-color: #000;
+    width: 100%;
+}
+
+.slider__range {
+    background-color: red;
+    /*width: 50%;*/
+}
+
+/* Eliminiamo il colore del "pollice" di default (blu) */
+.point,
+.point::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+.point {
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    width: 200px;
+}
+
+.point-left {
+    z-index: 3;
+}
+
+.point-right {
+    z-index: 4;
+}
+
+/* Settaggio pollici */
+.point::-webkit-slider-thumb {
+    background-color: #000;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 2px #efeff1;
+    cursor: pointer;
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    pointer-events: all;
+}
+
+/* Settaggio valori da visualizzare (min e max) */
+.left-value,
+.right-value {
+    color: #000;
+    font-size: 12px;
+    margin-top: 20px;
+    position: absolute;
+}
+
+.left-value {
+    left: 0.1rem;
+}
+
+/* Valore negativo per spostarci a destra */
+.right-value {
+    right: -0.3rem;
+}
