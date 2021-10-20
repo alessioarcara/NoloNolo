@@ -7,7 +7,7 @@ import PriceFilter from "./PriceFilter";
 const Filter = () => {
     const submitHandler = (evt) => {
         evt.preventDefault()
-        console.log(evt.target[0].checked)
+        console.log(evt)
     }
 
     return (

@@ -1,14 +1,13 @@
 import React from "react";
-import MultiRangeSlider from "./MultiRangeSlider";
+import MultiRangeSlider from "../../UI/RangeSlider/MultiRangeSlider";
 
 const PriceFilter = () => {
     return (
         <div>
-            <p className='filter-subtitle'>Scegli la fascia di prezzo:</p>
+            <p className='filter-subtitle'>Scegli la fascia di prezzo giornaliero:</p>
             <MultiRangeSlider
                 min={0}
-                max={50000}
-                onChange={({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
+                max={10000}
             />
         </div>
     );

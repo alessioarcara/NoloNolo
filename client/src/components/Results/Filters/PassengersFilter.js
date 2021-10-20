@@ -25,7 +25,7 @@ const PassengersFilter = () => {
             <p className='filter-subtitle'>Numero massimo di passeggeri:</p>
             <div className='passengers-container'>
                 <button className='btn rmv-btn' type='button' onClick={rmvPassenger}>&#45;</button>
-                <div className='passengers-count'>{passengers}</div>
+                <input className='passengers-count' type='text' value={passengers} readOnly/>
                 <button className='btn add-btn' type='button' onClick={addPassenger}>&#43;</button>
             </div>
         </>
