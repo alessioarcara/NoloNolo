@@ -6,7 +6,7 @@
 /* Sovrapponiamo il track e il range per creare una nuova barra */
 .slider-track,
 .slider-range {
-    border-radius: 3px;
+    border-radius: 2rem;
     height: 5px;
     position: absolute;
 }
@@ -19,7 +19,7 @@
 
 .slider-range {
     background-color: green;
-    /*width: 50%;*/
+    /*width: 50% !important;*/
 }
 
 /* Eliminiamo il colore e la struttura dell'input range di default (blu) */
@@ -37,6 +37,7 @@
 
 .point-left {
     z-index: 3;
+    left: 1.7rem;
 }
 
 .point-right {

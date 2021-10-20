@@ -2,7 +2,19 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import './MultiRangeSlider.css';
 import {formatNumber} from '../../../helpers/utils';
 
-const MultiRangeSlider = ({min = 0, max = 10000}) => {
+const changeValue = (a, b) => {
+    if (a > b) {
+        let tmp = a
+        a = b
+        b = tmp
+    }
+    return {a, b}
+}
+
+const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
+    /* Settaggio valori min e max */
+    const {a: min, b: max} = changeValue(minValue, maxValue)
+
     /* State per gestire il valore minimo e il valore massimo */
     const [minVal, setMinVal] = useState (min)
     const [maxVal, setMaxVal] = useState (max)
@@ -53,7 +65,7 @@ const MultiRangeSlider = ({min = 0, max = 10000}) => {
                 max={max}
                 value={minVal}
                 onChange={event => {
-                    const value = Math.min(Number(event.target.value), maxVal - 2000);
+                    const value = Math.min(Number(event.target.value), maxVal - size);
                     setMinVal(value);
                     minValRef.current = value;
                 }}
@@ -65,7 +77,7 @@ const MultiRangeSlider = ({min = 0, max = 10000}) => {
                 max={max}
                 value={maxVal}
                 onChange={event => {
-                    const value = Math.max(Number(event.target.value), minVal + 2000);
+                    const value = Math.max(Number(event.target.value), minVal + size);
                     setMaxVal(value);
                     maxValRef.current = value;
                 }}

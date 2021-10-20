@@ -7,11 +7,13 @@ import Modal from "../components/UI/Modal/Modal";
 import TypeFilter from "../components/Results/Filters/TypeFilter";
 
 const ResultsPage = () => {
-    const [isShow, setIsShow] = useState (false)
+    // const [isShow, setIsShow] = useState (false)
     // const [allParams, setAllParams] = useState(false);
     // const [days, setDays] = useState(0);
     // const URL = useMemo(() => new URLSearchParams(window.location.search), []);
-
+    //
+    // console.log(URL.get('start'))
+    //
     // const start = useMemo(() => URL.get('start')
     //     ? new Date(URL.get('start'))
     //     : Object.null, [URL]);
@@ -23,7 +25,7 @@ const ResultsPage = () => {
     // const time = (start && end)
     //     ? new Date(end).getTime() - new Date(start).getTime()
     //     : Object.null;
-
+    //
     // useEffect(() => {
     //     if (start && end && time) {
     //         setDays(time / (1000 * 3600 * 24));
@@ -41,7 +43,6 @@ const ResultsPage = () => {
             {/*</div>*/}
             {/*}*/}
 
-            {/*{!isShow && <Modal><TypeFilter/></Modal>}*/}
             <Results/>
         </>
     );

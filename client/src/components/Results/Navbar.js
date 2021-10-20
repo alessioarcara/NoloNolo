@@ -43,8 +43,8 @@ const Navbar = () => {
             </header>
 
             {show &&
-                <Modal title='Ci pensiamo noi!' closeModalHandler={() => setShow (false)}>
-                    <Filter/>
+                <Modal title='Filtra i tuoi risultati' closeModalHandler={() => setShow (false)}>
+                    <Filter onClose={() => setShow (false)}/>
                 </Modal>
             }
         </nav>

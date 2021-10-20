@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useRef} from "react";
 import TypeFilter from "./TypeFilter";
 import './Filter.css';
 import PassengersFilter from "./PassengersFilter";
 import PriceFilter from "./PriceFilter";
 
-const Filter = () => {
+const Filter = ({onClose}) => {
+
     const submitHandler = (evt) => {
         evt.preventDefault()
-        console.log(evt)
+        onClose()
     }
 
     return (

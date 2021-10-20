@@ -4,10 +4,11 @@ import MultiRangeSlider from "../../UI/RangeSlider/MultiRangeSlider";
 const PriceFilter = () => {
     return (
         <div>
-            <p className='filter-subtitle'>Scegli la fascia di prezzo giornaliero:</p>
+            <p className='filter-subtitle'>Scegli la fascia di prezzo giornaliera:</p>
             <MultiRangeSlider
-                min={0}
-                max={10000}
+                minValue={0}
+                maxValue={10000}
+                size={1000}
             />
         </div>
     );
