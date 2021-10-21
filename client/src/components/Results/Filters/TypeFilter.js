@@ -1,55 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
+import {boats} from "../../../helpers/elements";
+import {MANAGE_BOATS} from "../../../helpers/constants";
 
-const TypeFilter = () => {
-    const [isChecked, setIsChecked] = useState ('')
-
-    const onCheckHandler = (evt) => {
-        setIsChecked (evt.target.value)
+const TypeFilter = ({dispatch}) => {
+    const onCheckHandler = (boat) => {
+        dispatch({type: MANAGE_BOATS, payload: boat})
     }
-
-    console.log(isChecked)
 
     return (
         <>
             <p className='filter-subtitle'>Scegli la barca che vuoi noleggiare:</p>
             <div style={{display: "flex", flexDirection: "column", gap: "1rem"}}>
-                <div onChange={onCheckHandler}>
-                    <input
-                        id='motor'
-                        type='radio'
-                        name='btn-group'
-                        value='Barche a motore'
-                    />
-                    <label htmlFor='motor'>Barche a motore</label>
-                </div>
-                <div>
-                    <input
-                        id='sail'
-                        type='radio'
-                        name='btn-group'
-                        value='Barche a vela'
-                        onChange={onCheckHandler}
-                    />
-                    <label htmlFor='sail'>Barche a vela</label>
-                </div>
-                <div>
-                    <input
-                        id='catamaran'
-                        type='radio'
-                        name='btn-group'
-                        value='Catamarani'
-                    />
-                    <label htmlFor='catamaran'>Catamarani</label>
-                </div>
-                <div>
-                    <input
-                        id='rubber'
-                        type='radio'
-                        name='btn-group'
-                        value='Gommoni'
-                    />
-                    <label htmlFor='rubber'>Gommone</label>
-                </div>
+                {
+                    boats.map(boat => (
+                        <div key={boat.id} onChange={() => onCheckHandler(boat)}>
+                            <input
+                                id={boat.id}
+                                type='checkbox'
+                                value={boat.name}
+                            />
+                            <label htmlFor={boat.id}> {boat.name}</label>
+                        </div>
+                    ))
+                }
             </div>
         </>
     );

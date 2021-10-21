@@ -1,6 +1,7 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import {useRef, useCallback, useEffect} from "react";
 import './MultiRangeSlider.css';
 import {formatNumber} from '../../../helpers/utils';
+import {INITIAL_PRICE, MANAGE_MAX_PRICE, MANAGE_MIN_PRICE} from "../../../helpers/constants";
 
 const changeValue = (a, b) => {
     if (a > b) {
@@ -11,18 +12,20 @@ const changeValue = (a, b) => {
     return {a, b}
 }
 
-const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
+const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue = 0, maxValue = 10000, size = 1}) => {
     /* Settaggio valori min e max */
     const {a: min, b: max} = changeValue(minValue, maxValue)
-
-    /* State per gestire il valore minimo e il valore massimo */
-    const [minVal, setMinVal] = useState (min)
-    const [maxVal, setMaxVal] = useState (max)
 
     /* useRef per */
     const minValRef = useRef(min);
     const maxValRef = useRef(max);
     const range = useRef (null)
+
+    /* Settiamo il valore iniziale degli state */
+    useEffect(() => {
+        dispatch({type: INITIAL_PRICE, payload: {min, max}})
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     /* Ritorniamo il valore percentuale a seconda del valore passato */
     const getPercentage = useCallback((value) => {
@@ -37,24 +40,24 @@ const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
     * dello slider green grazie al valore di width
     */
     useEffect(() => {
-        const minPercent = getPercentage(minVal);
+        const minPercent = getPercentage(minPrice);
         const maxPercent = getPercentage(maxValRef.current);
 
         if (range.current) {
             range.current.style.left = `${minPercent}%`;
             range.current.style.width = `${maxPercent - minPercent}%`;
         }
-    }, [minVal, getPercentage]);
+    }, [minPrice, getPercentage]);
 
     useEffect(() => {
         const minPercent = getPercentage(minValRef.current);
-        const maxPercent = getPercentage(maxVal);
+        const maxPercent = getPercentage(maxPrice);
 
         if (range.current) {
             range.current.style.right = `${maxPercent}%`;
             range.current.style.width = `${maxPercent - minPercent}%`;
         }
-    }, [maxVal, getPercentage]);
+    }, [maxPrice, getPercentage]);
 
 
     return (
@@ -63,10 +66,10 @@ const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
                 type='range'
                 min={min}
                 max={max}
-                value={minVal}
+                value={minPrice}
                 onChange={event => {
-                    const value = Math.min(Number(event.target.value), maxVal - size);
-                    setMinVal(value);
+                    const value = Math.min(Number(event.target.value), maxPrice - size);
+                    dispatch({type: MANAGE_MIN_PRICE, payload: value})
                     minValRef.current = value;
                 }}
                 className='point point-left'
@@ -75,10 +78,10 @@ const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
                 type='range'
                 min={min}
                 max={max}
-                value={maxVal}
+                value={maxPrice}
                 onChange={event => {
-                    const value = Math.max(Number(event.target.value), minVal + size);
-                    setMaxVal(value);
+                    const value = Math.max(Number(event.target.value), minPrice + size);
+                    dispatch({type: MANAGE_MAX_PRICE, payload: value})
                     maxValRef.current = value;
                 }}
                 className='point point-right'
@@ -88,8 +91,8 @@ const MultiRangeSlider = ({minValue = 0, maxValue = 10000, size = 1}) => {
             <div className="slider">
                 <div className="slider-track" />
                 <div ref={range} className="slider-range" />
-                <div className="left-value">{formatNumber(minVal)}</div>
-                <div className="right-value">{formatNumber(maxVal)}</div>
+                <div className="left-value">{formatNumber(minPrice)}</div>
+                <div className="right-value">{formatNumber(maxPrice)}</div>
             </div>
 
         </>

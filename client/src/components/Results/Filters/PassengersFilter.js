@@ -1,23 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import './PassengersFilter.css';
+import {ADD_GUEST, REMOVE_GUEST} from "../../../helpers/constants";
 
-const PassengersFilter = () => {
-    const [passengers, setPassenger] = useState (0)
-
+const PassengersFilter = ({guests, dispatch}) => {
     const addPassenger = () => {
-        setPassenger (oldValue => {
-            if (oldValue + 1 > 5)
-                return oldValue
-            return oldValue + 1
-        })
+        dispatch({type: ADD_GUEST})
     }
 
     const rmvPassenger = () => {
-        setPassenger (oldValue => {
-            if (oldValue - 1 < 0)
-                return 0
-            return oldValue - 1
-        })
+        dispatch({type: REMOVE_GUEST})
     }
 
     return (
@@ -25,7 +16,7 @@ const PassengersFilter = () => {
             <p className='filter-subtitle'>Numero massimo di passeggeri:</p>
             <div className='passengers-container'>
                 <button className='btn rmv-btn' type='button' onClick={rmvPassenger}>&#45;</button>
-                <input className='passengers-count' type='text' value={passengers} readOnly/>
+                <input className='passengers-count' type='text' value={guests} readOnly/>
                 <button className='btn add-btn' type='button' onClick={addPassenger}>&#43;</button>
             </div>
         </>
