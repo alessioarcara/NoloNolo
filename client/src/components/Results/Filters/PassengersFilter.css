@@ -10,24 +10,13 @@
     width: 2.2rem;
 }
 
-.add-btn {
-    color: rgba(0, 200, 0, 0.7);
-    border-color: rgba(0, 200, 0, 0.7);
+.add-btn, .rmv-btn {
+    color: rgba(0, 0, 0, 0.325);
+    border-color: rgba(0, 0, 0, 0.325);
     padding: 0.3rem 1.1rem;
 }
 
-.rmv-btn {
-    color: rgba(255, 0, 0, 0.7);
-    border-color: rgba(255, 0, 0, 0.7);
-    padding: 0.3rem 1.1rem;
-}
-
-.add-btn:hover {
-    color: white;
-    background-color: rgba(0, 200, 0, 0.7);
-}
-
-.rmv-btn:hover {
-    color: white;
-    background-color: rgba(255, 0, 0, 0.7);
+.add-btn:hover, .rmv-btn:hover {
+    color: rgba(0, 0, 0, 0.725);
+    border-color: rgba(0, 0, 0, 0.725);
 }

@@ -4,9 +4,10 @@ import './Filter.css';
 import PassengersFilter from "./PassengersFilter";
 import PriceFilter from "./PriceFilter";
 import filterReducer from "./filterReducer";
+import {CLEAR_FORM} from "../../../helpers/constants";
 
 // State iniziale per useReducer
-const initialState = {
+export const initialState = {
     boatsTypes: [],
     guests: 0,
     minPrice: 0,
@@ -14,8 +15,8 @@ const initialState = {
 }
 
 const Filter = ({onClose}) => {
-    console.log("Render Filter")
     const [state, dispatch] = useReducer(filterReducer, initialState);
+    const isDisabled = state.boatsTypes.length === 0 || state.guests === 0
 
     const submitHandler = (evt) => {
         evt.preventDefault()
@@ -23,14 +24,35 @@ const Filter = ({onClose}) => {
         onClose()
     }
 
+    const clearHandler = () => {
+        dispatch({type: CLEAR_FORM, payload: initialState})
+    }
+
+    console.log(state.boatsTypes)
+
     return (
         <form className='container' onSubmit={submitHandler}>
-            <TypeFilter dispatch={dispatch}/>
+            <TypeFilter dispatch={dispatch} types={state.boatsTypes}/>
             <hr/>
             <PassengersFilter dispatch={dispatch} guests={state.guests}/>
             <hr/>
             <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
-            <button className='btn btn-filter' type='submit'>Cerca</button>
+
+            <div className='modal-footer'>
+                <button
+                    disabled={isDisabled}
+                    className='btn btn-clear'
+                    onClick={clearHandler}
+                >
+                    Pulisci
+                </button>
+                <button
+                    className='btn btn-filter'
+                    type='submit'
+                >
+                    Cerca
+                </button>
+            </div>
         </form>
     );
 }

@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png';
 import './Navbar.css';
 import BackIcon from "../UI/icons/BackIcon";
 import {useHistory} from "react-router-dom";
-import Filters from "../UI/icons/Filters";
+import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
 
@@ -38,7 +38,7 @@ const Navbar = () => {
                     className='btn-filters'
                     onClick={() => setShow (true)}
                 >
-                    <Filters/>
+                    <FiltersIcon/>
                 </button>
             </header>
 

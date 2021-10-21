@@ -1,4 +1,4 @@
-const Filters = () => {
+const FiltersIcon = () => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,4 +61,4 @@ const Filters = () => {
     );
 };
 
-export default Filters;
+export default FiltersIcon;

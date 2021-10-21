@@ -1,11 +1,12 @@
 import {
-    ADD_GUEST,
+    ADD_GUEST, CLEAR_FORM,
     INITIAL_PRICE,
     MANAGE_BOATS,
     MANAGE_MAX_PRICE,
     MANAGE_MIN_PRICE,
     REMOVE_GUEST
 } from "../../../helpers/constants";
+import { initialState } from "./Filter";
 
 const filterReducer = (state, {type, payload}) => {
     /*
@@ -16,9 +17,9 @@ const filterReducer = (state, {type, payload}) => {
     if (type === MANAGE_BOATS) {
         return {
             ...state,
-            boatsTypes: (!state.boatsTypes.some(el => el.id === payload.id))
+            boatsTypes: (!state.boatsTypes.some(el => el === payload))
                 ? [...state.boatsTypes, payload]
-                : [...state.boatsTypes.filter(el => el.id !== payload.id)]
+                : [...state.boatsTypes.filter(el => el !== payload)]
         }
     }
     if (type === ADD_GUEST) {
@@ -57,7 +58,7 @@ const filterReducer = (state, {type, payload}) => {
         }
     }
 
-    return state
+    return initialState
 }
 
 export default filterReducer;
