@@ -6,6 +6,7 @@ import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
 import ResultsPage from "./pages/ResultsPage";
+import FavoritesPage from "./pages/FavoritesPage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -17,10 +18,7 @@ function App() {
                     <Home/>
                 </Route>
                 <Route path='/preferiti'>
-                    <div className="centered">
-                        <h1>Preferiti</h1>
-                        <p>No favorites found.</p>
-                    </div>
+                    <FavoritesPage/>
                 </Route>
                 {!isLoggedIn &&
                 <Route path='/auth'>

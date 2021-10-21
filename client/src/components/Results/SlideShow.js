@@ -7,7 +7,7 @@ import RightArrowIcon from "../UI/icons/RightArrowIcon";
 import Images from "./Images";
 import SlideShowDots from "./SlideShowDots";
 
-const SlideShow = (props) => {
+const SlideShow = props => {
     const [isClicked, setIsClicked] = useState(false);
     const [index, setIndex] = useState(0);
     const images = props.images;
@@ -36,6 +36,7 @@ const SlideShow = (props) => {
     // }, [imageRef, options])
 
     const changeClickHandler = () => {
+        props.onToggleFavoritesStatus();
         setIsClicked(state => !state);
     }
 

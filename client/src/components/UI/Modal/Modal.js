@@ -24,6 +24,7 @@ const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
                 <h1>{title}</h1>
             </header>
             <section className={classes["modal-content"]}>{children}</section>
+            {/*<footer><div className={classes["modal-actions"]}>{footer}</div></footer>*/}
             <span onClick={onCancel} className={classes["modal-close"]}>&times;</span>
         </div>
     );
@@ -34,7 +35,7 @@ const Modal = (props) => {
 
     const showHandler = () => { setIsShown(false) }
 
-    if (!isShown) { return null}
+    if (!isShown) { return null }
 
     return (
         <>

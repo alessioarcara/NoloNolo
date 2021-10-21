@@ -26,7 +26,7 @@ const Results = (props) => {
             >
                 {boats && boats.map(boat => (
                     <ResultCard
-                        key={boat._id}
+                        id={boat._id}
                         images={boat.hasAdvertisement.images}
                         model={boat.model}
                         description={boat.hasAdvertisement.description}
