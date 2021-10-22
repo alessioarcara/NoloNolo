@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import logo from '../../assets/logo.png';
 import './Navbar.css';
 import BackIcon from "../UI/icons/BackIcon";
 import {useHistory} from "react-router-dom";

@@ -2,7 +2,6 @@ import React from "react";
 import {boats} from "../../../helpers/elements";
 import {MANAGE_BOATS} from "../../../helpers/constants";
 import "./TypeFilter.css";
-import SearchIcon from "../../UI/icons/MenuIcons/SearchIcon";
 
 const TypeFilter = ({dispatch, types}) => {
     const onCheckHandler = (typeName) => {

@@ -17,8 +17,6 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
     const {a: min, b: max} = changeValue(minValue, maxValue)
 
     /* useRef per */
-    const minValRef = useRef(min);
-    const maxValRef = useRef(max);
     const range = useRef (null)
 
     /* Settiamo il valore iniziale degli state */
@@ -40,27 +38,22 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
     * dello slider green grazie al valore di width
     */
     useEffect(() => {
-        // const minPercent = getPercentage(minPrice);
-        // const maxPercent = getPercentage(maxValRef.current);
-        //
-        // if (range.current) {
-        //     range.current.style.left = `${minPercent}%`;
-        //     range.current.style.width = `${maxPercent - minPercent}%`;
-        // }
-    }, [minPrice, getPercentage]);
+        const minPercent = getPercentage(minPrice);
+        const maxPercent = getPercentage(maxPrice);
 
-    useEffect(() => {
-        // const minPercent = getPercentage(minValRef.current);
-        // const maxPercent = getPercentage(maxPrice);
-        //
-        // if (range.current) {
-        //     range.current.style.right = `${maxPercent}%`;
-        //     range.current.style.width = `${maxPercent - minPercent}%`;
-        // }
-    }, [maxPrice, getPercentage]);
-
+        if (range.current) {
+            range.current.style.left = `${minPercent}%`;
+            range.current.style.right = `${maxPercent}%`;
+            range.current.style.width = `${maxPercent - minPercent}%`;
+        }
+    }, [minPrice, maxPrice, getPercentage]);
 
     return (
+        /*
+        *  Nella onChange Math.min prende sempre il valore più piccolo: se la differenza tra il prezzo
+        *  massimo e la grandezza del range risulta inferiore al valore del puntatore corrente, verrà
+        *  presa la differenza (stessa cosa con Math.max ma considerando il massimo)
+        */
         <>
             <input
                 type='range'
@@ -70,7 +63,6 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
                 onChange={event => {
                     const value = Math.min(Number(event.target.value), maxPrice - size);
                     dispatch({type: MANAGE_MIN_PRICE, payload: value})
-                    minValRef.current = value;
                 }}
                 className={`point-left ${min === minPrice ? 'point default-point' : 'point'}`}
             />
@@ -82,14 +74,13 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
                 onChange={event => {
                     const value = Math.max(Number(event.target.value), minPrice + size);
                     dispatch({type: MANAGE_MAX_PRICE, payload: value})
-                    maxValRef.current = value;
                 }}
                 className={`point-right ${max === maxPrice ? 'point default-point' : 'point'}`}
             />
 
             {/* Creazione barra per lo slider con doppi pollici e doppio slider */}
             <div className="slider">
-                {/*<div className="slider-track" />*/}
+                <div className="slider-track" />
                 <div ref={range} className="slider-range" />
                 <div className="left-value">{formatNumber(minPrice)}</div>
                 <div className="right-value">{formatNumber(maxPrice)}</div>

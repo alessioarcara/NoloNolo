@@ -13,8 +13,8 @@
 
 .add-btn, .rmv-btn {
     color: rgba(0, 0, 0, 0.325);
-    border-color: rgba(0, 0, 0, 0.325);
-    padding: 0.3rem 1.1rem;
+    border-color: rgba(0, 0, 0, 0.2);
+    padding: 0.3rem 1.425rem;
 }
 
 .add-btn:hover, .rmv-btn:hover {

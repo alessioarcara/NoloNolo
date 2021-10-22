@@ -25,10 +25,8 @@ const Filter = ({onClose}) => {
     }
 
     const clearHandler = () => {
-        dispatch({type: CLEAR_FORM, payload: initialState})
+        dispatch({type: CLEAR_FORM})
     }
-
-    console.log(state.boatsTypes)
 
     return (
         <form className='container' onSubmit={submitHandler}>

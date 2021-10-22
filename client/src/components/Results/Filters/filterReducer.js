@@ -1,5 +1,5 @@
 import {
-    ADD_GUEST, CLEAR_FORM,
+    ADD_GUEST,
     INITIAL_PRICE,
     MANAGE_BOATS,
     MANAGE_MAX_PRICE,
