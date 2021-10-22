@@ -11,7 +11,7 @@ export const initialState = {
     boatsTypes: [],
     guests: 0,
     minPrice: 0,
-    maxPrice: 0
+    maxPrice: 10000
 }
 
 const Filter = ({onClose}) => {

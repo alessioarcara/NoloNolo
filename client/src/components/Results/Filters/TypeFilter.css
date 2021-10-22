@@ -1,0 +1,51 @@
+.container-type {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+.label {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.325s ease;
+}
+
+div:nth-child(1) > .label, div:nth-child(4) > .label {
+    padding: 0.3rem 0.3rem;
+}
+
+div:nth-child(2) > .label, div:nth-child(3) > .label {
+    padding: 0.5rem 1.6rem;
+}
+
+.label svg path, .label svg line{
+    stroke: rgba(0, 0, 0, 0.5);
+    transition: all 0.325s ease;
+}
+
+/*
+* Permettiamo la visualizzazione checked del label nascondendo quello del Checkbox,
+* quindi modifichiamo l'elemento immediatamente successivo ad un checkbox che un questo caso
+* è proprio un label
+*/
+input[type=checkbox]:checked + .label svg path,
+input[type=checkbox]:checked + .label svg line {
+    stroke: #000;
+}
+
+input[type=checkbox]:checked + .label {
+    border: 1px solid #000;
+}
+
+@media only screen and (max-width: 650px) {
+    .container-type {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

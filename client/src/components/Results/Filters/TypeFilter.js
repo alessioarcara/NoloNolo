@@ -1,6 +1,8 @@
 import React from "react";
 import {boats} from "../../../helpers/elements";
 import {MANAGE_BOATS} from "../../../helpers/constants";
+import "./TypeFilter.css";
+import SearchIcon from "../../UI/icons/MenuIcons/SearchIcon";
 
 const TypeFilter = ({dispatch, types}) => {
     const onCheckHandler = (typeName) => {
@@ -10,7 +12,7 @@ const TypeFilter = ({dispatch, types}) => {
     return (
         <>
             <p className='filter-subtitle'>Scegli la barca che vuoi noleggiare:</p>
-            <div style={{display: "flex", flexDirection: "column", gap: "1rem"}}>
+            <div className='container-type'>
                 {
                     boats.map(boat => (
                         <div key={boat.id}>
@@ -24,7 +26,7 @@ const TypeFilter = ({dispatch, types}) => {
                                 */
                                 checked={types.some(type => type === boat.name)}
                             />
-                            <label htmlFor={boat.id}> {boat.name}</label>
+                            <label className='label' htmlFor={boat.id}>{boat.avatar}</label>
                         </div>
                     ))
                 }

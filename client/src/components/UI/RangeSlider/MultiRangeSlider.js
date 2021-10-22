@@ -12,7 +12,7 @@ const changeValue = (a, b) => {
     return {a, b}
 }
 
-const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue = 0, maxValue = 10000, size = 1}) => {
+const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, size = 1}) => {
     /* Settaggio valori min e max */
     const {a: min, b: max} = changeValue(minValue, maxValue)
 
@@ -40,23 +40,23 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue = 0, maxValue 
     * dello slider green grazie al valore di width
     */
     useEffect(() => {
-        const minPercent = getPercentage(minPrice);
-        const maxPercent = getPercentage(maxValRef.current);
-
-        if (range.current) {
-            range.current.style.left = `${minPercent}%`;
-            range.current.style.width = `${maxPercent - minPercent}%`;
-        }
+        // const minPercent = getPercentage(minPrice);
+        // const maxPercent = getPercentage(maxValRef.current);
+        //
+        // if (range.current) {
+        //     range.current.style.left = `${minPercent}%`;
+        //     range.current.style.width = `${maxPercent - minPercent}%`;
+        // }
     }, [minPrice, getPercentage]);
 
     useEffect(() => {
-        const minPercent = getPercentage(minValRef.current);
-        const maxPercent = getPercentage(maxPrice);
-
-        if (range.current) {
-            range.current.style.right = `${maxPercent}%`;
-            range.current.style.width = `${maxPercent - minPercent}%`;
-        }
+        // const minPercent = getPercentage(minValRef.current);
+        // const maxPercent = getPercentage(maxPrice);
+        //
+        // if (range.current) {
+        //     range.current.style.right = `${maxPercent}%`;
+        //     range.current.style.width = `${maxPercent - minPercent}%`;
+        // }
     }, [maxPrice, getPercentage]);
 
 
@@ -72,7 +72,7 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue = 0, maxValue 
                     dispatch({type: MANAGE_MIN_PRICE, payload: value})
                     minValRef.current = value;
                 }}
-                className='point point-left'
+                className={`point-left ${min === minPrice ? 'point default-point' : 'point'}`}
             />
             <input
                 type='range'
@@ -84,12 +84,12 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue = 0, maxValue 
                     dispatch({type: MANAGE_MAX_PRICE, payload: value})
                     maxValRef.current = value;
                 }}
-                className='point point-right'
+                className={`point-right ${max === maxPrice ? 'point default-point' : 'point'}`}
             />
 
             {/* Creazione barra per lo slider con doppi pollici e doppio slider */}
             <div className="slider">
-                <div className="slider-track" />
+                {/*<div className="slider-track" />*/}
                 <div ref={range} className="slider-range" />
                 <div className="left-value">{formatNumber(minPrice)}</div>
                 <div className="right-value">{formatNumber(maxPrice)}</div>

@@ -22,17 +22,14 @@ const Navbar = () => {
     return (
         <nav className='nav'>
             <header className='nav-header'>
-                <div className='nav-brand'>
-                    <button
-                        type='button'
-                        className='btn-back'
-                        onClick={backPage}
-                    >
-                        <BackIcon className='nav-icon'/>
-                    </button>
-                    <img src={logo} alt='logo' className='nav-logo'/>
-                    <h4>51+ barche trovate</h4>
-                </div>
+                <button
+                    type='button'
+                    className='btn-back'
+                    onClick={backPage}
+                >
+                    <BackIcon className='nav-icon'/>
+                </button>
+                <h4 className='subtitle'>51 barche trovate</h4>
                 <button
                     type='button'
                     className='btn-filters'
