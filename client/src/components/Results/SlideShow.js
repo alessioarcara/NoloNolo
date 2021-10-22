@@ -8,7 +8,7 @@ import Images from "./Images";
 import SlideShowDots from "./SlideShowDots";
 
 const SlideShow = props => {
-    const [isClicked, setIsClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(props.advIsFavorite);
     const [index, setIndex] = useState(0);
     const images = props.images;
 

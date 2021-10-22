@@ -1,5 +1,5 @@
 import classes from "./SelectDates.module.css";
-import SearchActionButtons from "./SearchActionButtons";
+import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 import BackIcon from "../../UI/icons/BackIcon";
 import SearchDatePicker from "./SearchDatePicker";
 import {useCallback} from "react";
@@ -17,7 +17,7 @@ const SelectDates = ({moveClickHandler}) => {
 
     return (
         <div className={classes[`datepicker-container`]}>
-            <SearchActionButtons
+            <ActionButtons
                 actionClassName={classes[`actions-top`]}
                 firstButtonClassName={classes[`btn-back`]}
                 firstButtonClickHandler={moveClickHandler}
@@ -27,7 +27,7 @@ const SelectDates = ({moveClickHandler}) => {
                 secondButtonText='Cancella'
             />
             <SearchDatePicker/>
-            <SearchActionButtons
+            <ActionButtons
                 actionClassName={classes[`actions-bottom`]}
                 firstButtonClassName={classes[`btn-skip`]}
                 firstButtonClickHandler={skipClickHandler}

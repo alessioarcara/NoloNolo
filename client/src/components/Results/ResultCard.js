@@ -4,7 +4,7 @@ import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "./SlideShow";
 import {useStore} from "../../hooks-store/store";
 
-const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFare }) => {
+const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite }) => {
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
         [reviews]);
@@ -14,7 +14,7 @@ const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFa
     const toggleFavoritesStatusHandler = () => {
         dispatch(
             'TOGGLE_FAV',
-            { id, images, model, description, dailyFee, reviews, totalFare }
+            { id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite: true }
         )
     }
 
@@ -24,6 +24,7 @@ const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFa
                 <SlideShow
                     key={id}
                     images={images}
+                    advIsFavorite={advIsFavorite}
                     onToggleFavoritesStatus={toggleFavoritesStatusHandler}
                 />
                 <div className={classes.adapter}>

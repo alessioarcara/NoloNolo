@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../UI/Button/Button";
+import Button from "../Button/Button";
 
-const SearchActionButtons = props => {
+const ActionButtons = props => {
     const {
         actionClassName,
         firstButtonClassName,
@@ -23,4 +23,4 @@ const SearchActionButtons = props => {
     )
 }
 
-export default SearchActionButtons;
+export default ActionButtons;

@@ -20,6 +20,7 @@ const FavoritesPage = () => {
                 dailyFee={userFav.dailyFee}
                 totalFare={+userFav.missingDays * +userFav.dailyFee}
                 reviews={userFav.reviews}
+                advIsFavorite={userFav.advIsFavorite}
             />)
     }
 

@@ -1,5 +1,5 @@
 import PlaceCard from "./PlaceCard";
-import classes from './RecommendedPlaces.module.css';
+import classes from './FeaturedPlaces.module.css';
 import {useCallback, useState} from "react";
 import {circularSlice} from "../../../helpers/utils";
 import LeftArrowIcon from "../../UI/icons/LeftArrowIcon";
@@ -8,7 +8,7 @@ import RightArrowIcon from "../../UI/icons/RightArrowIcon";
 
 const places = ['Campania', 'Liguria', 'Sardegna', 'Sicilia', 'Toscana', 'Puglia']
 
-const RecommendedPlaces = () => {
+const FeaturedPlaces = () => {
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(places.length - 1)
 
@@ -23,7 +23,7 @@ const RecommendedPlaces = () => {
     }, [])
 
     return (
-        <>
+        <section>
             <div className="subtitle">Naviga nelle nostre località</div>
             <div
                 className={classes.list}>
@@ -36,8 +36,8 @@ const RecommendedPlaces = () => {
                 <div onClick={leftClickHandler} className={classes['left-button']}><LeftArrowIcon/></div>
                 <div onClick={rightClickHandler} className={classes['right-button']}><RightArrowIcon/></div>
             </div>
-        </>
+        </section>
     );
 };
 
-export default RecommendedPlaces;
+export default FeaturedPlaces;
