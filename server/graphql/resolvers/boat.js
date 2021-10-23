@@ -3,7 +3,8 @@ const {transformBoat} = require("./merge");
 
 module.exports = {
     boats: async args => {
-        const {where, skip, take} = args.filter
+        const {where} = args.filter
+        const {skip, take} = args
         try {
             const boats = await Boat.aggregate([
                 {$facet: {

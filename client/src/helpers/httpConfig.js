@@ -33,8 +33,8 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
 exports.body_boats = ({where, skip}) => {
     return {
         query: `
-           query($filter: BoatFilter!) {
-              boats(filter: $filter) {
+           query($filter: BoatFilter! $skip: Int) {
+              boats(filter: $filter, skip: $skip) {
                  _id
                  model
                  hasAdvertisement {
@@ -48,7 +48,7 @@ exports.body_boats = ({where, skip}) => {
               }
            }
         `,
-        variables: {filter: {where, skip}}
+        variables: {filter: {where}, skip}
     }
 };
 exports.body_search = (contains) => {

@@ -26,7 +26,7 @@ div:nth-child(2) > .label, div:nth-child(3) > .label {
 }
 
 .label svg path, .label svg line{
-    stroke: rgba(0, 0, 0, 0.5);
+    fill: rgba(0, 0, 0, 0.5);
     transition: all 0.325s ease;
 }
 
@@ -37,7 +37,7 @@ div:nth-child(2) > .label, div:nth-child(3) > .label {
 */
 input[type=checkbox]:checked + .label svg path,
 input[type=checkbox]:checked + .label svg line {
-    stroke: #000;
+    fill: #000;
 }
 
 input[type=checkbox]:checked + .label {

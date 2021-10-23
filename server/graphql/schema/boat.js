@@ -28,8 +28,12 @@ const boatType = `
         
         input BoatFilter {
             where: String
-            skip: Int
-            take: Int = 10
+            from: String
+            to: String
+            boatTypes: [BoatType!]
+            minPrice: Int
+            maxPrice: Int
+            maxCapacity: Int
         }
         
         enum BoatType {

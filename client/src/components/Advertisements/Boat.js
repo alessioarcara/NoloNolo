@@ -1,12 +1,14 @@
-import React, {useState, useCallback} from "react"
+import React, {useState, useCallback, useContext} from "react"
 import classes from './Boat.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
+import AuthContext from "../../store/auth-context";
 
 const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite }) => {
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
+    const {isLoggedIn} = useContext(AuthContext)
 
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
@@ -25,13 +27,13 @@ const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, ad
     return (
         <>
             <div className={classes.card}>
-                <SlideShow
-                    images={images}
-                >
+                <SlideShow images={images}>
+                    {isLoggedIn &&
                     <div onClick={toggleFavoritesStatusHandler}
                          className={isFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
                         <HeartIcon className={classes.heart}/>
                     </div>
+                    }
                 </SlideShow>
                 <div className={classes.adapter}>
                     <h3 className={classes['card-title']}>{model}</h3>
