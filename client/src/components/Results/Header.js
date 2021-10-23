@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import './Navbar.css';
+import classes from './Header.module.css';
 import BackIcon from "../UI/icons/BackIcon";
 import {useHistory} from "react-router-dom";
 import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
 
-const Navbar = () => {
+const Header = () => {
     /* useState per gestire la visualizzazione del menù */
     const [show, setShow] = useState(false)
 
@@ -23,12 +23,12 @@ const Navbar = () => {
             <header className='nav-header'>
                 <button
                     type='button'
-                    className='btn-back'
+                    className={classes['btn-back']}
                     onClick={backPage}
                 >
                     <BackIcon className='nav-icon'/>
                 </button>
-                <h4 className='subtitle'>51 barche trovate</h4>
+                <div className='subtitle'>51 barche trovate</div>
                 <button
                     type='button'
                     className='btn-filters'
@@ -47,4 +47,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default Header;

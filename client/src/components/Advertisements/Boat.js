@@ -1,9 +1,12 @@
-import React, {useCallback} from "react"
-import classes from './ResultCard.module.css';
+import React, {useState, useCallback} from "react"
+import classes from './Boat.module.css';
 import StarIcon from "../UI/icons/StarIcon";
-import SlideShow from "./SlideShow";
+import SlideShow from "../UI/SlideShow/SlideShow";
+import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 
-const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFare }) => {
+const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare }) => {
+    const [isClicked, setIsClicked] = useState(false);
+
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
         [reviews]);
@@ -15,8 +18,12 @@ const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFa
                 <SlideShow
                     key={id}
                     images={images}
-                />
-
+                >
+                    <div onClick={() => {setIsClicked(prevState => !prevState)}}
+                         className={isClicked ? `${classes.icon} ${classes.clicked}` : classes.icon}>
+                        <HeartIcon className={classes.heart}/>
+                    </div>
+                </SlideShow>
                 <div className={classes.adapter}>
                     <h3 className={classes['card-title']}>{model}</h3>
                     <div className={classes['card-description']}>{description}</div>
@@ -36,4 +43,4 @@ const ResultCard = ({ id, images, model, description, dailyFee, reviews, totalFa
     );
 };
 
-export default ResultCard;
+export default Boat;

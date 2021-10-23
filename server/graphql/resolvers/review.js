@@ -10,7 +10,7 @@ module.exports = {
             boat.advertisement.reviews.push( { customer: req.userId, body, rating } )
             boat.save()
 
-            if (!boat) { return { publishReviewProblem: "Advertisement is still active?" } }
+            if (!boat) { return { publishReviewProblem: "Boat is still active?" } }
             const review = boat.advertisement.reviews.slice(-1)[0]
 
             return { publishReviewData: { ...review._doc, creator: review.customer } }

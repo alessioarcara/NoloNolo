@@ -1,14 +1,11 @@
 import Results from "../components/Results/Results";
-import BackIcon from "../components/UI/icons/BackIcon";
-import classes from './ResultsPage.module.css';
-import { useEffect, useMemo, useState } from "react";
-import Navbar from "../components/Results/Navbar";
-import Modal from "../components/UI/Modal/Modal";
-import TypeFilter from "../components/Results/Filters/TypeFilter";
+import { useEffect } from "react";
+import Header from "../components/Results/Header";
+import useHttp from "../hooks/use-http";
+import {body_boats} from "../helpers/httpConfig";
 
 const ResultsPage = () => {
     // const [isShow, setIsShow] = useState (false)
-    // const [allParams, setAllParams] = useState(false);
     // const [days, setDays] = useState(0);
     // const URL = useMemo(() => new URLSearchParams(window.location.search), []);
     //
@@ -35,15 +32,11 @@ const ResultsPage = () => {
 
     return (
         <>
-            <Navbar/>
-            {/*{allParams &&*/}
-            {/*<div className={classes['dates-table']}>*/}
-            {/*    <div>{start}</div>*/}
-            {/*    <div>{end}</div>*/}
-            {/*</div>*/}
-            {/*}*/}
-
-            <Results/>
+            <Header/>
+            <Results
+                boats={boats}
+                status={status}
+            />
         </>
     );
 };

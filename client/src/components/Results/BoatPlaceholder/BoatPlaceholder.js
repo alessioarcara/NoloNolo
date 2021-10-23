@@ -1,6 +1,6 @@
-import '../components/Results/Placeholder.css';
+import './BoatPlaceholder.css';
 
-export const PlaceholderConfig = () => {
+export const BoatPlaceholder = () => {
     return (
         <div className="placeholder-card">
             <figure className="img-container loading"/>

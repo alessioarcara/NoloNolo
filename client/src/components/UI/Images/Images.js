@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import classes from "./Images.module.css";
-import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Images = ({images}) => {
     const [isLoading, setIsLoading] = useState(true)
