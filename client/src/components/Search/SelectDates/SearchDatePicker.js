@@ -17,17 +17,6 @@ const SearchDatePicker = () => {
 
     return (
         <>
-            <div>
-                <ul className="days-text">
-                    <li>Su</li>
-                    <li>Mo</li>
-                    <li>Tu</li>
-                    <li>We</li>
-                    <li>Th</li>
-                    <li>Fr</li>
-                    <li>Sa</li>
-                </ul>
-            </div>
             <DatePicker
                 wrapperClassName={"input-container"}
                 selected={startDate}

@@ -3,24 +3,8 @@
     flex-direction: column;
 }
 
-.btn-filter, .btn-clear {
-    align-self: center;
-}
-
-.btn-filter:hover, .btn-clear:hover {
-    color: white;
-    background-color: #FF2677;
-}
-
-.btn-clear:disabled {
-    background-color: #ccc;
-    color: #3f3f3f;
-    border-color: #ccc;
-    cursor: not-allowed;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 4rem;
-}
+/*.modal-footer {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-top: 4rem;*/
+/*}*/

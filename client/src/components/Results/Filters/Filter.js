@@ -21,7 +21,6 @@ const Filter = ({onClose}) => {
 
     const submitHandler = (evt) => {
         evt.preventDefault()
-        console.log(state)
         onClose()
     }
 
@@ -37,12 +36,12 @@ const Filter = ({onClose}) => {
             <hr/>
             <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
             <ActionButtons
-                actionClassName={classes["modal-footer"]}
-                firstButtonClassName={`btn ${classes["btn-clear"]}`}
+                // actionClassName={classes["modal-footer"]}
+                // firstButtonClassName={`btn ${classes["btn-clear"]}`}
                 firstButtonClickHandler={clearHandler}
                 firstButtonDisabled={isDisabled}
                 firstButtonText='Pulisci'
-                secondButtonClassName={`btn ${classes["btn-filter"]}`}
+                secondButtonClassName={`btn btn-primary`}
                 // secondButtonClickHandler={goForwardClickHandler}
                 secondButtonType='Submit'
                 secondButtonText='Cerca'

@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../Button/Button";
 
+import classes from "./ActionButton.module.css"
+
 const ActionButtons = props => {
     const {
         actionClassName,
@@ -11,12 +13,13 @@ const ActionButtons = props => {
         secondButtonClassName,
         secondButtonClickHandler,
         secondButtonText,
+        secondButtonDisabled,
         secondButtonType
     } = props
     return (
-        <div className={actionClassName}>
+        <div className={actionClassName || classes.actions}>
             <Button
-                className={firstButtonClassName}
+                className={firstButtonClassName || classes['btn-first']}
                 onClick={firstButtonClickHandler}
                 disabled={firstButtonDisabled}
                 type="button"
@@ -24,8 +27,9 @@ const ActionButtons = props => {
                 {firstButtonText}
             </Button>
             <Button
-                className={secondButtonClassName}
+                className={`${secondButtonClassName} ${classes['btn-second']}`}
                 onClick={secondButtonClickHandler}
+                disabled={secondButtonDisabled}
                 type={secondButtonType || "button"}
             >
                 {secondButtonText}

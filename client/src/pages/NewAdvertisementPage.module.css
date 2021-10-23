@@ -25,57 +25,22 @@
 }
 
 .right-layout > div:nth-child(2) {
-    position: fixed;
-    bottom: 6vh;
-    /*float: bottom;*/
+    position: absolute;
+    bottom: 0;
     width: 50%;
-    height: 5vh;
-    /*height: 1rem;*/
     border-top: 1px solid rgb(221, 221, 221);
-    /*float: bottom;*/
 }
 
 .right-layout > div:nth-child(2) > div {
     display: flex;
-    height: 11vh;
+    height: 20vh;
     align-items: center;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
 
 .right-layout > div:nth-child(2) > div > button {
     width: 25%;
 }
-
-.btn-forward {
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    background-color: #FF2677;
-    color: #fff;
-    border-radius: 0.5rem;
-    border: 0;
-    height: 3rem;
-    width: 10rem;
-    cursor: pointer;
-}
-
-.btn-skip {
-    height: 3rem;
-    width: 10rem;
-    text-align: left;
-    padding-left: 1.5rem;
-}
-
-.btn-skip, .btn-cancel {
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    background-color: transparent;
-    text-decoration: underline;
-    border: 0;
-    cursor: pointer;
-}
-
 
 
 @media only screen and (max-width: 768px) {

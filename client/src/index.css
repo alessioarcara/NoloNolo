@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   font-family: 'Verdana', sans-serif;
-  /*-webkit-font-smoothing: antialiased;*/
 }
 
 html {
@@ -35,15 +34,54 @@ hr {
   align-items: center;
 }
 
-/* Bottone generico */
+/* Bottone primario */
 .btn {
-  border: 1px solid #FF2677;
-  background-color: white;
-  color: #FF2677;
-  border-radius: 1rem;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 0.5rem;
   padding: 0.425rem 2rem;
   cursor: pointer;
   transition: all 0.425s ease;
+}
+
+.btn:disabled,
+.btn:disabled:hover,
+.btn:disabled:active {
+  background-color: #ccc;
+  color: #3f3f3f;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #FF2677;
+  border: 1px solid #FF2677;
+}
+
+.btn-primary:hover {
+  background-color: #FF2677;
+  color: #fff;
+  border: 0;
+}
+
+.btn-outline-primary {
+  background-color: #FF2677;
+  color: #fff;
+  border: 0;
+}
+
+.btn-outline-primary:hover {
+  background-color: white;
+  color: #FF2677;
+  border: 1px solid #FF2677;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  text-decoration: underline;
+  border: 0;
 }
 
 /* Letter spacing subtitle generico */

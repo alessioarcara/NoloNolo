@@ -1,75 +1,77 @@
 .datepicker-container {
-    overflow-y: auto;
+    /*padding-top: 0;*/
+    /*overflow-y: auto;*/
     overflow-x: hidden;
 }
 
-.actions-top {
+.header-datepicker {
     position: absolute;
     top: 0;
-    width: 100%;
-    height: 2.5rem;
     display: flex;
-    padding-top: 0.4rem;
-    padding-right: 15%;
-    justify-content: flex-end;
-    align-items: flex-end;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    align-items: center;
+    z-index: 1;
 }
 
-.btn-back {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
+.days-text {
+    font-size: 0.72em;
+    font-weight: bold;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    color: #7f7f7f;
+    border-bottom: 1px solid #efefef;
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    gap: 3.3rem;
+    width: 100%;
 }
 
-.btn-cancel {
-    width: 10rem;
-    text-align: right;
+.actions-top {
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 10rem;
+    align-items: center;
 }
 
 .actions-bottom {
     position: absolute;
     bottom: 0;
-    width: 100%;
-    height: 4rem;
-    border-top: 1px solid #efefef;
     display: flex;
-    padding-bottom: 0.4rem;
-    justify-content: center;
-    align-items: flex-end;
+    width: 100%;
+    height: 4.5rem;
+    border-top: 1px solid #efefef;
+    justify-content: space-around;
+    gap: 10rem;
+    align-items: center;
 }
 
-.btn-forward {
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-    background-color: #FF2677;
-    color: #fff;
-    border-radius: 0.5rem;
-    border: 0;
-    height: 3rem;
-    width: 10rem;
-    cursor: pointer;
-}
-
-.btn-skip {
-    height: 3rem;
-    width: 10rem;
-    text-align: left;
-    padding-left: 1.5rem;
-}
-
-.btn-skip, .btn-cancel {
-    font-size: 1em;
-    font-weight: bold;
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+.btn-back {
     background-color: transparent;
-    text-decoration: underline;
     border: 0;
-    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .header-datepicker {
+        width: 90%;
+    }
+
+    .days-text {
+        display: none;
+    }
+
+    .actions-top {
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 1px solid #efefef;
+    }
+
+    .actions-bottom {
+        width: 90%;
+    }
 }

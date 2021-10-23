@@ -13,11 +13,11 @@ const NewAdvertisementPage = () => {
                     </div>
                     <div>
                         <ActionButtons
-                            // actionClassName={classes[`actions-bottom`]}
-                            firstButtonClassName={classes[`btn-skip`]}
+                            actionClassName={classes[`actions-bottom`]}
+                            firstButtonClassName={`btn btn-secondary ${classes[`btn-skip`]}`}
                             // firstButtonClickHandler={skipClickHandler}
                             firstButtonText='Esci'
-                            secondButtonClassName={classes[`btn-forward`]}
+                            secondButtonClassName={`btn btn-outline-primary ${classes[`btn-forward`]}`}
                             // secondButtonClickHandler={goForwardClickHandler}
                             secondButtonText='Avanti'
                         />
