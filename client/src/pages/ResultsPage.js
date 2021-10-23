@@ -5,6 +5,13 @@ import useHttp from "../hooks/use-http";
 import {body_boats} from "../helpers/httpConfig";
 
 const ResultsPage = () => {
+    const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
+
+    useEffect(() => {
+        const transformData = resData => resData.boats
+        fetchResults({body: body_boats({where: "marina", skip: 0})}, transformData)
+    }, [fetchResults])
+
     // const [isShow, setIsShow] = useState (false)
     // const [days, setDays] = useState(0);
     // const URL = useMemo(() => new URLSearchParams(window.location.search), []);

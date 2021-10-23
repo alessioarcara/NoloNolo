@@ -6,7 +6,6 @@ import PriceFilter from "./PriceFilter";
 import filterReducer from "./filterReducer";
 import {CLEAR_FORM} from "../../../helpers/constants";
 
-// State iniziale per useReducer
 export const initialState = {
     boatsTypes: [],
     guests: 0,

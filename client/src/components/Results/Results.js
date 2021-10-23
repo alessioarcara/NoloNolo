@@ -5,16 +5,9 @@ import {BoatPlaceholder} from "./BoatPlaceholder/BoatPlaceholder";
 import BoatList from "../Advertisements/BoatList";
 import Pagination from "../UI/Pagination/Pagination";
 
-const Results = (props) => {
-    const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
-
-    useEffect(() => {
-        const transformData = resData => resData.boats
-        fetchResults({body: body_boats({where: "marina", skip: 0})}, transformData)
-    }, [fetchResults])
-
+const Results = ({status, boats}) => {
     return (
-        <div className={classes.wrap}>
+        <div className={classes["results-layout"]}>
             <LetSuspense
                 condition={ status === 'completed' }
                 placeholder={BoatPlaceholder}
@@ -23,9 +16,10 @@ const Results = (props) => {
             >
                 <BoatList boats={boats}/>
                 {boats &&
-                <Pagination   data={boats}
-                              pageLimit={5}
-                              dataLimit={10}
+                <Pagination
+                    data={boats}
+                    pageLimit={5}
+                    dataLimit={10}
                 />
                 }
             </LetSuspense>

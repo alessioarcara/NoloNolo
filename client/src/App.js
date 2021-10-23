@@ -30,10 +30,7 @@ function App() {
                     {isLoggedIn && <ProfilePage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
                 </Route>
-                <Route path='/results/' exact>
-                    <ResultsPage/>
-                </Route>
-                <Route path='/results/:id'>
+                <Route path='/search'>
                     <ResultsPage/>
                 </Route>
                 <Route path='*'>

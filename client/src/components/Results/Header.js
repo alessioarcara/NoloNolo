@@ -18,32 +18,35 @@ const Header = () => {
         history.push('/')
     }
 
+    const showHandler = () => {
+        setShow(prevState => !prevState)
+    }
+
     return (
-        <nav className='nav'>
-            <header className='nav-header'>
+        <>
+            <header className={classes['results-header']}>
                 <button
                     type='button'
                     className={classes['btn-back']}
                     onClick={backPage}
                 >
-                    <BackIcon className='nav-icon'/>
+                    <BackIcon className={classes['results-header-icon']}/>
                 </button>
                 <div className='subtitle'>51 barche trovate</div>
                 <button
                     type='button'
-                    className='btn-filters'
-                    onClick={() => setShow (true)}
+                    className={classes['btn-filters']}
+                    onClick={showHandler}
                 >
                     <FiltersIcon/>
                 </button>
             </header>
-
             {show &&
-                <Modal title='Filtra i tuoi risultati' closeModalHandler={() => setShow (false)}>
-                    <Filter onClose={() => setShow (false)}/>
-                </Modal>
+            <Modal title='Filtra i tuoi risultati' closeModalHandler={showHandler}>
+                <Filter onClose={showHandler}/>
+            </Modal>
             }
-        </nav>
+        </>
     );
 };
 
