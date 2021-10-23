@@ -36,7 +36,44 @@
 }
 
 .right-layout > div:nth-child(2) > div {
-    width: 50%;
+    display: flex;
+    height: 11vh;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.right-layout > div:nth-child(2) > div > button {
+    width: 25%;
+}
+
+.btn-forward {
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    background-color: #FF2677;
+    color: #fff;
+    border-radius: 0.5rem;
+    border: 0;
+    height: 3rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+.btn-skip {
+    height: 3rem;
+    width: 10rem;
+    text-align: left;
+    padding-left: 1.5rem;
+}
+
+.btn-skip, .btn-cancel {
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    background-color: transparent;
+    text-decoration: underline;
+    border: 0;
+    cursor: pointer;
 }
 
 
