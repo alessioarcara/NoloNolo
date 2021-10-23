@@ -7,7 +7,7 @@ const Backdrop = (props) => {
     return <div className={classes.backdrop} onClick={props.onCancel} />;
 };
 
-const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
+const ModalOverlay = ({title, children, actions, onCancel, adapterSize = "desktop"}) => {
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -24,7 +24,10 @@ const ModalOverlay = ({title, children, onCancel, adapterSize = "desktop"}) => {
                 <h1>{title}</h1>
             </header>
             <section className={classes["modal-content"]}>{children}</section>
-            <span onClick={onCancel} className={classes["modal-close"]}>&times;</span>
+            <footer>
+                {actions}
+                <span onClick={onCancel} className={classes["modal-close"]}>&times;</span>
+            </footer>
         </div>
     );
 };
@@ -34,7 +37,7 @@ const Modal = (props) => {
 
     const showHandler = () => { setIsShown(false) }
 
-    if (!isShown) { return null}
+    if (!isShown) { return null }
 
     return (
         <>

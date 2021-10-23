@@ -6,6 +6,8 @@ import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
 import ResultsPage from "./pages/ResultsPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import NewAdvertisementPage from "./pages/NewAdvertisementPage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -17,10 +19,7 @@ function App() {
                     <Home/>
                 </Route>
                 <Route path='/preferiti'>
-                    <div className="centered">
-                        <h1>Preferiti</h1>
-                        <p>No favorites found.</p>
-                    </div>
+                    <FavoritesPage/>
                 </Route>
                 {!isLoggedIn &&
                 <Route path='/auth'>
@@ -32,6 +31,10 @@ function App() {
                 </Route>
                 <Route path='/search'>
                     <ResultsPage/>
+                </Route>
+                <Route path='/become-shipowner'>
+                    {isLoggedIn && <NewAdvertisementPage />}
+                    {!isLoggedIn && <Redirect to='/auth'/>}
                 </Route>
                 <Route path='*'>
                     <Redirect to='/'/>

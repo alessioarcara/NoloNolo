@@ -3,24 +3,33 @@ import classes from './Boat.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
+import {useStore} from "../../hooks-store/store";
 
-const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare }) => {
-    const [isClicked, setIsClicked] = useState(false);
+const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite }) => {
+    const [isFavorite, setIsFavorite] = useState(advIsFavorite);
 
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
         [reviews]);
 
+    const dispatch = useStore()[1]
+
+    const toggleFavoritesStatusHandler = () => {
+        dispatch(
+            'TOGGLE_FAV',
+            { _id: id, hasAdvertisement: { images, description, dailyFee, reviews}, model, totalFare, advIsFavorite: true }
+        )
+        setIsFavorite(prevState => !prevState)
+    }
 
     return (
         <>
             <div className={classes.card}>
                 <SlideShow
-                    key={id}
                     images={images}
                 >
-                    <div onClick={() => {setIsClicked(prevState => !prevState)}}
-                         className={isClicked ? `${classes.icon} ${classes.clicked}` : classes.icon}>
+                    <div onClick={toggleFavoritesStatusHandler}
+                         className={isFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
                         <HeartIcon className={classes.heart}/>
                     </div>
                 </SlideShow>

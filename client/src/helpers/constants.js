@@ -1,4 +1,4 @@
-export const GRAPHQL_API_URL = "http://localhost:3001/api"
+export const GRAPHQL_API_URL = "http://localhost:3010/api"
 
 /* Costanti per filterReducer */
 export const MANAGE_BOATS = "MANAGE_BOATS"

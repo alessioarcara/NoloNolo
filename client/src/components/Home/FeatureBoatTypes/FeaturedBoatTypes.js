@@ -1,17 +1,17 @@
-import classes from './BoatType.module.css';
-import SailBoatIcon from "../UI/icons/BoatIcons/SailBoatIcon";
-import BoatIcon from "../UI/icons/BoatIcons/BoatIcon";
-import CatamaranIcon from "../UI/icons/BoatIcons/CatamaranIcon";
-import InflatableBoatIcon from "../UI/icons/BoatIcons/InflatableBoatIcon";
+import classes from './FeaturedBoatTypes.module.css';
+import SailBoatIcon from "../../UI/icons/BoatIcons/SailBoatIcon";
+import MotorBoatIcon from "../../UI/icons/BoatIcons/MotorBoatIcon";
+import CatamaranIcon from "../../UI/icons/BoatIcons/CatamaranIcon";
+import InflatableBoatIcon from "../../UI/icons/BoatIcons/InflatableBoatIcon";
 
 
-const BoatType = () => {
+const FeaturedBoatTypes = () => {
     return (
-        <>
+        <section>
             <div className="subtitle">Scegli la tipologia di barca</div>
             <div className={classes['boat-grid']}>
                 <div className={classes.boat}>
-                    <BoatIcon/>
+                    <MotorBoatIcon/>
                     <p>Barca a motore</p>
                 </div>
                 <div className={classes.boat}>
@@ -27,8 +27,8 @@ const BoatType = () => {
                     <p>Gommone</p>
                 </div>
             </div>
-        </>
+        </section>
     );
 };
 
-export default BoatType;
+export default FeaturedBoatTypes;

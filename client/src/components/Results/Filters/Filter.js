@@ -1,10 +1,12 @@
 import React, {useReducer} from "react";
 import TypeFilter from "./TypeFilter";
-import './Filter.css';
 import PassengersFilter from "./PassengersFilter";
 import PriceFilter from "./PriceFilter";
 import filterReducer from "./filterReducer";
 import {CLEAR_FORM} from "../../../helpers/constants";
+import ActionButtons from "../../UI/ActionButtons/ActionButtons";
+
+import classes from "./Filter.module.css"
 
 export const initialState = {
     boatsTypes: [],
@@ -28,28 +30,23 @@ const Filter = ({onClose}) => {
     }
 
     return (
-        <form className='container' onSubmit={submitHandler}>
+        <form className={classes.container} onSubmit={submitHandler}>
             <TypeFilter dispatch={dispatch} types={state.boatsTypes}/>
             <hr/>
             <PassengersFilter dispatch={dispatch} guests={state.guests}/>
             <hr/>
             <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
-
-            <div className='modal-footer'>
-                <button
-                    disabled={isDisabled}
-                    className='btn btn-clear'
-                    onClick={clearHandler}
-                >
-                    Pulisci
-                </button>
-                <button
-                    className='btn btn-filter'
-                    type='submit'
-                >
-                    Cerca
-                </button>
-            </div>
+            <ActionButtons
+                actionClassName={classes["modal-footer"]}
+                firstButtonClassName={`btn ${classes["btn-clear"]}`}
+                firstButtonClickHandler={clearHandler}
+                firstButtonDisabled={isDisabled}
+                firstButtonText='Pulisci'
+                secondButtonClassName={`btn ${classes["btn-filter"]}`}
+                // secondButtonClickHandler={goForwardClickHandler}
+                secondButtonType='Submit'
+                secondButtonText='Cerca'
+            />
         </form>
     );
 }

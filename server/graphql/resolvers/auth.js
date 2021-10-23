@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail} = require("../../helpers/problemMessages");
 
-const ACCESS_EXPIRE_TIME = '60m'
+const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {
@@ -44,10 +44,7 @@ module.exports = {
             const user = await User.findOne({email});
             if (!user) { return { authProblem: userNotFound } }
 
-            console.log(password)
-
             const isEqual =  await bcrypt.compare(password, user.password)
-            console.log(isEqual)
             if (!isEqual) { return { authProblem: invalidPassword } }
 
             const accessToken = createTokens(user._id, user.email, user.count, res)
