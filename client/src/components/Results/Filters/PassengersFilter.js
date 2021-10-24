@@ -14,14 +14,14 @@ const PassengersFilter = ({guests, dispatch}) => {
     }
 
     return (
-        <>
+        <div className={'border-space'}>
             <p className='filter-subtitle'>Numero massimo di passeggeri:</p>
             <div className={classes["passengers-container"]}>
                 <button className={classes["rmv-btn"]} type='button' onClick={rmvPassenger}>&#45;</button>
                 <input className={classes["passengers-count"]} type='text' value={guests} readOnly/>
                 <button className={classes["add-btn"]} type='button' onClick={addPassenger}>&#43;</button>
             </div>
-        </>
+        </div>
     );
 }
 

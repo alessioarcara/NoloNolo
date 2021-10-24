@@ -1,5 +1,5 @@
 import LetSuspense from "../UI/LetSuspense/LetSuspense";
-import './BoatPlaceholder/BoatPlaceholder.css';
+import './BoatPlaceholder/BoatPlaceholder.module.css';
 import {BoatPlaceholder} from "./BoatPlaceholder/BoatPlaceholder";
 import BoatList from "../Advertisements/BoatList";
 import Pagination from "../UI/Pagination/Pagination";

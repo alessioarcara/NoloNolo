@@ -15,16 +15,16 @@ const FeaturedBoatTypes = () => {
                     <p>Barca a motore</p>
                 </div>
                 <div className={classes.boat}>
-                    <SailBoatIcon/>
-                    <p>Barca a vela</p>
+                    <InflatableBoatIcon/>
+                    <p>Gommone</p>
                 </div>
                 <div className={classes.boat}>
                     <CatamaranIcon/>
                     <p>Catamarano</p>
                 </div>
                 <div className={classes.boat}>
-                    <InflatableBoatIcon/>
-                    <p>Gommone</p>
+                    <SailBoatIcon/>
+                    <p>Barca a vela</p>
                 </div>
             </div>
         </section>

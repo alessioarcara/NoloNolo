@@ -6,7 +6,7 @@ import filterReducer from "./filterReducer";
 import {CLEAR_FORM} from "../../../helpers/constants";
 import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 
-import classes from "./Filter.module.css"
+import classes from "./Filter.module.css";
 
 export const initialState = {
     boatsTypes: [],
@@ -21,6 +21,7 @@ const Filter = ({onClose}) => {
 
     const submitHandler = (evt) => {
         evt.preventDefault()
+        console.log(state)
         onClose()
     }
 
@@ -31,19 +32,15 @@ const Filter = ({onClose}) => {
     return (
         <form className={classes.container} onSubmit={submitHandler}>
             <TypeFilter dispatch={dispatch} types={state.boatsTypes}/>
-            <hr/>
             <PassengersFilter dispatch={dispatch} guests={state.guests}/>
-            <hr/>
             <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
             <ActionButtons
-                // actionClassName={classes["modal-footer"]}
-                // firstButtonClassName={`btn ${classes["btn-clear"]}`}
                 firstButtonClickHandler={clearHandler}
                 firstButtonDisabled={isDisabled}
                 firstButtonText='Pulisci'
                 secondButtonClassName={`btn btn-primary`}
-                // secondButtonClickHandler={goForwardClickHandler}
                 secondButtonType='Submit'
+                secondButtonDisabled={isDisabled}
                 secondButtonText='Cerca'
             />
         </form>

@@ -7,22 +7,22 @@ import InflatableBoatIcon from "../components/UI/icons/BoatIcons/InflatableBoatI
 export const boats = [
     {
         id: uuid4(),
-        name: 'Barche a motore',
+        name: 'motorboat',
         avatar: <MotorBoatIcon/>
     },
     {
         id: uuid4(),
-        name: 'Barche a vela',
+        name: 'sailboat',
         avatar: <SailBoatIcon/>
     },
     {
         id: uuid4(),
-        name: 'Catamarani',
+        name: 'catamaran',
         avatar: <CatamaranIcon/>
     },
     {
         id: uuid4(),
-        name: 'Gommoni',
+        name: 'dinghy',
         avatar: <InflatableBoatIcon/>
     }
 ]

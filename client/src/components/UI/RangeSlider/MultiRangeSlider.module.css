@@ -29,18 +29,20 @@
 
 .point {
     pointer-events: none;
-    position: absolute;
+    position: relative;
     height: 0;
     width: 200px;
 }
 
 .point-left {
     z-index: 3;
-    left: 1.7rem;
+    left: 0.01rem;
+    transform: translateY(0.4rem);
 }
 
 .point-right {
     z-index: 4;
+    transform: translateY(0.2rem);
 }
 
 /* Settaggio pollici */
