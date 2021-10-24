@@ -17,12 +17,11 @@ const SelectDates = ({moveClickHandler, sendPlaceHandler}) => {
     },[])
 
     const skipClickHandler = useCallback(() => {
-        // ora 'search' si chiama 'results'
-        history.push(`/results?place=${place}`)
+        history.push(`/search?place=${place}`)
     }, [history, place])
 
     const goForwardClickHandler = useCallback(() => {
-        history.push(`/results?place=${place}&start=${startingDate}&end=${endingDate}`)
+        history.push(`/search?place=${place}&start=${startingDate}&end=${endingDate}`)
     }, [history, place, startingDate, endingDate])
 
     return (
