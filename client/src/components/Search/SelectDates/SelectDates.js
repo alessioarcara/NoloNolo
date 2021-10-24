@@ -3,20 +3,26 @@ import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 import BackIcon from "../../UI/icons/BackIcon";
 import SearchDatePicker from "./SearchDatePicker";
 import {useCallback} from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom/cjs/react-router-dom";
 
-const SelectDates = ({moveClickHandler}) => {
-    const history = useHistory();
+
+const SelectDates = ({moveClickHandler, sendPlaceHandler}) => {
+    const history = useHistory()
+    const place = sendPlaceHandler.split(',')[0]
+    const startingDate = ''
+    const endingDate = ''
 
     const cancelSelectionHandler = useCallback(() => {
 
-    }, [])
-    const skipClickHandler = useCallback(() => {
-        history.push("/search")
-    }, [history])
-    const goForwardClickHandler = useCallback(() => {
+    },[])
 
-    }, [])
+    const skipClickHandler = useCallback(() => {
+        history.push(`/search?place=${place}`)
+    }, [history, place])
+
+    const goForwardClickHandler = useCallback(() => {
+        history.push(`/search?place=${place}&start=${startingDate}&end=${endingDate}`)
+    }, [history, place, startingDate, endingDate])
 
     return (
         <div className={classes[`datepicker-container`]}>
