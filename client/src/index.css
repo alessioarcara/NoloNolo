@@ -17,6 +17,11 @@ hr {
   width: 100%;
 }
 
+.border-space {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+}
+
 .subtitle {
   font-family: 'Lobster', cursive;
   font-size: 1.55rem;

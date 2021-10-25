@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 input[type=checkbox] {
@@ -11,18 +11,13 @@ input[type=checkbox] {
 
 .label {
     border: 1px solid rgba(0, 0, 0, 0.5);
-    display: inline-block;
+    display: flex;
     border-radius: 2rem;
     cursor: pointer;
     transition: all 0.325s ease;
-}
-
-div:nth-child(1) > .label, div:nth-child(4) > .label {
-    padding: 0.3rem 0.3rem;
-}
-
-div:nth-child(2) > .label, div:nth-child(3) > .label {
-    padding: 0.5rem 1.6rem;
+    width: 7rem;
+    height: 5rem;
+    align-items: center;
 }
 
 .label svg path, .label svg line{
