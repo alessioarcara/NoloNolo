@@ -28,7 +28,8 @@ const boatType = `
         }
         
         input BoatFilter {
-            where: String
+            city: String
+            region: String!
             from: String
             to: String
             boatTypes: [BoatType!]

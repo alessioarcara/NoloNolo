@@ -30,7 +30,7 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
-exports.body_boats = ({where, skip}) => {
+exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice, maxPrice, skip}) => {
     return {
         query: `
            query($filter: BoatFilter! $skip: Int) {
@@ -49,7 +49,7 @@ exports.body_boats = ({where, skip}) => {
               }
            }
         `,
-        variables: {filter: {where}, skip}
+        variables: {filter: {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice}, skip}
     }
 };
 exports.body_search = (contains) => {

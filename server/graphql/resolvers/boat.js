@@ -1,12 +1,12 @@
 const Boat = require('../../models/boat');
 const {transformBoat} = require("./merge");
+const Rental = require("../../models/rental");
 
 module.exports = {
     boats: async ({filter, skip, take}) => {
-        const {where, minPrice, maxPrice} = filter
+        const {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice} = filter
 
         let pipeline = [
-            {$match: {"location.city": {$regex: `^${where}`, $options: "i"}}},
             {$facet: {
                     "Boats": [
                         {$skip: skip},
@@ -22,18 +22,37 @@ module.exports = {
             {$replaceRoot: {newRoot: "$Boats"}}
         ]
 
-        // if (minPrice ,a) {
-        //     pipeline.unshift({$match: {}})
-        // }
+        if (city) {
+            pipeline.unshift({$match: {"location.city": city }})
+        } else {
+            pipeline.unshift({$match: {"location.region": region }})
+        }
+        if (from && to) {
+            const rentalsById = await Rental.find(
+                {$and: [{fromDate: {$lte: to}}, {toDate: {$gte: from}}]},
+                {boat: 1})
+
+            const ids = rentalsById.map(item => item['boat'])
+            pipeline.unshift({$match: {"_id": { $nin: ids}}})
+        }
+        if (maxCapacity) {
+            pipeline.unshift({$match: {"maximumCapacity": {$gte: maxCapacity}}})
+        }
+        if (boatTypes) {
+            pipeline.unshift({$match: {"boatType": { $in: boatTypes}}})
+        }
+        if (minPrice) {
+            pipeline.unshift({$match: {"advertisement.dailyFee": {$gte: minPrice}}})
+        }
+        if (maxPrice) {
+            pipeline.unshift({$match: {"advertisement.dailyFee": {$lte: maxPrice}}})
+        }
 
         try {
             const boats = await Boat.aggregate(pipeline)
-            console.log(boats)
             return boats.map(transformBoat)
         } catch (err) {
-            console.log(err)
             throw new Error(`Can't find boats. ${err}`)
-
         }
     },
     addBoat: async (args, {req}) => {
