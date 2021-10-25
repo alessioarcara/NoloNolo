@@ -40,7 +40,6 @@ const Results = ({status, boats, switchPage, numberPage}) => {
                 dataCount={60}
                 setCurrentPage={switchPage}
                 currentPage={numberPage}
-                dataLimit={10}
             />
             }
         </>

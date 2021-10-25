@@ -3,10 +3,10 @@ import classes from "./Pagination.module.css"
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 
-const Pagination = ({dataCount, dataLimit, currentPage, setCurrentPage}) => {
+const Pagination = ({dataCount, dataLimit= 10, currentPage, setCurrentPage}) => {
     /* register total page number */
     const pages = Math.floor(dataCount / dataLimit)
-    const pagesGroup = pages > 3 ? 3 : pages
+    const pagesGroup = pages > 5 ? 5 : pages
 
     /* function to go next page, to go previous page and to go current page */
     const goToNextPage = () => setCurrentPage(oldPageNumber => oldPageNumber + 10);
@@ -26,7 +26,7 @@ const Pagination = ({dataCount, dataLimit, currentPage, setCurrentPage}) => {
     return (
         <div className={classes.pagination}>
             {/* prev page */}
-            <button onClick={goToPreviousPage} className={classes.prev} disabled={currentPage === 0}>
+            <button onClick={goToPreviousPage} className={classes.prev} hidden={currentPage === 0}>
                 <LeftArrowIcon/>
             </button>
             {/* current page and page number */}
@@ -42,8 +42,15 @@ const Pagination = ({dataCount, dataLimit, currentPage, setCurrentPage}) => {
                     <span>{item}</span>
                 </button>
             ))}
+            {<span>...</span>}
+            <button
+                className={`${classes.paginationItem}`}
+                onClick={changePage}
+            >
+                <span>{pages+1}</span>
+            </button>
             {/* next page */}
-            <button onClick={goToNextPage} className={classes.next} disabled={(currentPage/10) === pages}>
+            <button onClick={goToNextPage} className={classes.next} hidden={(currentPage/10) === pages}>
                 <RightArrowIcon/>
             </button>
         </div>
