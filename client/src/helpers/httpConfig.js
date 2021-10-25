@@ -37,6 +37,7 @@ exports.body_boats = ({where, skip}) => {
               boats(filter: $filter, skip: $skip) {
                  _id
                  model
+                 totalCount
                  hasAdvertisement {
                     description
                     images

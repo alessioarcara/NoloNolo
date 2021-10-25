@@ -9,6 +9,7 @@ const boatType = `
             boatType: BoatType!
             isDocked: Location!
             hasAdvertisement: Advertisement
+            totalCount: Int
         }
         
         type addBoatPayload {

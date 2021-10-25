@@ -6,7 +6,8 @@ const transformBoat = boat => {
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee)
         },
-        isDocked: boat.location
+        isDocked: boat.location,
+        totalCount: boat.totalCount
     }
 }
 

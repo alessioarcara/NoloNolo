@@ -2,26 +2,33 @@ const Boat = require('../../models/boat');
 const {transformBoat} = require("./merge");
 
 module.exports = {
-    boats: async args => {
-        const {where} = args.filter
-        const {skip, take} = args
+    boats: async ({filter, skip, take}) => {
+        const {where, minPrice, maxPrice} = filter
+
+        let pipeline = [
+            {$match: {"location.city": {$regex: `^${where}`, $options: "i"}}},
+            {$facet: {
+                    "Boats": [
+                        {$skip: skip},
+                        {$limit: take}
+                    ],
+                    "Count": [
+                        {$count: "count"}
+                    ]
+                }
+            },
+            {$unwind: "$Boats"},
+            {$addFields: {"Boats.totalCount": { $arrayElemAt:["$Count.count", 0]}}},
+            {$replaceRoot: {newRoot: "$Boats"}}
+        ]
+
+        // if (minPrice ,a) {
+        //     pipeline.unshift({$match: {}})
+        // }
+
         try {
-            const boats = await Boat.aggregate([
-                {$facet: {
-                        "Boats": [
-                            {$match: {"location.city": {$regex: `^${where}`, $options: "i"}}},
-                            {$skip: skip},
-                            {$limit: take}
-                        ],
-                        "Count": [
-                            {$count: "count"}
-                        ]
-                    }
-                },
-                {$unwind: "$Boats"},
-                {$addFields: {"Boats.Total": { $arrayElemAt:["$Count.count", 0]}}},
-                {$replaceRoot: {newRoot: "$Boats"}}
-            ])
+            const boats = await Boat.aggregate(pipeline)
+            console.log(boats)
             return boats.map(transformBoat)
         } catch (err) {
             console.log(err)
