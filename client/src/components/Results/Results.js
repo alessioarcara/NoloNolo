@@ -37,7 +37,7 @@ const Results = ({status, boats, switchPage, numberPage}) => {
             </BoatListLayout>
             {boats &&
             <Pagination
-                dataCount={60}
+                dataCount={boats[0].totalCount}
                 setCurrentPage={switchPage}
                 currentPage={numberPage}
             />

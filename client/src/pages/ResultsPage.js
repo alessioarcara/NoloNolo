@@ -38,9 +38,11 @@ const ResultsPage = () => {
     //     }
     // }, [start, end, time]);
 
+    const resultsNumber = boats && boats[0].totalCount
+
     return (
         <>
-            <Header/>
+            <Header resultsNumber={resultsNumber}/>
             <Results
                 boats={boats}
                 status={status}
