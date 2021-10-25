@@ -8,8 +8,6 @@ const ResultsPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
 
-    console.log(currentPage)
-
     useEffect(() => {
         const transformData = resData => resData.boats
         fetchResults({body: body_boats({where: "marina", skip: currentPage})}, transformData)

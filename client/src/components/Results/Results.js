@@ -23,27 +23,27 @@ const Results = ({status, boats, switchPage, numberPage}) => {
         }
     })
 
-    console.log(boats)
-
     return (
-        <BoatListLayout>
-            {/*<LetSuspense*/}
-            {/*    condition={status === 'completed'}*/}
-            {/*    placeholder={BoatPlaceholder}*/}
-            {/*    multiplier={10}*/}
-            {/*    delay={1000}*/}
-            {/*>*/}
-            <BoatList boats={updatedBoats}/>
+        <>
+            <BoatListLayout>
+                {/*<LetSuspense*/}
+                {/*    condition={status === 'completed'}*/}
+                {/*    placeholder={BoatPlaceholder}*/}
+                {/*    multiplier={10}*/}
+                {/*    delay={1000}*/}
+                {/*>*/}
+                    <BoatList boats={updatedBoats}/>
+                {/*</LetSuspense>*/}
+            </BoatListLayout>
             {boats &&
             <Pagination
-                dataCount={37}
+                dataCount={60}
                 setCurrentPage={switchPage}
                 currentPage={numberPage}
                 dataLimit={10}
             />
             }
-            {/*</LetSuspense>*/}
-        </BoatListLayout>
+        </>
     );
 };
 

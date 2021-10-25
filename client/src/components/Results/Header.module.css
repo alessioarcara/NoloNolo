@@ -5,7 +5,12 @@
     transition: all 0.425s ease-out;
 }
 
-.btn-back:hover, .btn-filters:hover {
+.btn-filters {
+    width: 2.5rem;
+    transform: rotate(90deg);
+}
+
+.btn-back:hover {
     transform: translateX(-10%);
 }
 
