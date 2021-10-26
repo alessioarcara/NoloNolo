@@ -10,6 +10,7 @@ export const throttle = (callback, delay) => {
         }
     }
 }
+
 export const debounce = (callback, delay) => {
     let timer;
     return (...args) => {
@@ -19,13 +20,19 @@ export const debounce = (callback, delay) => {
         }, delay);
     }
 };
+
 export const circularSlice = (arr, start, end) => {
     return end < start ? arr.slice(start).concat(arr.slice(0, end + 1)) : arr.slice(start, end + 1)
 }
+
 /* Settiamo lo style come valuta e prendiamo la valuta Euro. de-DE sta per Germania */
-export const formatNumber = (number) => {
-    return new Intl.NumberFormat('de-DE', {
+export const formatNumber = (number) =>
+    new Intl.NumberFormat('de-DE', {
         style: 'currency',
         currency: 'EUR'
     }).format(number);
-};
+
+/* Settiamo la data da dd/mm/yyyy a yyyy-mm-dd */
+export const formatDate = (date) =>
+    new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
+        .toISOString().split('T')[0]

@@ -16,18 +16,22 @@
 }
 
 .days-text {
-    font-size: 1.1em;
+    font-size: 0.7em;
     font-weight: bold;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     color: #7f7f7f;
     border-bottom: 1px solid #efefef;
-    padding-left: 0;
     list-style-type: none;
     display: flex;
     height: 2rem;
     justify-content: center;
-    gap: 2.1rem;
-    width: 100%;
+    padding-left: 0;
+    gap: 1.5rem;
+    width: 95%;
+}
+
+.days-text li {
+    margin: 0;
 }
 
 .actions-top {
@@ -47,13 +51,23 @@
     height: 4.5rem;
     border-top: 1px solid #efefef;
     justify-content: space-around;
-    gap: 10rem;
+    gap: 8rem;
     align-items: center;
 }
 
 .btn-back {
     background-color: transparent;
     border: 0;
+}
+
+@media (max-width: 768px) {
+    .btn-skip {
+        width: 100%;
+        padding-left: 3rem;
+    }
+    .btn-forward {
+        margin-right: 3rem;
+    }
 }
 
 @media (min-width: 768px) {
