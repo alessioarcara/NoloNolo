@@ -18,14 +18,18 @@ const Pagination = ({dataCount, dataLimit= 10, currentPage, setCurrentPage}) => 
     }
 
     const getPaginationGroup = useCallback(() => {
-        const start = Math.floor(currentPage/10)
-        let pageNumberList = Array(pagesGroup).fill().map((_, idx) => start + idx + 1);
+        const pageNumberList = new Array(pagesGroup).fill().map(
+            (_, idx) => {
+                return currPage === lastPage - 1 && lastPage - 1 > 1 ? currPage + idx - 1
+                     : currPage === 0 ? currPage + idx + 1
+                     : currPage + idx
+            }
+        );
 
-        if (start < (pages+1)/2) {
-            return pageNumberList.concat(["...", (pages + 1)])
-        }
-        return [1, "..."].concat(pageNumberList)
-        }, [currentPage, pages, pagesGroup]);
+        return lastPage <= pagesGroup ? pageNumberList
+            : (currPage < (lastPage) / 2) ? pageNumberList.concat(["...", (lastPage)])
+            : [1, "..."].concat(pageNumberList)
+    }, [currPage, lastPage, pagesGroup]);
 
     return (
         <div className={classes.pagination}>
