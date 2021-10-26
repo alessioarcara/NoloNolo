@@ -26,6 +26,7 @@ const SearchDatePicker = ({start, end, onChangeStartDate, onChangeEndDate}) => {
                 endDate={end}
                 onChange={handleDateChange}
                 monthsShown={2}
+                calendarStartDay={1}
                 selectsRange
                 inline
             />

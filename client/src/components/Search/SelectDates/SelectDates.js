@@ -19,13 +19,13 @@ const SelectDates = ({moveClickHandler, changeStartDateHandler, changeEndDateHan
                     secondButtonText='Cancella'
                 />
                 <ul className={classes["days-text"]}>
-                    <li>dom</li>
                     <li>lun</li>
                     <li>mar</li>
                     <li>mer</li>
                     <li>gio</li>
                     <li>ven</li>
                     <li>sab</li>
+                    <li>dom</li>
                 </ul>
             </div>
             <SearchDatePicker
