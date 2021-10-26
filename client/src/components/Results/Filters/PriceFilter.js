@@ -2,7 +2,7 @@ import React from "react";
 import MultiRangeSlider from "../../UI/RangeSlider/MultiRangeSlider";
 import classes from './PriceFilter.module.css';
 
-const PriceFilter = ({minPrice, maxPrice, dispatch}) => {
+const PriceFilter = ({minPrice, maxPrice, maxValue, dispatch}) => {
     return (
         <>
             <p className={`'filter-subtitle' ${classes.space}`}>Scegli la fascia di prezzo giornaliera:</p>
@@ -10,9 +10,8 @@ const PriceFilter = ({minPrice, maxPrice, dispatch}) => {
                 minPrice={minPrice}
                 maxPrice={maxPrice}
                 dispatch={dispatch}
-                minValue={0}
-                maxValue={10000}
-                size={1000}
+                maxValue={maxValue}
+                size={50}
             />
         </>
     );

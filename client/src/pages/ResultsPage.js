@@ -5,13 +5,23 @@ import useHttp from "../hooks/use-http";
 import {body_boats} from "../helpers/httpConfig";
 
 const ResultsPage = () => {
+    const [filters, setFilters] = useState({})
     const [currentPage, setCurrentPage] = useState(0);
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
 
     useEffect(() => {
         const transformData = resData => resData.boats
-        fetchResults({body: body_boats({region: "Emilia-Romagna", skip: currentPage, take: 20})}, transformData)
-    }, [fetchResults, currentPage])
+        fetchResults({body: body_boats(
+            {
+                region: "Emilia-Romagna",
+                skip: currentPage,
+                boatTypes: filters.boatTypes,
+                minCapacity: filters.minCapacity,
+                minPrice: filters.minPrice,
+                maxPrice: filters.maxPrice,
+                take: 20}
+            )}, transformData)
+    }, [fetchResults, currentPage, filters])
 
     // const [isShow, setIsShow] = useState (false)
     // const [days, setDays] = useState(0);
@@ -38,18 +48,25 @@ const ResultsPage = () => {
     //     }
     // }, [start, end, time]);
 
-    const resultsNumber = !boats ? false :
+    const boatsNumber = !boats ? false :
                           boats.length  > 0 ? boats[0].totalCount :"Nessun risultato"
+
+    const boatsMaxPrice = boats && boats.length > 0 ? boats[0].maxPrice: 10000
 
     return (
         <>
-            <Header resultsNumber={resultsNumber}/>
+            <Header
+                boatsNumber={boatsNumber}
+                boatsMaxPrice={boatsMaxPrice}
+                onSubmitFilters={setFilters}
+            />
             <Results
                 boats={boats}
                 status={status}
                 switchPage={setCurrentPage}
                 numberPage={currentPage}
             />
+            <div style={{marginBottom:"5rem"}}/>
         </>
     );
 };

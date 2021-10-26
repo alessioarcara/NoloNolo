@@ -4,28 +4,45 @@ const Rental = require("../../models/rental");
 
 module.exports = {
     boats: async ({filter, skip, take}) => {
-        const {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice} = filter
+        const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
 
         let pipeline = [
-            {$facet: {
+            {
+                $facet: {
                     "Boats": [
                         {$skip: skip},
                         {$limit: take}
                     ],
                     "Count": [
                         {$count: "count"}
-                    ]
+                    ],
+                    "MinPrice": [
+                        {
+                            $group:
+                                {
+                                    "_id": null,
+                                    "minPrice": {$min: "$advertisement.dailyFee"},
+                                    "maxPrice": {$max: "$advertisement.dailyFee"}
+                                }
+                        }
+                    ],
                 }
             },
             {$unwind: "$Boats"},
-            {$addFields: {"Boats.totalCount": { $arrayElemAt:["$Count.count", 0]}}},
+            {
+                $addFields: {
+                    "Boats.totalCount": {$arrayElemAt: ["$Count.count", 0]},
+                    "Boats.minPrice": {$arrayElemAt: ["$MinPrice.minPrice", 0]},
+                    "Boats.maxPrice": {$arrayElemAt: ["$MinPrice.maxPrice", 0]}
+                }
+            },
             {$replaceRoot: {newRoot: "$Boats"}}
         ]
 
         if (city) {
-            pipeline.unshift({$match: {"location.city": city }})
+            pipeline.unshift({$match: {"location.city": city}})
         } else {
-            pipeline.unshift({$match: {"location.region": region }})
+            pipeline.unshift({$match: {"location.region": region}})
         }
         if (from && to) {
             const rentalsById = await Rental.find(
@@ -33,13 +50,13 @@ module.exports = {
                 {boat: 1})
 
             const ids = rentalsById.map(item => item['boat'])
-            pipeline.unshift({$match: {"_id": { $nin: ids}}})
+            pipeline.unshift({$match: {"_id": {$nin: ids}}})
         }
-        if (maxCapacity) {
-            pipeline.unshift({$match: {"maximumCapacity": {$gte: maxCapacity}}})
+        if (minCapacity) {
+            pipeline.unshift({$match: {"maximumCapacity": {$gte: minCapacity}}})
         }
         if (boatTypes) {
-            pipeline.unshift({$match: {"boatType": { $in: boatTypes}}})
+            pipeline.unshift({$match: {"boatType": {$in: boatTypes}}})
         }
         if (minPrice) {
             pipeline.unshift({$match: {"advertisement.dailyFee": {$gte: minPrice}}})

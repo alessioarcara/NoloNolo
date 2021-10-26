@@ -10,6 +10,8 @@ const boatType = `
             isDocked: Location!
             hasAdvertisement: Advertisement
             totalCount: Int
+            minPrice: Float
+            maxPrice: Float
         }
         
         type addBoatPayload {
@@ -35,7 +37,7 @@ const boatType = `
             boatTypes: [BoatType!]
             minPrice: Int
             maxPrice: Int
-            maxCapacity: Int
+            minCapacity: Int
         }
         
         enum BoatType {

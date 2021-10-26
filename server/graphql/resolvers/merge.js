@@ -9,7 +9,9 @@ const transformBoat = boat => {
             fixedFee: parseFloat(boat.advertisement.fixedFee)
         },
         isDocked: boat.location,
-        totalCount: boat.totalCount
+        totalCount: boat.totalCount,
+        minPrice: parseFloat(boat.minPrice),
+        maxPrice: parseFloat(boat.maxPrice)
     }
 }
 

@@ -1,21 +1,21 @@
-import React from "react";
-import './PassengersFilter.module.css';
+import React, {useCallback} from "react";
+import './CapacityFilter.module.css';
 import {ADD_GUEST, REMOVE_GUEST} from "../../../helpers/constants";
 
-import classes from "./PassengersFilter.module.css"
+import classes from "./CapacityFilter.module.css"
 
-const PassengersFilter = ({guests, dispatch}) => {
-    const addPassenger = () => {
+const CapacityFilter = ({guests, dispatch}) => {
+    const addPassenger = useCallback(() => {
         dispatch({type: ADD_GUEST})
-    }
+    }, [dispatch])
 
-    const rmvPassenger = () => {
+    const rmvPassenger = useCallback(() => {
         dispatch({type: REMOVE_GUEST})
-    }
+    }, [dispatch])
 
     return (
         <div className={'border-space'}>
-            <p className='filter-subtitle'>Numero massimo di passeggeri:</p>
+            <p className='filter-subtitle'>Numero minimo di passeggeri:</p>
             <div className={classes["passengers-container"]}>
                 <button className={classes["rmv-btn"]} type='button' onClick={rmvPassenger}>&#45;</button>
                 <input className={classes["passengers-count"]} type='text' value={guests} readOnly/>
@@ -25,4 +25,4 @@ const PassengersFilter = ({guests, dispatch}) => {
     );
 }
 
-export default PassengersFilter;
+export default CapacityFilter;

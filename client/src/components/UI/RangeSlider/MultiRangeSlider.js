@@ -13,7 +13,7 @@ const changeValue = (a, b) => {
     return {a, b}
 }
 
-const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, size = 1}) => {
+const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue=0, maxValue, size = 1}) => {
     /* Settaggio valori min e max */
     const {a: min, b: max} = changeValue(minValue, maxValue)
 

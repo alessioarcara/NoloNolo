@@ -30,7 +30,7 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
-exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
+exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
            query($filter: BoatFilter! $skip: Int $take: Int) {
@@ -38,6 +38,9 @@ exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice,
                  _id
                  model
                  totalCount
+                 maximumCapacity
+                 minPrice
+                 maxPrice
                  hasAdvertisement {
                     description
                     images
@@ -49,7 +52,7 @@ exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice,
               }
            }
         `,
-        variables: {filter: {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice}, skip, take}
+        variables: {filter: {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice}, skip, take}
     }
 };
 exports.body_search = (contains) => {

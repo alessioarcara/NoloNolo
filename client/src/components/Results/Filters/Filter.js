@@ -1,46 +1,40 @@
-import React, {useReducer} from "react";
+import React, {useCallback, useReducer} from "react";
 import TypeFilter from "./TypeFilter";
-import PassengersFilter from "./PassengersFilter";
+import CapacityFilter from "./CapacityFilter";
 import PriceFilter from "./PriceFilter";
-import filterReducer from "./filterReducer";
-import {CLEAR_FORM} from "../../../helpers/constants";
+import {CLEAR_FORM, NUMBER_BOAT_TYPES} from "../../../helpers/constants";
 import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 
 import classes from "./Filter.module.css";
+import filterReducer, {initialState} from "./filterReducer";
 
-export const initialState = {
-    boatsTypes: [],
-    guests: 0,
-    minPrice: 0,
-    maxPrice: 10000
-}
-
-const Filter = ({onClose}) => {
+const Filter = ({onSubmitFilters, onClose, boatsMaxPrice}) => {
     const [state, dispatch] = useReducer(filterReducer, initialState);
-    const isDisabled = state.boatsTypes.length === 0 && state.guests === 0
+    const isDisabled =
+        state.boatTypes.length === NUMBER_BOAT_TYPES && state.minCapacity === 0
+        && state.maxPrice === boatsMaxPrice && state.minPrice === 0
 
-    const submitHandler = (evt) => {
+    const submitHandler = evt => {
         evt.preventDefault()
-        console.log(state)
+        onSubmitFilters(state)
         onClose()
-    }
+    };
 
-    const clearHandler = () => {
-        dispatch({type: CLEAR_FORM})
-    }
+    const clearHandler = useCallback(() => {
+        dispatch({type: CLEAR_FORM, payload: boatsMaxPrice})
+    }, [dispatch, boatsMaxPrice])
 
     return (
         <form className={classes.container} onSubmit={submitHandler}>
-            <TypeFilter dispatch={dispatch} types={state.boatsTypes}/>
-            <PassengersFilter dispatch={dispatch} guests={state.guests}/>
-            <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} dispatch={dispatch}/>
+            <TypeFilter dispatch={dispatch} types={state.boatTypes}/>
+            <CapacityFilter dispatch={dispatch} guests={state.minCapacity}/>
+            <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} maxValue={boatsMaxPrice} dispatch={dispatch}/>
             <ActionButtons
                 firstButtonClickHandler={clearHandler}
                 firstButtonDisabled={isDisabled}
                 firstButtonText='Pulisci'
                 secondButtonClassName={`btn btn-primary`}
                 secondButtonType='Submit'
-                secondButtonDisabled={isDisabled}
                 secondButtonText='Cerca'
             />
         </form>

@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {boats} from "../../../helpers/elements";
 import {MANAGE_BOATS} from "../../../helpers/constants";
 import classes from "./TypeFilter.module.css";
 
 const TypeFilter = ({dispatch, types}) => {
-    const onCheckHandler = (typeName) => {
+    const onCheckHandler = useCallback((typeName) => {
         dispatch({type: MANAGE_BOATS, payload: typeName})
-    }
+    }, [dispatch])
 
     return (
         <div className={'border-space'} style={{borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
