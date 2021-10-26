@@ -6,7 +6,7 @@ import {CLEAR_FORM, NUMBER_BOAT_TYPES} from "../../../helpers/constants";
 import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 
 import classes from "./Filter.module.css";
-import filterReducer, {initialState} from "./filterReducer";
+import {filterReducer, initialState} from "../../../reducers/filterReducer";
 
 const Filter = ({onSubmitFilters, onClose, boatsMaxPrice}) => {
     const [state, dispatch] = useReducer(filterReducer, initialState);

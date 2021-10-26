@@ -33,7 +33,7 @@ const SelectPlaces = ({closeModalHandler, moveClickHandler}) => {
     if (status === "completed" && !error && locations.length > 0) {
         content = locations.map(location =>
             <Location
-                onClick={moveClickHandler}
+                onClick={moveClickHandler.bind(this, location.city, location.region )}
                 key={location.city}
                 city={location.city}
                 region={location.region}

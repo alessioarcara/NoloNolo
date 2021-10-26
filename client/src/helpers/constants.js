@@ -9,3 +9,8 @@ export const MANAGE_MIN_PRICE = "MANAGE_MIN_PRICE"
 export const MANAGE_MAX_PRICE = "MANAGE_MAX_PRICE"
 export const CLEAR_FORM = "CLEAR_FORM"
 export const NUMBER_BOAT_TYPES = 4
+export const SWITCH_SEARCH = "SWITCH_SEARCH"
+export const CHANGE_START_DATE = "CHANGE_START_DATE"
+export const CHANGE_END_DATE = "CHANGE_END_DATE"
+export const CLEAR_DATES = "CLEAR_DATES"
+
