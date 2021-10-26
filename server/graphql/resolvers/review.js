@@ -8,7 +8,7 @@ module.exports = {
             const boat = await Boat.findOne({ _id: boatId } )
             console.log(boat.advertisement.reviews)
             boat.advertisement.reviews.push( { customer: req.userId, body, rating } )
-            boat.save()
+            await boat.save()
 
             if (!boat) { return { publishReviewProblem: "Boat is still active?" } }
             const review = boat.advertisement.reviews.slice(-1)[0]

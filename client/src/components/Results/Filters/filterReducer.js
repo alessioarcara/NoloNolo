@@ -1,12 +1,18 @@
 import {
-    ADD_GUEST,
+    ADD_GUEST, CLEAR_FORM,
     INITIAL_PRICE,
     MANAGE_BOATS,
     MANAGE_MAX_PRICE,
     MANAGE_MIN_PRICE,
     REMOVE_GUEST
 } from "../../../helpers/constants";
-import { initialState } from "./Filter";
+
+export const initialState = {
+    boatTypes: ['motorboat', 'sailboat', 'catamaran', 'dinghy'],
+    minCapacity: 0,
+    minPrice: 0,
+    maxPrice: 10000
+}
 
 const filterReducer = (state, {type, payload}) => {
     /*
@@ -17,25 +23,25 @@ const filterReducer = (state, {type, payload}) => {
     if (type === MANAGE_BOATS) {
         return {
             ...state,
-            boatsTypes: (!state.boatsTypes.some(el => el === payload))
-                ? [...state.boatsTypes, payload]
-                : [...state.boatsTypes.filter(el => el !== payload)]
+            boatTypes: (!state.boatTypes.some(el => el === payload))
+                ? [...state.boatTypes, payload]
+                : [...state.boatTypes.filter(el => el !== payload)]
         }
     }
     if (type === ADD_GUEST) {
         return {
             ...state,
-            guests: state.guests + 1 > 5
-                ? state.guests
-                : state.guests + 1
+            minCapacity: state.minCapacity + 1 > 50
+                ? state.minCapacity
+                : state.minCapacity + 1
         }
     }
     if (type === REMOVE_GUEST) {
         return {
             ...state,
-            guests: state.guests - 1 < 0
-                ? state.guests
-                : state.guests - 1
+            minCapacity: state.minCapacity - 1 < 0
+                ? state.minCapacity
+                : state.minCapacity - 1
         }
     }
     if (type === INITIAL_PRICE) {
@@ -54,6 +60,14 @@ const filterReducer = (state, {type, payload}) => {
     if (type === MANAGE_MAX_PRICE) {
         return {
             ...state,
+            maxPrice: payload
+        }
+    }
+    if (type === CLEAR_FORM) {
+        return {
+            boatTypes: ['motorboat', 'sailboat', 'catamaran', 'dinghy'],
+            minCapacity: 0,
+            minPrice: 0,
             maxPrice: payload
         }
     }

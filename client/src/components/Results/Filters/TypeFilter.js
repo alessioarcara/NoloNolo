@@ -1,17 +1,17 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {boats} from "../../../helpers/elements";
 import {MANAGE_BOATS} from "../../../helpers/constants";
-import "./TypeFilter.css";
+import classes from "./TypeFilter.module.css";
 
 const TypeFilter = ({dispatch, types}) => {
-    const onCheckHandler = (typeName) => {
+    const onCheckHandler = useCallback((typeName) => {
         dispatch({type: MANAGE_BOATS, payload: typeName})
-    }
+    }, [dispatch])
 
     return (
-        <>
-            <p className='filter-subtitle'>Scegli la barca che vuoi noleggiare:</p>
-            <div className='container-type'>
+        <div className={'border-space'} style={{borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
+            <p className={classes['filter-subtitle']}>Scegli la barca che vuoi noleggiare:</p>
+            <div className={classes['container-type']}>
                 {
                     boats.map(boat => (
                         <div key={boat.id}>
@@ -25,12 +25,12 @@ const TypeFilter = ({dispatch, types}) => {
                                 */
                                 checked={types.some(type => type === boat.name)}
                             />
-                            <label className='label' htmlFor={boat.id}>{boat.avatar}</label>
+                            <label className={classes.label} htmlFor={boat.id}>{boat.avatar}</label>
                         </div>
                     ))
                 }
             </div>
-        </>
+        </div>
     );
 };
 

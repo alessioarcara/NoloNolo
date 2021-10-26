@@ -6,7 +6,7 @@ import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
 
-const Header = () => {
+const Header = ({onSubmitFilters, boatsNumber, boatsMaxPrice}) => {
     /* useState per gestire la visualizzazione del menù */
     const [show, setShow] = useState(false)
 
@@ -32,7 +32,9 @@ const Header = () => {
                 >
                     <BackIcon className={classes['results-header-icon']}/>
                 </button>
-                <div className='subtitle'>51 barche trovate</div>
+                <div className='subtitle'>{!boatsNumber ?
+                    "Caricamento risultati ..." :
+                    typeof(boatsNumber) === "number" ? `${boatsNumber} barche trovate` : boatsNumber}</div>
                 <button
                     type='button'
                     className={classes['btn-filters']}
@@ -43,7 +45,9 @@ const Header = () => {
             </header>
             {show &&
             <Modal title='Filtra i tuoi risultati' closeModalHandler={showHandler}>
-                <Filter onClose={showHandler}/>
+                <Filter
+                    onSubmitFilters={onSubmitFilters} onClose={showHandler} boatsMaxPrice={boatsMaxPrice}
+                />
             </Modal>
             }
         </>

@@ -4,6 +4,7 @@ const boatType = require('./boat')
 const locationType = require('./location')
 const advertisementType = require('./advertisement')
 const reviewType = require('./review')
+const rentalType = require('./rental')
 
 
 const rootSchema = `
@@ -12,11 +13,13 @@ const rootSchema = `
         ${locationType}
         ${advertisementType}
         ${reviewType}
+        ${rentalType}
         
         type RootQuery {
             refreshToken: AuthData!
             user: User!
-            boats(filter: BoatFilter!, skip: Int, take: Int = 10): [Boat!]
+            boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
+            boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
         }
         
@@ -27,6 +30,7 @@ const rootSchema = `
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
+            rentBoat(inputRental: RentalInput!): rentBoatPayload!
         }
         
         schema {

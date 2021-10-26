@@ -9,6 +9,9 @@ const boatType = `
             boatType: BoatType!
             isDocked: Location!
             hasAdvertisement: Advertisement
+            totalCount: Int
+            minPrice: Float
+            maxPrice: Float
         }
         
         type addBoatPayload {
@@ -27,13 +30,14 @@ const boatType = `
         }
         
         input BoatFilter {
-            where: String
+            city: String
+            region: String!
             from: String
             to: String
             boatTypes: [BoatType!]
             minPrice: Int
             maxPrice: Int
-            maxCapacity: Int
+            minCapacity: Int
         }
         
         enum BoatType {

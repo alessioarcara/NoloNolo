@@ -3,16 +3,18 @@
     grid-template-columns: repeat(2, 1fr);
     background: linear-gradient(90deg, #71B9E1, #089AC1);
     text-align: center;
-    width: 100%;
+    /*width: 100%;*/
     padding: 1rem;
     color: white;
     margin-top: 0.6rem;
+    justify-items: center;
 }
 
+
 .boat {
-    font-size: 1.2em;
+    font-size: 1em;
     cursor: pointer;
-    justify-self: center;
+    align-self: center;
 }
 
 .boat:hover {

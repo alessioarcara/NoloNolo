@@ -1,7 +1,8 @@
 import {useRef, useCallback, useEffect} from "react";
-import './MultiRangeSlider.css';
+import './MultiRangeSlider.module.css';
 import {formatNumber} from '../../../helpers/utils';
 import {INITIAL_PRICE, MANAGE_MAX_PRICE, MANAGE_MIN_PRICE} from "../../../helpers/constants";
+import classes from './MultiRangeSlider.module.css';
 
 const changeValue = (a, b) => {
     if (a > b) {
@@ -12,7 +13,7 @@ const changeValue = (a, b) => {
     return {a, b}
 }
 
-const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, size = 1}) => {
+const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue=0, maxValue, size = 1}) => {
     /* Settaggio valori min e max */
     const {a: min, b: max} = changeValue(minValue, maxValue)
 
@@ -64,7 +65,7 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
                     const value = Math.min(Number(event.target.value), maxPrice - size);
                     dispatch({type: MANAGE_MIN_PRICE, payload: value})
                 }}
-                className={`point-left ${min === minPrice ? 'point default-point' : 'point'}`}
+                className={`${classes.point} ${classes['point-left']} ${min === minPrice ? `${classes['default-point']}` : ``}`}
             />
             <input
                 type='range'
@@ -75,15 +76,15 @@ const MultiRangeSlider = ({minPrice, maxPrice, dispatch, minValue, maxValue, siz
                     const value = Math.max(Number(event.target.value), minPrice + size);
                     dispatch({type: MANAGE_MAX_PRICE, payload: value})
                 }}
-                className={`point-right ${max === maxPrice ? 'point default-point' : 'point'}`}
+                className={`${classes.point} ${classes['point-right']} ${max === maxPrice ? `${classes['default-point']}` : ``}`}
             />
 
             {/* Creazione barra per lo slider con doppi pollici e doppio slider */}
-            <div className="slider">
-                <div className="slider-track" />
-                <div ref={range} className="slider-range" />
-                <div className="left-value">{formatNumber(minPrice)}</div>
-                <div className="right-value">{formatNumber(maxPrice)}</div>
+            <div className={classes['slider']}>
+                <div className={classes['slider-track']}/>
+                <div ref={range} className={classes['slider-range']}/>
+                <div className={classes['left-value']}>{formatNumber(minPrice)}</div>
+                <div className={classes['right-value']}>{formatNumber(maxPrice)}</div>
             </div>
 
         </>
