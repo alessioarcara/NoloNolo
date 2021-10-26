@@ -17,7 +17,7 @@ export const initialState = {
 
 const Filter = ({onClose}) => {
     const [state, dispatch] = useReducer(filterReducer, initialState);
-    const isDisabled = state.boatsTypes.length === 0 || state.guests === 0
+    const isDisabled = state.boatsTypes.length === 0 && state.guests === 0
 
     const submitHandler = (evt) => {
         evt.preventDefault()

@@ -6,7 +6,7 @@ import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
 
-const Header = () => {
+const Header = ({resultsNumber}) => {
     /* useState per gestire la visualizzazione del menù */
     const [show, setShow] = useState(false)
 
@@ -32,7 +32,9 @@ const Header = () => {
                 >
                     <BackIcon className={classes['results-header-icon']}/>
                 </button>
-                <div className='subtitle'>51 barche trovate</div>
+                <div className='subtitle'>{!resultsNumber ?
+                    "Caricamento risultati ..." :
+                    typeof(resultsNumber) === "number" ? `${resultsNumber} barche trovate` : resultsNumber}</div>
                 <button
                     type='button'
                     className={classes['btn-filters']}

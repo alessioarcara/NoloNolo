@@ -9,7 +9,7 @@ const TypeFilter = ({dispatch, types}) => {
     }
 
     return (
-        <div className={'border-space'}>
+        <div className={'border-space'} style={{borderTop: '1px solid rgba(0, 0, 0, 0.1)'}}>
             <p className={classes['filter-subtitle']}>Scegli la barca che vuoi noleggiare:</p>
             <div className={classes['container-type']}>
                 {

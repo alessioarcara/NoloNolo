@@ -6,7 +6,7 @@ import Pagination from "../UI/Pagination/Pagination";
 import BoatListLayout from "../UI/Layout/BoatListLayout/BoatListLayout";
 import {useStore} from "../../hooks-store/store";
 
-const Results = ({status, boats}) => {
+const Results = ({status, boats, switchPage, numberPage}) => {
 
     const store = useStore()[0]
 
@@ -23,25 +23,26 @@ const Results = ({status, boats}) => {
         }
     })
 
-
     return (
-        <BoatListLayout>
-            <LetSuspense
-                condition={status === 'completed'}
-                placeholder={BoatPlaceholder}
-                multiplier={10}
-                delay={1000}
-            >
-                <BoatList boats={updatedBoats}/>
-                {boats &&
-                <Pagination
-                    data={boats}
-                    pageLimit={5}
-                    dataLimit={10}
-                />
-                }
-            </LetSuspense>
-        </BoatListLayout>
+        <>
+            <BoatListLayout>
+                {/*<LetSuspense*/}
+                {/*    condition={status === 'completed'}*/}
+                {/*    placeholder={BoatPlaceholder}*/}
+                {/*    multiplier={10}*/}
+                {/*    delay={1000}*/}
+                {/*>*/}
+                    <BoatList boats={updatedBoats}/>
+                {/*</LetSuspense>*/}
+            </BoatListLayout>
+            {boats &&
+            <Pagination
+                dataCount={boats[0].totalCount}
+                setCurrentPage={switchPage}
+                currentPage={numberPage}
+            />
+            }
+        </>
     );
 };
 

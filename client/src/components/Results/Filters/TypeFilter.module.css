@@ -1,6 +1,7 @@
 .container-type {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -20,7 +21,7 @@ input[type=checkbox] {
     align-items: center;
 }
 
-.label svg path, .label svg line{
+.label svg path, .label svg line {
     fill: rgba(0, 0, 0, 0.5);
     transition: all 0.325s ease;
 }
@@ -42,5 +43,11 @@ input[type=checkbox]:checked + .label {
 @media only screen and (max-width: 650px) {
     .container-type {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .container-type {
+        grid-template-columns: repeat(1, 1fr);
     }
 }

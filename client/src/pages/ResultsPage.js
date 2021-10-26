@@ -1,18 +1,17 @@
 import Results from "../components/Results/Results";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import Header from "../components/Results/Header";
 import useHttp from "../hooks/use-http";
 import {body_boats} from "../helpers/httpConfig";
 
 const ResultsPage = () => {
+    const [currentPage, setCurrentPage] = useState(0);
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
 
     useEffect(() => {
         const transformData = resData => resData.boats
-        fetchResults({body: body_boats({
-                region: "Emilia-Romagna", skip: 0
-        })}, transformData)
-    }, [fetchResults])
+        fetchResults({body: body_boats({where: "marina", skip: currentPage})}, transformData)
+    }, [fetchResults, currentPage])
 
     // const [isShow, setIsShow] = useState (false)
     // const [days, setDays] = useState(0);
@@ -39,12 +38,17 @@ const ResultsPage = () => {
     //     }
     // }, [start, end, time]);
 
+    const resultsNumber = !boats ? false :
+                          boats.length  > 0 ? boats[0].totalCount :"Nessun risultato"
+
     return (
         <>
-            <Header/>
+            <Header resultsNumber={resultsNumber}/>
             <Results
                 boats={boats}
                 status={status}
+                switchPage={setCurrentPage}
+                numberPage={currentPage}
             />
         </>
     );
