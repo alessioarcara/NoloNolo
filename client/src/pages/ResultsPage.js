@@ -1,5 +1,5 @@
 import Results from "../components/Results/Results";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Header from "../components/Results/Header";
 import useHttp from "../hooks/use-http";
 import {body_boats} from "../helpers/httpConfig";
@@ -9,11 +9,21 @@ const ResultsPage = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const {status, data: boats, sendRequest: fetchResults} = useHttp(true)
 
+    const URL = useMemo(() =>
+        new URLSearchParams(window.location.search), []);
+    const boatsNumber = useMemo(() =>
+        !boats ? false : boats.length  > 0 ? boats[0].totalCount :"Nessun risultato", [boats])
+    const boatsMaxPrice = useMemo(() =>
+        boats && boats.length > 0 ? boats[0].maxPrice: 10000, [boats])
+
     useEffect(() => {
         const transformData = resData => resData.boats
         fetchResults({body: body_boats(
             {
-                region: "Emilia-Romagna",
+                region: URL.get('region'),
+                city: URL.get('city'),
+                from: URL.get('from'),
+                to: URL.get('to'),
                 skip: currentPage,
                 boatTypes: filters.boatTypes,
                 minCapacity: filters.minCapacity,
@@ -21,37 +31,7 @@ const ResultsPage = () => {
                 maxPrice: filters.maxPrice,
                 take: 20}
             )}, transformData)
-    }, [fetchResults, currentPage, filters])
-
-    // const [isShow, setIsShow] = useState (false)
-    // const [days, setDays] = useState(0);
-    // const URL = useMemo(() => new URLSearchParams(window.location.search), []);
-    //
-    // console.log(URL.get('start'))
-    //
-    // const start = useMemo(() => URL.get('start')
-    //     ? new Date(URL.get('start'))
-    //     : Object.null, [URL]);
-    //
-    // const end = useMemo(() => URL.get('end')
-    //     ? new Date(URL.get('end'))
-    //     : Object.null,[URL]);
-    //
-    // const time = (start && end)
-    //     ? new Date(end).getTime() - new Date(start).getTime()
-    //     : Object.null;
-    //
-    // useEffect(() => {
-    //     if (start && end && time) {
-    //         setDays(time / (1000 * 3600 * 24));
-    //         setAllParams(true);
-    //     }
-    // }, [start, end, time]);
-
-    const boatsNumber = !boats ? false :
-                          boats.length  > 0 ? boats[0].totalCount :"Nessun risultato"
-
-    const boatsMaxPrice = boats && boats.length > 0 ? boats[0].maxPrice: 10000
+    }, [fetchResults, currentPage, filters, URL])
 
     return (
         <>

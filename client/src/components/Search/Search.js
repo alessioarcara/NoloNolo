@@ -4,7 +4,7 @@ import SelectDates from "./SelectDates/SelectDates";
 import {formatDate} from "../../helpers/utils";
 import {useHistory} from "react-router-dom/cjs/react-router-dom";
 import searchReducer, {initialState} from "../../reducers/searchReducer";
-import {CHANGE_END_DATE, CHANGE_START_DATE, SWITCH_SEARCH} from "../../helpers/constants";
+import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../../helpers/constants";
 
 
 const Search = ({closeModalHandler}) => {
@@ -12,7 +12,7 @@ const Search = ({closeModalHandler}) => {
     const [state, dispatch] = useReducer(searchReducer, initialState);
 
     const searchClickHandler = useCallback(() => {
-        history.push(`/search?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&start=${formatDate(state.startDate)}&end=${formatDate(state.endDate)}` : ``}`)
+        history.push(`/search?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
     }, [history, state])
     const moveClickHandler = useCallback((city, region) => {
         dispatch({ type: SWITCH_SEARCH, payload: {city, region}})
