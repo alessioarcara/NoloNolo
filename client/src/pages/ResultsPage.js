@@ -10,7 +10,7 @@ const ResultsPage = () => {
 
     useEffect(() => {
         const transformData = resData => resData.boats
-        fetchResults({body: body_boats({where: "marina", skip: currentPage})}, transformData)
+        fetchResults({body: body_boats({region: "Emilia-Romagna", skip: currentPage})}, transformData)
     }, [fetchResults, currentPage])
 
     // const [isShow, setIsShow] = useState (false)
