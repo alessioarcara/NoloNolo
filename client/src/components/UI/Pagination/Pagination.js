@@ -1,21 +1,21 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useMemo} from "react";
 import classes from "./Pagination.module.css"
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 
-const Pagination = ({dataCount, dataLimit= 10, currentPage, setCurrentPage}) => {
+const Pagination = ({dataCount, dataLimit = 10, currentPage, setCurrentPage}) => {
     /* register total page number */
-    const pages = Math.floor(dataCount / dataLimit)
-    const pagesGroup = pages > 3 ? 3 : pages
+    const lastPage = useMemo(() => Math.floor(dataCount / dataLimit) + 1 , [dataCount, dataLimit])
+    const currPage = useMemo(() => Math.floor(currentPage / dataLimit), [currentPage, dataLimit])
+    const pagesGroup = useMemo(() => lastPage > 3 ? 3 : lastPage, [lastPage])
 
     /* function to go next page, to go previous page and to go current page */
-    const goToNextPage = () => setCurrentPage(oldPageNumber => oldPageNumber + 10);
-    const goToPreviousPage = () => setCurrentPage(oldPageNumber => oldPageNumber - 10);
-
-    const changePage = event => {
-        const pageNumber = (Number(event.target.textContent) - 1) * 10;
+    const goToNextPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber + dataLimit), [setCurrentPage]);
+    const goToPreviousPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber - dataLimit), [setCurrentPage]);
+    const changePage = useCallback(event => {
+        const pageNumber = (+event.target.textContent - 1) * 10;
         setCurrentPage(pageNumber);
-    }
+    }, [setCurrentPage]);
 
     const getPaginationGroup = useCallback(() => {
         const pageNumberList = new Array(pagesGroup).fill().map(
@@ -34,23 +34,24 @@ const Pagination = ({dataCount, dataLimit= 10, currentPage, setCurrentPage}) => 
     return (
         <div className={classes.pagination}>
             {/* prev page */}
-            <button onClick={goToPreviousPage} className={classes.prev} hidden={currentPage === 0}>
+            <button onClick={goToPreviousPage} className={classes.prev} hidden={currPage === 0}>
                 <LeftArrowIcon/>
             </button>
             {/* current page and page number */}
-            {getPaginationGroup().map((item, index) => (
-                <button
+            {getPaginationGroup().map((item, index) => typeof (item) !== "number" ?
+                <span key={index}>{item}</span>
+                : <button
                     key={index}
                     onClick={changePage}
-                    className={
-                        `${classes.paginationItem}
-                        ${currentPage/10 === item - 1 && (classes.active)}
-                        ${item > pages+1 && classes.deactivate}`}
-                >
+                    className={`
+                        ${classes.paginationItem}
+                        ${currPage === item - 1 && (classes.active)}
+                        `}>
                     <span>{item}</span>
                 </button>
-            ))}
-            <button onClick={goToNextPage} className={classes.next} hidden={(currentPage/10) === pages}>
+            )}
+            {/* next page */}
+            <button onClick={goToNextPage} className={classes.next} hidden={currPage === lastPage - 1}>
                 <RightArrowIcon/>
             </button>
         </div>

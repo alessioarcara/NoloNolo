@@ -32,7 +32,9 @@ const Header = ({resultsNumber}) => {
                 >
                     <BackIcon className={classes['results-header-icon']}/>
                 </button>
-                <div className='subtitle'>{resultsNumber ? `${resultsNumber} barche trovate` : "Caricamento risultati ..."}</div>
+                <div className='subtitle'>{!resultsNumber ?
+                    "Caricamento risultati ..." :
+                    typeof(resultsNumber) === "number" ? `${resultsNumber} barche trovate` : resultsNumber}</div>
                 <button
                     type='button'
                     className={classes['btn-filters']}

@@ -38,7 +38,8 @@ const ResultsPage = () => {
     //     }
     // }, [start, end, time]);
 
-    const resultsNumber = boats && boats[0].totalCount
+    const resultsNumber = !boats ? false :
+                          boats.length  > 0 ? boats[0].totalCount :"Nessun risultato"
 
     return (
         <>
