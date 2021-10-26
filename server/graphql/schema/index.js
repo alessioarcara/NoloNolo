@@ -18,7 +18,7 @@ const rootSchema = `
         type RootQuery {
             refreshToken: AuthData!
             user: User!
-            boats(filter: BoatFilter!, skip: Int, take: Int = 10): [Boat!]
+            boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
         }

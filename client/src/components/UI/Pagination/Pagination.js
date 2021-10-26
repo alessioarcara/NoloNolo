@@ -10,12 +10,12 @@ const Pagination = ({dataCount, dataLimit = 10, currentPage, setCurrentPage}) =>
     const pagesGroup = useMemo(() => lastPage > 3 ? 3 : lastPage, [lastPage])
 
     /* function to go next page, to go previous page and to go current page */
-    const goToNextPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber + dataLimit), [setCurrentPage]);
-    const goToPreviousPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber - dataLimit), [setCurrentPage]);
+    const goToNextPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber + dataLimit), [setCurrentPage, dataLimit]);
+    const goToPreviousPage = useCallback(() => setCurrentPage(oldPageNumber => oldPageNumber - dataLimit), [setCurrentPage, dataLimit]);
     const changePage = useCallback(event => {
-        const pageNumber = (+event.target.textContent - 1) * 10;
+        const pageNumber = (+event.target.textContent - 1) * dataLimit;
         setCurrentPage(pageNumber);
-    }, [setCurrentPage]);
+    }, [setCurrentPage, dataLimit]);
 
     const getPaginationGroup = useCallback(() => {
         const pageNumberList = new Array(pagesGroup).fill().map(

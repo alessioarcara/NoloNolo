@@ -30,11 +30,11 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
-exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice, maxPrice, skip}) => {
+exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
-           query($filter: BoatFilter! $skip: Int) {
-              boats(filter: $filter, skip: $skip) {
+           query($filter: BoatFilter! $skip: Int $take: Int) {
+              boats(filter: $filter, skip: $skip, take: $take) {
                  _id
                  model
                  totalCount
@@ -49,7 +49,7 @@ exports.body_boats = ({city, region, from, to, maxCapacity, boatTypes, minPrice,
               }
            }
         `,
-        variables: {filter: {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice}, skip}
+        variables: {filter: {region, city, from, to, maxCapacity, boatTypes, minPrice, maxPrice}, skip, take}
     }
 };
 exports.body_search = (contains) => {
