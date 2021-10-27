@@ -55,6 +55,30 @@ exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice,
         variables: {filter: {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice}, skip, take}
     }
 };
+exports.body_boat = (boatId) => {
+    return {
+        query: `
+           query($boatId: ID!) {
+              boat(boatId: $boatId) {
+                 model
+                 maximumCapacity
+                 hasAdvertisement {
+                    description
+                    images
+                    dailyFee
+                    reviews {
+                      rating
+                    }
+                 }
+                 isDocked {
+                    region
+                 }
+              }
+           }
+        `,
+        variables: boatId
+    }
+};
 exports.body_search = (contains) => {
     return {
         query: `

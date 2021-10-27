@@ -35,7 +35,6 @@ export const filterReducer = (state, {type, payload}) => {
                     ? state.minCapacity
                     : state.minCapacity + 1
             }
-
         case REMOVE_GUEST:
             return {
                 ...state,
@@ -43,26 +42,22 @@ export const filterReducer = (state, {type, payload}) => {
                     ? state.minCapacity
                     : state.minCapacity - 1
             }
-
         case INITIAL_PRICE:
             return {
                 ...state,
                 minPrice: payload.min,
                 maxPrice: payload.max
             }
-
         case MANAGE_MIN_PRICE:
             return {
                 ...state,
                 minPrice: payload
             }
-
         case MANAGE_MAX_PRICE:
             return {
                 ...state,
                 maxPrice: payload
             }
-
         case CLEAR_FORM:
             return {
                 boatTypes: ['motorboat', 'sailboat', 'catamaran', 'dinghy'],

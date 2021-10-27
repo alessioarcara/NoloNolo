@@ -12,7 +12,7 @@ const Search = ({closeModalHandler}) => {
     const [state, dispatch] = useReducer(searchReducer, initialState);
 
     const searchClickHandler = useCallback(() => {
-        history.push(`/search?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
+        history.push(`/boats?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
     }, [history, state])
     const moveClickHandler = useCallback((city, region) => {
         dispatch({ type: SWITCH_SEARCH, payload: {city, region}})

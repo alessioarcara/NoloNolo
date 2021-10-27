@@ -3,6 +3,14 @@ const {transformBoat} = require("./merge");
 const Rental = require("../../models/rental");
 
 module.exports = {
+    boat: async ({boatId}) => {
+        try {
+            const boat = await Boat.findById(boatId).lean()
+            return transformBoat(boat)
+        } catch (err) {
+            `Can't find boat. ${err}`
+        }
+    },
     boats: async ({filter, skip, take}) => {
         const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
 

@@ -5,6 +5,7 @@ import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
 import AuthContext from "../../store/auth-context";
+import {Link} from "react-router-dom";
 
 const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite }) => {
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
@@ -45,7 +46,11 @@ const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, ad
                     </div>
                     <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
                     {/*{totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}*/}
-                    <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
+                    <div className={classes['btn-ctn']}>
+                        <Link to={location => `${location.pathname}/${id}`}>
+                            <button className={classes['btn-details']}>Dettagli</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </>

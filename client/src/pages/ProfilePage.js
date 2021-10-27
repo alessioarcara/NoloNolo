@@ -82,7 +82,6 @@ const ProfilePage = () => {
     if (status === "completed" && error) {
         content = <p>User not found.</p>
     }
-    console.log(user)
 
     return (
         <div className="centered">

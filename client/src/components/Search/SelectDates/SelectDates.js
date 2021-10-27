@@ -4,7 +4,7 @@ import BackIcon from "../../UI/icons/BackIcon";
 import SearchDatePicker from "./SearchDatePicker";
 
 const SelectDates = ({moveClickHandler, changeStartDateHandler, changeEndDateHandler,
-                         searchClickHandler, cancelSelectionHandler, startDate, endDate}) => {
+                     searchClickHandler, cancelSelectionHandler, startDate, endDate}) => {
 
     return (
         <div className={classes[`datepicker-container`]}>

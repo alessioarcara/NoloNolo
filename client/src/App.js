@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ResultsPage from "./pages/ResultsPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import NewAdvertisementPage from "./pages/NewAdvertisementPage";
+import AdvertisementPage from "./pages/AdvertisementPage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -29,8 +30,11 @@ function App() {
                     {isLoggedIn && <ProfilePage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
                 </Route>
-                <Route path='/search'>
+                <Route path='/boats' exact>
                     <ResultsPage/>
+                </Route>
+                <Route path='/boats/:boatId'>
+                    <AdvertisementPage/>
                 </Route>
                 <Route path='/become-shipowner'>
                     {isLoggedIn && <NewAdvertisementPage />}
