@@ -1,13 +1,15 @@
 .slide {
     display: inline-block;
-    width: 100%;
-    border-radius: 40px;
+    /*width: 100%;*/
+    /*border-radius: 1rem;*/
 }
 
 .card-image {
-    height: 12rem;
+    height: 100%;
     width: 100%;
-    object-fit: cover;
+    background-size: cover;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
 }
 
 @media only screen and (max-width: 768px) {
@@ -19,7 +21,8 @@
 
 @media only screen and (min-width: 769px) {
     .card-image {
-        height: 15rem;
-        border-radius: 1rem;
+        height: 100%;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 1rem;
     }
 }

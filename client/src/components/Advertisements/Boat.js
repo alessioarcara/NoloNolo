@@ -5,8 +5,10 @@ import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
 import AuthContext from "../../store/auth-context";
+import {formatNumber} from "../../helpers/utils";
+import GroupIcon from "../UI/icons/GroupIcon";
 
-const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, advIsFavorite }) => {
+const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, advIsFavorite}) => {
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
     const {isLoggedIn} = useContext(AuthContext)
 
@@ -19,7 +21,7 @@ const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, ad
     const toggleFavoritesStatusHandler = () => {
         dispatch(
             'TOGGLE_FAV',
-            { _id: id, hasAdvertisement: { images, description, dailyFee, reviews}, model, totalFare, advIsFavorite: true }
+            { _id: id, hasAdvertisement: { images, description, dailyFee, reviews}, model, advIsFavorite: true }
         )
         setIsFavorite(prevState => !prevState)
     }
@@ -27,6 +29,7 @@ const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, ad
     return (
         <>
             <div className={classes.card}>
+                {/* The first part with images */}
                 <SlideShow images={images}>
                     {isLoggedIn &&
                     <div onClick={toggleFavoritesStatusHandler}
@@ -35,17 +38,20 @@ const Boat = ({ id, images, model, description, dailyFee, reviews, totalFare, ad
                     </div>
                     }
                 </SlideShow>
+                {/* The second part with information */}
                 <div className={classes.adapter}>
-                    <h3 className={classes['card-title']}>{model}</h3>
-                    <div className={classes['card-description']}>{description}</div>
+                    <div className={classes.model}>{model}</div>
+                    <div className={`${classes['capacity-content']} ${classes.capacity}`}>
+                        <GroupIcon/>
+                        <div className={classes['text-style']}>· Fino a {maxCapacity} passeggeri</div>
+                    </div>
+                    <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
                     <div className={classes.info}>
                         <StarIcon/>
                         <span>{reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}</span>
                         <span>({reviews.length})</span>
                     </div>
-                    <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
-                    {/*{totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}*/}
-                    <div className={classes['btn-ctn']}><button className={classes['btn-details']}>Dettagli</button></div>
+                    <button className={`btn btn-primary ${classes['btn-details']}`}>Dettagli</button>
                 </div>
             </div>
         </>

@@ -55,7 +55,7 @@ hr {
 .btn:disabled:active {
   background-color: #ccc;
   color: #3f3f3f;
-  border-color: #ccc;
+  border: 1px solid #ccc;
   cursor: not-allowed;
 }
 
@@ -68,7 +68,7 @@ hr {
 .btn-primary:hover {
   background-color: #FF2677;
   color: #fff;
-  border: 0;
+  border: 1px solid;
 }
 
 .btn-outline-primary {

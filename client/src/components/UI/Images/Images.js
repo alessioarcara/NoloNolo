@@ -7,19 +7,15 @@ const Images = ({images}) => {
 
     const handleImageLoaded = useCallback(() => setIsLoading(false), []);
     return (
-        <>
-            {images.map((image, index) =>
-                <div key={index} className={classes.slide}>
-                    {isLoading && <LoadingSpinner/>}
-                    <img
-                        onLoad={handleImageLoaded}
-                        src={image}
-                        alt={''}
-                        className={classes['card-image']}
-                    />
-                </div>
-            )}
-        </>
+        <div className={classes.slide}>
+            {isLoading && <LoadingSpinner/>}
+            <img
+                onLoad={handleImageLoaded}
+                src={images}
+                alt={''}
+                className={classes['card-image']}
+            />
+        </div>
     );
 };
 

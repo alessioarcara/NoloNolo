@@ -10,8 +10,8 @@ const BoatList = ({boats}) => {
                     images={boat.hasAdvertisement.images}
                     model={boat.model}
                     description={boat.hasAdvertisement.description}
+                    maxCapacity={boat.maximumCapacity}
                     dailyFee={boat.hasAdvertisement.dailyFee}
-                    // totalFare={+props.missingDays * +boat.hasAdvertisement.dailyFee}
                     reviews={boat.hasAdvertisement.reviews}
                     advIsFavorite={boat.advIsFavorite}
                 />
