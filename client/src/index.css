@@ -45,7 +45,7 @@ hr {
   font-size: 1em;
   font-weight: bold;
   border-radius: 0.5rem;
-  padding: 0.425rem 2rem;
+  padding: 0.425rem 1rem;
   cursor: pointer;
   transition: all 0.425s ease;
 }

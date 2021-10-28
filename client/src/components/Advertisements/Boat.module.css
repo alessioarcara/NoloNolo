@@ -7,13 +7,14 @@
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
+    transition: all 0.425s ease-out;
     /* No selection text in the card */
     user-select: none;
     -webkit-user-select: none;
 }
 
 .card:hover {
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.7);
 }
 
 .adapter {
@@ -30,11 +31,6 @@
     font-weight: bold;
     font-size: 1.1em;
     letter-spacing: 2px;
-}
-
-.capacity-content {
-    display: flex;
-    gap: 0.3rem;
 }
 
 .capacity {
@@ -130,5 +126,7 @@
     .btn-details {
         display: block;
         pointer-events: all;
+        align-self: center;
+        width: 50%;
     }
 }

@@ -6,9 +6,10 @@ import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
 import AuthContext from "../../store/auth-context";
 import {formatNumber} from "../../helpers/utils";
-import GroupIcon from "../UI/icons/GroupIcon";
+import {useHistory} from "react-router-dom";
 
 const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, advIsFavorite}) => {
+    const history = useHistory()
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
     const {isLoggedIn} = useContext(AuthContext)
 
@@ -24,6 +25,10 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
             { _id: id, hasAdvertisement: { images, description, dailyFee, reviews}, model, advIsFavorite: true }
         )
         setIsFavorite(prevState => !prevState)
+    }
+
+    const goAdvertisementPage = () => {
+        history.push(`/search/${id}`)
     }
 
     return (
@@ -47,10 +52,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                 {/* The second part with information */}
                 <div className={classes.adapter} onClick={() => alert('Premuto!')}>
                     <div className={classes.model}>{model}</div>
-                    <div className={`${classes['capacity-content']} ${classes.capacity}`}>
-                        <GroupIcon/>
-                        <div className={classes['text-style']}>· Fino a {maxCapacity} passeggeri</div>
-                    </div>
+                    <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri</div>
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
                     <div className={classes.info}>
                         <StarIcon/>

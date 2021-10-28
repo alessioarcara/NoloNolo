@@ -11,6 +11,7 @@ import NewAdvertisementPage from "./pages/NewAdvertisementPage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
+    // const [ref, visible] = useIntersectionObserver({threshold: 1.0})
 
     return (
         <>
@@ -40,7 +41,10 @@ function App() {
                     <Redirect to='/'/>
                 </Route>
             </Switch>
-            <NavigationBar/>
+
+            {/*<div ref={ref}><Footer/></div>*/}
+            {/*{!visible && <NavigationBar/>}*/}
+            {/*<NavigationBar/>*/}
         </>
     );
 }
