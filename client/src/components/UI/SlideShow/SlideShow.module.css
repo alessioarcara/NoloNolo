@@ -2,15 +2,11 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    /*object-fit: cover;*/
-    /*border-top-left-radius: 1rem;*/
-    /*border-top-right-radius: 1rem;*/
-    /*-webkit-border-top-left-radius: 1rem;*/
-    /*-webkit-border-top-right-radius: 1rem;*/
 }
 
 .slideshowSlider {
     white-space: nowrap;
+    height: 100%;
 }
 
 .slideshowDots {
@@ -23,11 +19,10 @@
 
 .style-arrow svg {
     position: absolute;
-    top: 0;
-    margin-top: 6rem;
+    top: 50%;
+    bottom: 50%;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    /*stroke-width: 1;*/
     width: 2rem;
     cursor: pointer;
 }
@@ -43,21 +38,6 @@
 .show-left svg {
     left: 1rem;
 }
-
-/*@media only screen and (max-width: 768px) {*/
-/*    .style-arrow {*/
-/*        display: none;*/
-/*    }*/
-
-/*    .slideshowSlider {*/
-/*        overflow: scroll;*/
-/*        scroll-snap-type: x mandatory;*/
-/*    }*/
-
-/*    ::-webkit-scrollbar {*/
-/*        display: none;*/
-/*    }*/
-/*}*/
 
 @media only screen and (max-width: 569px) {
     .style-arrow {

@@ -31,15 +31,21 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
             <div className={classes.card}>
                 {/* The first part with images */}
                 <SlideShow images={images}>
-                    {isLoggedIn &&
-                    <div onClick={toggleFavoritesStatusHandler}
-                         className={isFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
-                        <HeartIcon className={classes.heart}/>
-                    </div>
-                    }
+                    <>
+                        {isLoggedIn &&
+                        <div onClick={toggleFavoritesStatusHandler}
+                             className={isFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
+                            <HeartIcon className={classes.heart}/>
+                        </div>
+                        }
+                        {/* price in mobile phone */}
+                        <div className={`${classes['price-mobile-phone']} ${classes['text-style']}`}>
+                            Da {formatNumber(dailyFee)}
+                        </div>
+                    </>
                 </SlideShow>
                 {/* The second part with information */}
-                <div className={classes.adapter}>
+                <div className={classes.adapter} onClick={() => alert('Premuto!')}>
                     <div className={classes.model}>{model}</div>
                     <div className={`${classes['capacity-content']} ${classes.capacity}`}>
                         <GroupIcon/>

@@ -8,8 +8,6 @@ import SlideShowDots from "./SlideShowDots";
 import {circularSlice} from "../../../helpers/utils";
 
 const SlideShow = ({images, children}) => {
-    // const [index, setIndex] = useState(0);
-
     // const imageRef = useRef(null)
     // const [isVisible, setIsVisible] = useState(false)
 
@@ -33,28 +31,6 @@ const SlideShow = ({images, children}) => {
     //     return () => { if (imageRef.current) observer.unobserve((imageRef.current)) }
     // }, [imageRef, options])
 
-    // const leftClickHandler = () => {
-    //     setIndex (prevIndex => {
-    //         if (prevIndex === 0)
-    //             return images.length - 1
-    //         return prevIndex - 1
-    //     })
-    //     // index === 0
-    //     //     ? setIndex(images.length - 1)
-    //     //     : setIndex(index - 1)
-    // }
-    //
-    // const rightClickHandler = () => {
-    //     setIndex (prevIndex => {
-    //         if (prevIndex === images.length - 1)
-    //             return 0
-    //         return prevIndex + 1
-    //     })
-    //     // index === images.length - 1
-    //     //     ? setIndex(0)
-    //     //     : setIndex(index + 1)
-    // }
-
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(images.length - 1)
 
@@ -72,12 +48,10 @@ const SlideShow = ({images, children}) => {
         <div className={classes.slideshow}>
             <div className={classes.slideshowSlider}>
                 {circularSlice(images, start, end).map((place, index) => (
-                    <>
-                        <Images
-                            key={index}
-                            images={place}
-                        />
-                    </>
+                    <Images
+                        key={index}
+                        images={place}
+                    />
                 ))}
             </div>
             <div className={classes.slideshowDots}>

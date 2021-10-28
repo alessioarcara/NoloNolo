@@ -1,21 +1,26 @@
 .results-layout {
     display: grid;
-    margin-top: 2rem;
     grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    margin-top: 2rem;
     gap: 1rem;
     padding: 0 3rem;
 }
 
-@media only screen and (min-width: 570px) and (max-width: 768px) {
+@media only screen and (min-width: 570px) and (max-width: 900px) {
     .results-layout {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0 1rem;
     }
 }
 
-@media only screen and (min-width: 769px) and (max-width: 900px) {
+@media only screen and (min-width: 901px) and (max-width: 1035px) {
     .results-layout {
         grid-template-columns: repeat(1, 1fr);
-        justify-content: center;
+    }
+}
+
+@media only screen and (min-width: 1036px) {
+    .results-layout {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
