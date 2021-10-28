@@ -1,15 +1,48 @@
 .option {
-    background-color: #b37aec;
+    background-color: rgba(41, 41, 41, 0.8);
     border-radius: 16px;
     width: 30%;
+    padding: 0.4rem;
     margin: 0.5rem;
 }
 
+.singleop {
+    color: #bdbebd;
+    position: relative;
+    animation-name: animation;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+.singleop:hover {
+    color: #000;
+}
+
+.singleop h4 {
+    color: #e9e9e9;
+}
+
+
 @media all and (max-width: 768px) {
     .option {
-        border-top: 2px solid #efefef;
         border-radius: 0;
         width: 100%;
         background-color: transparent;
+        margin: 0;
+    }
+
+    .singleop {
+        font-size: 0.9em;
+        text-align: left;
+    }
+
+    @keyframes animation {
+        from {
+            top: 15px;
+            color: rgba(189, 190, 189, 0.2);
+        }
+        to {
+            top: 0;
+        }
     }
 }

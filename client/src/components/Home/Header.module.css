@@ -1,12 +1,8 @@
 .title {
     background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
-    padding-top: 0.8rem;
     position: relative;
     z-index: 100;
-    font-family: 'Lobster', cursive;
-    font-size: 30px;
-    text-align: center;
-    margin: 0;
+    padding-top: 0.8rem;
 }
 
 @media only screen and (max-width: 768px) {

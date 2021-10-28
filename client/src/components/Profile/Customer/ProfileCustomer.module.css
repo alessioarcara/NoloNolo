@@ -1,0 +1,10 @@
+hr {
+    border-color: #bdbebd;
+}
+
+
+@media all and (min-width: 768px) {
+    hr {
+        display: none;
+    }
+}

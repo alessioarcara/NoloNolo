@@ -16,7 +16,7 @@ const FavoritesPage = () => {
 
     return (
         <section className="centered">
-            <h1>My favorites</h1>
+            <h1 className="title">My favorites</h1>
             {content}
         </section>
     )
