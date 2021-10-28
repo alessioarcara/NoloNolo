@@ -44,7 +44,7 @@ function App() {
 
             {/*<div ref={ref}><Footer/></div>*/}
             {/*{!visible && <NavigationBar/>}*/}
-            {/*<NavigationBar/>*/}
+            <NavigationBar/>
         </>
     );
 }

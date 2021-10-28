@@ -1,5 +1,5 @@
 import Results from "../components/Results/Results";
-import {useCallback, useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Header from "../components/Results/Header";
 import useHttp from "../hooks/use-http";
 import {body_boats} from "../helpers/httpConfig";

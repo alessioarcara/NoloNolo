@@ -26,14 +26,14 @@ const Results = ({status, boats, switchPage, numberPage}) => {
     return (
         <>
             <BoatListLayout>
-                {/*<LetSuspense*/}
-                {/*    condition={status === 'completed'}*/}
-                {/*    placeholder={BoatPlaceholder}*/}
-                {/*    multiplier={10}*/}
-                {/*    delay={1000}*/}
-                {/*>*/}
+                <LetSuspense
+                    condition={boats && boats.length > 0}
+                    placeholder={BoatPlaceholder}
+                    multiplier={10}
+                    delay={1000}
+                >
                     <BoatList boats={updatedBoats}/>
-                {/*</LetSuspense>*/}
+                </LetSuspense>
             </BoatListLayout>
             {boats && boats.length > 0 &&
             <Pagination
