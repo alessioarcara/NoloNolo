@@ -7,6 +7,9 @@ const letSuspenseReducer = (state, {type, payload}) => {
         return {isChecked: true, component: payload}
     if (type === SEND_PLACEHOLDER)
         return {isChecked: false, component: payload}
+    if (type === 'CLEAR') {
+        return {...state, isChecked: false}
+    }
 
     return initialState
 }

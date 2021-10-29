@@ -12,33 +12,35 @@ const LetSuspense = ({
     const [{component, isChecked} , dispatch] = useReducer(letSuspenseReducer, initialState)
 
     useEffect(() => {
+        console.log('useEffect()', isChecked, component)
         /* If isChecked === true then the data has been loaded */
         if (isChecked) {
+            console.log('isChecked')
             dispatch ({type: SEND_CHILDREN, payload: [children]})
-            console.log("Entro!")
-            return ;
+            // return;
         }
 
-        let delayedTimeout = null;
+        let delayedTimeout = null
         if (condition) {
             if (delay) {
                 delayedTimeout = setTimeout(() => {
                     dispatch({type: SEND_CHILDREN, payload: [children]})
-                }, delay);
+                }, delay)
             }
         } else {
-            let tempComponent = [];
+            let tempComponent = []
             for (let i = 0; i < multiplier; i++) {
-                tempComponent.push(<Placeholder key={i}/>);
+                tempComponent.push(<Placeholder key={i}/>)
             }
-            dispatch({type: SEND_PLACEHOLDER, payload: tempComponent});
+            dispatch({type: SEND_PLACEHOLDER, payload: tempComponent})
         }
         return () => {
+            console.log('CLEANUP FUNCTION')
             if (delayedTimeout) {
-                clearTimeout(delayedTimeout);
+                clearTimeout(delayedTimeout)
             }
         };
-    }, [delay, isChecked, multiplier, condition, children]);
+    }, [delay, isChecked, multiplier, condition, children])
 
     return (
         <>
