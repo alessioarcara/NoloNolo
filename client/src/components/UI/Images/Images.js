@@ -9,9 +9,9 @@ const Images = ({images}) => {
 
     return (
         <div className={classes.slide}>
-            {isLoading && <LoadingSpinner/>}
+            {/*{isLoading && <LoadingSpinner/>}*/}
             <img
-                onLoad={imageLoadedHandler}
+                // onLoad={imageLoadedHandler}
                 src={images}
                 alt={''}
                 className={classes['card-image']}
