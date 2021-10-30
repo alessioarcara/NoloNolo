@@ -13,10 +13,10 @@ const LetSuspense = ({
 
     useEffect(() => {
         /* If isChecked === true then the data has been loaded */
-        if (isChecked) {
-            console.log('isChecked')
-            dispatch ({type: SEND_CHILDREN, payload: [children]})
-        }
+        // if (isChecked) {
+        //     console.log('isChecked')
+        //     dispatch ({type: SEND_CHILDREN, payload: [children]})
+        // }
 
         /* create delayedTimeout for setTimeout */
         let delayedTimeout = null
