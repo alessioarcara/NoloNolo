@@ -4,7 +4,7 @@ module.exports = {
     publishReview: async (args, {req}) => {
         const {boatId, body, rating} = args.inputReview;
         try {
-            req.userId = "6101ba0e9edb920b862e8c46"
+            req.userId = "6101517c380b91c517a31039"
             const boat = await Boat.findOne({ _id: boatId } )
             console.log(boat.advertisement.reviews)
             boat.advertisement.reviews.push( { customer: req.userId, body, rating } )

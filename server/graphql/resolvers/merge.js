@@ -1,12 +1,32 @@
+const DataLoader = require('dataloader');
+
+const User = require('../../models/user');
 const {dateToString} = require("../../helpers/date");
+
+const userLoader = new DataLoader(userIds => {
+    return User.find({_id: {$in: userIds}});
+});
+
+const user = async userId => {
+    try {
+        return await userLoader.load(userId.toString());
+    } catch (err) { throw err }
+}
 
 const transformBoat = boat => {
     return {
         ...boat,
+        owner: user.bind(this, boat.shipowner),
         hasAdvertisement: {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
-            fixedFee: parseFloat(boat.advertisement.fixedFee)
+            fixedFee: parseFloat(boat.advertisement.fixedFee),
+            reviews: boat.advertisement.reviews.map(review => {
+                return {
+                    ...review,
+                    creator: user.bind(this, review.customer),
+                }
+            })
         },
         isDocked: boat.location,
         totalCount: boat.totalCount,

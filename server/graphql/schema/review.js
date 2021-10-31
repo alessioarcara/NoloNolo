@@ -1,5 +1,6 @@
 const reviewType = `
         type Review {
+            _id: ID!
             body: String!
             rating: Int!
             createdAt: String!

@@ -81,6 +81,8 @@ module.exports = {
         }
     },
     addBoat: async (args, {req}) => {
+        req.userId = "61013cd2cbcb99c21fbe91e2"
+        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
         const {yard, model, length, maximumCapacity, boatType, isDocked, publishAdvertisement} = args.inputBoat
         try {
             const boat = new Boat({
@@ -94,6 +96,5 @@ module.exports = {
         } catch (err) {
             throw new Error(`Can't add boat. ${err}`)
         }
-        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
     }
 }
