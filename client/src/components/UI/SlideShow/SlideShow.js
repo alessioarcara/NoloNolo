@@ -47,24 +47,26 @@ const SlideShow = ({images, children}) => {
     return (
         <>
             <div className={classes.slideshow}>
-                <div className={classes.slideshowSlider} style={{ transform: `translate3d(${-index * 100}%, 0, 0)`}}>
+                <div className={classes.slideshowSlider} style={{transform: `translate3d(${-index * 100}%, 0, 0)`}}>
                     <Images
                         images={images}
                     />
                 </div>
-                <div className={classes.slideshowDots}>
-                    <SlideShowDots
-                        images={images}
-                        onCurrentIndex={index}
-                    />
-                </div>
+                {images.length > 1 && <>
+                    <div className={classes.slideshowDots}>
+                        <SlideShowDots
+                            images={images}
+                            onCurrentIndex={index}
+                        />
+                    </div>
+                    <div onClick={leftClickHandler} className={`${classes['style-arrow']} ${classes['show-left']}`}>
+                        <LeftArrowIcon/>
+                    </div>
+                    <div onClick={rightClickHandler} className={`${classes['style-arrow']} ${classes['show-right']}`}>
+                        <RightArrowIcon/>
+                    </div>
+                </>}
                 {children}
-                <div onClick={leftClickHandler} className={`${classes['style-arrow']} ${classes['show-left']}`}>
-                    <LeftArrowIcon/>
-                </div>
-                <div onClick={rightClickHandler} className={`${classes['style-arrow']} ${classes['show-right']}`}>
-                    <RightArrowIcon/>
-                </div>
             </div>
         </>
     );

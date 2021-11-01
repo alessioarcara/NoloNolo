@@ -5,6 +5,7 @@ import useHttp from "../hooks/use-http";
 import {body_informations} from "../helpers/httpConfig";
 import SlideShow from "../components/UI/SlideShow/SlideShow";
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
+import BoatMapPosition from "../components/UI/Map/BoatMapPosition";
 
 const AdvertisementPage = () => {
     const match = useRouteMatch()
@@ -29,6 +30,7 @@ const AdvertisementPage = () => {
     return (
         <SplitScreenLayout
             contentLeft={boat &&
+                // <BoatMapPosition boatPosition={boat.isDocked.coordinates}/>
                 <SlideShow images={boat.hasAdvertisement.images}/>
             }
             contentRight={contentRight}
