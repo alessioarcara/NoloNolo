@@ -10,7 +10,9 @@ const userLoader = new DataLoader(userIds => {
 const user = async userId => {
     try {
         return await userLoader.load(userId.toString());
-    } catch (err) { throw err }
+    } catch (err) {
+        throw err
+    }
 }
 
 const transformBoat = boat => {
@@ -28,7 +30,10 @@ const transformBoat = boat => {
                 }
             })
         },
-        isDocked: boat.location,
+        isDocked: {
+            ...boat.location,
+            coordinates: boat.location.geometry.coordinates
+        },
         totalCount: boat.totalCount,
         minPrice: parseFloat(boat.minPrice),
         maxPrice: parseFloat(boat.maxPrice)

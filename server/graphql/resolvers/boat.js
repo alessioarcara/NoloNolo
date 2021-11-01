@@ -87,12 +87,16 @@ module.exports = {
         try {
             const boat = new Boat({
                 yard, model, length, maximumCapacity, boatType, shipowner: req.userId,
-                location: {...isDocked},
+                location: {
+                    ...isDocked,
+                    geometry: {
+                        coordinates: [isDocked.longitude, isDocked.latitude]
+                    }
+                },
                 advertisement: {...publishAdvertisement}
             })
-
             await boat.save();
-            return {addBoatData: {...boat._doc, hasAdvertisement: boat.advertisement, isDocked: boat.location}}
+            return {addBoatData: transformBoat(boat._doc)}
         } catch (err) {
             throw new Error(`Can't add boat. ${err}`)
         }

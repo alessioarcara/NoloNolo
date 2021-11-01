@@ -89,6 +89,7 @@ exports.body_informations = (boatId) => {
                     region
                     city
                     harbour
+                    coordinates 
                  }
               }
               boatRentals(boatId: $boatId) {
