@@ -49,19 +49,17 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     <div className={classes.model}>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri</div>
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
+                    <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
                     <div className={classes.info}>
                         <StarIcon/>
                         <span>{reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}</span>
                         <span>({reviews.length})</span>
                     </div>
-                    <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
-                    {/*{totalFare !== 0 && <div className={classes.total}>{`€ ${totalFare}/totale`}</div>}*/}
-                    <div className={classes['btn-ctn']}>
+                    {/*<div className={classes['btn-details']}>*/}
                         <Link to={location => `${location.pathname}/${id}`}>
-                            <button className={classes['btn-details']}>Dettagli</button>
+                            <button className={`btn btn-primary ${classes['btn-details']}`}>Dettagli</button>
                         </Link>
-                    </div>
-                    <button className={`btn btn-primary ${classes['btn-details']}`}>Dettagli</button>
+                    {/*</div>*/}
                 </div>
             </div>
         </>
