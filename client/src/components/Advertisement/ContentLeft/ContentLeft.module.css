@@ -1,0 +1,9 @@
+.container {
+    height: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        height: 11.4rem;
+    }
+}

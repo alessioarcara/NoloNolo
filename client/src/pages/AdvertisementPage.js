@@ -1,10 +1,12 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import {useRouteMatch} from "react-router-dom"
 import useHttp from "../hooks/use-http";
 import {body_boat} from "../helpers/httpConfig";
-import SlideShow from "../components/UI/SlideShow/SlideShow";
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
+import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
+import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
+import classes from '../components/Advertisement/ContentRight/ContentRight.module.css';
 
 const AdvertisementPage = () => {
     const match = useRouteMatch()
@@ -28,10 +30,9 @@ const AdvertisementPage = () => {
 
     return (
         <SplitScreenLayout
-            contentLeft={boat &&
-                <SlideShow images={boat.hasAdvertisement.images}/>
-            }
+            contentLeft={boat && <ContentLeft isVisible={visibleContent} images={boat.hasAdvertisement.images}/>}
             contentRight={contentRight}
+            rightLayoutContentClassName={classes[`layout-content-right`]}
         />
     );
 };
