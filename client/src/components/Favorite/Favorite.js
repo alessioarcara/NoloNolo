@@ -17,20 +17,24 @@ const Favorite = ({boatId, advIsFavorite}) => {
         const transformData = resData => {
             const favoritesPayload = resData[Object.keys(resData)[0]]
             favoritesPayload.favoritesData &&
-                dispatch('TOGGLE_FAV', {...favoritesPayload.favoritesData, advIsFavorite: true})
+            dispatch('TOGGLE_FAV', {...favoritesPayload.favoritesData, advIsFavorite: true})
             return favoritesPayload
         }
         !advIsFavorite ? toggleFavorite({body: body_addFavorite({boatId}), token}, transformData) :
             toggleFavorite({body: body_removeFavorite({boatId}), token}, transformData)
     }
 
+    console.log(advIsFavorite)
+
     return (
         <>
-            {status === 'completed' && payload && payload.favoritesProblem && <Modal title="Error">{payload.favoritesProblem}</Modal>}
+            {status === 'completed' && payload && payload.favoritesProblem &&
+            <Modal title="Error">{payload.favoritesProblem}</Modal>}
             {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
             {isLoggedIn &&
             <div onClick={toggleFavoritesStatusHandler}
                  className={advIsFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
+            >
                 <HeartIcon className={classes.heart}/>
             </div>
             }
