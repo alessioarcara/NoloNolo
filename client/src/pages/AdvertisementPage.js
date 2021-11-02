@@ -18,10 +18,8 @@ const AdvertisementPage = () => {
 
     useEffect(() => {
         const transformData = resData => resData.boat
-        fetchBoat({body: body_boat({boatId: boatId})}, transformData)
+        fetchBoat({body: body_informations({boatId: boatId})}, transformData)
     }, [fetchBoat, boatId])
-        fetchBoat({body: body_informations({boatId: match.params.boatId})}, transformData)
-    }, [fetchBoat, match.params.boatId])
 
     let contentRight = <LoadingSpinner/>
     if (status === "completed" && boat) {
@@ -31,10 +29,6 @@ const AdvertisementPage = () => {
     return (
         <SplitScreenLayout
             contentLeft={boat && <ContentLeft isVisible={visibleContent} images={boat.hasAdvertisement.images}/>}
-            contentLeft={boat &&
-                // <BoatMapPosition boatPosition={boat.isDocked.coordinates}/>
-                <SlideShow images={boat.hasAdvertisement.images}/>
-            }
             contentRight={contentRight}
             rightLayoutContentClassName={classes[`layout-content-right`]}
         />

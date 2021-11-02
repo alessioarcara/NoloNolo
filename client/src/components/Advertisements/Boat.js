@@ -49,7 +49,6 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     <div className={classes.model}>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri</div>
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
-                    <div className={classes.price}>{`€ ${dailyFee}/al giorno`}</div>
                     <div className={classes.info}>
                         <StarIcon/>
                         <span>{reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}</span>
