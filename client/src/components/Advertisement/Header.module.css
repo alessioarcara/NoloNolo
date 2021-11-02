@@ -1,0 +1,31 @@
+.header-bar {
+    position: relative;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    height: 3.5rem;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+}
+
+.btn-back svg {
+
+}
+
+.container svg {
+    width: 1.5rem;
+}
+
+.container svg path {
+    stroke: black;
+}
+
+@media only screen and (min-width: 570px) {
+    .header-bar {
+        display: none;
+    }
+}

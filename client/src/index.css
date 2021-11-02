@@ -45,7 +45,7 @@ hr {
   font-size: 1em;
   font-weight: bold;
   border-radius: 0.5rem;
-  padding: 0.425rem 2rem;
+  padding: 0.425rem 1rem;
   cursor: pointer;
   transition: all 0.425s ease;
 }
@@ -55,7 +55,7 @@ hr {
 .btn:disabled:active {
   background-color: #ccc;
   color: #3f3f3f;
-  border-color: #ccc;
+  border: 1px solid #ccc;
   cursor: not-allowed;
 }
 
@@ -68,7 +68,7 @@ hr {
 .btn-primary:hover {
   background-color: #FF2677;
   color: #fff;
-  border: 0;
+  border: 1px solid;
 }
 
 .btn-outline-primary {
