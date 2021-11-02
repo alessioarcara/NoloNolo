@@ -60,11 +60,13 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                         <span>{reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}</span>
                         <span>({reviews.length})</span>
                     </div>
-                    {/*<div className={classes['btn-details']}>*/}
-                        <Link to={`${location.pathname}/${id}`}>
-                            <button className={`btn btn-primary ${classes['btn-details']}`}>Dettagli</button>
-                        </Link>
-                    {/*</div>*/}
+                    {/* Button in desktop */}
+                    <button
+                        className={`btn btn-primary ${classes['btn-details']}`}
+                        onClick={() => goAdvertisementPage(location.pathname)}
+                    >
+                        Dettagli
+                    </button>
                 </div>
             </div>
         </>
