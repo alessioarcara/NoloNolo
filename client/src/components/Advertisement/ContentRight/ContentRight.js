@@ -2,7 +2,7 @@ import ContentSwitch from "./ContentSwitch";
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import classes from "../ContentRight/ContentRight.module.css";
 
-const ContentRight = ({setVisibleContent}) => {
+const ContentRight = ({setVisibleContent, images}) => {
 
     return (
         <>

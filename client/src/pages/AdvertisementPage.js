@@ -24,7 +24,7 @@ const AdvertisementPage = () => {
     let contentRight = <LoadingSpinner/>
     let contentLeft = <LoadingSpinner/>
     if (status === "completed" && boat) {
-        contentRight = (<ContentRight setVisibleContent={setVisibleContent}/>)
+        contentRight = (<ContentRight setVisibleContent={setVisibleContent} images={boat.hasAdvertisement.images}/>)
         contentLeft = (<ContentLeft isVisible={visibleContent} images={boat.hasAdvertisement.images}/>)
     }
 
