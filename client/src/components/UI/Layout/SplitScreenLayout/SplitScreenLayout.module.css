@@ -1,15 +1,20 @@
 .layout {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: stretch;
     background: linear-gradient(0deg, red, rebeccapurple, rosybrown);
 }
 
 .left-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
+    flex-direction: column;
     width: 50%;
+    height: 100vh;
     align-items: center;
     justify-content: center;
     background-color: transparent;
@@ -18,6 +23,7 @@
 
 .right-layout {
     display: flex;
+    flex-direction: column;
     width: 50%;
     align-items: center;
     justify-content: center;
@@ -25,18 +31,17 @@
 }
 
 .right-layout-actions {
-    position: absolute;
-    bottom: 0;
-    width: 50%;
-    border-top: 1px solid rgb(221, 221, 221);
+    position: relative;
+    width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 569px) {
     .layout {
         flex-direction: column;
     }
 
     .left-layout {
+        position: static;
         height: 35%;
         width: 100%;
     }
