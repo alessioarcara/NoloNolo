@@ -1,9 +1,18 @@
-.container {
-    height: 0;
+.container-mobile {
+    text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
-    .container {
-        height: 11.4rem;
+.container-desktop {
+    background: #9e9d9d;
+    display: none;
+}
+
+.custom-images {
+    border-radius: 0;
+}
+
+@media only screen and (min-width: 570px) {
+    .container-mobile {
+        display: none;
     }
 }

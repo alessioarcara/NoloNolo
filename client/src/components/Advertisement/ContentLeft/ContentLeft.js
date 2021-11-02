@@ -11,6 +11,10 @@ const ContentLeft = ({isVisible, images}) => {
                 {!isVisible && <p>Ciao</p>}
                 {isVisible && <SlideShow images={images}/>}
             </div>
+
+            <div className={classes['container-desktop']}>
+                <p>MAPPA DESKTOP</p>
+            </div>
         </>
     );
 }
