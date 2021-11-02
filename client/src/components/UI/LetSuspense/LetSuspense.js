@@ -1,51 +1,44 @@
 import React, {Fragment, useEffect, useReducer} from "react";
-
-const initialState = { isChecked: false, component: [] }
-
-const suspenseReducer = (state, action) => {
-    switch (action.type) {
-        case "CHILDREN": return { isChecked: true, component: action.component };
-        case "PLACEHOLDER": return { isChecked: false, component: action.component };
-        default: return initialState;
-    }
-}
+import {SEND_CHILDREN, SEND_PLACEHOLDER} from "../../../helpers/constants";
+import letSuspenseReducer from "../../../reducers/letSuspenseReducer";
+import {initialState} from "../../../reducers/letSuspenseReducer";
 
 const LetSuspense = ({
                          condition,
                          placeholder: Placeholder,
                          multiplier = 1,
-                         delay = 0,
-                         checkOnce,
+                         delay = 2000,
                          children }) => {
-    const [{component, isChecked} , dispatch] = useReducer(suspenseReducer, initialState)
+    const [{component} , dispatch] = useReducer(letSuspenseReducer, initialState)
 
     useEffect(() => {
-        // checkOnce && dispatch( {type: "CHILDREN", component: [children]} )
-        if (isChecked) { return; }
+        /* create delayedTimeout for setTimeout */
+        let delayedTimeout = null
 
-        let delayedTimeout = null;
+        /* send children with dispatch else send placeholder (from 0 to multiplier - 1) */
         if (condition) {
             if (delay) {
                 delayedTimeout = setTimeout(() => {
-                    dispatch({type: "CHILDREN", component: [children]})
-                }, delay);
-            } else {
-                dispatch({type: "CHILDREN", component: [children]})
+                    dispatch({type: SEND_CHILDREN, payload: [children]})
+                }, delay)
             }
         } else {
-            let tempComponent = [];
+            let tempComponent = []
             for (let i = 0; i < multiplier; i++) {
-                tempComponent.push(<Placeholder key={i}/>);
+                tempComponent.push(<Placeholder key={i}/>)
             }
-            dispatch({type: "PLACEHOLDER", component: tempComponent});
+            dispatch({type: SEND_PLACEHOLDER, payload: tempComponent})
         }
+
+        /* Cleanup function to reset timeout */
         return () => {
             if (delayedTimeout) {
-                clearTimeout(delayedTimeout);
+                clearTimeout(delayedTimeout)
             }
         };
-    }, [checkOnce, delay, isChecked, multiplier, condition, children]);
+    }, [delay, multiplier, condition, children])
 
+    /* Print all components (placeholders or children) */
     return (
         <>
             {component.map((component, index) => (

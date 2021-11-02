@@ -1,17 +1,14 @@
-.slideshowSlider {
-    white-space: nowrap;
-}
-
 .slideshow {
     position: relative;
-    margin: 0 auto;
     overflow: hidden;
     width: 100%;
-    object-fit: cover;
+    height: 100%;
 }
 
 .slideshowSlider {
     white-space: nowrap;
+    height: 100%;
+    border-radius: 1rem 1rem 0 0;
 }
 
 .slideshowDots {
@@ -24,11 +21,10 @@
 
 .style-arrow svg {
     position: absolute;
-    top: 0;
-    margin-top: 6rem;
+    top: 50%;
+    bottom: 50%;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 50%;
-    stroke-width: 1;
     width: 2rem;
     cursor: pointer;
 }
@@ -45,7 +41,7 @@
     left: 1rem;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 569px) {
     .style-arrow {
         display: none;
     }

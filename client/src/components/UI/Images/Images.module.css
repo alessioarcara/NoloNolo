@@ -1,25 +1,27 @@
 .slide {
     display: inline-block;
     width: 100%;
-    border-radius: 40px;
+    height: 100%;
 }
 
 .card-image {
-    height: 12rem;
+    height: 100%;
     width: 100%;
-    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 1rem 1rem 0 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 569px) {
     .slide {
         scroll-snap-align: start;
-        scroll-snap-stop: normal;
+        /*scroll-snap-stop: normal;*/
     }
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 901px) {
     .card-image {
-        height: 15rem;
-        border-radius: 1rem;
+        border-radius: 1rem 0 0 1rem;
     }
 }

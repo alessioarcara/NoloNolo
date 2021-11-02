@@ -4,7 +4,7 @@ import PencilIcon from "../UI/icons/PencilIcon";
 const Footer = () => {
     return (
         <>
-            <div className={classes.foot}>
+            <div className={classes.footer}>
                 <PencilIcon/>
                 <div className={classes['grid-footer']}>
                     <div>Arcara Alessio</div>

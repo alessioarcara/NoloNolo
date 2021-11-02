@@ -3,27 +3,27 @@ import classes from './BoatPlaceholder.module.css';
 export const BoatPlaceholder = () => {
     return (
         <div className={classes["placeholder-card"]}>
-            <figure className={`${classes["img-container"]} ${classes.loading}`}/>
+            <div className={`${classes["img-container"]} ${classes.loading}`}/>
             <div className={classes["adapter-details"]}>
-                <p
+                <div
                     className={classes["loading"]}
-                    style={{width: "10rem", height: 30}}
+                    style={{width: "10rem", height: 15}}
                 />
-                <p
+                <div
                     className={classes["loading"]}
-                    style={{width: "12rem", height: 9, margin: "8px 0"}}
+                    style={{width: "8rem", height: 6}}
                 />
-                <p
+                <div
+                    className={`${classes["loading"]} ${classes['price']}`}
+                    style={{width: '11rem', height: 8}}
+                />
+                <div
                     className={classes["loading"]}
-                    style={{width: "10.7rem", height: 12, margin: "8px 0"}}
+                    style={{width: "4rem", height: 10, alignSelf: "flex-end", marginTop: "auto"}}
                 />
-                <p
-                    className={classes["loading"]}
-                    style={{width: "9.5rem", height: 13, margin: "8px 0"}}
-                />
-                <p
+                <div
                     className={`${classes.loading} ${classes['btn-container']}`}
-                    style={{width: "8.5rem", height: "2.4rem"}}
+                    style={{height: "2rem"}}
                 />
             </div>
         </div>
