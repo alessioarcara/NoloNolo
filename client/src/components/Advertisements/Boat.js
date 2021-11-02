@@ -5,12 +5,14 @@ import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
 import AuthContext from "../../store/auth-context";
-import {Link} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import {formatNumber} from "../../helpers/utils";
 
 const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, advIsFavorite}) => {
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
     const {isLoggedIn} = useContext(AuthContext)
+    const history = useHistory()
+    const location = useLocation()
 
     const averageReviews = useCallback(
         () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
@@ -25,6 +27,10 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
         )
         setIsFavorite(prevState => !prevState)
     }
+
+    const goAdvertisementPage = useCallback((pathname) => {
+        history.push(`${pathname}/${id}`)
+    }, [history, id])
 
     return (
         <>
@@ -45,7 +51,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     </>
                 </SlideShow>
                 {/* The second part with information */}
-                <div className={classes.adapter} onClick={() => alert('Premuto!')}>
+                <div className={classes.adapter} onClick={() => goAdvertisementPage(location.pathname)}>
                     <div className={classes.model}>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri</div>
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
@@ -55,7 +61,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                         <span>({reviews.length})</span>
                     </div>
                     {/*<div className={classes['btn-details']}>*/}
-                        <Link to={location => `${location.pathname}/${id}`}>
+                        <Link to={`${location.pathname}/${id}`}>
                             <button className={`btn btn-primary ${classes['btn-details']}`}>Dettagli</button>
                         </Link>
                     {/*</div>*/}

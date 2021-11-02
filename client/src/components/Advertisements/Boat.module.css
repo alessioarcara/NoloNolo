@@ -120,7 +120,8 @@
 
     /* Remove events onClick in all adapter */
     .adapter {
-        pointer-events: none;
+        pointer-events: none !important;
+        cursor: not-allowed;
     }
 
     /* Add pointer events in btn-details */
