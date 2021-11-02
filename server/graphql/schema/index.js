@@ -5,6 +5,7 @@ const locationType = require('./location')
 const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
+const favoriteType = require("./favorite");
 
 
 const rootSchema = `
@@ -12,6 +13,7 @@ const rootSchema = `
         ${boatType}
         ${locationType}
         ${advertisementType}
+        ${favoriteType}
         ${reviewType}
         ${rentalType}
         
@@ -22,6 +24,7 @@ const rootSchema = `
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
+            favorites: [Boat!]
         }
         
         type RootMutation {
@@ -30,6 +33,8 @@ const rootSchema = `
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
+            addFavorite(boatId: ID!): FavoritesPayload!
+            removeFavorite(boatId: ID!): FavoritesPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             rentBoat(inputRental: RentalInput!): rentBoatPayload!
         }

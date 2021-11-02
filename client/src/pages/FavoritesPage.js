@@ -8,7 +8,7 @@ const FavoritesPage = () => {
 
     let content;
 
-    if (store.userFavorites.length === 0) {
+    if (store.userFavorites && store.userFavorites.length === 0) {
         content = <p>You got no favorites yet. Start adding some?</p>
     } else {
         content = <BoatListLayout><BoatList boats={store.userFavorites}/></BoatListLayout>;

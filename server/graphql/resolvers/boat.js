@@ -7,9 +7,7 @@ module.exports = {
         try {
             const boat = await Boat.findById(boatId).lean()
             return transformBoat(boat)
-        } catch (err) {
-            `Can't find boat. ${err}`
-        }
+        } catch (err) { throw new Error(`Can't find boat. ${err}`) }
     },
     boats: async ({filter, skip, take}) => {
         const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
@@ -76,9 +74,7 @@ module.exports = {
         try {
             const boats = await Boat.aggregate(pipeline)
             return boats.map(transformBoat)
-        } catch (err) {
-            throw new Error(`Can't find boats. ${err}`)
-        }
+        } catch (err) { throw new Error(`Can't find boats. ${err}`) }
     },
     addBoat: async (args, {req}) => {
         req.userId = "61013cd2cbcb99c21fbe91e2"
@@ -97,8 +93,6 @@ module.exports = {
             })
             await boat.save();
             return {addBoatData: transformBoat(boat._doc)}
-        } catch (err) {
-            throw new Error(`Can't add boat. ${err}`)
-        }
+        } catch (err) { throw new Error(`Can't add boat. ${err}`) }
     }
 }

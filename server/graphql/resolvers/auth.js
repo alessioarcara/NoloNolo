@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail} = require("../../helpers/problemMessages");
 
-const ACCESS_EXPIRE_TIME = '1m'
+const ACCESS_EXPIRE_TIME = '60m'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {
@@ -87,6 +87,6 @@ module.exports = {
             res.clearCookie('refresh-token')
 
             return true
-        } catch (err) {`Can't invalide tokens. ${err}`}
+        } catch (err) { throw new Error(`Can't invalide tokens. ${err}`) }
     }
 }

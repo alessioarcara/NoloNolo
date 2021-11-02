@@ -114,6 +114,75 @@ exports.body_search = (contains) => {
         variables: {filter: {contains}}
     }
 }
+exports.body_favorites = {
+    query: `
+          query {
+              favorites {
+                  _id
+                  model
+                  maximumCapacity
+                  hasAdvertisement {
+                      images
+                      description
+                      dailyFee
+                      reviews {
+                          rating
+                      }
+                  }
+              }  
+          }
+    `,
+}
+exports.body_addFavorite = (boatId) => {
+    return {
+        query: `
+           mutation($boatId: ID!) {
+              addFavorite(boatId: $boatId) {
+                  favoritesData {
+                      _id
+                      model
+                      maximumCapacity
+                      hasAdvertisement {
+                          images
+                          description
+                          dailyFee
+                          reviews {
+                              rating
+                          }
+                      }
+                  }
+                  favoritesProblem
+              }
+           }
+           `,
+        variables: boatId
+    }
+};
+exports.body_removeFavorite = (boatId) => {
+    return {
+        query: `
+           mutation($boatId: ID!) {
+              removeFavorite(boatId: $boatId) {
+                  favoritesData {
+                      _id
+                      model
+                      maximumCapacity
+                      hasAdvertisement {
+                          images
+                          description
+                          dailyFee
+                          reviews {
+                              rating
+                          }
+                      }
+                  }
+                  favoritesProblem
+              }
+           }
+           `,
+        variables: boatId
+    }
+};
 exports.body_refresh = {
     query: `
           query {

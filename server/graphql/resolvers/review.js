@@ -1,23 +1,24 @@
 const Boat = require('../../models/boat');
+const {boatNotFound} = require("../../helpers/problemMessages");
 
 module.exports = {
     publishReview: async (args, {req}) => {
+        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
         const {boatId, body, rating} = args.inputReview;
         try {
             req.userId = "6101517c380b91c517a31039"
             const boat = await Boat.findOne({ _id: boatId } )
-            console.log(boat.advertisement.reviews)
+            if (!boat) { return { publishReviewProblem: boatNotFound } }
+
             boat.advertisement.reviews.push( { customer: req.userId, body, rating } )
             await boat.save()
 
-            if (!boat) { return { publishReviewProblem: "Boat is still active?" } }
             const review = boat.advertisement.reviews.slice(-1)[0]
 
             return { publishReviewData: { ...review._doc, creator: review.customer } }
         } catch (err) { `Can't publish review. ${err}` }
     }
 }
-// if (!req.isAuth) { throw new Error("Unauthenticated.") }
 
 // const review = await Boat.findOneAndUpdate(
 //     { _id: boatId },

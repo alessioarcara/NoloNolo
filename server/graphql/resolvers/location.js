@@ -21,6 +21,6 @@ module.exports = {
             return locations.map(location => {
                 return { city: location._id.city, region: location._id.region }
             })
-        } catch (err) { `Can't find locations. ${err}` }
+        } catch (err) { throw new Error(`Can't find locations. ${err}`) }
     }
 }

@@ -1,6 +1,6 @@
 import {initStore} from "./store";
 
-const configureStore = () => {
+const configureStore = fetchedFavorites => {
     const actions = {
         TOGGLE_FAV: (curState, favoriteAdv) => {
             const advIsFavorite = curState.userFavorites.some(userFavAdv => userFavAdv._id === favoriteAdv._id)
@@ -11,7 +11,7 @@ const configureStore = () => {
         }
     }
     initStore(actions, {
-        userFavorites: []
+        userFavorites: fetchedFavorites || []
     })
 }
 

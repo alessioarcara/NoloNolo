@@ -10,7 +10,7 @@ const Results = ({status, boats, switchPage, numberPage}) => {
 
     const store = useStore()[0]
 
-    const updatedBoats = boats && boats.map(boat => {
+    const updatedBoats = boats && store.userFavorites && boats.map(boat => {
         if (store.userFavorites.some(userFav => userFav._id === boat._id)) {
             return {
                 ...boat,
@@ -32,7 +32,7 @@ const Results = ({status, boats, switchPage, numberPage}) => {
                 {/*    multiplier={10}*/}
                 {/*    delay={1000}*/}
                 {/*>*/}
-                    <BoatList boats={updatedBoats}/>
+                    <BoatList boats={updatedBoats || boats}/>
                 {/*</LetSuspense>*/}
             </BoatListLayout>
             {boats && boats.length > 0 &&
