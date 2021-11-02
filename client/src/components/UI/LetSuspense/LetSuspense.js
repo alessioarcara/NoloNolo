@@ -9,15 +9,9 @@ const LetSuspense = ({
                          multiplier = 1,
                          delay = 2000,
                          children }) => {
-    const [{component, isChecked} , dispatch] = useReducer(letSuspenseReducer, initialState)
+    const [{component} , dispatch] = useReducer(letSuspenseReducer, initialState)
 
     useEffect(() => {
-        /* If isChecked === true then the data has been loaded */
-        // if (isChecked) {
-        //     console.log('isChecked')
-        //     dispatch ({type: SEND_CHILDREN, payload: [children]})
-        // }
-
         /* create delayedTimeout for setTimeout */
         let delayedTimeout = null
 
@@ -42,7 +36,7 @@ const LetSuspense = ({
                 clearTimeout(delayedTimeout)
             }
         };
-    }, [delay, isChecked, multiplier, condition, children])
+    }, [delay, multiplier, condition, children])
 
     /* Print all components (placeholders or children) */
     return (

@@ -3,15 +3,14 @@ import classes from "./Images.module.css";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Images = ({images}) => {
-    // const [isLoading, setIsLoading] = useState(true)
-    //
-    // const imageLoadedHandler = useCallback(() => setIsLoading(false), [])
+    const [isLoading, setIsLoading] = useState(true)
+    const imageLoadedHandler = useCallback(() => setIsLoading(false), [])
 
     return (
         <div className={classes.slide}>
-            {/*{isLoading && <LoadingSpinner/>}*/}
+            {isLoading && <LoadingSpinner/>}
             <img
-                // onLoad={imageLoadedHandler}
+                onLoad={imageLoadedHandler}
                 src={images}
                 alt={''}
                 className={classes['card-image']}

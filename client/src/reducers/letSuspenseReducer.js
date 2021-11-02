@@ -1,12 +1,12 @@
 import {SEND_CHILDREN, SEND_PLACEHOLDER} from "../helpers/constants";
 
-export const initialState = { isChecked: false, component: [] }
+export const initialState = { component: [] }
 
 const letSuspenseReducer = (state, {type, payload}) => {
     if (type === SEND_CHILDREN)
-        return {isChecked: true, component: payload}
+        return { component: payload }
     if (type === SEND_PLACEHOLDER)
-        return {isChecked: false, component: payload}
+        return { component: payload }
 
     return initialState
 }

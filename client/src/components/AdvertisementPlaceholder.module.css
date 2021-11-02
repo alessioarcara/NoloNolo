@@ -39,7 +39,7 @@
     height: 100%;
     /* Animation starting point */
     transform: translateX(-100%);
-    /* Right and left color transparent, center is white with alpha channel*/
+    /* Right and left color transparent, center is white with alpha channel */
     background: linear-gradient(
             90deg,
             transparent,
