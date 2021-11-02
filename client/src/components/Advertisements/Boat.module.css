@@ -11,6 +11,7 @@
     /* No selection text in the card */
     user-select: none;
     -webkit-user-select: none;
+    overflow: hidden;
 }
 
 .card:hover {
