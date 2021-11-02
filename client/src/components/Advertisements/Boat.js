@@ -15,7 +15,7 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
 
 
     const goAdvertisementPage = () => {
-        history.push(`${history.location.pathname}/${id}`)
+        history.push(`/boats/${id}`)
     }
 
     return (
