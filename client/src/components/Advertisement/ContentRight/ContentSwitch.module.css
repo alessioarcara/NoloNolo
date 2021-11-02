@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    height: 2.5rem;
+    align-items: center;
+    background-color: #efefef;
+    border-bottom: 1px solid #000;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    position: sticky;
+    top: 0;
+}
+
+.bar {
+    background-color: #000;
+    width: 1px;
+    height: 100%;
+}
+
+.map, .img {
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 570px) {
+    .container {
+        display: none;
+    }
+}

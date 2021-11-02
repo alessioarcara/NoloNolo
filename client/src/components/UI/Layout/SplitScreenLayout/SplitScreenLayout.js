@@ -8,11 +8,12 @@ const SplitScreenLayout = ({contentLeft, contentRight, actions, layoutClassName,
                 {contentLeft}
             </div>
             <div className={`${classes["right-layout"]} ${rightLayoutClassName}`}>
-                <div className={`${classes["right-layout-content"]} ${rightLayoutContentClassName}`}>
+                <div className={`${rightLayoutContentClassName}`}>
                     {contentRight}
                 </div>
                 <div className={`${classes["right-layout-actions"]} ${rightLayoutActionsClassName}`}>
-                    {actions}
+                    <p>CIAO!</p>
+                    {/*{actions}*/}
                 </div>
             </div>
         </section>
