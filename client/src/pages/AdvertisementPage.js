@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
-import {useRouteMatch} from "react-router-dom"
+import {useParams} from "react-router-dom"
 import useHttp from "../hooks/use-http";
 import {body_boat} from "../helpers/httpConfig";
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
@@ -9,23 +9,18 @@ import ContentRight from "../components/Advertisement/ContentRight/ContentRight"
 import classes from '../components/Advertisement/ContentRight/ContentRight.module.css';
 
 const AdvertisementPage = () => {
-    const match = useRouteMatch()
+    const [visibleContent, setVisibleContent] = useState(false)
+    const { boatId } = useParams()
     const {status, data: boat, sendRequest: fetchBoat} = useHttp(true)
 
     useEffect(() => {
         const transformData = resData => resData.boat
-        fetchBoat({body: body_boat({boatId: match.params.boatId})}, transformData)
-    }, [fetchBoat, match.params.boatId])
+        fetchBoat({body: body_boat({boatId: boatId})}, transformData)
+    }, [fetchBoat, boatId])
 
     let contentRight = <LoadingSpinner/>
     if (status === "completed" && boat) {
-        contentRight = (
-            <div>
-                <p>{boat.model}</p>
-                <p>{boat.hasAdvertisement.description}</p>
-            </div>
-        )
-
+        contentRight = (<ContentRight setVisibleContent={setVisibleContent}/>)
     }
 
     return (
