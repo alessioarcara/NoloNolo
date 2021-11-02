@@ -27,11 +27,20 @@ const AdvertisementPage = () => {
     }
 
     return (
-        <SplitScreenLayout
-            contentLeft={boat && <ContentLeft isVisible={visibleContent} images={boat.hasAdvertisement.images}/>}
-            contentRight={contentRight}
-            rightLayoutContentClassName={classes[`layout-content-right`]}
-        />
+        <>
+            <LetSuspense
+                condition={status === 'completed'}
+                placeholder={AdvertisementPlaceholder}
+                multiplier={1}
+                delay={2000}
+            >
+                <SplitScreenLayout
+                    contentRight={contentRight}
+                    contentLeft={contentLeft}
+                    rightLayoutContentClassName={classes[`layout-content-right`]}
+                />
+            </LetSuspense>
+        </>
     );
 };
 
