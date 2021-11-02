@@ -2,18 +2,18 @@ import React, {useEffect, useState} from "react";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import {useParams} from "react-router-dom"
 import useHttp from "../hooks/use-http";
-import {body_boat} from "../helpers/httpConfig";
 import {body_informations} from "../helpers/httpConfig";
-import SlideShow from "../components/UI/SlideShow/SlideShow";
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
 import classes from '../components/Advertisement/ContentRight/ContentRight.module.css';
 import BoatMapPosition from "../components/UI/Map/BoatMapPosition";
+import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
+import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 
 const AdvertisementPage = () => {
     const [visibleContent, setVisibleContent] = useState(false)
-    const { boatId } = useParams()
+    const {boatId} = useParams()
     const {status, data: boat, sendRequest: fetchBoat} = useHttp(true)
 
     useEffect(() => {
@@ -22,8 +22,10 @@ const AdvertisementPage = () => {
     }, [fetchBoat, boatId])
 
     let contentRight = <LoadingSpinner/>
+    let contentLeft = <LoadingSpinner/>
     if (status === "completed" && boat) {
         contentRight = (<ContentRight setVisibleContent={setVisibleContent}/>)
+        contentLeft = (<ContentLeft isVisible={visibleContent} images={boat.hasAdvertisement.images}/>)
     }
 
     return (
