@@ -1,0 +1,22 @@
+.boat-title {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.content-reviews {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.content-place {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.place-text {
+    font-size: 1.1em;
+    font-family: "Noto Sans Old Italic";
+    font-weight: 700;
+}

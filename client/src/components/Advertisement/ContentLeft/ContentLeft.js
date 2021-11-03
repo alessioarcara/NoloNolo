@@ -6,7 +6,7 @@ const ContentLeft = ({isVisible, images}) => {
 
     return (
         <>
-            <Header/>
+            <div className={classes['mobile-header']}><Header/></div>
             <div className={classes['container-mobile']}>
                 {!isVisible && <p>MAPPA MOBILE</p>}
                 {isVisible && <SlideShow classNameSlideShowSlider={classes['custom-images']} images={images}/>}

@@ -4,7 +4,7 @@ export const initialState = { component: [] }
 
 const letSuspenseReducer = (state, {type, payload}) => {
     if (type === SEND_CHILDREN)
-        return { component: payload }
+        return { isChecked: true, component: payload }
     if (type === SEND_PLACEHOLDER)
         return { component: payload }
 
