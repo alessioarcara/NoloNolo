@@ -24,8 +24,6 @@ const Favorite = ({boatId, advIsFavorite}) => {
             toggleFavorite({body: body_removeFavorite({boatId}), token}, transformData)
     }
 
-    console.log(advIsFavorite)
-
     return (
         <>
             {status === 'completed' && payload && payload.favoritesProblem &&

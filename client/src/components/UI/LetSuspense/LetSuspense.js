@@ -1,33 +1,42 @@
-import React, {Fragment, useEffect, useReducer} from "react";
-import {SEND_CHILDREN, SEND_PLACEHOLDER} from "../../../helpers/constants";
-import letSuspenseReducer from "../../../reducers/letSuspenseReducer";
-import {initialState} from "../../../reducers/letSuspenseReducer";
+import React, {Fragment, useEffect, useState} from "react";
 
 const LetSuspense = ({
                          condition,
                          placeholder: Placeholder,
                          multiplier = 1,
-                         delay = 2000,
-                         children }) => {
-    const [{component} , dispatch] = useReducer(letSuspenseReducer, initialState)
+                         initialDelay = 2000,
+                         checkOnce,
+                         children
+                     }) => {
+    const [component, setComponent] = useState([]);
+    const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
+        if (checkOnce && isChecked) {
+            setComponent([children]);
+            return;
+        }
+
         /* create delayedTimeout for setTimeout */
+        let delay = initialDelay || 0;
         let delayedTimeout = null
 
         /* send children with dispatch else send placeholder (from 0 to multiplier - 1) */
         if (condition) {
             if (delay) {
                 delayedTimeout = setTimeout(() => {
-                    dispatch({type: SEND_CHILDREN, payload: [children]})
+                    setComponent([children])
                 }, delay)
+            } else {
+                setComponent([children])
             }
+            setIsChecked(true)
         } else {
             let tempComponent = []
             for (let i = 0; i < multiplier; i++) {
                 tempComponent.push(<Placeholder key={i}/>)
             }
-            dispatch({type: SEND_PLACEHOLDER, payload: tempComponent})
+            setComponent([tempComponent])
         }
 
         /* Cleanup function to reset timeout */
@@ -36,7 +45,8 @@ const LetSuspense = ({
                 clearTimeout(delayedTimeout)
             }
         };
-    }, [delay, multiplier, condition, children])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [condition, children])
 
     /* Print all components (placeholders or children) */
     return (

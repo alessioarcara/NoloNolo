@@ -29,8 +29,9 @@ const Results = ({status, boats, switchPage, numberPage}) => {
                 <LetSuspense
                     condition={status === 'completed'}
                     placeholder={BoatPlaceholder}
+                    initialDelay={2000}
+                    checkOnce={false}
                     multiplier={20}
-                    delay={2000}
                 >
                     <BoatList boats={updatedBoats || boats}/>
                 </LetSuspense>
