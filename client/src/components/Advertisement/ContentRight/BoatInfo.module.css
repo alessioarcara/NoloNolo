@@ -20,3 +20,9 @@
     font-family: "Noto Sans Old Italic";
     font-weight: 700;
 }
+
+@media only screen and (max-width: 768px) {
+    .place-text {
+        font-size: 0.9rem;
+    }
+}

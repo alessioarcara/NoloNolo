@@ -33,6 +33,10 @@ const Advertisement = () => {
                 ownerEmail={boat.owner.email}
                 ownerAvatar={boat.owner.avatar}
                 boatDescription={boat.hasAdvertisement.description}
+                boatYard={boat.yard}
+                boatLength={boat.length}
+                boatMaxCapacity={boat.maximumCapacity}
+                boatType={boat.boatType}
             />
         )
         contentLeft = (

@@ -17,7 +17,7 @@ const BoatInfo = ({model, reviews, place}) => {
             {/* Content place */}
             <div className={classes['content-place']}>
                 <RegionIcon/>
-                <span className={classes['place-text']}>{place.city ? `${place.city} - ${place.region}` : `${place.region}`}</span>
+                <span className={classes['place-text']}>{`${place.harbour}, ${place.city}, ${place.region}`}</span>
             </div>
             <hr/>
         </>

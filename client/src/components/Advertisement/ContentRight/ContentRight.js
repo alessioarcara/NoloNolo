@@ -4,6 +4,9 @@ import ShipownerInfo from "./ShipownerInfo";
 import Header from "../Header";
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import classes from "../ContentRight/ContentRight.module.css";
+import BoatDetails from "./BoatDetails";
+import BoatAvailability from "./BoatAvailability";
+import BoatReviews from "./BoatReviews";
 
 const ContentRight = ({
                           setVisibleContent,
@@ -13,7 +16,11 @@ const ContentRight = ({
                           images,
                           ownerEmail,
                           ownerAvatar,
-                          boatDescription
+                          boatDescription,
+                          boatYard,
+                          boatLength,
+                          boatMaxCapacity,
+                          boatType
                      }) => {
     return (
         <>
@@ -35,6 +42,18 @@ const ContentRight = ({
                     shipownerEmail={ownerEmail}
                     shipownerAvatar={ownerAvatar}
                     shipownerPresentation={boatDescription}
+                />
+                <BoatDetails
+                    yard={boatYard}
+                    length={boatLength}
+                    maximumCapacity={boatMaxCapacity}
+                    type={boatType}
+                />
+                <BoatAvailability
+
+                />
+                <BoatReviews
+                    reviews={boatReviews}
                 />
             </div>
         </>

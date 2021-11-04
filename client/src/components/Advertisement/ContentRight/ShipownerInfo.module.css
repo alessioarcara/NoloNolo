@@ -1,48 +1,36 @@
 .shipowner {
     display: flex;
-    font-weight: bold;
-    font-size: 1em;
     justify-content: space-between;
     align-items: center;
 }
 
 .shipowner-name {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.container-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.info {
     font-size: 0.8em;
     font-style: italic;
 }
 
 .shipowner-avatar {
     margin-right: 1rem;
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border: 1px solid black;
     border-radius: 50%;
 }
 
 .shipowner-avatar img {
-    align-items: center;
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
 }
-
-.shipowner-presentation {
-    font-family: "Noto Sans Old Italic", serif;
-    font-size: 1em;
-}
-
-.show-more-content {
-    font-size: 0.8em;
-    text-decoration: underline;
-    color: #808080;
-    cursor: pointer;
-}
-
-/*@media only screen and (min-width: 769px) {*/
-/*    .shipowner-info-container {*/
-/*        height: auto;*/
-/*    }*/
-
-/*    .show-more-content {*/
-/*        display: none;*/
-/*    }*/
-/*}*/
