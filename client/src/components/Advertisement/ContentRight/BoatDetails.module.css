@@ -29,3 +29,9 @@
     width: 3rem;
     height: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+    .details {
+        grid-template-columns: 1fr;
+    }
+}
