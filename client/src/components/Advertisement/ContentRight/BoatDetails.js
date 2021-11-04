@@ -5,7 +5,6 @@ import Motorboat from "../../UI/icons/BoatIcons/MotorBoatIcon";
 import Sailboat from "../../UI/icons/BoatIcons/SailBoatIcon";
 import Catamaran from "../../UI/icons/BoatIcons/CatamaranIcon";
 
-
 const BoatDetails = ({yard, length, maximumCapacity, type}) => {
 
     const boatTypes = {
