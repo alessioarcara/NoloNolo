@@ -36,3 +36,6 @@ export const formatNumber = (number) =>
 export const formatDate = (date) =>
     new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
         .toISOString().split('T')[0]
+
+/* Settiamo la media delle reviews */
+export const averageReviews = (reviews => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length)

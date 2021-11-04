@@ -22,13 +22,13 @@
     display: none;
 }
 
-@media only screen and (max-width: 569px) {
+@media only screen and (max-width: 768px) {
     .images-container {
         display: none;
     }
 }
 
-@media only screen and (min-width: 570px) {
+@media only screen and (min-width: 769px) {
     .desktop-header {
         position: sticky;
         top: 0;

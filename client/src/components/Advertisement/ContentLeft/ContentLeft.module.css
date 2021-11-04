@@ -20,7 +20,7 @@
     border-radius: 0;
 }
 
-@media only screen and (min-width: 570px) {
+@media only screen and (min-width: 769px) {
     .container-mobile {
         display: none;
     }

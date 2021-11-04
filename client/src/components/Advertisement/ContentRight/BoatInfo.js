@@ -4,10 +4,6 @@ import classes from "./BoatInfo.module.css";
 import {averageReviews} from "../../../helpers/utils";
 
 const BoatInfo = ({model, reviews, place}) => {
-    const averageReviews = useCallback(() =>
-            reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
-        [reviews]);
-
     return (
         <>
             {/* Content boat model */}
@@ -15,7 +11,7 @@ const BoatInfo = ({model, reviews, place}) => {
             {/* Content reviews */}
             <div className={classes['content-reviews']}>
                 <StarIcon/>
-                {reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}
+                {reviews.length > 0 ? averageReviews(reviews).toFixed(1) : '0.0'}
                 <span>{`(${reviews.length} recensioni)`}</span>
             </div>
             {/* Content place */}

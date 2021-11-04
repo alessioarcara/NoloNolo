@@ -5,18 +5,14 @@ import SlideShow from "../UI/SlideShow/SlideShow";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import {useStore} from "../../hooks-store/store";
 import AuthContext from "../../store/auth-context";
-import {Link, useHistory, useLocation} from "react-router-dom";
-import {formatNumber} from "../../helpers/utils";
+import {useHistory, useLocation} from "react-router-dom";
+import {averageReviews, formatNumber} from "../../helpers/utils";
 
 const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, advIsFavorite}) => {
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
     const {isLoggedIn} = useContext(AuthContext)
     const history = useHistory()
     const location = useLocation()
-
-    const averageReviews = useCallback(
-        () => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length,
-        [reviews]);
 
     const dispatch = useStore()[1]
 
@@ -57,7 +53,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
                     <div className={classes.info}>
                         <StarIcon/>
-                        <span>{reviews.length > 0 ? averageReviews().toFixed(1) : '0.0'}</span>
+                        <span>{reviews.length > 0 ? averageReviews(reviews).toFixed(1) : '0.0'}</span>
                         <span>({reviews.length})</span>
                     </div>
                     {/* Button in desktop */}
