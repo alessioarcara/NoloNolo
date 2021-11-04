@@ -1,11 +1,7 @@
-.layout-content-right {
-    width: 100%;
-}
-
 .container {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 2rem;
     gap: 0.5rem;
     overflow-y: scroll;
 }
@@ -15,21 +11,20 @@
 }
 
 .images-container {
-    /*width: 100%;*/
-    padding: 1rem;
+    padding: 2rem 2rem 0 2rem;
+}
+
+.custom-images img {
+    border-radius: 1rem;
 }
 
 .desktop-header {
     display: none;
 }
 
-.custom {
-    border-radius: 1rem;
-}
-
 @media only screen and (max-width: 569px) {
     .images-container {
-        /*display: none;*/
+        display: none;
     }
 }
 

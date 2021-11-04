@@ -1,7 +1,7 @@
-import {useCallback} from "react";
-import classes from "./BoatInfo.module.css";
 import StarIcon from "../../UI/icons/StarIcon";
 import RegionIcon from "../../UI/icons/RegionIcon";
+import classes from "./BoatInfo.module.css";
+import {averageReviews} from "../../../helpers/utils";
 
 const BoatInfo = ({model, reviews, place}) => {
     const averageReviews = useCallback(() =>
