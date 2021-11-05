@@ -1,24 +1,13 @@
 import React, {useCallback} from "react";
-import {useState} from "react";
-import DayPicker from "../../UI/DatePicker/DayPicker";
-import classes from "./BoatAbailability.module.css";
+import DayPicker from "../../../UI/DatePicker/DayPicker";
+import classes from "./BoatAvailability.module.css";
 
-const BoatAvailability = ({place}) => {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-
-    const changeStartDateHandler = useCallback((start) => {
-        setStartDate(start)
-    }, [])
-
-    const changeEndDateHandler = useCallback((end) => {
-        setEndDate(end)
-    }, [])
+const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEndDateHandler, place}) => {
 
     const cancelSelectionHandler = useCallback(() => {
-        setStartDate(null)
-        setEndDate(null)
-    }, [])
+        changeStartDateHandler(null)
+        changeEndDateHandler(null)
+    }, [changeStartDateHandler, changeEndDateHandler])
 
     return (
         <>

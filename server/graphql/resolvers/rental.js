@@ -13,12 +13,10 @@ module.exports = {
         }
     },
     rentBoat: async (args, {req}) => {
-        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
-        req.userId = "6101ba0e9edb920b862e8c46"
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
         const {boatId, from, to, bill} = args.inputRental
-
         try {
-            const boat = await Boat.findOne({_id: "61095452d94d352989a19da0"})
+            const boat = await Boat.findOne({_id: boatId})
             if (!boat) {return {rentBoatProblem: "Boat is still active?"}}
 
             if (dateToString(from) > dateToString(to)) {
@@ -31,7 +29,7 @@ module.exports = {
              *     (StartA <= EndB) and (EndA >= StartB)      *
              *------------------------------------------------*/
             const rentals = await Rental.find({
-                $and: [{boat: "61095452d94d352989a19da0"}, {fromDate: {$lte: to}}, {toDate: {$gte: from}}]
+                $and: [{boat: boatId}, {fromDate: {$lte: to}}, {toDate: {$gte: from}}]
                 })
 
             if (rentals.length > 0) {return {rentBoatProblem: "Already rented for these dates."}}

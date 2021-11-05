@@ -12,7 +12,9 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
     const [isFavorite, setIsFavorite] = useState(advIsFavorite);
     const {isLoggedIn} = useContext(AuthContext)
     const history = useHistory()
-    const location = useLocation()
+
+    // TODO: in react-router v6 use useSearchParams
+    const search = useLocation().search
 
     const dispatch = useStore()[1]
 
@@ -24,8 +26,8 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
         setIsFavorite(prevState => !prevState)
     }
 
-    const goAdvertisementPage = useCallback((pathname) => {
-        history.push(`${pathname}/${id}`)
+    const goAdvertisementPage = useCallback((start, end) => {
+        history.push({pathname: `/boats/${id}`, state: {startUrlDate: start, endUrlDate: end}})
     }, [history, id])
 
     return (
@@ -47,7 +49,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     </>
                 </SlideShow>
                 {/* The second part with information */}
-                <div className={classes.adapter} onClick={() => goAdvertisementPage(location.pathname)}>
+                <div className={classes.adapter} onClick={goAdvertisementPage.bind(this, new URLSearchParams(search).get('from'), new URLSearchParams(search).get('to'))}>
                     <div className={classes.model}>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri</div>
                     <div className={`${classes.price} ${classes['text-style']}`}>{`Da ${formatNumber(dailyFee)} /al giorno`}</div>
@@ -59,7 +61,7 @@ const Boat = ({ id, images, model, description, maxCapacity, dailyFee, reviews, 
                     {/* Button in desktop */}
                     <button
                         className={`btn btn-primary ${classes['btn-details']}`}
-                        onClick={() => goAdvertisementPage(location.pathname)}
+                        onClick={goAdvertisementPage.bind(this, new URLSearchParams(search).get('from'), new URLSearchParams(search).get('to'))}
                     >
                         Dettagli
                     </button>

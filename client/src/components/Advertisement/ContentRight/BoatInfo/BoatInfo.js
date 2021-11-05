@@ -1,6 +1,6 @@
-import RegionIcon from "../../UI/icons/RegionIcon";
+import RegionIcon from "../../../UI/icons/RegionIcon";
 import classes from "./BoatInfo.module.css";
-import CityIcon from "../../UI/icons/CityIcon";
+import CityIcon from "../../../UI/icons/CityIcon";
 
 const BoatInfo = ({model, place}) => {
     return (

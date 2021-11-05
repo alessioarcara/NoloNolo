@@ -101,6 +101,21 @@ exports.body_informations = (boatId) => {
         variables: boatId
     }
 };
+exports.body_rentBoat = ({boatId, from, to, bill}) => {
+    return {
+        query: `
+            mutation($rentalData: RentalInput!) {
+                rentBoat(inputRental: $rentalData) {
+                    rentBoatData {
+                        _id
+                    }
+                    rentBoatProblem
+                }
+            }
+        `,
+        variables: {rentalData: {boatId, from, to, bill}}
+    }
+}
 exports.body_search = (contains) => {
     return {
         query: `

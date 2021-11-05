@@ -1,5 +1,5 @@
 import classes from "./ShipownerInfo.module.css";
-import ReadMoreText from "../../UI/ReadMoreText/ReadMoreText";
+import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
 
 const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation}) => {
     return (

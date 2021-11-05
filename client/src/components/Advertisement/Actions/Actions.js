@@ -1,7 +1,8 @@
 import classes from './Actions.module.css';
 import {formatNumber, formatDayShortMonthDate} from "../../../helpers/utils";
 
-const Actions = ({dailyFee}) => {
+// TODO: actions is really a good name for component?? =_=
+const Actions = ({dailyFee, rentBoatHandler}) => {
 
     console.log(dailyFee)
     return (
@@ -13,7 +14,11 @@ const Actions = ({dailyFee}) => {
                     {`${formatDayShortMonthDate(new Date(1635698577168))} - ${formatDayShortMonthDate(new Date(1635698577168))}`}
                 </span>
             </div>
-            <button className='btn btn-primary'>Prenota</button>
+            {/* TODO: greys out this button if:
+                - non authenticated
+                - not selected dates
+            */}
+            <button onClick={rentBoatHandler} className='btn btn-primary'>Prenota</button>
         </div>
     );
 }

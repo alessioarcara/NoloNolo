@@ -1,11 +1,11 @@
 import ContentSwitch from "./ContentSwitch";
-import BoatInfo from "./BoatInfo";
-import ShipownerInfo from "./ShipownerInfo";
+import BoatInfo from "./BoatInfo/BoatInfo";
+import ShipownerInfo from "./ShipownerInfo/ShipownerInfo";
 import Header from "../Header";
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import classes from "../ContentRight/ContentRight.module.css";
-import BoatDetails from "./BoatDetails";
-import BoatAvailability from "./BoatAvailability";
+import BoatDetails from "./BoatDetails/BoatDetails";
+import BoatAvailability from "./BoatAvailability/BoatAvailability";
 import BoatReviews from "./BoatReviews/BoatReviews";
 
 const ContentRight = ({
@@ -20,7 +20,11 @@ const ContentRight = ({
                           boatYard,
                           boatLength,
                           boatMaxCapacity,
-                          boatType
+                          boatType,
+                          startDate,
+                          endDate,
+                          changeStartDateHandler,
+                          changeEndDateHandler,
                      }) => {
     return (
         <>
@@ -50,6 +54,10 @@ const ContentRight = ({
                 />
                 <BoatAvailability
                     place={place}
+                    startDate={startDate}
+                    endDate={endDate}
+                    changeStartDateHandler={changeStartDateHandler}
+                    changeEndDateHandler={changeEndDateHandler}
                 />
                 <BoatReviews
                     reviews={boatReviews}

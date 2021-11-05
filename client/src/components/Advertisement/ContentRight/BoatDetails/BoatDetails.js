@@ -1,9 +1,9 @@
 import classes from './BoatDetails.module.css';
-import GroupIcon from "../../UI/icons/GroupIcon";
-import Dinghy from "../../UI/icons/BoatIcons/InflatableBoatIcon"
-import Motorboat from "../../UI/icons/BoatIcons/MotorBoatIcon";
-import Sailboat from "../../UI/icons/BoatIcons/SailBoatIcon";
-import Catamaran from "../../UI/icons/BoatIcons/CatamaranIcon";
+import GroupIcon from "../../../UI/icons/GroupIcon";
+import Dinghy from "../../../UI/icons/BoatIcons/InflatableBoatIcon"
+import Motorboat from "../../../UI/icons/BoatIcons/MotorBoatIcon";
+import Sailboat from "../../../UI/icons/BoatIcons/SailBoatIcon";
+import Catamaran from "../../../UI/icons/BoatIcons/CatamaranIcon";
 
 const BoatDetails = ({yard, length, maximumCapacity, type}) => {
 
