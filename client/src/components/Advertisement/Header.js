@@ -1,13 +1,13 @@
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import BackIcon from "../UI/icons/BackIcon";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import classes from './Header.module.css';
 
 const Header = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const goBackClickHandler = () => {
-        history.goBack();
+        navigate(-1);
     }
 
     return (

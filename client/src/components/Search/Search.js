@@ -2,18 +2,18 @@ import React, {useCallback, useReducer} from "react";
 import SelectPlaces from "./SelectPlaces/SelectPlaces";
 import SelectDates from "./SelectDates/SelectDates";
 import {formatDate} from "../../helpers/utils";
-import {useHistory} from "react-router-dom/cjs/react-router-dom";
+import {useNavigate} from "react-router-dom";
 import searchReducer, {initialState} from "../../reducers/searchReducer";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../../helpers/constants";
 
 
 const Search = ({closeModalHandler}) => {
-    const history = useHistory()
+    const navigate = useNavigate()
     const [state, dispatch] = useReducer(searchReducer, initialState);
 
     const searchClickHandler = useCallback(() => {
-        history.push(`/boats?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
-    }, [history, state])
+        navigate(`/boats?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
+    }, [navigate, state])
     const moveClickHandler = useCallback((city, region) => {
         dispatch({ type: SWITCH_SEARCH, payload: {city, region}})
     }, []);

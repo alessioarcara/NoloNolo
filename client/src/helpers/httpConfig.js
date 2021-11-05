@@ -183,20 +183,29 @@ exports.body_removeFavorite = (boatId) => {
         variables: boatId
     }
 };
+exports.body_userBoats = {
+    query: `
+           query {
+               boatsByUser {
+                   _id
+               }
+           }
+           `
+};
 exports.body_refresh = {
     query: `
           query {
-            refreshToken {
-              userId
-              token
-            }  
+              refreshToken {
+                  userId
+                  token
+              }  
           }
         `,
 };
 exports.invalidate = {
     query: `
           mutation {
-            invalidateTokens
+              invalidateTokens
           }
         `,
 };

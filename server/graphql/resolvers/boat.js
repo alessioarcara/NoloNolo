@@ -76,6 +76,14 @@ module.exports = {
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`) }
     },
+    boatsByUser: async (args, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        try {
+            const boats = await Boat.find({}).lean()
+            console.log(boats)
+            // return transformBoat(boat)
+        } catch (err) { throw new Error(`Can't find boats. ${err}`)}
+    },
     addBoat: async (args, {req}) => {
         req.userId = "61013cd2cbcb99c21fbe91e2"
         // if (!req.isAuth) { throw new Error("Unauthenticated.") }

@@ -1,4 +1,4 @@
-export const GRAPHQL_API_URL = "http://localhost:3010/api"
+export const GRAPHQL_API_URL = "http://192.168.178.38:3010/api"
 
 /* Constants filterReducer */
 export const MANAGE_BOATS = "MANAGE_BOATS"
@@ -13,9 +13,4 @@ export const SWITCH_SEARCH = "SWITCH_SEARCH"
 export const CHANGE_START_DATE = "CHANGE_START_DATE"
 export const CHANGE_END_DATE = "CHANGE_END_DATE"
 export const CLEAR_DATES = "CLEAR_DATES"
-
-/* Constants LetSuspense */
-export const SEND_CHILDREN = "SEND_CHILDREN"
-export const SEND_PLACEHOLDER = "SEND_PLACEHOLDER"
-
 

@@ -7,7 +7,6 @@ import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
 import classes from '../components/Advertisement/ContentRight/ContentRight.module.css';
-import BoatMapPosition from "../components/UI/Map/BoatMapPosition";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 

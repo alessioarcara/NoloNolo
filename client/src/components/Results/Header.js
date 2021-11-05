@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classes from './Header.module.css';
 import BackIcon from "../UI/icons/BackIcon";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
@@ -11,11 +11,11 @@ const Header = ({onSubmitFilters, boatsNumber, boatsMaxPrice}) => {
     const [show, setShow] = useState(false)
 
     /* history per tornare alla pagina precedente */
-    const history = useHistory()
+    const navigate = useNavigate()
 
     /* Function per tornare alla pagina precedente */
     const backPage = () => {
-        history.push('/')
+        navigate(-1)
     }
 
     const showHandler = () => {

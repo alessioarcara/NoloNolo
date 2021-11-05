@@ -2,12 +2,12 @@ import React, {useCallback} from "react"
 import classes from './Boat.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "../UI/SlideShow/SlideShow";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Favorite from "../Favorite/Favorite";
 import {formatNumber} from "../../helpers/utils";
 
 const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}) => {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const averageReviews = useCallback(
         () => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length,
@@ -15,7 +15,7 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
 
 
     const goAdvertisementPage = () => {
-        history.push(`/boats/${id}`)
+        navigate(`${id}`)
     }
 
     return (
