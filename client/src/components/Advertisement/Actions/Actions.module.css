@@ -1,6 +1,7 @@
 .data-container {
     display: flex;
     justify-content: space-between;
+    user-select: none;
 }
 
 .report {

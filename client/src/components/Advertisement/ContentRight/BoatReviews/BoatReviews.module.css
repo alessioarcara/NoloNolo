@@ -11,10 +11,49 @@
 }
 
 .container {
-    overflow: scroll;
+    position: relative;
     width: 100%;
+}
+
+.list-container {
+    overflow-x: scroll;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+.left-arrow, .right-arrow {
+    position: absolute;
+    width: 1.7rem;
+    height: 1.7rem;
+    top: 50%;
+    bottom: 50%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.325s ease;
+    z-index: 10000;
+}
+
+.left-arrow {
+    left: -1.5rem;
+}
+
+.right-arrow {
+    right: -1.5rem;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.5);;
+}
+
+.left-arrow svg, .right-arrow svg {
+    width: 1.7rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-arrow, .right-arrow {
+        display: none;
+    }
 }

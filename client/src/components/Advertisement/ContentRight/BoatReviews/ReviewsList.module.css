@@ -1,4 +1,5 @@
 .reviews-container {
+    position: relative;
     display: inline-flex;
     gap: 1rem;
 }
