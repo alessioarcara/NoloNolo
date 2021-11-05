@@ -6,7 +6,7 @@ import SlideShow from "../../UI/SlideShow/SlideShow";
 import classes from "../ContentRight/ContentRight.module.css";
 import BoatDetails from "./BoatDetails";
 import BoatAvailability from "./BoatAvailability";
-import BoatReviews from "./BoatReviews";
+import BoatReviews from "./BoatReviews/BoatReviews";
 
 const ContentRight = ({
                           setVisibleContent,
@@ -35,7 +35,6 @@ const ContentRight = ({
             <div className={classes.container}>
                 <BoatInfo
                     model={boatModel}
-                    reviews={boatReviews}
                     place={place}
                 />
                 <ShipownerInfo

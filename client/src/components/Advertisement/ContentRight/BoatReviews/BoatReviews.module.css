@@ -1,0 +1,20 @@
+.reviews-title {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0.5rem;
+}
+
+.reviews-info {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.container {
+    overflow: scroll;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

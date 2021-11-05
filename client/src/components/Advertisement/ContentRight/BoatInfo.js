@@ -1,23 +1,20 @@
-import StarIcon from "../../UI/icons/StarIcon";
 import RegionIcon from "../../UI/icons/RegionIcon";
 import classes from "./BoatInfo.module.css";
-import {averageReviews} from "../../../helpers/utils";
+import CityIcon from "../../UI/icons/CityIcon";
 
-const BoatInfo = ({model, reviews, place}) => {
+const BoatInfo = ({model, place}) => {
     return (
         <>
             {/* Content boat model */}
             <div className={classes['boat-title']}>{model}</div>
-            {/* Content reviews */}
-            <div className={classes['content-reviews']}>
-                <StarIcon/>
-                {reviews.length > 0 ? averageReviews(reviews).toFixed(1) : '0.0'}
-                <span>{`(${reviews.length} recensioni)`}</span>
-            </div>
-            {/* Content place */}
-            <div className={classes['content-place']}>
+            {/* Content place and harbour */}
+            <div className={classes['content-harbour']}>
                 <RegionIcon/>
-                <span className={classes['place-text']}>{`${place.harbour}, ${place.city}, ${place.region}`}</span>
+                <span className={classes['place-text']}>{place.harbour}</span>
+            </div>
+            <div className={classes['content-place']}>
+                <CityIcon/>
+                <span className={classes['place-text']}>{`${place.city}, ${place.region}`}</span>
             </div>
             <hr/>
         </>

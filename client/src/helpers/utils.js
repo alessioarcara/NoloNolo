@@ -32,10 +32,18 @@ export const formatNumber = (number) =>
         currency: 'EUR'
     }).format(number);
 
-/* Settiamo la data da dd/mm/yyyy a yyyy-mm-dd */
+/* Set data from dd/mm/yyyy to yyyy-mm-dd */
 export const formatDate = (date) =>
     new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
         .toISOString().split('T')[0]
 
-/* Settiamo la media delle reviews */
+/* Set averageReviews */
 export const averageReviews = (reviews => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length)
+
+/* Data with month name */
+export const formatLongMonthYearDate = (date) =>
+    new Date(date).toLocaleDateString("it-IT", {month: 'long', year: 'numeric'})
+
+/* Data with numeric day and short month */
+export const formatDayShortMonthDate = (date) =>
+    new Date(date).toLocaleDateString("it-IT", {day: 'numeric', month: 'short'})

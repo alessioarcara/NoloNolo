@@ -9,6 +9,7 @@ import LetSuspense from "../UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "./AdvertisementPlaceholder/AdvertisementPlaceholder";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import classes from "./Avertisement.module.css";
+import Actions from "./Actions/Actions";
 
 const Advertisement = () => {
     const [visibleContent, setVisibleContent] = useState(false)
@@ -22,6 +23,7 @@ const Advertisement = () => {
 
     let contentRight = <LoadingSpinner/>
     let contentLeft = <LoadingSpinner/>
+    let actions = <LoadingSpinner/>
     if (status === "completed" && boat) {
         contentRight = (
             <ContentRight
@@ -46,6 +48,11 @@ const Advertisement = () => {
                 boatPosition={boat.isDocked.coordinates}
             />
         )
+        actions = (
+            <Actions
+                dailyFee={boat.hasAdvertisement.dailyFee}
+            />
+        )
     }
 
     return (
@@ -59,6 +66,8 @@ const Advertisement = () => {
                 <SplitScreenLayout
                     contentRight={contentRight}
                     contentLeft={contentLeft}
+                    actions={actions}
+                    rightLayoutActionsClassName={classes['action-layout']}
                     rightLayoutContentClassName={classes[`layout-content-right`]}
                 />
             </LetSuspense>

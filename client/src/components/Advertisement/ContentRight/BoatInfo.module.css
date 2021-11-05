@@ -4,15 +4,14 @@
     font-weight: bold;
 }
 
-.content-reviews {
-    display: flex;
-    gap: 0.3rem;
-}
-
-.content-place {
+.content-place, .content-harbour {
     display: flex;
     align-items: center;
     gap: 0.3rem;
+}
+
+.content-place svg {
+    fill: black;
 }
 
 .place-text {
