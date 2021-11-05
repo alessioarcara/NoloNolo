@@ -23,10 +23,10 @@ function App() {
                 <Route path='/profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
                 <Route path='/boats/*' element={<ResultsPage/>}/>
                 <Route path='/boats/:boatId' element={<AdvertisementPage/>}/>
-                <Route path='/become-shipowner' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
+                <Route path='/become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
                 <Route path='*' element={<Navigate replace to="/" />}/>
             </Routes>
-            <NavigationBar/>
+            {/*<NavigationBar/>*/}
         </>
     );
 }
