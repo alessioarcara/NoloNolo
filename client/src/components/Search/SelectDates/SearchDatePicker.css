@@ -55,6 +55,12 @@
     color: black;
 }
 
+/*Not On Hover in disabled and outside days*/
+.react-datepicker__day--outside-month:hover, .react-datepicker__day--disabled:hover {
+    box-shadow: none;
+    color: #ccc;
+}
+
 /*Selected dates range*/
 .react-datepicker__day--in-range, .react-datepicker__day--keyboard-selected.react-datepicker__day--in-range {
     background-color: #efefef;
