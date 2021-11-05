@@ -49,7 +49,7 @@ const ContentRight = ({
                     type={boatType}
                 />
                 <BoatAvailability
-
+                    place={place}
                 />
                 <BoatReviews
                     reviews={boatReviews}

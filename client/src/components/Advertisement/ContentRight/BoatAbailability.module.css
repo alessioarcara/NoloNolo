@@ -3,3 +3,23 @@
     font-size: 1em;
     margin-bottom: 0.5rem;
 }
+
+.days-from {
+    font-size: 0.8em;
+    color: #6e6d6d;
+}
+
+.delete-dates {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .row-space {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}

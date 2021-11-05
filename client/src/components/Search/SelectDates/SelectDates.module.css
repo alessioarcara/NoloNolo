@@ -61,6 +61,10 @@
 }
 
 @media (max-width: 768px) {
+    .day-picker {
+        margin-top: 8rem;
+    }
+
     .btn-skip {
         width: 100%;
         padding-left: 3rem;
@@ -75,7 +79,7 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .header-datepicker {
         width: 90%;
     }
