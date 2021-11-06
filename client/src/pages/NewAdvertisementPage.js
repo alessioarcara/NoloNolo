@@ -18,7 +18,7 @@ const NewAdvertisementPage = () => {
     useEffect(() => {
         const transformData = resData => resData
         fetchUserBoats({body: body_userBoats, token: authCtx.token}, transformData)
-    }, [])
+    }, [fetchUserBoats, authCtx.token])
 
     return (
         <Routes>

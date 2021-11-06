@@ -47,3 +47,17 @@ export const authForm = {
         ]
     }
 };
+export const boatForm = {
+    yard: {
+        ...createFormFieldConfig('Yard', 'yard', 'text'),
+        validationRules: [
+            requiredRule("yard")
+        ]
+    },
+    model: {
+        ...createFormFieldConfig('Model', 'model', 'text'),
+        validationRules: [
+            requiredRule("model")
+        ]
+    },
+}

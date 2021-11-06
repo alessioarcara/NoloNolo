@@ -2,6 +2,7 @@ const DataLoader = require('dataloader');
 
 const User = require('../../models/user');
 const {dateToString} = require("../../helpers/date");
+const {boat} = require("./boat");
 
 const userLoader = new DataLoader(userIds => {
     return User.find({_id: {$in: userIds}});
@@ -44,7 +45,7 @@ const transformRental = rental => {
     return {
         ...rental._doc,
         from: dateToString(rental._doc.fromDate),
-        to: dateToString(rental._doc.toDate)
+        to: dateToString(rental._doc.toDate),
     }
 }
 
