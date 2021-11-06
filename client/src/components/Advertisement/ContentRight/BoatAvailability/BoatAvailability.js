@@ -1,6 +1,8 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useMemo} from "react";
 import DayPicker from "../../../UI/DatePicker/DayPicker";
 import classes from "./BoatAvailability.module.css";
+import Button from "../../../UI/Button/Button";
+import {rangeDate} from "../../../../helpers/utils";
 
 const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEndDateHandler, place}) => {
 
@@ -10,26 +12,27 @@ const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEnd
     }, [changeStartDateHandler, changeEndDateHandler])
 
     return (
-        <>
-            <div className={classes[`title`]}>Disponibilità</div>
-            <div className={classes[`row-space`]}>
-                <div className={classes[`days-from`]}>[7] giorni da {place.city}</div>
-                <DayPicker
-                    start={startDate}
-                    end={endDate}
-                    onChangeStartDate={changeStartDateHandler}
-                    onChangeEndDate={changeEndDateHandler}
-                    monthsShown={1}
-                />
+        <section className={classes[`boat-availability`]}>
+            <div>
+                <div className={classes[`title`]}>Disponibilità</div>
+                <div className={classes[`date-range`]}>{rangeDate(startDate, endDate)} giorni da {place.city}</div>
             </div>
-            <div
-                className={classes[`delete-dates`]}
+            <DayPicker
+                start={startDate}
+                end={endDate}
+                onChangeStartDate={changeStartDateHandler}
+                onChangeEndDate={changeEndDateHandler}
+                monthsShown={1}
+            />
+            <Button
+                className={`btn btn-secondary ${classes[`delete-dates`]}`}
                 onClick={cancelSelectionHandler}
+                disabled={!startDate || !endDate}
             >
                 Cancella date
-            </div>
+            </Button>
             <hr/>
-        </>
+        </section>
     );
 }
 

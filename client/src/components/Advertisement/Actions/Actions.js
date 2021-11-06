@@ -1,8 +1,9 @@
 import classes from './Actions.module.css';
 import {formatNumber, formatDayShortMonthDate} from "../../../helpers/utils";
+import Button from "../../UI/Button/Button";
 
 // TODO: actions is really a good name for component?? =_=
-const Actions = ({dailyFee, rentBoatHandler}) => {
+const Actions = ({dailyFee, rentBoatHandler, statusRental}) => {
 
     console.log(dailyFee)
     return (
@@ -18,7 +19,7 @@ const Actions = ({dailyFee, rentBoatHandler}) => {
                 - non authenticated
                 - not selected dates
             */}
-            <button onClick={rentBoatHandler} className='btn btn-primary'>Prenota</button>
+            <Button isLoading={statusRental === "pending"} onClick={rentBoatHandler} className='btn'>Prenota</Button>
         </div>
     );
 }

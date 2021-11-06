@@ -1,3 +1,5 @@
+import {useMemo} from "react";
+
 export const throttle = (callback, delay) => {
     let wait = false;
     return () => {
@@ -37,8 +39,14 @@ export const formatDate = (date) =>
     new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
         .toISOString().split('T')[0]
 
+export const rangeDate = ((startDate, endDate) => {
+    const oneDayMilliseconds = 24 * 60 * 60 * 1000
+    return endDate ? Math.round((new Date(endDate) - new Date(startDate)) / oneDayMilliseconds) : 0
+})
+
+
 /* Set averageReviews */
-export const averageReviews = (reviews => reviews.reduce((sum, { rating }) => sum + rating, 0 ) / reviews.length)
+export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length)
 
 /* Data with month name */
 export const formatLongMonthYearDate = (date) =>

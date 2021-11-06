@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import {body_informations, body_rentBoat} from "../../helpers/httpConfig";
@@ -8,7 +8,7 @@ import ContentLeft from "./ContentLeft/ContentLeft";
 import LetSuspense from "../UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "./AdvertisementPlaceholder/AdvertisementPlaceholder";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
-import classes from "./Avertisement.module.css";
+import classes from "./Advertisement.module.css";
 import Actions from "./Actions/Actions";
 import AuthContext from "../../store/auth-context";
 import {formatDate} from "../../helpers/utils";
@@ -20,12 +20,12 @@ const Advertisement = () => {
     const {token} = useContext(AuthContext)
 
     // TODO: if number of states explodes consider a reducer
-
-    const {status, data: boat, sendRequest} = useHttp(true)
+    const {status: statusBoat, data: boat, sendRequest: fetchBoat} = useHttp(true)
+    const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
 
     // TODO: should implement some bullet-proof method for convert string to date
-    const [startDate, setStartDate] = useState(new Date(location.state.startUrlDate) || null);
-    const [endDate, setEndDate] = useState(new Date(location.state.endUrlDate) || null);
+    const [startDate, setStartDate] = useState(location.state.startUrlDate ? new Date(location.state.startUrlDate) : null);
+    const [endDate, setEndDate] = useState(location.state.endUrlDate ? new Date(location.state.endUrlDate) : null);
 
     const changeStartDateHandler = useCallback((start) => {
         setStartDate(start)
@@ -37,13 +37,13 @@ const Advertisement = () => {
 
     useEffect(() => {
         const transformData = resData => resData.boat
-        sendRequest({body: body_informations({boatId})}, transformData)
-    }, [sendRequest, boatId])
+        fetchBoat({body: body_informations({boatId})}, transformData)
+    }, [fetchBoat, boatId])
 
     // TODO: this is only for example purpose :)
     // submit? button clickhandler?
     const rentBoatHandler = () => {
-        sendRequest({
+        rentBoat({
             body: body_rentBoat({
                 boatId,
                 from: formatDate(startDate),
@@ -58,9 +58,9 @@ const Advertisement = () => {
     let contentRight = <LoadingSpinner/>
     let contentLeft = <LoadingSpinner/>
     let actions = <LoadingSpinner/>
-    if (status === "completed" && boat) {
+    if (statusBoat === "completed" && boat) {
         contentRight = (
-            <ContentRight
+        <ContentRight
                 setVisibleContent={setVisibleContent}
                 boatModel={boat.model}
                 boatReviews={boat.hasAdvertisement.reviews}
@@ -90,6 +90,7 @@ const Advertisement = () => {
             <Actions
                 dailyFee={boat.hasAdvertisement.dailyFee}
                 rentBoatHandler={rentBoatHandler}
+                statusRental={statusRental}
             />
         )
     }
@@ -97,7 +98,7 @@ const Advertisement = () => {
     return (
         <>
             <LetSuspense
-                condition={status === 'completed'}
+                condition={statusBoat === 'completed'}
                 placeholder={AdvertisementPlaceholder}
                 multiplier={1}
                 delay={2000}
