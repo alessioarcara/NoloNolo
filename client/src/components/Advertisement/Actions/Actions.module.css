@@ -16,7 +16,7 @@
     font-style: italic;
 }
 
-.daily-fee {
+.daily-fee, .fixed-fee {
     font-size: 0.8rem;
     font-style: italic;
 }
@@ -24,4 +24,8 @@
 .date-range {
     font-size: 0.8rem;
     color: #6e6d6d;
+}
+
+.confirm-btn {
+    height: 2.7rem;
 }

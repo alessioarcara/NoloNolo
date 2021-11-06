@@ -1,25 +1,37 @@
 import classes from './Actions.module.css';
-import {formatNumber, formatDayShortMonthDate} from "../../../helpers/utils";
+import {formatNumber, formatDayMonthYearDate, rangeDate} from "../../../helpers/utils";
 import Button from "../../UI/Button/Button";
+import {useContext, useMemo} from "react";
+import AuthContext from "../../../store/auth-context";
 
-// TODO: actions is really a good name for component?? =_=
-const Actions = ({dailyFee, rentBoatHandler, statusRental}) => {
+const Actions = ({dailyFee, fixedFee, rentBoatHandler, statusRental, startDate, endDate}) => {
+    const { isLoggedIn: isLogged } = useContext(AuthContext)
+    const rangeDates = useMemo(() => rangeDate(startDate, endDate), [startDate, endDate])
 
-    console.log(dailyFee)
+    /* Options for date */
+    const options = {
+        day: 'numeric',
+        month: 'short'
+    }
+
     return (
         <div className={classes['data-container']}>
             <div className={classes.report}>
-                <span className={classes['total-price']}>{formatNumber(1700)}</span>
+                <span className={classes['total-price']}>{endDate && rangeDates !== 0 ? formatNumber((dailyFee * rangeDates) + fixedFee) : 'Seleziona date'}</span>
                 <span className={classes['daily-fee']}>{`${formatNumber(dailyFee)} /al giorno`}</span>
+                <span className={classes['fixed-fee']}>{`${formatNumber(fixedFee)} /fisso`}</span>
                 <span className={classes['date-range']}>
-                    {`${formatDayShortMonthDate(new Date(1635698577168))} - ${formatDayShortMonthDate(new Date(1635698577168))}`}
+                    {startDate && endDate && rangeDates !== 0 ? `${formatDayMonthYearDate(startDate, options)} - ${formatDayMonthYearDate(endDate, options)}` : 'Seleziona date'}
                 </span>
             </div>
-            {/* TODO: greys out this button if:
-                - non authenticated
-                - not selected dates
-            */}
-            <Button isLoading={statusRental === "pending"} onClick={rentBoatHandler} className='btn'>Prenota</Button>
+            <Button
+                className={`btn btn-outline-primary ${classes['confirm-btn']}`}
+                isLoading={statusRental === "pending"}
+                onClick={rentBoatHandler}
+                disabled={!startDate || !endDate || !isLogged || rangeDates === 0}
+            >
+                Prenota
+            </Button>
         </div>
     );
 }

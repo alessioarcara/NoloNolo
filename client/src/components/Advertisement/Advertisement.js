@@ -12,6 +12,7 @@ import classes from "./Advertisement.module.css";
 import Actions from "./Actions/Actions";
 import AuthContext from "../../store/auth-context";
 import {formatDate} from "../../helpers/utils";
+import Modal from "../UI/Modal/Modal";
 
 const Advertisement = () => {
     const [visibleContent, setVisibleContent] = useState(false)
@@ -19,7 +20,6 @@ const Advertisement = () => {
     const location = useLocation();
     const {token} = useContext(AuthContext)
 
-    // TODO: if number of states explodes consider a reducer
     const {status: statusBoat, data: boat, sendRequest: fetchBoat} = useHttp(true)
     const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
 
@@ -43,6 +43,7 @@ const Advertisement = () => {
     // TODO: this is only for example purpose :)
     // submit? button clickhandler?
     const rentBoatHandler = () => {
+        const transformData = resData => resData.rentBoat
         rentBoat({
             body: body_rentBoat({
                 boatId,
@@ -51,7 +52,7 @@ const Advertisement = () => {
                 bill: 1000
             }),
             token
-        })
+        }, transformData)
     }
 
 
@@ -60,24 +61,36 @@ const Advertisement = () => {
     let actions = <LoadingSpinner/>
     if (statusBoat === "completed" && boat) {
         contentRight = (
-        <ContentRight
-                setVisibleContent={setVisibleContent}
-                boatModel={boat.model}
-                boatReviews={boat.hasAdvertisement.reviews}
-                place={boat.isDocked}
-                images={boat.hasAdvertisement.images}
-                ownerEmail={boat.owner.email}
-                ownerAvatar={boat.owner.avatar}
-                boatDescription={boat.hasAdvertisement.description}
-                boatYard={boat.yard}
-                boatLength={boat.length}
-                boatMaxCapacity={boat.maximumCapacity}
-                boatType={boat.boatType}
-                startDate={startDate}
-                endDate={endDate}
-                changeStartDateHandler={changeStartDateHandler}
-                changeEndDateHandler={changeEndDateHandler}
-            />
+            <>
+                {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
+                    <Modal title="Errore">
+                        Prenotazione già presente
+                    </Modal>
+                }
+                {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
+                    <Modal title="Prenotato">
+                        Prenotazione avvenuta con successo!
+                    </Modal>
+                }
+                <ContentRight
+                    setVisibleContent={setVisibleContent}
+                    boatModel={boat.model}
+                    boatReviews={boat.hasAdvertisement.reviews}
+                    place={boat.isDocked}
+                    images={boat.hasAdvertisement.images}
+                    ownerEmail={boat.owner.email}
+                    ownerAvatar={boat.owner.avatar}
+                    boatDescription={boat.hasAdvertisement.description}
+                    boatYard={boat.yard}
+                    boatLength={boat.length}
+                    boatMaxCapacity={boat.maximumCapacity}
+                    boatType={boat.boatType}
+                    startDate={startDate}
+                    endDate={endDate}
+                    changeStartDateHandler={changeStartDateHandler}
+                    changeEndDateHandler={changeEndDateHandler}
+                />
+            </>
         )
         contentLeft = (
             <ContentLeft
@@ -89,8 +102,11 @@ const Advertisement = () => {
         actions = (
             <Actions
                 dailyFee={boat.hasAdvertisement.dailyFee}
+                fixedFee={boat.hasAdvertisement.fixedFee}
                 rentBoatHandler={rentBoatHandler}
                 statusRental={statusRental}
+                startDate={startDate}
+                endDate={endDate}
             />
         )
     }

@@ -1,10 +1,11 @@
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import './DayPicker.css';
+import './DayPicker.css'
 
 // date-fns internalization imposta la localizzazione
 import {registerLocale} from 'react-datepicker';
 import it from 'date-fns/locale/it';
+import React from "react";
 
 registerLocale('it', it);
 

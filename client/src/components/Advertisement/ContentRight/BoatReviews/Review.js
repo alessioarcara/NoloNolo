@@ -1,8 +1,13 @@
 import classes from './Review.module.css';
 import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
-import {formatLongMonthYearDate} from "../../../../helpers/utils";
+import {formatDayMonthYearDate} from "../../../../helpers/utils";
 
 const Review = ({avatar, creator, createdAt, body}) => {
+    const options = {
+        month: 'long',
+        year: 'numeric'
+    }
+
     return (
         <div className={classes['card-container']}>
             <div className={classes['user-info-container']}>
@@ -16,7 +21,7 @@ const Review = ({avatar, creator, createdAt, body}) => {
                 </div>
                 <div className={classes['user-container']}>
                     <div className={classes['name']}>{creator}</div>
-                    <div className={classes.data}>{formatLongMonthYearDate(+createdAt)}</div>
+                    <div className={classes.data}>{formatDayMonthYearDate(+createdAt, options)}</div>
                 </div>
             </div>
             <ReadMoreText

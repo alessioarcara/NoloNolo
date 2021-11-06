@@ -75,13 +75,12 @@ hr {
 .btn-outline-primary {
   background-color: #FF2677;
   color: #fff;
-  border: 0;
+  border: 1px solid #FF2677;
 }
 
 .btn-outline-primary:hover {
   background-color: white;
   color: #FF2677;
-  border: 1px solid #FF2677;
 }
 
 .btn-secondary {

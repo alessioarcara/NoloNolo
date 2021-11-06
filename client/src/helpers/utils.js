@@ -48,10 +48,6 @@ export const rangeDate = ((startDate, endDate) => {
 /* Set averageReviews */
 export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length)
 
-/* Data with month name */
-export const formatLongMonthYearDate = (date) =>
-    new Date(date).toLocaleDateString("it-IT", {month: 'long', year: 'numeric'})
-
-/* Data with numeric day and short month */
-export const formatDayShortMonthDate = (date) =>
-    new Date(date).toLocaleDateString("it-IT", {day: 'numeric', month: 'short'})
+/* Set general date with options */
+export const formatDayMonthYearDate = (date, options) =>
+    new Date(date).toLocaleDateString("it-IT", options)

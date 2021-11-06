@@ -1,3 +1,9 @@
+
+
+.datepicker > div > div > div.react-datepicker__month-container {
+    width: 100%;
+}
+
 .title {
     font-weight: bold;
     font-size: 1em;
@@ -25,6 +31,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    z-index: 0;
 }
 
 @media only screen and (max-width: 768px) {

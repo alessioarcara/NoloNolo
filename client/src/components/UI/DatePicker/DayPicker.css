@@ -30,6 +30,7 @@
 /*Calendar month dates area*/
 .react-datepicker__month {
     font-size: 0.8em;
+    margin: 0;
 }
 
 /*Calendar month date numbers*/
@@ -85,6 +86,7 @@
 .react-datepicker__day--outside-month {
     background-color: transparent !important;;
     color: transparent !important;
+    pointer-events: none;
 }
 
 /*Reverse dates selection*/
@@ -117,9 +119,9 @@
         padding-left: 0.8rem;
     }
 
-    .react-datepicker__current-month {
-        margin-top: 1.5rem;
-    }
+    /*.react-datepicker__current-month {*/
+    /*    margin-top: 1.5rem;*/
+    /*}*/
 
     .react-datepicker__day {
         width: 3em;
@@ -141,13 +143,14 @@
     /*day names distances*/
     .react-datepicker__day-name{
         font-size: 0.9em;
-        padding-right: 2.1rem;
+        /*padding-right: 2.1rem;*/
+        margin: 0 0.47rem;
     }
     .react-datepicker__day-name:nth-of-type(1){
-        padding-left: 0.9rem;
-        padding-right: 2.3rem;
+        /*padding-left: 0.9rem;*/
+        /*padding-right: 2.3rem;*/
     }
     .react-datepicker__day-name:nth-last-of-type(4), .react-datepicker__day-name:nth-last-of-type(3), .react-datepicker__day-name:nth-last-of-type(2){
-        margin-left: 0.5rem;
+        /*margin-left: 0.5rem;*/
     }
 }

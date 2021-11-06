@@ -11,8 +11,8 @@ const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation})
                 </div>
                 <div className={classes[`shipowner-avatar`]}>
                     <img
-                        // src={'https://media-assets.vanityfair.it/photos/614ca309da3ab1f8a363d56a/1:1/w_874,h_874,c_limit/donna-P.jpg'}
-                        src={shipownerAvatar}
+                        src={'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png'}
+                        // src={shipownerAvatar}
                         alt={''}
                     />
                 </div>

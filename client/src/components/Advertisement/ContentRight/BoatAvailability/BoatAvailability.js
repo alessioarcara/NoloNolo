@@ -17,13 +17,15 @@ const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEnd
                 <div className={classes[`title`]}>Disponibilità</div>
                 <div className={classes[`date-range`]}>{rangeDate(startDate, endDate)} giorni da {place.city}</div>
             </div>
-            <DayPicker
-                start={startDate}
-                end={endDate}
-                onChangeStartDate={changeStartDateHandler}
-                onChangeEndDate={changeEndDateHandler}
-                monthsShown={1}
-            />
+            <div className={classes.datepicker}>
+                <DayPicker
+                    start={startDate}
+                    end={endDate}
+                    onChangeStartDate={changeStartDateHandler}
+                    onChangeEndDate={changeEndDateHandler}
+                    monthsShown={1}
+                />
+            </div>
             <Button
                 className={`btn btn-secondary ${classes[`delete-dates`]}`}
                 onClick={cancelSelectionHandler}
