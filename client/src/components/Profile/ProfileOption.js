@@ -7,7 +7,7 @@ const ProfileOption = props => {
     return (
             <div className={classes.option}>
                 <Link className={classes.singleop} to={`${match.url}/${props.title.replace(/\s/g, "")}`}>
-                    {props.children}
+                    {props.icon}
                     <h4>{props.title}</h4>
                     <p>{props.content}</p>
                 </Link>

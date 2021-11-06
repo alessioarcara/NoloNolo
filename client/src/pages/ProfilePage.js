@@ -21,12 +21,17 @@ const ProfilePage = () => {
 
     let content = <LoadingSpinner/>
 
-    if (status === "completed" && user && user.userType === "shipowner") {
-        content = <ProfileShipowner/>
-    }
-
     if (status === "completed" && user && user.userType === "customer") {
         content = <ProfileCustomer/>
+    }
+
+    if (status === "completed" && user && user.userType === "shipowner") {
+        content = (
+            <>
+                <ProfileCustomer/>
+                <ProfileShipowner/>
+            </>
+        )
     }
 
     if (status === "completed" && error) {
@@ -34,9 +39,9 @@ const ProfilePage = () => {
     }
 
     return (
-            <Profile auth={authCtx}>
-                {content}
-            </Profile>
+        <Profile auth={authCtx}>
+            {content}
+        </Profile>
     );
 };
 
