@@ -6,6 +6,10 @@
     margin: 0.5rem;
 }
 
+.option > a > svg {
+    width: 50%;
+}
+
 .singleop {
     color: #bdbebd;
     position: relative;
@@ -22,19 +26,27 @@
     color: #e9e9e9;
 }
 
-
-@media all and (max-width: 768px) {
+@media only screen and (max-width: 568px) {
     .option {
-        border-radius: 0;
+        /*border-radius: 0;*/
+        /*margin: 0;*/
         width: 100%;
-        background-color: transparent;
-        margin: 0;
     }
 
-    .singleop {
-        font-size: 0.9em;
-        text-align: left;
+    .option > a > svg {
+        width: 25%;
     }
+
+    .option > a > p {
+        display: none;
+    }
+
+
+
+    /*.singleop {*/
+    /*    font-size: 0.9em;*/
+    /*    text-align: left;*/
+    /*}*/
 
     @keyframes animation {
         from {
@@ -44,5 +56,15 @@
         to {
             top: 0;
         }
+    }
+}
+
+@media only screen and (min-width:569px) and (max-width: 768px) {
+    .option {
+        width: 45%;
+    }
+
+    .option > a > svg {
+        width: 30%;
     }
 }
