@@ -43,7 +43,7 @@ module.exports = {
             })
 
             const result = await rental.save();
-            return { rentBoatData: result };
+            return { rentBoatData: transformRental(result._doc) };
         } catch (err) {
             `Can't rent boat. ${err}`
         }
