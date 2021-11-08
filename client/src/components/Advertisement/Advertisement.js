@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import {body_informations, body_rentBoat} from "../../helpers/httpConfig";
@@ -20,10 +20,9 @@ const Advertisement = () => {
     const location = useLocation();
     const {token} = useContext(AuthContext)
 
-    const {status: statusBoat, data: boat, sendRequest: fetchBoat} = useHttp(true)
+    const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat} = useHttp(true)
     const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
 
-    // TODO: should implement some bullet-proof method for convert string to date
     const [startDate, setStartDate] = useState(location.state.startUrlDate ? new Date(location.state.startUrlDate) : null);
     const [endDate, setEndDate] = useState(location.state.endUrlDate ? new Date(location.state.endUrlDate) : null);
 
@@ -36,12 +35,9 @@ const Advertisement = () => {
     }, [])
 
     useEffect(() => {
-        const transformData = resData => resData.boat
-        fetchBoat({body: body_informations({boatId})}, transformData)
+        fetchBoat({body: body_informations({boatId})}, resData => resData)
     }, [fetchBoat, boatId])
 
-    // TODO: this is only for example purpose :)
-    // submit? button clickhandler?
     const rentBoatHandler = () => {
         const transformData = resData => resData.rentBoat
         rentBoat({
@@ -55,11 +51,10 @@ const Advertisement = () => {
         }, transformData)
     }
 
-
     let contentRight = <LoadingSpinner/>
     let contentLeft = <LoadingSpinner/>
     let actions = <LoadingSpinner/>
-    if (statusBoat === "completed" && boat) {
+    if (statusBoat === "completed" && boatPayload) {
         contentRight = (
             <>
                 {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
@@ -74,35 +69,36 @@ const Advertisement = () => {
                 }
                 <ContentRight
                     setVisibleContent={setVisibleContent}
-                    boatModel={boat.model}
-                    boatReviews={boat.hasAdvertisement.reviews}
-                    place={boat.isDocked}
-                    images={boat.hasAdvertisement.images}
-                    ownerEmail={boat.owner.email}
-                    ownerAvatar={boat.owner.avatar}
-                    boatDescription={boat.hasAdvertisement.description}
-                    boatYard={boat.yard}
-                    boatLength={boat.length}
-                    boatMaxCapacity={boat.maximumCapacity}
-                    boatType={boat.boatType}
+                    boatModel={boatPayload.boat.model}
+                    boatReviews={boatPayload.boat.hasAdvertisement.reviews}
+                    place={boatPayload.boat.isDocked}
+                    images={boatPayload.boat.hasAdvertisement.images}
+                    ownerEmail={boatPayload.boat.owner.email}
+                    ownerAvatar={boatPayload.boat.owner.avatar}
+                    boatDescription={boatPayload.boat.hasAdvertisement.description}
+                    boatYard={boatPayload.boat.yard}
+                    boatLength={boatPayload.boat.length}
+                    boatMaxCapacity={boatPayload.boat.maximumCapacity}
+                    boatType={boatPayload.boat.boatType}
                     startDate={startDate}
                     endDate={endDate}
                     changeStartDateHandler={changeStartDateHandler}
                     changeEndDateHandler={changeEndDateHandler}
+                    alreadyRentedDates={boatPayload.boatRentals}
                 />
             </>
         )
         contentLeft = (
             <ContentLeft
                 isVisible={visibleContent}
-                images={boat.hasAdvertisement.images}
-                boatPosition={boat.isDocked.coordinates}
+                images={boatPayload.boat.hasAdvertisement.images}
+                boatPosition={boatPayload.boat.isDocked.coordinates}
             />
         )
         actions = (
             <Actions
-                dailyFee={boat.hasAdvertisement.dailyFee}
-                fixedFee={boat.hasAdvertisement.fixedFee}
+                dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
+                fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
                 rentBoatHandler={rentBoatHandler}
                 statusRental={statusRental}
                 startDate={startDate}

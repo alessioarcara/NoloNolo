@@ -25,6 +25,7 @@ const ContentRight = ({
                           endDate,
                           changeStartDateHandler,
                           changeEndDateHandler,
+                          alreadyRentedDates
                      }) => {
     return (
         <>
@@ -58,6 +59,7 @@ const ContentRight = ({
                     endDate={endDate}
                     changeStartDateHandler={changeStartDateHandler}
                     changeEndDateHandler={changeEndDateHandler}
+                    boatRentals={alreadyRentedDates}
                 />
                 <BoatReviews
                     reviews={boatReviews}

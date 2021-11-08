@@ -1,5 +1,3 @@
-import {useMemo} from "react";
-
 export const throttle = (callback, delay) => {
     let wait = false;
     return () => {

@@ -1,10 +1,17 @@
-import React, {useCallback, useMemo} from "react";
+import React, {useCallback} from "react";
 import DayPicker from "../../../UI/DatePicker/DayPicker";
 import classes from "./BoatAvailability.module.css";
 import Button from "../../../UI/Button/Button";
 import {rangeDate} from "../../../../helpers/utils";
 
-const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEndDateHandler, place}) => {
+const BoatAvailability = ({
+                              startDate,
+                              endDate,
+                              changeStartDateHandler,
+                              changeEndDateHandler,
+                              place,
+                              boatRentals
+}) => {
 
     const cancelSelectionHandler = useCallback(() => {
         changeStartDateHandler(null)
@@ -24,6 +31,7 @@ const BoatAvailability = ({startDate, endDate, changeStartDateHandler, changeEnd
                     onChangeStartDate={changeStartDateHandler}
                     onChangeEndDate={changeEndDateHandler}
                     monthsShown={1}
+                    boatRentals={boatRentals}
                 />
             </div>
             <Button
