@@ -55,7 +55,6 @@ const Advertisement = () => {
         }, transformData)
     }
 
-
     let contentRight = <LoadingSpinner/>
     let contentLeft = <LoadingSpinner/>
     let actions = <LoadingSpinner/>

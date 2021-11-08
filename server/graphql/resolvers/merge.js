@@ -42,11 +42,17 @@ const transformBoat = boat => {
 
 const transformRental = rental => {
     return {
-        ...rental._doc,
-        from: dateToString(rental._doc.fromDate),
-        to: dateToString(rental._doc.toDate)
+        ...rental,
+        customer: user.bind(this, rental),
+        from: dateToString(rental.fromDate),
+        to: dateToString(rental.toDate),
+        bill: parseFloat(rental.bill)
     }
 }
+
+// customer: User!
+//     boat: Boat!
+
 
 exports.transformBoat = transformBoat;
 exports.transformRental = transformRental;
