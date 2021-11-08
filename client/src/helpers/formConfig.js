@@ -1,10 +1,32 @@
 import React from "react";
 import Input from "../components/UI/Input/Input"
 
-import {requiredRule, minLengthRule, isEmailRule} from "./InputValidationRules"
+import {requiredRule, minLengthRule, isEmailRule, isNumberRule} from "./InputValidationRules"
+import SailBoatIcon from "../components/UI/icons/BoatIcons/SailBoatIcon";
+import MotorBoatIcon from "../components/UI/icons/BoatIcons/MotorBoatIcon";
+import CatamaranIcon from "../components/UI/icons/BoatIcons/CatamaranIcon";
+import InflatableBoatIcon from "../components/UI/icons/BoatIcons/InflatableBoatIcon";
+import NumberSpinner from "../components/UI/Input/NumberSpinner";
 
-function createFormFieldConfig(label, name, type, defaultValue = '') {
+function createFormFieldConfig(label, name, type, defaultValue = '', defaultConfig = 'input') {
     return {
+        renderNumberSpinner: (handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) => {
+            return (
+                <NumberSpinner
+                    key={key}
+                    name={name}
+                    type={type}
+                    label={label}
+                    isValid={isValid}
+                    isTouched={isTouched}
+                    value={value}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    errorMessage={error}
+                    classNames={classNames}
+                />
+            )
+        },
         renderInput: (handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) => {
             return (
                 <Input
@@ -24,6 +46,7 @@ function createFormFieldConfig(label, name, type, defaultValue = '') {
         },
         label,
         value: defaultValue,
+        config: defaultConfig,
         valid: false,
         errorMessage: '',
         touched: false,
@@ -60,4 +83,38 @@ export const boatForm = {
             requiredRule("model")
         ]
     },
+    length: {
+        ...createFormFieldConfig('Length', 'length', 'text', 0, 'number'),
+        validationRules: [
+            requiredRule("length"),
+            isNumberRule("length")
+        ]
+    },
+    maximumCapacity: {
+        ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', 0, 'number'),
+        validationRules: [
+            requiredRule("maximum capacity"),
+            isNumberRule("maximum capacity")
+        ]
+    },
+    // sailboat: {
+    //     ...createFormFieldConfig(<SailBoatIcon/>, 'boatType', 'radio'),
+    //     validationRules: [
+    //     ]
+    // },
+    // motorboat: {
+    //     ...createFormFieldConfig(<MotorBoatIcon/>, 'boatType', 'radio'),
+    //     validationRules: [
+    //     ]
+    // },
+    // catamaran: {
+    //     ...createFormFieldConfig(<CatamaranIcon/>, 'boatType', 'radio'),
+    //     validationRules: [
+    //     ]
+    // },
+    // dinghy: {
+    //     ...createFormFieldConfig(<InflatableBoatIcon/>, 'boatType', 'radio'),
+    //     validationRules: [
+    //     ]
+    // },
 }

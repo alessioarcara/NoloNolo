@@ -5,8 +5,10 @@ function useForm(formObj) {
 
     function renderFormInputs(classNames) {
         return Object.values(form).map((inputObj) => {
-            const {value, label, errorMessage, valid, touched, renderInput} = inputObj;
-            return renderInput(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames);
+            const {value, label, errorMessage, valid, touched, renderNumberSpinner, renderInput, config} = inputObj;
+            return config === 'number' ?
+                renderNumberSpinner(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames) :
+                renderInput(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames) ;
         });
     }
 
@@ -22,6 +24,7 @@ function useForm(formObj) {
         }, [form]);
 
     const onInputChange = useCallback(event => {
+            console.log(event)
             const { name, value } = event.target;
             // copy input object whose value was changed
             const inputObj = { ...form[name] };

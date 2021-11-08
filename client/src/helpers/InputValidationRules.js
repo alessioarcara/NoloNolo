@@ -37,3 +37,11 @@ export function passwordMatchRule() {
         (inputValue, formObj) => inputValue === formObj.password.value
     );
 }
+
+export function isNumberRule(inputName) {
+    return createValidationRule(
+        "isNumber",
+        `${inputName} should be a number`,
+        (inputValue, formObj) => typeof +inputValue === "number"
+    );
+}
