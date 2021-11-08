@@ -14,7 +14,7 @@ module.exports = {
     },
     rentBoat: async (args, {req}) => {
         if (!req.isAuth) { throw new Error("Unauthenticated.") }
-        const {boatId, from, to, bill} = args.inputRental
+        const {boatId, from, to, totalAmount} = args.inputRental
         try {
             const boat = await Boat.findOne({_id: boatId})
             if (!boat) {return {rentBoatProblem: "Boat is still active?"}}
@@ -36,8 +36,8 @@ module.exports = {
 
             const rental = new Rental({
                 customer: req.userId,
-                boat,
-                bill,
+                boat: boatId,
+                totalAmount,
                 fromDate: new Date(from),
                 toDate: new Date(to)
             })

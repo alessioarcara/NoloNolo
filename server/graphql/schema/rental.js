@@ -5,7 +5,8 @@ const RentalType = `
         boat: Boat!
         from: String!
         to: String!
-        bill: Float!
+        totalAmount: Float!
+        billNumber: Int!
         createdAt: String
         updatedAt: String
     }
@@ -19,7 +20,7 @@ const RentalType = `
         boatId: ID!
         from: String!
         to: String!
-        bill: Float!
+        totalAmount: Float!
     }
 `
 

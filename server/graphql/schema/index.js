@@ -6,7 +6,6 @@ const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
 
-
 const rootSchema = `
         ${authType}
         ${boatType}

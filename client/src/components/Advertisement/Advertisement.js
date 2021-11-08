@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import {body_informations, body_rentBoat} from "../../helpers/httpConfig";
@@ -28,12 +28,9 @@ const Advertisement = () => {
     const changeStartDateHandler = useCallback((start) => {
         setStartDate(start)
     }, [])
-
     const changeEndDateHandler = useCallback((end) => {
         setEndDate(end)
     }, [])
-
-    const alreadyRentedDates = boatPayload && boatPayload.boatRentals;
 
     useEffect(() => {
         fetchBoat({body: body_informations({boatId})}, resData => resData)
@@ -41,11 +38,12 @@ const Advertisement = () => {
 
     const handleRentBoat = () => {
         const transformData = resData => {
-            boatPayload.boatRentals = boatPayload.boatRentals.concat({
-                from: resData.rentBoat.rentBoatData.from,
-                to: resData.rentBoat.rentBoatData.to
-            })
-            console.log(resData)
+            if (resData.rentBoat.rentBoatData) {
+                boatPayload.boatRentals = boatPayload.boatRentals.concat({
+                    from: resData.rentBoat.rentBoatData.from,
+                    to: resData.rentBoat.rentBoatData.to
+                })
+            }
             return resData.rentBoat
         }
         rentBoat({
@@ -53,74 +51,78 @@ const Advertisement = () => {
                 boatId,
                 from: formatDate(startDate),
                 to: formatDate(endDate),
-                bill: 1000
+                totalAmount: 1000
             }),
             token
         }, transformData)
+
+        /* setState instead of handlers for batching */
+        setStartDate(null)
+        setEndDate(null)
     }
 
     return (
-            <LetSuspense
-                condition={statusBoat === 'completed'}
-                placeholder={AdvertisementPlaceholder}
-                multiplier={1}
-                delay={2000}
-            >
-                {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
-                <Modal title="Errore">
-                    Prenotazione già presente
-                </Modal>
+        <LetSuspense
+            condition={statusBoat === 'completed'}
+            placeholder={AdvertisementPlaceholder}
+            multiplier={1}
+            delay={2000}
+        >
+            {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
+            <Modal title="Errore">
+                Prenotazione già presente
+            </Modal>
+            }
+            {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
+            <Modal title="Prenotato">
+                Prenotazione avvenuta con successo!
+            </Modal>
+            }
+            {boatPayload &&
+            <SplitScreenLayout
+                contentRight={
+                    <ContentRight
+                        setVisibleContent={setVisibleContent}
+                        boatModel={boatPayload.boat.model}
+                        boatReviews={boatPayload.boat.hasAdvertisement.reviews}
+                        place={boatPayload.boat.isDocked}
+                        images={boatPayload.boat.hasAdvertisement.images}
+                        ownerEmail={boatPayload.boat.owner.email}
+                        ownerAvatar={boatPayload.boat.owner.avatar}
+                        boatDescription={boatPayload.boat.hasAdvertisement.description}
+                        boatYard={boatPayload.boat.yard}
+                        boatLength={boatPayload.boat.length}
+                        boatMaxCapacity={boatPayload.boat.maximumCapacity}
+                        boatType={boatPayload.boat.boatType}
+                        startDate={startDate}
+                        endDate={endDate}
+                        changeStartDateHandler={changeStartDateHandler}
+                        changeEndDateHandler={changeEndDateHandler}
+                        alreadyRentedDates={boatPayload.boatRentals}
+                    />
                 }
-                {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
-                <Modal title="Prenotato">
-                    Prenotazione avvenuta con successo!
-                </Modal>
+                contentLeft={
+                    <ContentLeft
+                        isVisible={visibleContent}
+                        images={boatPayload.boat.hasAdvertisement.images}
+                        boatPosition={boatPayload.boat.isDocked.coordinates}
+                    />
                 }
-                {boatPayload &&
-                <SplitScreenLayout
-                    contentRight={
-                        <ContentRight
-                            setVisibleContent={setVisibleContent}
-                            boatModel={boatPayload.boat.model}
-                            boatReviews={boatPayload.boat.hasAdvertisement.reviews}
-                            place={boatPayload.boat.isDocked}
-                            images={boatPayload.boat.hasAdvertisement.images}
-                            ownerEmail={boatPayload.boat.owner.email}
-                            ownerAvatar={boatPayload.boat.owner.avatar}
-                            boatDescription={boatPayload.boat.hasAdvertisement.description}
-                            boatYard={boatPayload.boat.yard}
-                            boatLength={boatPayload.boat.length}
-                            boatMaxCapacity={boatPayload.boat.maximumCapacity}
-                            boatType={boatPayload.boat.boatType}
-                            startDate={startDate}
-                            endDate={endDate}
-                            changeStartDateHandler={changeStartDateHandler}
-                            changeEndDateHandler={changeEndDateHandler}
-                            alreadyRentedDates={alreadyRentedDates}
-                        />
-                    }
-                    contentLeft={
-                        <ContentLeft
-                            isVisible={visibleContent}
-                            images={boatPayload.boat.hasAdvertisement.images}
-                            boatPosition={boatPayload.boat.isDocked.coordinates}
-                        />
-                    }
-                    actions={
-                        <AdvertisementActions
-                            dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                            fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
-                            handleRentBoat={handleRentBoat}
-                            statusRental={statusRental}
-                            startDate={startDate}
-                            endDate={endDate}
-                        />
-                    }
-                    rightLayoutActionsClassName={classes['action-layout']}
-                    rightLayoutContentClassName={classes[`layout-content-right`]}
-                />
+                actions={
+                    <AdvertisementActions
+                        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
+                        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                        handleRentBoat={handleRentBoat}
+                        statusRental={statusRental}
+                        startDate={startDate}
+                        endDate={endDate}
+                    />
                 }
-            </LetSuspense>
+                rightLayoutActionsClassName={classes['action-layout']}
+                rightLayoutContentClassName={classes[`layout-content-right`]}
+            />
+            }
+        </LetSuspense>
     );
 };
 
