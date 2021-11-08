@@ -5,11 +5,11 @@
 
 /*Overall Calendar*/
 .react-datepicker {
+    display: flex;
+    flex-direction: column;
     border: none;
     background-color: white;
     font-size: 1.1em;
-    display: flex;
-    flex-direction: column;
 }
 
 /*Calendar Overall month*/
@@ -70,6 +70,7 @@
 .react-datepicker__day--outside-month:hover, .react-datepicker__day--disabled:hover, .react-datepicker__day--disabled {
     box-shadow: none;
     color: #ccc !important;
+    text-decoration: line-through;
 }
 
 /*Selected dates range*/

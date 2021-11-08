@@ -9,7 +9,7 @@ import LetSuspense from "../UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "./AdvertisementPlaceholder/AdvertisementPlaceholder";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import classes from "./Advertisement.module.css";
-import Actions from "./Actions/Actions";
+import AdvertisementActions from "./AdvertisementActions/AdvertisementActions";
 import AuthContext from "../../store/auth-context";
 import {formatDate} from "../../helpers/utils";
 import Modal from "../UI/Modal/Modal";
@@ -38,8 +38,15 @@ const Advertisement = () => {
         fetchBoat({body: body_informations({boatId})}, resData => resData)
     }, [fetchBoat, boatId])
 
-    const rentBoatHandler = () => {
-        const transformData = resData => resData.rentBoat
+    const handleRentBoat = () => {
+        const transformData = resData => {
+            boatPayload.boatRentals = boatPayload.boatRentals.concat({
+                from: resData.rentBoat.rentBoatData.from,
+                to: resData.rentBoat.rentBoatData.to
+            })
+            console.log(resData)
+            return resData.rentBoat
+        }
         rentBoat({
             body: body_rentBoat({
                 boatId,
@@ -123,7 +130,6 @@ const Advertisement = () => {
                     rightLayoutContentClassName={classes[`layout-content-right`]}
                 />
             </LetSuspense>
-        </>
     );
 };
 

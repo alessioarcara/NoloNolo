@@ -1,10 +1,10 @@
-import classes from './Actions.module.css';
+import classes from './AdvertisementActions.module.css';
 import {formatNumber, formatDayMonthYearDate, rangeDate} from "../../../helpers/utils";
 import Button from "../../UI/Button/Button";
 import {useContext, useMemo} from "react";
 import AuthContext from "../../../store/auth-context";
 
-const Actions = ({dailyFee, fixedFee, rentBoatHandler, statusRental, startDate, endDate}) => {
+const Actions = ({dailyFee, fixedFee, handleRentBoat, statusRental, startDate, endDate}) => {
     const { isLoggedIn: isLogged } = useContext(AuthContext)
     const rangeDates = useMemo(() => rangeDate(startDate, endDate), [startDate, endDate])
 
@@ -27,7 +27,7 @@ const Actions = ({dailyFee, fixedFee, rentBoatHandler, statusRental, startDate, 
             <Button
                 className={`btn btn-outline-primary ${classes['confirm-btn']}`}
                 isLoading={statusRental === "pending"}
-                onClick={rentBoatHandler}
+                onClick={handleRentBoat}
                 disabled={!startDate || !endDate || !isLogged || rangeDates === 0}
             >
                 Prenota
