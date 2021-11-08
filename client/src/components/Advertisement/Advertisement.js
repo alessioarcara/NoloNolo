@@ -1,8 +1,7 @@
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useHttp from "../../hooks/use-http";
 import {body_informations, body_rentBoat} from "../../helpers/httpConfig";
-import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 import ContentRight from "./ContentRight/ContentRight";
 import ContentLeft from "./ContentLeft/ContentLeft";
 import LetSuspense from "../UI/LetSuspense/LetSuspense";
@@ -34,6 +33,8 @@ const Advertisement = () => {
         setEndDate(end)
     }, [])
 
+    const alreadyRentedDates = boatPayload && boatPayload.boatRentals;
+
     useEffect(() => {
         fetchBoat({body: body_informations({boatId})}, resData => resData)
     }, [fetchBoat, boatId])
@@ -58,77 +59,67 @@ const Advertisement = () => {
         }, transformData)
     }
 
-    let contentRight = <LoadingSpinner/>
-    let contentLeft = <LoadingSpinner/>
-    let actions = <LoadingSpinner/>
-    if (statusBoat === "completed" && boatPayload) {
-        contentRight = (
-            <>
-                {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
-                    <Modal title="Errore">
-                        Prenotazione già presente
-                    </Modal>
-                }
-                {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
-                    <Modal title="Prenotato">
-                        Prenotazione avvenuta con successo!
-                    </Modal>
-                }
-                <ContentRight
-                    setVisibleContent={setVisibleContent}
-                    boatModel={boatPayload.boat.model}
-                    boatReviews={boatPayload.boat.hasAdvertisement.reviews}
-                    place={boatPayload.boat.isDocked}
-                    images={boatPayload.boat.hasAdvertisement.images}
-                    ownerEmail={boatPayload.boat.owner.email}
-                    ownerAvatar={boatPayload.boat.owner.avatar}
-                    boatDescription={boatPayload.boat.hasAdvertisement.description}
-                    boatYard={boatPayload.boat.yard}
-                    boatLength={boatPayload.boat.length}
-                    boatMaxCapacity={boatPayload.boat.maximumCapacity}
-                    boatType={boatPayload.boat.boatType}
-                    startDate={startDate}
-                    endDate={endDate}
-                    changeStartDateHandler={changeStartDateHandler}
-                    changeEndDateHandler={changeEndDateHandler}
-                    alreadyRentedDates={boatPayload.boatRentals}
-                />
-            </>
-        )
-        contentLeft = (
-            <ContentLeft
-                isVisible={visibleContent}
-                images={boatPayload.boat.hasAdvertisement.images}
-                boatPosition={boatPayload.boat.isDocked.coordinates}
-            />
-        )
-        actions = (
-            <Actions
-                dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
-                rentBoatHandler={rentBoatHandler}
-                statusRental={statusRental}
-                startDate={startDate}
-                endDate={endDate}
-            />
-        )
-    }
-
     return (
-        <>
             <LetSuspense
                 condition={statusBoat === 'completed'}
                 placeholder={AdvertisementPlaceholder}
                 multiplier={1}
                 delay={2000}
             >
+                {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
+                <Modal title="Errore">
+                    Prenotazione già presente
+                </Modal>
+                }
+                {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
+                <Modal title="Prenotato">
+                    Prenotazione avvenuta con successo!
+                </Modal>
+                }
+                {boatPayload &&
                 <SplitScreenLayout
-                    contentRight={contentRight}
-                    contentLeft={contentLeft}
-                    actions={actions}
+                    contentRight={
+                        <ContentRight
+                            setVisibleContent={setVisibleContent}
+                            boatModel={boatPayload.boat.model}
+                            boatReviews={boatPayload.boat.hasAdvertisement.reviews}
+                            place={boatPayload.boat.isDocked}
+                            images={boatPayload.boat.hasAdvertisement.images}
+                            ownerEmail={boatPayload.boat.owner.email}
+                            ownerAvatar={boatPayload.boat.owner.avatar}
+                            boatDescription={boatPayload.boat.hasAdvertisement.description}
+                            boatYard={boatPayload.boat.yard}
+                            boatLength={boatPayload.boat.length}
+                            boatMaxCapacity={boatPayload.boat.maximumCapacity}
+                            boatType={boatPayload.boat.boatType}
+                            startDate={startDate}
+                            endDate={endDate}
+                            changeStartDateHandler={changeStartDateHandler}
+                            changeEndDateHandler={changeEndDateHandler}
+                            alreadyRentedDates={alreadyRentedDates}
+                        />
+                    }
+                    contentLeft={
+                        <ContentLeft
+                            isVisible={visibleContent}
+                            images={boatPayload.boat.hasAdvertisement.images}
+                            boatPosition={boatPayload.boat.isDocked.coordinates}
+                        />
+                    }
+                    actions={
+                        <AdvertisementActions
+                            dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
+                            fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                            handleRentBoat={handleRentBoat}
+                            statusRental={statusRental}
+                            startDate={startDate}
+                            endDate={endDate}
+                        />
+                    }
                     rightLayoutActionsClassName={classes['action-layout']}
                     rightLayoutContentClassName={classes[`layout-content-right`]}
                 />
+                }
             </LetSuspense>
     );
 };

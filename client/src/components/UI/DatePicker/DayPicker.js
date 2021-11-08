@@ -10,7 +10,7 @@ import {addDays} from "date-fns";
 
 registerLocale('it', it);
 
-const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown, boatRentals}) => {
+const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown, alreadyRentedDates}) => {
     const handleDateChange = (dates) => {
         const [start, end] = dates
         onChangeStartDate(start)
@@ -22,7 +22,7 @@ const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown,
         let dates = []
 
         /* for each object we add to the array data to deselect */
-        boatRentals && boatRentals.forEach(rental => {
+        alreadyRentedDates && alreadyRentedDates.forEach(rental => {
             const startDate = new Date(rental.from)
             const endDate = new Date(rental.to)
 
@@ -31,7 +31,7 @@ const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown,
             }
         })
         return dates
-    }, [boatRentals])
+    }, [alreadyRentedDates])
 
     return (
         <DatePicker
@@ -46,7 +46,6 @@ const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown,
             calendarStartDay={1}
             selectsRange
             inline
-            // filterDate={isRented}
             excludeDates={excludeDates}
         />
     );

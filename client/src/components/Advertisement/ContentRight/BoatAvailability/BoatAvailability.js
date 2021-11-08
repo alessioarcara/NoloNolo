@@ -10,7 +10,7 @@ const BoatAvailability = ({
                               changeStartDateHandler,
                               changeEndDateHandler,
                               place,
-                              boatRentals
+                              alreadyRentedDates
 }) => {
 
     const cancelSelectionHandler = useCallback(() => {
@@ -31,7 +31,7 @@ const BoatAvailability = ({
                     onChangeStartDate={changeStartDateHandler}
                     onChangeEndDate={changeEndDateHandler}
                     monthsShown={1}
-                    boatRentals={boatRentals}
+                    alreadyRentedDates={alreadyRentedDates}
                 />
             </div>
             <Button
