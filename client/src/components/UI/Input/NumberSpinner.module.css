@@ -1,16 +1,4 @@
-.number-spinner {
-    display: flex;
-}
-
-.passengers-count {
-    border: 1px solid rgba(0, 0, 0, 0.325);
-    border-radius: 50%;
-    padding: 0.425rem 0.725rem;
-    width: 2.2rem;
-    outline: none;
-}
-
-.add-btn, .rmv-btn {
+.increase-btn, .decrease-btn {
     border-radius: 50%;
     color: rgba(0, 0, 0, 0.325);
     border-color: rgba(0, 0, 0, 0.2);
@@ -19,15 +7,27 @@
     transition: all 0.325s ease;
 }
 
-.add-btn {
+.increase-btn {
     padding: 0.3rem 0.6rem;
 }
 
-.rmv-btn {
+.decrease-btn {
     padding: 0.3rem 0.725rem;
 }
 
-.add-btn:hover, .rmv-btn:hover {
+.increase-btn:hover, .decrease-btn:hover {
     color: rgba(0, 0, 0, 0.725);
     border-color: rgba(0, 0, 0, 0.725);
 }
+
+/*.number-spinner {*/
+/*    display: flex;*/
+/*}*/
+
+/*.passengers-count {*/
+/*    border: 1px solid rgba(0, 0, 0, 0.325);*/
+/*    border-radius: 50%;*/
+/*    padding: 0.425rem 0.725rem;*/
+/*    width: 2.2rem;*/
+/*    outline: none;*/
+/*}*/

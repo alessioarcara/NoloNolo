@@ -1,0 +1,29 @@
+.boatTypes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 1rem;
+}
+
+.boatTypes label {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    display: flex;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.325s ease;
+    align-items: center;
+}
+
+.boatTypes svg {
+    height: 5rem;
+    width: 5rem;
+}
+
+.boatTypes label svg path {
+    fill: rgba(0, 0, 0, 0.5);
+    transition: all 0.325s ease;
+}
+
+input[type="radio"]:checked {
+    fill: rgba(0, 0, 0, 1)
+}

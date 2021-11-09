@@ -1,52 +1,15 @@
-import React from "react";
-import Input from "../components/UI/Input/Input"
-
 import {requiredRule, minLengthRule, isEmailRule, isNumberRule} from "./InputValidationRules"
-import SailBoatIcon from "../components/UI/icons/BoatIcons/SailBoatIcon";
-import MotorBoatIcon from "../components/UI/icons/BoatIcons/MotorBoatIcon";
-import CatamaranIcon from "../components/UI/icons/BoatIcons/CatamaranIcon";
-import InflatableBoatIcon from "../components/UI/icons/BoatIcons/InflatableBoatIcon";
-import NumberSpinner from "../components/UI/Input/NumberSpinner";
+import {renderInput, renderNumberSpinner} from "./inputConfig";
 
-function createFormFieldConfig(label, name, type, defaultValue = '', defaultConfig = 'input') {
+
+function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
     return {
-        renderNumberSpinner: (handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) => {
-            return (
-                <NumberSpinner
-                    key={key}
-                    name={name}
-                    type={type}
-                    label={label}
-                    isValid={isValid}
-                    isTouched={isTouched}
-                    value={value}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    errorMessage={error}
-                    classNames={classNames}
-                />
-            )
-        },
-        renderInput: (handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) => {
-            return (
-                <Input
-                    key={key}
-                    name={name}
-                    type={type}
-                    label={label}
-                    isValid={isValid}
-                    isTouched={isTouched}
-                    value={value}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    errorMessage={error}
-                    classNames={classNames}
-                />
-            );
-        },
+        render: function render(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
+            return extension.call({label, name, type}, ...arguments)
+        }.bind(this, label, name, type)
+        ,
         label,
         value: defaultValue,
-        config: defaultConfig,
         valid: false,
         errorMessage: '',
         touched: false,
@@ -84,37 +47,17 @@ export const boatForm = {
         ]
     },
     length: {
-        ...createFormFieldConfig('Length', 'length', 'text', 0, 'number'),
+        ...createFormFieldConfig('Length', 'length', 'text', 0, renderNumberSpinner),
         validationRules: [
             requiredRule("length"),
             isNumberRule("length")
         ]
     },
     maximumCapacity: {
-        ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', 0, 'number'),
+        ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', 0, renderNumberSpinner),
         validationRules: [
             requiredRule("maximum capacity"),
             isNumberRule("maximum capacity")
         ]
     },
-    // sailboat: {
-    //     ...createFormFieldConfig(<SailBoatIcon/>, 'boatType', 'radio'),
-    //     validationRules: [
-    //     ]
-    // },
-    // motorboat: {
-    //     ...createFormFieldConfig(<MotorBoatIcon/>, 'boatType', 'radio'),
-    //     validationRules: [
-    //     ]
-    // },
-    // catamaran: {
-    //     ...createFormFieldConfig(<CatamaranIcon/>, 'boatType', 'radio'),
-    //     validationRules: [
-    //     ]
-    // },
-    // dinghy: {
-    //     ...createFormFieldConfig(<InflatableBoatIcon/>, 'boatType', 'radio'),
-    //     validationRules: [
-    //     ]
-    // },
 }

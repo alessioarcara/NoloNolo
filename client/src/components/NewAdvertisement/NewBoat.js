@@ -3,21 +3,33 @@ import useForm from "../../hooks/use-form";
 import {boatForm} from "../../helpers/formConfig";
 import classes from "../Auth/AuthForm.module.css";
 import ActionButtons from "../UI/ActionButtons/ActionButtons";
+import BoatTypes from "../UI/Input/BoatTypes";
 
 const NewBoat = () => {
+    const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(boatForm)
 
     const title = <h1>Che tipo di barca offrirai?</h1>
+    const content = (
+        <>
+            {renderFormInputs(classes.control)}
+            <BoatTypes/>
+        </>
+    )
 
     const submitHandler = () => {
         resetForm()
     };
 
-    const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(boatForm)
     return (
         <SplitScreenLayout
             contentLeft={title}
-            contentRight={renderFormInputs(classes.control)}
-            actions={<ActionButtons/>}
+            contentRight={content}
+            actions={
+                <ActionButtons
+                    firstButtonText="Indietro"
+                    secondButtonText="Avanti"
+                />
+            }
         />
     );
 };
