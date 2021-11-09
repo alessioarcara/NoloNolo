@@ -10,21 +10,31 @@ import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout"
 import classes from "./Advertisement.module.css";
 import AdvertisementActions from "./AdvertisementActions/AdvertisementActions";
 import AuthContext from "../../store/auth-context";
-import {formatDate} from "../../helpers/utils";
+import {formatDate, formatNumber, rangeDate} from "../../helpers/utils";
 import Modal from "../UI/Modal/Modal";
+import InvoiceReport from "./BoatBill/InvoiceReport/InvoiceReport";
+import BoatBill from "./BoatBill/BoatBill";
 
 const Advertisement = () => {
-    const [visibleContent, setVisibleContent] = useState(false)
+    /* Data recovery */
     const {boatId} = useParams()
     const location = useLocation();
     const {token} = useContext(AuthContext)
 
-    const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat} = useHttp(true)
-    const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
+    /* Show map or images */
+    const [visibleContent, setVisibleContent] = useState(false)
+    /* Show boat bill */
+    const [isBillShow, setIsBillShow] = useState(false)
 
+    /* Dates for datepicker in content right */
     const [startDate, setStartDate] = useState(location.state.startUrlDate ? new Date(location.state.startUrlDate) : null);
     const [endDate, setEndDate] = useState(location.state.endUrlDate ? new Date(location.state.endUrlDate) : null);
 
+    /* Requests to the server */
+    const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat} = useHttp(true)
+    const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
+
+    /* Set dates functions */
     const changeStartDateHandler = useCallback((start) => {
         setStartDate(start)
     }, [])
@@ -51,7 +61,9 @@ const Advertisement = () => {
                 boatId,
                 from: formatDate(startDate),
                 to: formatDate(endDate),
-                totalAmount: 1000
+                totalAmount:
+                    (boatPayload.boat.hasAdvertisement.dailyFee * rangeDate(startDate, endDate))
+                    + boatPayload.boat.hasAdvertisement.fixedFee
             }),
             token
         }, transformData)
@@ -59,6 +71,7 @@ const Advertisement = () => {
         /* setState instead of handlers for batching */
         setStartDate(null)
         setEndDate(null)
+        setIsBillShow(false)
     }
 
     return (
@@ -69,14 +82,39 @@ const Advertisement = () => {
             delay={2000}
         >
             {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
-            <Modal title="Errore">
-                Prenotazione già presente
-            </Modal>
+                <Modal title="Errore">
+                    Prenotazione già presente
+                </Modal>
             }
             {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
-            <Modal title="Prenotato">
-                Prenotazione avvenuta con successo!
-            </Modal>
+                <Modal title='Fattura'>
+                    <BoatBill
+                        billNumber={rentalPayload.rentBoatData.billNumber}
+                        from={rentalPayload.rentBoatData.from}
+                        to={rentalPayload.rentBoatData.to}
+                        boatData={rentalPayload.rentBoatData.boat}
+                        customer={rentalPayload.rentBoatData.customer.email}
+                        createdAt={rentalPayload.rentBoatData.createdAt}
+                        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
+                        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                        total={rentalPayload.rentBoatData.totalAmount}
+                    />
+                </Modal>
+            }
+            {isBillShow &&
+                <Modal
+                    title="Conferma prenotazione"
+                    closeModalHandler={() => setIsBillShow(false)}
+                >
+                    <InvoiceReport
+                        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
+                        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                        start={startDate}
+                        end={endDate}
+                        statusRental={statusRental}
+                        handleRentBoat={handleRentBoat}
+                    />
+                </Modal>
             }
             {boatPayload &&
             <SplitScreenLayout
@@ -112,10 +150,9 @@ const Advertisement = () => {
                     <AdvertisementActions
                         dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
                         fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
-                        handleRentBoat={handleRentBoat}
-                        statusRental={statusRental}
                         startDate={startDate}
                         endDate={endDate}
+                        isBill={() => setIsBillShow(true)}
                     />
                 }
                 rightLayoutActionsClassName={classes['action-layout']}

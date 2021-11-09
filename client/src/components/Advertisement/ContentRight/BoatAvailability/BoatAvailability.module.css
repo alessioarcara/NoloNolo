@@ -29,6 +29,9 @@
     width: 100%;
 }
 
+.datepicker {
+    width: 20rem;
+}
 
 @media only screen and (max-width: 768px) {
 }
