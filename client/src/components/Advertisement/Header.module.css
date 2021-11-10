@@ -14,10 +14,15 @@
 }
 
 .container svg {
+    position: relative;
     width: 1.5rem;
+    cursor: pointer;
 }
 
-.container svg path {
+.container div:nth-child(1) svg {
     stroke: black;
-    fill: white;
+}
+
+.container div:nth-child(2) svg {
+    width: 1.8rem;
 }

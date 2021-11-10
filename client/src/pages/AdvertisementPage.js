@@ -114,6 +114,7 @@ const AdvertisementPage = () => {
             <SplitScreenLayout
                 contentRight={
                     <ContentRight
+                        boatId={boatId}
                         dispatch={dispatch}
                         boatModel={boatPayload.boat.model}
                         boatReviews={boatPayload.boat.hasAdvertisement.reviews}

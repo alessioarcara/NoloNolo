@@ -9,6 +9,7 @@ import BoatAvailability from "./BoatAvailability/BoatAvailability";
 import BoatReviews from "./BoatReviews/BoatReviews";
 
 const ContentRight = ({
+                          boatId,
                           boatModel,
                           boatReviews,
                           place,
@@ -27,7 +28,7 @@ const ContentRight = ({
                      }) => {
     return (
         <>
-            <div className={classes['desktop-header']}><Header/></div>
+            <div className={classes['desktop-header']}><Header boatId={boatId}/></div>
             <ContentSwitch dispatch={dispatch}/>
             {/* if desktop then show SlideShow */}
             <div className={classes['images-container']}>

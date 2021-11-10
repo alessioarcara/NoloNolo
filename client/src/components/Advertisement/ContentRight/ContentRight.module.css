@@ -19,13 +19,15 @@
     border-radius: 1rem;
 }
 
-.desktop-header {
-    display: none;
-}
-
 @media only screen and (max-width: 768px) {
     .images-container {
         display: none;
+    }
+
+    .desktop-header {
+        position: absolute;
+        top: 0;
+        width: 100%;
     }
 }
 
@@ -33,7 +35,6 @@
     .desktop-header {
         position: sticky;
         top: 0;
-        display: block;
         z-index: 1;
     }
 }

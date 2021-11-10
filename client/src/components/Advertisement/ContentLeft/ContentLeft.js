@@ -7,7 +7,8 @@ import classes from './ContentLeft.module.css';
 const ContentLeft = ({isVisible, images, boatPosition}) => {
     return (
         <>
-            <div className={classes['mobile-header']}><Header/></div>
+            {/* TO DO: marginTop in div style in SlideShow */}
+            {/*<div className={classes['mobile-header']}><Header/></div>*/}
             <div className={classes['container-mobile']}>
                 {!isVisible &&
                     <div className={classes[`map-container`]}>
@@ -15,7 +16,7 @@ const ContentLeft = ({isVisible, images, boatPosition}) => {
                     </div>
                 }
                 {isVisible &&
-                    <SlideShow classNameSlideShowSlider={classes['custom-images']} images={images}/>
+                    <div style={{marginTop: '3.4rem'}}><SlideShow classNameSlideShowSlider={classes['custom-images']} images={images}/></div>
                 }
             </div>
 
