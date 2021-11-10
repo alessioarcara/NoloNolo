@@ -1,3 +1,14 @@
+.control div {
+    font-weight: bold;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0.5rem;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
 .boatTypes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -22,8 +33,4 @@
 .boatTypes label svg path {
     fill: rgba(0, 0, 0, 0.5);
     transition: all 0.325s ease;
-}
-
-input[type="radio"]:checked {
-    fill: rgba(0, 0, 0, 1)
 }

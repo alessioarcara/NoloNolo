@@ -1,9 +1,10 @@
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import useForm from "../../hooks/use-form";
 import {boatForm} from "../../helpers/formConfig";
-import classes from "../Auth/AuthForm.module.css";
-import ActionButtons from "../UI/ActionButtons/ActionButtons";
 import BoatTypes from "../UI/Input/BoatTypes";
+
+import classes from "./NewBoat.module.css"
+import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 
 const NewBoat = () => {
     const {formValues, renderFormInputs, isFormValid, resetForm} = useForm(boatForm)
@@ -11,25 +12,16 @@ const NewBoat = () => {
     const title = <h1>Che tipo di barca offrirai?</h1>
     const content = (
         <>
-            {renderFormInputs(classes.control)}
+            {renderFormInputs()}
             <BoatTypes/>
         </>
     )
-
-    const submitHandler = () => {
-        resetForm()
-    };
 
     return (
         <SplitScreenLayout
             contentLeft={title}
             contentRight={content}
-            actions={
-                <ActionButtons
-                    firstButtonText="Indietro"
-                    secondButtonText="Avanti"
-                />
-            }
+            actions={<NewAdvertisementFooter stepPosition={1}/>}
         />
     );
 };

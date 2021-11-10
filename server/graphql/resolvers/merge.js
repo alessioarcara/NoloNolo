@@ -2,7 +2,6 @@ const DataLoader = require('dataloader');
 
 const User = require('../../models/user');
 const {dateToString} = require("../../helpers/date");
-const {boat} = require("./boat");
 
 const userLoader = new DataLoader(userIds => {
     return User.find({_id: {$in: userIds}});

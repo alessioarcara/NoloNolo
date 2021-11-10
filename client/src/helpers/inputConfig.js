@@ -2,7 +2,6 @@ import NumberSpinner from "../components/UI/Input/NumberSpinner";
 import Input from "../components/UI/Input/Input";
 
 export function renderNumberSpinner(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
-    console.log(this)
     return (
         <NumberSpinner
             key={key}
@@ -14,6 +13,7 @@ export function renderNumberSpinner(handleChange, handleBlur, value, isValid, is
             value={value}
             handleBlur={handleBlur}
             handleChange={handleChange}
+            valueChange={this.valueChange}
             errorMessage={error}
             classNames={classNames}
         />
@@ -21,7 +21,6 @@ export function renderNumberSpinner(handleChange, handleBlur, value, isValid, is
 }
 
 export function renderInput(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
-    console.log(this)
     return (
         <Input
             key={key}

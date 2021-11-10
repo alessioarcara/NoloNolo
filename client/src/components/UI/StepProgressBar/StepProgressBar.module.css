@@ -1,0 +1,6 @@
+.progressBar {
+    display: flex;
+    background-color: rgba(0,0,0, 0.1);
+    /*flex: 1;*/
+    /*height: 5px;*/
+}

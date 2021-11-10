@@ -15,7 +15,7 @@ const AvailableBoats = ({userName, boats}) => {
             </div>
             <div className={classes["new-boat"]}>
                 <h3>Inizia ad aggiungere una nuova barca</h3>
-                <Link className={classes['add-boat']} to='location'>Aggiungi una nuova barca</Link>
+                <Link className={classes['add-boat']} to='boat'>Aggiungi una nuova barca</Link>
             </div>
         </>
     )

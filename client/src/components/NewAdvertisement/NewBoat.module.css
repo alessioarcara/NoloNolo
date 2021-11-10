@@ -1,18 +1,3 @@
-.label {
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    display: flex;
-    border-radius: 2rem;
-    cursor: pointer;
-    transition: all 0.325s ease;
-    align-items: center;
-}
-
-.label svg {
-    height: 5rem;
-    width: 5rem;
-}
-
-.label svg path, .label svg line {
-    fill: rgba(0, 0, 0, 0.5);
-    transition: all 0.325s ease;
-}
+/*.newBoat {*/
+/*    width: 30rem;*/
+/*}*/

@@ -5,9 +5,8 @@ import {renderInput, renderNumberSpinner} from "./inputConfig";
 function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
     return {
         render: function render(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
-            return extension.call({label, name, type}, ...arguments)
-        }.bind(this, label, name, type)
-        ,
+            return extension.call({label, name, type, valueChange}, ...arguments)
+        },
         label,
         value: defaultValue,
         valid: false,

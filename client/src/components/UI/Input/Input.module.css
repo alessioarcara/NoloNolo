@@ -46,16 +46,6 @@
 }
 
 @media (min-width: 768px) {
-    .auth {
-        margin: 4rem auto;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    }
-
-    .auth h1 {
-        text-align: left;
-    }
-
     .control {
         align-items: center;
         flex-flow: row wrap;
