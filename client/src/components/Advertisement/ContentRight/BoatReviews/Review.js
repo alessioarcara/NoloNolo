@@ -21,7 +21,7 @@ const Review = ({avatar, creator, createdAt, body}) => {
                 </div>
                 <div className={classes['user-container']}>
                     <div className={classes['name']}>{creator}</div>
-                    <div className={classes.data}>{formatDayMonthYearDate(+createdAt, options)}</div>
+                    <div className={classes.data}>{formatDayMonthYearDate(+createdAt, {month: 'long', year: 'numeric'})}</div>
                 </div>
             </div>
             <ReadMoreText

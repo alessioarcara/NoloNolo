@@ -9,7 +9,6 @@ import BoatAvailability from "./BoatAvailability/BoatAvailability";
 import BoatReviews from "./BoatReviews/BoatReviews";
 
 const ContentRight = ({
-                          setVisibleContent,
                           boatModel,
                           boatReviews,
                           place,
@@ -23,14 +22,13 @@ const ContentRight = ({
                           boatType,
                           startDate,
                           endDate,
-                          changeStartDateHandler,
-                          changeEndDateHandler,
-                          alreadyRentedDates
+                          alreadyRentedDates,
+                          dispatch
                      }) => {
     return (
         <>
             <div className={classes['desktop-header']}><Header/></div>
-            <ContentSwitch setVisibleContent={setVisibleContent}/>
+            <ContentSwitch dispatch={dispatch}/>
             {/* if desktop then show SlideShow */}
             <div className={classes['images-container']}>
                 <SlideShow classNameSlideShowSlider={classes['custom-images']} images={images}/>
@@ -57,8 +55,7 @@ const ContentRight = ({
                     place={place}
                     startDate={startDate}
                     endDate={endDate}
-                    changeStartDateHandler={changeStartDateHandler}
-                    changeEndDateHandler={changeEndDateHandler}
+                    dispatch={dispatch}
                     alreadyRentedDates={alreadyRentedDates}
                 />
                 <BoatReviews

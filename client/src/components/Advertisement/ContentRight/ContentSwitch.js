@@ -1,18 +1,19 @@
 import classes from './ContentSwitch.module.css'
 import {useCallback} from "react";
+import {SHOW_VISIBLE_CONTENT} from "../../../helpers/constants";
 
-const ContentSwitch = ({setVisibleContent}) => {
+const ContentSwitch = ({dispatch}) => {
     const scrollTopPage = useCallback(() => {
         window.scrollTo(0, 0)
     }, [])
 
     const switchImageClickHandler = () => {
-        setVisibleContent(true);
+        dispatch({type: SHOW_VISIBLE_CONTENT, payload: true})
         scrollTopPage()
     }
 
     const switchMapClickHandler = () => {
-        setVisibleContent(false);
+        dispatch({type: SHOW_VISIBLE_CONTENT, payload: false})
         scrollTopPage()
     }
 

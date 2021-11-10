@@ -33,7 +33,7 @@
     background-color: #efefef;
     cursor: pointer;
     transition: all 0.325s ease;
-    z-index: 10000;
+    z-index: 1;
 }
 
 .left-arrow {

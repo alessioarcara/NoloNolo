@@ -4,10 +4,6 @@ import {useMemo} from "react";
 import Button from "../../../UI/Button/Button";
 
 const InvoiceReport = ({dailyFee, fixedFee, start, end, statusRental, handleRentBoat}) => {
-    const options = {
-        day: 'numeric',
-        month: 'short'
-    }
     const range = useMemo(() => rangeDate(start, end), [start, end])
 
     return (
@@ -27,7 +23,8 @@ const InvoiceReport = ({dailyFee, fixedFee, start, end, statusRental, handleRent
             <div className={classes['data-container']}>
                 <label htmlFor='dates'>Date</label>
                 <div id='dates' className={classes.dates}>
-                    {`${formatDayMonthYearDate(start, options)} - ${formatDayMonthYearDate(end, options)}`}
+                    {`${formatDayMonthYearDate(start, {day: 'numeric',month: 'short'})} - 
+                    ${formatDayMonthYearDate(end, {day: 'numeric', month: 'short'})}`}
                 </div>
             </div>
             <div className={classes['data-container']}>

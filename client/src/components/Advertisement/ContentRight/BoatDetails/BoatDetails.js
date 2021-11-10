@@ -13,7 +13,7 @@ const BoatDetails = ({yard, length, maximumCapacity, type}) => {
         motorboat: <Motorboat/>,
         sailboat: <Sailboat/>,
         catamaran: <Catamaran/>,
-        dinghy: <Dinghy className={classes.dinghy}/>
+        dinghy: <Dinghy/>
     }
 
     return (

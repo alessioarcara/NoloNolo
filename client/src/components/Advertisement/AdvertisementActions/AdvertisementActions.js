@@ -4,7 +4,7 @@ import Button from "../../UI/Button/Button";
 import {useContext, useMemo} from "react";
 import AuthContext from "../../../store/auth-context";
 
-const Actions = ({dailyFee, fixedFee, startDate, endDate, isBill}) => {
+const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowBill}) => {
     const { isLoggedIn: isLogged } = useContext(AuthContext)
     const rangeDates = useMemo(() => rangeDate(startDate, endDate), [startDate, endDate])
 
@@ -21,12 +21,14 @@ const Actions = ({dailyFee, fixedFee, startDate, endDate, isBill}) => {
                 <span className={classes['daily-fee']}>{`${formatNumber(dailyFee)} /al giorno`}</span>
                 <span className={classes['fixed-fee']}>{`${formatNumber(fixedFee)} /fisso`}</span>
                 <span className={classes['date-range']}>
-                    {startDate && endDate && rangeDates !== 0 ? `${formatDayMonthYearDate(startDate, options)} - ${formatDayMonthYearDate(endDate, options)}` : 'Seleziona date'}
+                    {startDate && endDate && rangeDates !== 0 ? `${formatDayMonthYearDate(startDate, {day: 'numeric',
+                        month: 'short'})} - ${formatDayMonthYearDate(endDate, {day: 'numeric',
+                        month: 'short'})}` : 'Seleziona date'}
                 </span>
             </div>
             <Button
                 className={`btn btn-outline-primary ${classes['confirm-btn']}`}
-                onClick={isBill}
+                onClick={onShowBill}
                 disabled={!startDate || !endDate || !isLogged || rangeDates === 0}
             >
                 Prenota

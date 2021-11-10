@@ -15,10 +15,10 @@ const BoatReviews = ({reviews}) => {
         setLastIndex(prevState => prevState === reviews.length - 1 ? 0 : prevState + 1)
     }
 
-    const goPrevReview = () => {
+    const goPrevReview = useCallback(() => {
         setFirsIndex(prevState => prevState === 0 ? reviews.length - 1 : prevState - 1)
         setLastIndex(prevState => prevState === 0 ? reviews.length - 1 : prevState - 1)
-    }
+    }, [reviews])
 
     return (
         <>

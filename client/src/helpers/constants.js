@@ -18,4 +18,9 @@ export const CLEAR_DATES = "CLEAR_DATES"
 export const SEND_CHILDREN = "SEND_CHILDREN"
 export const SEND_PLACEHOLDER = "SEND_PLACEHOLDER"
 
+/* Constants advertisementReducer */
+export const SHOW_BILL = "SHOW_BILL"
+export const SHOW_VISIBLE_CONTENT = "SHOW_VISIBLE_CONTENT"
+export const CLEAR_RENTAL = "CLEAR_RENTAL"
+
 
