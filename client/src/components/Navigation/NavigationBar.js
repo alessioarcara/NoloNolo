@@ -28,19 +28,19 @@ const NavigationBar = () => {
         <nav>
             <ul className={showNavbar ? `${classes['nav-bar']} ${classes.action}` : `${classes['nav-bar']} ${classes['no-action']}`}>
                 <li>
-                    <NavLink to='/' exact activeClassName={classes.active} className={classes.item}>
+                    <NavLink to='/' end className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <SearchIcon/>
                         <div>Esplora</div>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/preferiti' activeClassName={classes.active} className={classes.item}>
+                    <NavLink to='/preferiti' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <HeartIcon className={classes.heart}/>
                         <div>Preferiti</div>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/profile' activeClassName={classes.active} className={classes.item}>
+                    <NavLink to='/profile' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <UserIcon/>
                         <div>Accedi</div>
                     </NavLink>

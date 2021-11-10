@@ -1,26 +1,11 @@
-import React from "react";
-import Input from "../components/UI/Input/Input"
+import {requiredRule, minLengthRule, isEmailRule, isNumberRule} from "./InputValidationRules"
+import {renderInput, renderNumberSpinner} from "./inputConfig";
 
-import {requiredRule, minLengthRule, isEmailRule} from "./InputValidationRules"
 
-function createFormFieldConfig(label, name, type, defaultValue = '') {
+function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
     return {
-        renderInput: (handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) => {
-            return (
-                <Input
-                    key={key}
-                    name={name}
-                    type={type}
-                    label={label}
-                    isValid={isValid}
-                    isTouched={isTouched}
-                    value={value}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    errorMessage={error}
-                    classNames={classNames}
-                />
-            );
+        render: function render(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
+            return extension.call({label, name, type, valueChange}, ...arguments)
         },
         label,
         value: defaultValue,
@@ -47,3 +32,31 @@ export const authForm = {
         ]
     }
 };
+export const boatForm = {
+    yard: {
+        ...createFormFieldConfig('Yard', 'yard', 'text'),
+        validationRules: [
+            requiredRule("yard")
+        ]
+    },
+    model: {
+        ...createFormFieldConfig('Model', 'model', 'text'),
+        validationRules: [
+            requiredRule("model")
+        ]
+    },
+    length: {
+        ...createFormFieldConfig('Length', 'length', 'text', 0, renderNumberSpinner),
+        validationRules: [
+            requiredRule("length"),
+            isNumberRule("length")
+        ]
+    },
+    maximumCapacity: {
+        ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', 0, renderNumberSpinner),
+        validationRules: [
+            requiredRule("maximum capacity"),
+            isNumberRule("maximum capacity")
+        ]
+    },
+}

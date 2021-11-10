@@ -3,6 +3,7 @@ import classes from "./Input.module.css"
 
 const Input = (props) => {
     const {
+        id,
         label,
         type,
         name,
@@ -19,13 +20,14 @@ const Input = (props) => {
     const inputClasses = hasErrors ? `${classNames} ${classes.invalid}` : `${classNames}`
 
     return (
-        <div className={inputClasses}>
-            <label htmlFor={name}>{label}</label>
-            <input type={type}
+        <div className={`${inputClasses} ${classes.control}`}>
+            <label htmlFor={id || name}>{label}</label>
+            <input id={id}
+                   type={type}
                    name={name}
                    value={value}
                    onChange={handleChange}
-                   onBlur={handleBlur} />
+                   onBlur={handleBlur}/>
             {hasErrors && (<span className={classes["error-text"]}>{errorMessage}</span>)}
         </div>
     )

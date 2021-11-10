@@ -5,8 +5,8 @@ function useForm(formObj) {
 
     function renderFormInputs(classNames) {
         return Object.values(form).map((inputObj) => {
-            const {value, label, errorMessage, valid, touched, renderInput} = inputObj;
-            return renderInput(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames);
+            const {value, label, errorMessage, valid, touched, render} = inputObj;
+            return render(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames)
         });
     }
 
@@ -22,9 +22,9 @@ function useForm(formObj) {
         }, [form]);
 
     const onInputChange = useCallback(event => {
-            const { name, value } = event.target;
+            const {name, value} = event.target;
             // copy input object whose value was changed
-            const inputObj = { ...form[name] };
+            const inputObj = {...form[name]};
             // update value
             inputObj.value = value;
 
@@ -40,14 +40,14 @@ function useForm(formObj) {
                 inputObj.valid = false;
             }
 
-            setForm({ ...form, [name]: inputObj });
+            setForm({...form, [name]: inputObj});
         },
         [form, isInputFieldValid]
     );
 
     const onInputBlur = useCallback(event => {
-        const { name } = event.target;
-        const inputObj = { ...form[name] };
+        const {name} = event.target;
+        const inputObj = {...form[name]};
 
         // mark input field as touched
         inputObj.touched = true;
@@ -60,7 +60,7 @@ function useForm(formObj) {
             inputObj.valid = false;
         }
 
-        setForm({ ...form, [name]: inputObj });
+        setForm({...form, [name]: inputObj});
     }, [form, isInputFieldValid])
 
     const isFormValid = useCallback(() => {
@@ -81,7 +81,7 @@ function useForm(formObj) {
     }, [formObj])
 
     const formValues = Object.values(form).map(inputObj => inputObj.value)
-    return {formValues, renderFormInputs, isFormValid, resetForm };
+    return {formValues, renderFormInputs, isFormValid, resetForm};
 }
 
 export default useForm;

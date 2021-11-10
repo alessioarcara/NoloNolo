@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail} = require("../../helpers/problemMessages");
 
-const ACCESS_EXPIRE_TIME = '60m'
+const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {

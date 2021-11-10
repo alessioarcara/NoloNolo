@@ -21,6 +21,7 @@ const rootSchema = `
             user: User!
             boat(boatId: ID!): Boat!
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
+            boatsByUser: [Boat!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
