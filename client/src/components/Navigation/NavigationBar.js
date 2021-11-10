@@ -34,7 +34,7 @@ const NavigationBar = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/preferiti' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
+                    <NavLink to='/favorites' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <HeartIcon className={classes.heart}/>
                         <div>Preferiti</div>
                     </NavLink>

@@ -10,7 +10,7 @@ const Header = ({onSubmitFilters, boatsNumber, boatsMaxPrice}) => {
     /* useState per gestire la visualizzazione del menù */
     const [show, setShow] = useState(false)
 
-    /* history per tornare alla pagina precedente */
+    /* navigate per tornare alla pagina precedente */
     const navigate = useNavigate()
 
     /* Function per tornare alla pagina precedente */

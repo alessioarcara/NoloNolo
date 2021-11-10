@@ -21,9 +21,9 @@ const NewAdvertisementPage = () => {
     return (
         <Routes>
             <Route path={'/*'} element={<AvailableBoats/>}/>
-            <Route path={'/boat'} element={<NewBoat/>}/>
-            <Route path={'/location'} element={<NewBoatLocation/>}/>
-            <Route path={'/advertisement'} element={<NewBoatAdvertisement/>}/>
+            <Route path={'boat'} element={<NewBoat/>}/>
+            <Route path={'location'} element={<NewBoatLocation/>}/>
+            <Route path={'advertisement'} element={<NewBoatAdvertisement/>}/>
         </Routes>
     );
 }
