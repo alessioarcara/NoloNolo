@@ -27,6 +27,7 @@
     border-radius: 50%;
     width: 2rem;
     cursor: pointer;
+    visibility: hidden;
 }
 
 .style-arrow svg:hover {
@@ -53,6 +54,12 @@
 
     ::-webkit-scrollbar {
         display: none;
+    }
+}
+
+@media only screen and (min-width: 570px) {
+    .slideshow:hover .style-arrow svg {
+        visibility: visible;
     }
 }
 

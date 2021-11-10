@@ -6,8 +6,6 @@
 
 .content-left {
     width: 50%;
-    /*height: 50rem; !* TO MODIFY *!*/
-    height: 100vh;
     background: #c2bfbf !important;
 }
 
@@ -25,6 +23,10 @@
 .bar {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.images {
+    display: block;
 }
 
 .loading {
@@ -60,14 +62,14 @@
     }
 }
 
-@media only screen and (max-width: 569px) {
+@media only screen and (max-width: 768px) {
     .placeholder-advertisement {
         flex-direction: column;
     }
 
     .content-left {
         width: 100%;
-        height: 10rem;
+        height: 35vh;
     }
 
     .content-right {
@@ -79,5 +81,9 @@
     .bar {
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
+    }
+
+    .is-show {
+        display: none;
     }
 }

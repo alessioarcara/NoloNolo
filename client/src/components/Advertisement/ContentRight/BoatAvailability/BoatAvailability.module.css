@@ -30,8 +30,15 @@
 }
 
 .datepicker {
-    width: 20rem;
+    justify-content: flex-start;
 }
 
-@media only screen and (max-width: 768px) {
+.datepicker {
+    width: fit-content;
+}
+
+@media only screen and (min-width: 769px) {
+    .datepicker {
+        width: 20rem;
+    }
 }

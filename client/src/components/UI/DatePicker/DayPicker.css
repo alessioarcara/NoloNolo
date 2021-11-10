@@ -10,6 +10,7 @@
     border: none;
     background-color: white;
     font-size: 1.1em;
+    user-select: none;
 }
 
 /*Calendar Overall month*/
@@ -112,6 +113,16 @@
 }
 .react-datepicker__navigation--next {
     margin-right: 0.4rem;
+}
+
+.react-datepicker__navigation {
+    overflow: visible;
+}
+
+@media only screen and (max-width: 350px) {
+    .react-datepicker {
+        font-size: 0.8rem;
+    }
 }
 
 @media only screen and (min-width: 769px) {
