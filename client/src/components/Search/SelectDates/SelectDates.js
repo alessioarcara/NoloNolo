@@ -1,10 +1,12 @@
-import classes from "./SelectDates.module.css";
 import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 import BackIcon from "../../UI/icons/BackIcon";
-import SearchDatePicker from "./SearchDatePicker";
+import DayPicker from "../../UI/DatePicker/DayPicker";
+import classes from "./SelectDates.module.css";
 
-const SelectDates = ({moveClickHandler, changeStartDateHandler, changeEndDateHandler,
-                     searchClickHandler, cancelSelectionHandler, startDate, endDate}) => {
+const SelectDates = ({
+                         moveClickHandler, changeStartDateHandler, changeEndDateHandler,
+                         searchClickHandler, cancelSelectionHandler, startDate, endDate
+                     }) => {
 
     return (
         <div className={classes[`datepicker-container`]}>
@@ -28,12 +30,15 @@ const SelectDates = ({moveClickHandler, changeStartDateHandler, changeEndDateHan
                     <li>dom</li>
                 </ul>
             </div>
-            <SearchDatePicker
-                start={startDate}
-                end={endDate}
-                onChangeStartDate={changeStartDateHandler}
-                onChangeEndDate={changeEndDateHandler}
-            />
+            <div className={classes[`day-picker`]}>
+                <DayPicker
+                    start={startDate}
+                    end={endDate}
+                    monthsShown={2}
+                    onChangeStartDate={changeStartDateHandler}
+                    onChangeEndDate={changeEndDateHandler}
+                />
+            </div>
             <ActionButtons
                 actionClassName={classes[`actions-bottom`]}
                 firstButtonClassName={`btn btn-secondary ${classes[`btn-skip`]}`}

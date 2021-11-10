@@ -11,6 +11,7 @@
     /* No selection text in the card */
     user-select: none;
     -webkit-user-select: none;
+    overflow: hidden;
 }
 
 .card:hover {
@@ -93,7 +94,8 @@
 
     /* Remove events onClick in all adapter */
     .adapter {
-        pointer-events: none;
+        pointer-events: none !important;
+        cursor: not-allowed;
     }
 
     /* Add pointer events in btn-details */

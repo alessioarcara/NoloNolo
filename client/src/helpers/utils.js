@@ -32,7 +32,20 @@ export const formatNumber = (number) =>
         currency: 'EUR'
     }).format(number);
 
-/* Settiamo la data da dd/mm/yyyy a yyyy-mm-dd */
+/* Set data from dd/mm/yyyy to yyyy-mm-dd */
 export const formatDate = (date) =>
     new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
         .toISOString().split('T')[0]
+
+export const rangeDate = ((startDate, endDate) => {
+    const oneDayMilliseconds = 24 * 60 * 60 * 1000
+    return endDate ? Math.round((new Date(endDate) - new Date(startDate)) / oneDayMilliseconds) : 0
+})
+
+
+/* Set averageReviews */
+export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length)
+
+/* Set general date with options */
+export const formatDayMonthYearDate = (date, options) =>
+    new Date(date).toLocaleDateString("it-IT", options)

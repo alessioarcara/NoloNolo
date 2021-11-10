@@ -1,0 +1,14 @@
+.content {
+    font-family: "Noto Sans Old Italic", serif;
+    font-size: 1em;
+    word-wrap: break-word;
+}
+
+.show-more-btn {
+    width: fit-content;
+    font-size: 0.8em;
+    color: #808080;
+    text-decoration: underline;
+    cursor: pointer;
+    user-select: none;
+}

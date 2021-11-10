@@ -4,6 +4,7 @@
     width: 100%;
     background: #fff;
     height: 3.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -12,20 +13,16 @@
     padding: 1rem 1.5rem;
 }
 
-.btn-back svg {
-
-}
-
 .container svg {
+    position: relative;
     width: 1.5rem;
+    cursor: pointer;
 }
 
-.container svg path {
+.container div:nth-child(1) svg {
     stroke: black;
 }
 
-@media only screen and (min-width: 570px) {
-    .header-bar {
-        display: none;
-    }
+.container div:nth-child(2) svg {
+    width: 1.8rem;
 }

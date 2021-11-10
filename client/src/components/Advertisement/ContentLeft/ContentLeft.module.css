@@ -1,9 +1,38 @@
 .container {
-    height: 0;
+    width: 100%;
+    height: 100%;
+    margin-top: 3.4rem;
 }
 
-@media only screen and (max-width: 768px) {
+.map-container {
+    width: 100%;
+    height: 17.5rem;
+}
+
+.container-desktop {
+    display: none;
+}
+
+.mobile-header {
+    width: 100%;
+}
+
+.custom-images {
+    border-radius: 0;
+}
+
+@media only screen and (min-width: 769px) {
     .container {
-        height: 11.4rem;
+        display: none;
+    }
+
+    .container-desktop {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile-header {
+        display: none;
     }
 }

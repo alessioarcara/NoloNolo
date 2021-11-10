@@ -21,7 +21,7 @@ const Favorite = ({boatId, advIsFavorite}) => {
             return favoritesPayload
         }
         !advIsFavorite ? toggleFavorite({body: body_addFavorite({boatId}), token}, transformData) :
-            toggleFavorite({body: body_removeFavorite({boatId}), token}, transformData)
+            toggleFavorite({body: body_removeFavorite( {boatId}), token}, transformData)
     }
 
     return (
@@ -32,7 +32,6 @@ const Favorite = ({boatId, advIsFavorite}) => {
             {isLoggedIn &&
             <div onClick={toggleFavoritesStatusHandler}
                  className={advIsFavorite ? `${classes.icon} ${classes.clicked}` : classes.icon}>
-            >
                 <HeartIcon className={classes.heart}/>
             </div>
             }

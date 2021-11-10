@@ -1,7 +1,7 @@
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../helpers/constants";
 
 export const initialState = {
-    startDate: new Date(),
+    startDate: null,
     endDate: null,
     city: "",
     region: "",

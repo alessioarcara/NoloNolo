@@ -27,6 +27,7 @@
     border-radius: 50%;
     width: 2rem;
     cursor: pointer;
+    visibility: hidden;
 }
 
 .style-arrow svg:hover {
@@ -47,11 +48,23 @@
     }
 
     .slideshowSlider {
-        overflow: scroll;
+        overflow-x: scroll;
         scroll-snap-type: x mandatory;
     }
 
     ::-webkit-scrollbar {
         display: none;
+    }
+}
+
+@media only screen and (min-width: 570px) {
+    .slideshow:hover .style-arrow svg {
+        visibility: visible;
+    }
+}
+
+@media only screen and (min-width: 901px) {
+    .slideshowSlider {
+        border-radius: 1rem 0 0 1rem;
     }
 }

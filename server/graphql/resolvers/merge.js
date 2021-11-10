@@ -1,11 +1,24 @@
 const DataLoader = require('dataloader');
 
 const User = require('../../models/user');
+const Boat = require('../../models/boat');
 const {dateToString} = require("../../helpers/date");
+
 
 const userLoader = new DataLoader(userIds => {
     return User.find({_id: {$in: userIds}});
 });
+
+const boatLoader = new DataLoader(boatIds => {
+    return Boat.find({_id: {$in: boatIds}})
+});
+
+const boat = async boatsId => {
+    try {
+        const boat = await boatLoader.load(boatsId.toString())
+        return transformBoat(boat._doc);
+    } catch (err) {throw err}
+}
 
 const user = async userId => {
     try {
@@ -31,7 +44,9 @@ const transformBoat = boat => {
             })
         },
         isDocked: {
-            ...boat.location,
+            region: boat.location.region,
+            city: boat.location.city,
+            harbour: boat.location.harbour,
             coordinates: boat.location.geometry.coordinates
         },
         totalCount: boat.totalCount,
@@ -42,9 +57,14 @@ const transformBoat = boat => {
 
 const transformRental = rental => {
     return {
-        ...rental._doc,
-        from: dateToString(rental._doc.fromDate),
-        to: dateToString(rental._doc.toDate)
+        ...rental,
+        customer: user.bind(this, rental.customer),
+        from: dateToString(rental.fromDate),
+        to: dateToString(rental.toDate),
+        totalAmount: parseFloat(rental.totalAmount),
+        boat: boat.bind(this, rental.boat),
+        createdAt: dateToString(rental.createdAt),
+        updatedAt: dateToString(rental.updatedAt)
     }
 }
 
