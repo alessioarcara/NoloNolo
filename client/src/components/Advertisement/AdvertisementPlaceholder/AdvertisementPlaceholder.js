@@ -7,6 +7,10 @@ export const AdvertisementPlaceholder = () => {
             <div className={classes['content-right']}>
                 {/* Advertisement data */}
                 <div
+                    className={`${classes.loading} ${classes['is-show']}`}
+                    style={{width: '100%', height: '100%', borderRadius: '1rem', marginTop: '2rem'}}
+                />
+                <div
                     className={classes.bar}
                     style={{width: '100%', height: '3rem'}}
                 />

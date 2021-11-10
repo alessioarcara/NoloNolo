@@ -7,7 +7,7 @@ import Images from "../Images/Images";
 import SlideShowDots from "./SlideShowDots";
 import {circularSlice} from "../../../helpers/utils";
 
-const SlideShow = ({images, children}) => {
+const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     // const imageRef = useRef(null)
     // const [isVisible, setIsVisible] = useState(false)
 
@@ -46,7 +46,7 @@ const SlideShow = ({images, children}) => {
 
     return (
         <div className={classes.slideshow}>
-            <div className={classes.slideshowSlider}>
+            <div className={`${classes.slideshowSlider} ${classNameSlideShowSlider ? classNameSlideShowSlider : ''}`}>
                 {circularSlice(images, start, end).map((place, index) => (
                     <Images
                         key={index}

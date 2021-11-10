@@ -30,29 +30,33 @@
     width: 95%;
 }
 
-.days-text li {
-    margin: 0;
-}
-
 .actions-top {
     width: 100%;
     height: 4.5rem;
     display: flex;
     justify-content: space-around;
-    gap: 10rem;
+    gap: 5rem;
     align-items: center;
 }
 
+.actions-top button {
+    width: 50%;
+}
+
 .actions-bottom {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     display: flex;
     width: 100%;
     height: 4.5rem;
     border-top: 1px solid #efefef;
     justify-content: space-around;
-    gap: 8rem;
+    gap: 5rem;
     align-items: center;
+}
+
+.actions-bottom button {
+    width: 25%;
 }
 
 .btn-back {
@@ -60,17 +64,25 @@
     border: 0;
 }
 
-@media (max-width: 768px) {
-    .btn-skip {
-        width: 100%;
-        padding-left: 3rem;
-    }
-    .btn-forward {
-        margin-right: 3rem;
+.btn-back svg {
+    position: absolute;
+    left: 1.5rem;
+    transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 350px) {
+    .days-text {
+        gap: 0.5rem;
     }
 }
 
-@media (min-width: 768px) {
+@media only screen and (max-width: 768px) {
+    .day-picker {
+        margin-top: 8rem;
+    }
+}
+
+@media only screen and (min-width: 769px) {
     .header-datepicker {
         width: 90%;
     }

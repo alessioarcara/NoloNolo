@@ -7,7 +7,6 @@ const reviewType = require('./review')
 const rentalType = require('./rental')
 const favoriteType = require("./favorite");
 
-
 const rootSchema = `
         ${authType}
         ${boatType}
