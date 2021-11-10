@@ -8,12 +8,6 @@ const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowBil
     const { isLoggedIn: isLogged } = useContext(AuthContext)
     const rangeDates = useMemo(() => rangeDate(startDate, endDate), [startDate, endDate])
 
-    /* Options for date */
-    const options = {
-        day: 'numeric',
-        month: 'short'
-    }
-
     return (
         <div className={classes['data-container']}>
             <div className={classes.report}>
@@ -37,4 +31,4 @@ const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowBil
     );
 }
 
-export default Actions;
+export default AdvertisementActions;

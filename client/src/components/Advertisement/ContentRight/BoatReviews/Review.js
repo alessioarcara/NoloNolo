@@ -3,10 +3,6 @@ import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
 import {formatDayMonthYearDate} from "../../../../helpers/utils";
 
 const Review = ({avatar, creator, createdAt, body}) => {
-    const options = {
-        month: 'long',
-        year: 'numeric'
-    }
 
     return (
         <div className={classes['card-container']}>

@@ -3,20 +3,25 @@ import DayPicker from "../../../UI/DatePicker/DayPicker";
 import classes from "./BoatAvailability.module.css";
 import Button from "../../../UI/Button/Button";
 import {rangeDate} from "../../../../helpers/utils";
+import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../../helpers/constants";
 
 const BoatAvailability = ({
                               startDate,
                               endDate,
-                              changeStartDateHandler,
-                              changeEndDateHandler,
+                              dispatch,
                               place,
                               alreadyRentedDates
-}) => {
+                          }) => {
 
     const cancelSelectionHandler = useCallback(() => {
-        changeStartDateHandler(null)
-        changeEndDateHandler(null)
-    }, [changeStartDateHandler, changeEndDateHandler])
+        dispatch({type: CLEAR_DATES})
+    }, [dispatch])
+    const changeStartDateHandler = useCallback((start) => {
+        dispatch({type: CHANGE_START_DATE, payload: start})
+    }, [dispatch])
+    const changeEndDateHandler = useCallback((end) => {
+        dispatch({type: CHANGE_END_DATE, payload: end})
+    }, [dispatch])
 
     return (
         <section className={classes[`boat-availability`]}>

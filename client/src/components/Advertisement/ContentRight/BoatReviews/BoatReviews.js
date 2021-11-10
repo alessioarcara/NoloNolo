@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import classes from './BoatReviews.module.css';
 import StarIcon from "../../../UI/icons/StarIcon";
 import {averageReviews} from "../../../../helpers/utils";
@@ -10,10 +10,10 @@ const BoatReviews = ({reviews}) => {
     const [firstIndex, setFirsIndex] = useState(0)
     const [lastIndex, setLastIndex] = useState(reviews.length - 1)
 
-    const goNextReview = () => {
+    const goNextReview = useCallback(() => {
         setFirsIndex(prevState => prevState === reviews.length - 1 ? 0 : prevState + 1)
         setLastIndex(prevState => prevState === reviews.length - 1 ? 0 : prevState + 1)
-    }
+    }, [reviews])
 
     const goPrevReview = useCallback(() => {
         setFirsIndex(prevState => prevState === 0 ? reviews.length - 1 : prevState - 1)
