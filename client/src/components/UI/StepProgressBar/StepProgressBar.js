@@ -12,7 +12,7 @@ const StepProgressBar = ({steps, stepPosition}) => {
     return (
         <div className={classes.progressBar}>
             {steps.map((name, i) =>
-                i < stepPosition ? <Step name={name} fullfilled/> : <Step name={name}/>
+                i < stepPosition ? <Step key={i} name={name} fullfilled/> : <Step key={i} name={name}/>
             )}
         </div>
     )

@@ -1,7 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {Outlet, Route, Routes} from 'react-router-dom';
-import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
-import ActionButtons from "../components/UI/ActionButtons/ActionButtons";
+import {Route, Routes} from 'react-router-dom';
 import useHttp from "../hooks/use-http";
 import {body_userBoats} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
