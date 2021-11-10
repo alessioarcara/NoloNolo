@@ -30,7 +30,7 @@ const Results = ({status, boats, switchPage, numberPage}) => {
                     condition={status === 'completed'}
                     placeholder={BoatPlaceholder}
                     initialDelay={2000}
-                    checkOnce={false}
+                    checkOnce={true}
                     multiplier={20}
                 >
                     <BoatList boats={updatedBoats || boats}/>

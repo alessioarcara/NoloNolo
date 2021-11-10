@@ -73,6 +73,7 @@ const AdvertisementPage = () => {
             condition={statusBoat === 'completed'}
             placeholder={AdvertisementPlaceholder}
             multiplier={1}
+            checkOnce={true}
             delay={2000}
         >
             {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&

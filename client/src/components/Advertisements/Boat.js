@@ -2,12 +2,7 @@ import React, {useCallback} from "react"
 import classes from './Boat.module.css';
 import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "../UI/SlideShow/SlideShow";
-import {useHistory} from "react-router-dom";
 import Favorite from "../Favorite/Favorite";
-import {formatNumber} from "../../helpers/utils";
-import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
-import {useStore} from "../../hooks-store/store";
-import AuthContext from "../../store/auth-context";
 import {useHistory, useLocation} from "react-router-dom";
 import {averageReviews, formatNumber} from "../../helpers/utils";
 
