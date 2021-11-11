@@ -29,6 +29,11 @@ const AuthType = `
             changePasswordProblem: String
         }
         
+        type updateUserPayload {
+            updateUserData: Address
+            updateUserProblem: String
+        }
+        
         input UserInput {
             email: String!
             password: String!
@@ -37,6 +42,13 @@ const AuthType = `
         input ChangePasswordInput {
             oldPassword: String!
             newPassword: String!
+        }
+        
+        input UpdateUserInput {
+            street: String
+            city: String
+            region: String
+            postalCode: Int
         }
         
         enum userType {

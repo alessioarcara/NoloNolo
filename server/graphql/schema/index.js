@@ -34,6 +34,7 @@ const rootSchema = `
         type RootMutation {
             login(inputUser: UserInput!): AuthenticationPayload!
             createUser(inputUser: UserInput!): AuthenticationPayload!
+            updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
