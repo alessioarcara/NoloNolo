@@ -1,4 +1,11 @@
-import {requiredRule, minLengthRule, isEmailRule, isNumberRule, passwordMatchRule} from "./InputValidationRules"
+import {
+    requiredRule,
+    minLengthRule,
+    isEmailRule,
+    isNumberRule,
+    passwordMatchRule,
+    maxLengthRule
+} from "./InputValidationRules"
 import {renderInput, renderNumberSpinner} from "./inputConfig";
 
 function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
@@ -86,6 +93,7 @@ export const addressForm = {
         validationRules: [
             requiredRule("postal code"),
             minLengthRule("postal code", 5),
+            maxLengthRule("postal code", 5)
         ]
     }
 };
@@ -109,5 +117,10 @@ export const newPasswordForm = {
         validationRules: [
             passwordMatchRule()
         ]
+    }
+}
+export const singleUploadForm = {
+    image: {
+        ...createFormFieldConfig('Immagine', 'avatar', 'file')
     }
 }
