@@ -1,6 +1,5 @@
-import {requiredRule, minLengthRule, isEmailRule, isNumberRule} from "./InputValidationRules"
+import {requiredRule, minLengthRule, isEmailRule, isNumberRule, passwordMatchRule} from "./InputValidationRules"
 import {renderInput, renderNumberSpinner} from "./inputConfig";
-
 
 function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
     return {
@@ -59,4 +58,56 @@ export const boatForm = {
             isNumberRule("maximum capacity")
         ]
     },
+};
+export const addressForm = {
+    street: {
+        ...createFormFieldConfig('Indirizzo', 'street', 'text'),
+        validationRules: [
+            requiredRule("street"),
+            minLengthRule("street", 4)
+        ]
+    },
+    city: {
+        ...createFormFieldConfig('Città', 'city', 'text'),
+        validationRules: [
+            requiredRule("city"),
+            minLengthRule("city", 4)
+        ]
+    },
+    region: {
+        ...createFormFieldConfig('Regione', 'region', 'text'),
+        validationRules: [
+            requiredRule("region"),
+            minLengthRule("region", 4)
+        ]
+    },
+    postalCode: {
+        ...createFormFieldConfig('Codice postale', 'postalCode', 'number'),
+        validationRules: [
+            requiredRule("postal code"),
+            minLengthRule("postal code", 5),
+        ]
+    }
+};
+export const newPasswordForm = {
+    oldPassword: {
+        ...createFormFieldConfig('Password attuale', 'oldPassword', 'password'),
+        validationRules: [
+            requiredRule("old password"),
+            minLengthRule("old password", 8)
+        ]
+    },
+    password: {
+        ...createFormFieldConfig('Nuova password', 'password', 'password'),
+        validationRules: [
+            requiredRule("new password"),
+            minLengthRule("new password", 8)
+        ]
+},
+    confirmPassword: {
+        ...createFormFieldConfig('Conferma la password', 'confirmPassword', 'password'),
+        validationRules: [
+            passwordMatchRule()
+        ]
+    }
 }

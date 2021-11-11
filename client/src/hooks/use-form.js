@@ -76,12 +76,16 @@ function useForm(formObj) {
         return isValid;
     }, [form]);
 
+    const changeForm = useCallback((newFormObj) => {
+        setForm(newFormObj)
+    }, [])
+
     const resetForm = useCallback(() => {
         setForm(formObj)
     }, [formObj])
 
     const formValues = Object.values(form).map(inputObj => inputObj.value)
-    return {formValues, renderFormInputs, isFormValid, resetForm};
+    return {formValues, renderFormInputs, isFormValid, changeForm, resetForm};
 }
 
 export default useForm;

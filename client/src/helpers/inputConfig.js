@@ -19,7 +19,6 @@ export function renderNumberSpinner(handleChange, handleBlur, value, isValid, is
         />
     )
 }
-
 export function renderInput(handleChange, handleBlur, value, isValid, isTouched, error, key, classNames) {
     return (
         <Input
