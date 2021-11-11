@@ -30,7 +30,7 @@ const AuthForm = () => {
         const transformData = resData => resData[Object.keys(resData)]
 
         if (isLogin) {
-            authenticate({body: body_login(enteredEmail, enteredPassword)}, transformData)
+            authenticate({body: body_login({enteredEmail, enteredPassword})}, transformData)
         } else {
             authenticate({body: body_signup({enteredEmail, enteredPassword})}, transformData)
         }
