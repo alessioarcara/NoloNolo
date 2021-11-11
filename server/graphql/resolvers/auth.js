@@ -68,7 +68,7 @@ module.exports = {
             await user.save()
 
             return {changePasswordStatus: true };
-        } catch (err) { throw new Error(`Can't login. ${err}`); }
+        } catch (err) { throw new Error(`Can't change password. ${err}`); }
     },
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
@@ -83,6 +83,28 @@ module.exports = {
             const accessToken = createTokens(user._id, user.email, user.count, res)
             return {authData: {userId: user._id, token: accessToken} }
         } catch (err) { throw new Error(`Can't create user. ${err}`); }
+    },
+    updateUser: async (args, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        const {street, city, region, postalCode} = args.inputUpdateUser
+        try {
+            const user = await User.findById(req.userId)
+            if (!user) { return { updateUserProblem: userNotFound } }
+
+            if (street !== undefined) {
+                user.address.street = street;
+            }
+            if (city !== undefined) {
+                user.address.city = city;
+            }
+            if (region !== undefined) {
+                user.address.region = region;
+            }
+            if (postalCode !== undefined) {
+                user.address.postalCode = postalCode;
+            }
+            return { updateUserData: user.address };
+        } catch (err) { throw new Error(`Can't update user. ${err}`)}
     },
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)

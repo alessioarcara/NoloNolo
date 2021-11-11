@@ -3,7 +3,7 @@ import {addressForm, newPasswordForm, singleUploadForm} from "../helpers/formCon
 import Button from "../components/UI/Button/Button";
 import {useCallback, useContext, useState} from "react";
 import useHttp from "../hooks/use-http";
-import {body_changePassword} from "../helpers/httpConfig";
+import {body_changePassword, body_updateUser} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 
 /* PROVVISORIO */
@@ -41,14 +41,26 @@ const UserDetailsPage = () => {
 
     const saveDetailsHandler = (event) => {
         event.preventDefault()
+        const transformData = resData => resData[Object.keys(resData)]
 
-        sendRequest({
-            body: body_changePassword({
-                oldPassword: formValues[0],
-                newPassword: formValues[1]
-            }),
-            token
-        }, resData => resData[Object.keys(resData)])
+        if (whichUserDetailsOpen === 0)
+            sendRequest({
+                body: body_updateUser({
+                    street: formValues[0],
+                    city: formValues[1],
+                    region: formValues[2],
+                    postalCode: parseInt(formValues[3])
+                }),
+                token
+            }, transformData)
+        if (whichUserDetailsOpen === 1)
+            sendRequest({
+                body: body_changePassword({
+                    oldPassword: formValues[0],
+                    newPassword: formValues[1]
+                }),
+                token
+            }, transformData)
         resetForm()
     }
 

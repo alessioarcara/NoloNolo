@@ -43,6 +43,24 @@ exports.body_changePassword = ({oldPassword, newPassword}) => {
         variables: {passwordData: {oldPassword, newPassword}}
     }
 };
+exports.body_updateUser = ({street, city, region, postalCode}) => {
+    return {
+        query: `
+          mutation($userData: UpdateUserInput!) {
+              updateUser(inputUpdateUser: $userData) {
+                  updateUserData {
+                      street
+                      city
+                      region
+                      postalCode
+                  }
+                  updateUserProblem
+            }  
+          }
+        `,
+        variables: {userData: {street, city, region, postalCode}}
+    }
+};
 exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
