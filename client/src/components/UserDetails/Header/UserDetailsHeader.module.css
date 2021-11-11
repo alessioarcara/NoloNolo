@@ -1,0 +1,27 @@
+.header {
+    position: sticky;
+    top: 0;
+    padding: 1rem;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.user-header-container svg {
+    width: 1.5rem;
+}
+
+.user-header-container svg:nth-child(1) {
+    cursor: pointer;
+}
+
+.user-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-text {
+    font-family: 'Lobster', cursive;
+    align-self: center;
+}

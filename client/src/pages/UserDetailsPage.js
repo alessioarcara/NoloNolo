@@ -1,6 +1,10 @@
+import UserDetailsHeader from "../components/UserDetails/Header/UserDetailsHeader";
+
 const UserDetailsPage = () => {
     return (
-        <h1>User Details</h1>
+        <>
+            <UserDetailsHeader/>
+        </>
     );
 };
 
