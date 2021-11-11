@@ -1,0 +1,41 @@
+.details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container {
+    width: 100%;
+    padding: 1rem;
+}
+
+.border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.details-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.type {
+    font-size: 0.9em;
+    font-weight: bold;
+    width: 100%;
+    color: #FF2677;
+}
+
+@media only screen and (min-width: 769px) {
+    .details-container {
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        margin: 2rem;
+    }
+
+    .container {
+        border-bottom: 0;
+    }
+}

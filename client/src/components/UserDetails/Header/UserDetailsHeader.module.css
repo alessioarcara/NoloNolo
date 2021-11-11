@@ -5,23 +5,23 @@
     width: 100%;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.user-header-container svg {
-    width: 1.5rem;
-}
-
-.user-header-container svg:nth-child(1) {
-    cursor: pointer;
+    z-index: 1;
 }
 
 .user-header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.user-header-container svg {
+    position: absolute;
+    left: 1rem;
+    width: 1.5rem;
+    cursor: pointer;
 }
 
 .header-text {
     font-family: 'Lobster', cursive;
-    align-self: center;
+    font-size: 1.2rem;
 }
