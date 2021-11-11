@@ -24,9 +24,19 @@ const AuthType = `
             authProblem: String
         }
         
+        type changePasswordPayload {
+            changePasswordStatus: Boolean
+            changePasswordProblem: String
+        }
+        
         input UserInput {
             email: String!
             password: String!
+        }
+        
+        input ChangePasswordInput {
+            oldPassword: String!
+            newPassword: String!
         }
         
         enum userType {

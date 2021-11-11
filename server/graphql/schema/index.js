@@ -32,8 +32,9 @@ const rootSchema = `
         }
         
         type RootMutation {
-            login(email: String!, password: String!): AuthenticationPayload!
+            login(inputUser: UserInput!): AuthenticationPayload!
             createUser(inputUser: UserInput!): AuthenticationPayload!
+            changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
