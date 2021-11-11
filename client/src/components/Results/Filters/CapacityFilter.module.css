@@ -1,32 +1,24 @@
 .passengers-container {
     display: flex;
     gap: 1rem;
+    align-items: center;
     margin-top: 1rem;
 }
 
 .passengers-count {
-    border: 1px solid rgba(0, 0, 0, 0.325);
-    border-radius: 50%;
-    padding: 0.425rem 0.725rem;
-    width: 2.2rem;
-    outline: none;
+    font-size: 0.8rem;
 }
 
 .add-btn, .rmv-btn {
     border-radius: 50%;
+    width: 1.7rem;
+    height: 1.7rem;
+    text-align: center;
     color: rgba(0, 0, 0, 0.325);
-    border-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #fff;
     cursor: pointer;
     transition: all 0.325s ease;
-}
-
-.add-btn {
-    padding: 0.3rem 0.6rem;
-}
-
-.rmv-btn {
-    padding: 0.3rem 0.725rem;
 }
 
 .add-btn:hover, .rmv-btn:hover {

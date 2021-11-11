@@ -18,7 +18,7 @@ const CapacityFilter = ({guests, dispatch}) => {
             <p className='filter-subtitle'>Numero minimo di passeggeri:</p>
             <div className={classes["passengers-container"]}>
                 <button className={classes["rmv-btn"]} type='button' onClick={rmvPassenger}>&#45;</button>
-                <input className={classes["passengers-count"]} type='text' value={guests} readOnly/>
+                <div className={classes['passengers-count']}>{guests}</div>
                 <button className={classes["add-btn"]} type='button' onClick={addPassenger}>&#43;</button>
             </div>
         </div>

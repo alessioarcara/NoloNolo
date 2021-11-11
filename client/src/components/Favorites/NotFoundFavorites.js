@@ -4,8 +4,8 @@ import NotFoundIcon from "../UI/icons/NotFoundIcon";
 const NotFoundFavorites = () => {
     return (
         <div className={classes['not-found-container']}>
-            <NotFoundIcon/>
-            <p className={classes['not-found-text']}>Non ci sono preferiti!</p>
+            {/*<NotFoundIcon/>*/}
+            <p className={classes['not-found-text']}>Non hai aggiunto nessun preferito!</p>
         </div>
     );
 }
