@@ -3,8 +3,8 @@
     flex-direction: column;
 }
 
-/*.modal-footer {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    margin-top: 4rem;*/
-/*}*/
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 4rem;
+}
