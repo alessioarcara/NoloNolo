@@ -22,6 +22,14 @@ export function minLengthRule(inputName, minCharacters) {
     );
 }
 
+export function maxLengthRule(inputName, maxCharacters) {
+    return createValidationRule(
+        "maxLenth",
+        `${inputName} should contain atleast ${maxCharacters} characters`,
+        (inputValue, formObj) => inputValue.length <= maxCharacters
+    );
+}
+
 export function isEmailRule(inputName) {
     return createValidationRule(
         "isEmail",
