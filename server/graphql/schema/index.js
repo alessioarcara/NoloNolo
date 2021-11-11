@@ -6,6 +6,7 @@ const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
 const favoriteType = require("./favorite");
+const imageType = require("./image");
 
 const rootSchema = `
         ${authType}
@@ -15,6 +16,9 @@ const rootSchema = `
         ${favoriteType}
         ${reviewType}
         ${rentalType}
+        ${imageType}
+        
+        scalar Upload
         
         type RootQuery {
             refreshToken: AuthData!
@@ -37,6 +41,7 @@ const rootSchema = `
             removeFavorite(boatId: ID!): FavoritesPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             rentBoat(inputRental: RentalInput!): rentBoatPayload!
+            addImage(inputImage: ImageInput!): addImagePayload! 
         }
         
         schema {
