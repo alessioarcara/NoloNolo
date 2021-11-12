@@ -1,7 +1,11 @@
 import classes from './NotFoundFavorites.module.css';
 import {Link} from "react-router-dom";
+import {useContext} from "react";
+import AuthContext from "../../store/auth-context";
 
 const NotFoundFavorites = () => {
+    const {isLoggedIn} = useContext(AuthContext)
+
     return (
         <div className={classes['not-found-container']}>
             <div className={classes['container']}>
@@ -10,9 +14,9 @@ const NotFoundFavorites = () => {
                 </div>
                 <Link
                     className='btn btn-primary'
-                    to="/"
+                    to={isLoggedIn ? '/' : 'auth'}
                 >
-                    Cerca
+                    {isLoggedIn ? 'Cerca' : 'Login'}
                 </Link>
             </div>
         </div>

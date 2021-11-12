@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../Header";
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import BoatMapPosition from "../../UI/Map/BoatMapPosition";
 import classes from './ContentLeft.module.css';

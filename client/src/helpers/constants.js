@@ -1,4 +1,4 @@
-export const GRAPHQL_API_URL = "http://localhost:3010/api"
+export const GRAPHQL_API_URL = "http://192.168.1.226:3010/api"
 
 /* Constants filterReducer */
 export const MANAGE_BOATS = "MANAGE_BOATS"

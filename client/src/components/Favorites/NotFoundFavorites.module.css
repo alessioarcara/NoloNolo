@@ -18,6 +18,11 @@
 }
 
 @media only screen and (min-width: 769px) {
+    .not-found-container {
+        margin: 2rem auto;
+        width: 25rem;
+    }
+
     .container {
         flex-direction: column;
     }

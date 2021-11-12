@@ -1,6 +1,5 @@
-import React, {useCallback, useState} from 'react';
+import React from 'react';
 import classes from "./Images.module.css";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Images = ({images, imageLoadedHandler}) => {
 
