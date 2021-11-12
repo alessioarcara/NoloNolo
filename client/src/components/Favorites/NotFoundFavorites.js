@@ -4,8 +4,6 @@ import {useContext} from "react";
 import AuthContext from "../../store/auth-context";
 
 const NotFoundFavorites = () => {
-    const {isLoggedIn} = useContext(AuthContext)
-
     return (
         <div className={classes['not-found-container']}>
             <div className={classes['container']}>
@@ -14,9 +12,9 @@ const NotFoundFavorites = () => {
                 </div>
                 <Link
                     className='btn btn-primary'
-                    to={isLoggedIn ? '/' : 'auth'}
+                    to='/'
                 >
-                    {isLoggedIn ? 'Cerca' : 'Login'}
+                    Cerca
                 </Link>
             </div>
         </div>

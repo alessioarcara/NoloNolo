@@ -9,10 +9,9 @@ import AuthContext from "../store/auth-context";
 const FavoritesPage = () => {
     const store = useStore()[0]
     const {isLoggedIn} = useContext(AuthContext)
-
     let content;
 
-    if ((store.userFavorites && store.userFavorites.length === 0) || !isLoggedIn) {
+    if ((isLoggedIn && store.userFavorites && store.userFavorites.length === 0)) {
         content = <NotFoundFavorites/>
     } else {
         content = <BoatListLayout><BoatList boats={store.userFavorites}/></BoatListLayout>;

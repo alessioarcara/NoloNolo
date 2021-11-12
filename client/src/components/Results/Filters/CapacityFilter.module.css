@@ -11,8 +11,8 @@
 
 .add-btn, .rmv-btn {
     border-radius: 50%;
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 2rem;
+    height: 2rem;
     text-align: center;
     color: rgba(0, 0, 0, 0.325);
     border: 1px solid rgba(0, 0, 0, 0.2);
