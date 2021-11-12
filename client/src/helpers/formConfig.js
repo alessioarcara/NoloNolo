@@ -68,7 +68,7 @@ export const boatForm = {
 };
 export const addressForm = {
     street: {
-        ...createFormFieldConfig('Indirizzo', 'street', 'text'),
+        ...createFormFieldConfig('Via', 'street', 'text'),
         validationRules: [
             requiredRule("street"),
             minLengthRule("street", 4)

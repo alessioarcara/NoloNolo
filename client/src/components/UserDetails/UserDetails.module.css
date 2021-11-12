@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
 }
 
 .container {
@@ -11,21 +10,24 @@
     padding: 1rem;
 }
 
-.border {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
 .details-header {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.3rem 0;
 }
 
 .type {
-    font-size: 0.9em;
+    font-size: 1em;
     font-weight: bold;
     width: 100%;
-    color: #464646;
+    color: #6e6d6d;
+}
+
+.modify {
+    font-size: 0.9em;
+    color: #807e7e;
 }
 
 @media only screen and (min-width: 769px) {
@@ -35,7 +37,7 @@
         margin: 2rem;
     }
 
-    .container {
+    .details-header {
         border-bottom: 0;
     }
 }
