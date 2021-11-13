@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
+import RentalsPage from "./pages/RentalsPage";
 import ResultsPage from "./pages/ResultsPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import NewAdvertisementPage from "./pages/NewAdvertisementPage";
@@ -30,6 +31,9 @@ function App() {
                 <Route path='/profile'>
                     {isLoggedIn && <ProfilePage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
+                </Route>
+                <Route path='/rentals' exact>
+                    <RentalsPage/>
                 </Route>
                 <Route path='/boats' exact>
                     <ResultsPage/>
