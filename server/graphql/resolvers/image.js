@@ -73,7 +73,6 @@ module.exports = {
             user.avatar = pathObj.path
 
             await user.save()
-            console.log(user)
             return { addAvatarData: user }
         } catch (err) { throw new Error(`Can't add avatar. ${err}`); }
     },
