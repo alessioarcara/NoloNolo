@@ -1,7 +1,5 @@
 import classes from './NotFoundFavorites.module.css';
 import {Link} from "react-router-dom";
-import {useContext} from "react";
-import AuthContext from "../../store/auth-context";
 
 const NotFoundFavorites = () => {
     return (

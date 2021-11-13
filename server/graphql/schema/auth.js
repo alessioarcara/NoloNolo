@@ -5,6 +5,7 @@ const AuthType = `
             address: Address
             avatar: String
             userType: String!
+            createdAt: String!
         }
         
         type Address {
@@ -30,7 +31,7 @@ const AuthType = `
         }
         
         type updateUserPayload {
-            updateUserData: Address
+            updateUserData: User
             updateUserProblem: String
         }
         

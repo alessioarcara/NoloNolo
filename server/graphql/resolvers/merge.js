@@ -28,6 +28,19 @@ const user = async userId => {
     }
 }
 
+const transformUser = user => {
+    return {
+        ...user,
+        email: user.email,
+        userType: user.userType,
+        address: {
+            ...user.address
+        },
+        avatar: user.avatar,
+        createdAt: dateToString(user.createdAt)
+    }
+}
+
 const transformBoat = boat => {
     return {
         ...boat,
@@ -68,5 +81,6 @@ const transformRental = rental => {
     }
 }
 
+exports.transformUser = transformUser;
 exports.transformBoat = transformBoat;
 exports.transformRental = transformRental;

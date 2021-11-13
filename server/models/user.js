@@ -25,11 +25,15 @@ const userSchema = new Schema({
         region: String,
         postalCode: Number
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     userType: {
         type: String,
         enum : ['customer', 'shipowner', 'admin'],
         default: 'customer'
-    }
+    },
 })
 
 module.exports = mongoose.model('User', userSchema)

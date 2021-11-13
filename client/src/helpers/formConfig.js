@@ -119,11 +119,3 @@ export const newPasswordForm = {
         ]
     }
 }
-export const singleUploadForm = {
-    avatar: {
-        ...createFormFieldConfig('Immagine', 'avatar', 'file'),
-        validationRules: [
-            requiredRule("file")
-        ]
-    }
-}

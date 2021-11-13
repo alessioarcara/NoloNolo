@@ -49,10 +49,15 @@ exports.body_updateUser = ({street, city, region, postalCode}) => {
             mutation($userData: UpdateUserInput!) {
                 updateUser(inputUpdateUser: $userData) {
                     updateUserData {
-                        street
-                        city
-                        region
-                        postalCode
+                        email
+                        address {
+                            street
+                            city
+                            region
+                            postalCode
+                        }
+                        avatar
+                        createdAt
                     }
                     updateUserProblem
                 }  
@@ -276,22 +281,23 @@ exports.invalidate = {
 };
 exports.body_user = {
     query: `
-    query {
-        user {
-            email
-            avatar
-            address {
-                street
-                city
-                region
-                postalCode
-            }
-            userType
-        }
-    }`
+            query {
+                user {
+                    email
+                    avatar
+                    address {
+                        street
+                        city
+                        region
+                        postalCode
+                    }
+                    userType
+                    createdAt
+                }
+            }`,
 };
 exports.body_addAvatar = {
-    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
+    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar createdAt } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
 
 }

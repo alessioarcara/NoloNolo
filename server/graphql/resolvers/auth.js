@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail, samePassword} = require("../../helpers/problemMessages");
+const {transformUser} = require("./merge");
 
 const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
@@ -36,7 +37,7 @@ module.exports = {
             const user = await User.findById(req.userId)
             if (!user) { return { authProblem: userNotFound } }
 
-            return user
+            return transformUser(user)
         } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
     },
     login: async (args, {_, res}) => {
@@ -104,7 +105,7 @@ module.exports = {
                 user.address.postalCode = postalCode;
             }
             await user.save()
-            return { updateUserData: user.address };
+            return { updateUserData: transformUser(user) };
         } catch (err) { throw new Error(`Can't update user. ${err}`)}
     },
     refreshToken: async (_, {req, res}) => {

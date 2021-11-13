@@ -3,6 +3,7 @@ const sharp = require('sharp');
 const {isImage} = require("../../helpers/utils");
 const {notImage, userNotFound, noFileAttached} = require("../../helpers/problemMessages");
 const User = require("../../models/user");
+const {transformUser} = require("./merge");
 
 const clearAvatar = filePath => {
     unlink(filePath, err => err && console.log(`unlink failed: ${err}`))
@@ -73,7 +74,7 @@ module.exports = {
             user.avatar = pathObj.path
 
             await user.save()
-            return { addAvatarData: user }
+            return { addAvatarData: transformUser(user) }
         } catch (err) { throw new Error(`Can't add avatar. ${err}`); }
     },
     addBoatImages: async () => {

@@ -6,7 +6,7 @@ import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
 
 const getImagePath = (userObject) => `${IMAGE_PATH}${userObject.avatar.substring(1)}`
 
-const UserInfo = ({status, user, sendFile, token}) => {
+const UserInfo = ({status, user, sendFile}) => {
     const fileRef = useRef()
 
     const fileUploadHandler = (evt) => {
@@ -16,14 +16,14 @@ const UserInfo = ({status, user, sendFile, token}) => {
         formData.append("map", body_addAvatar.map)
         formData.append("0", fileRef.current.files[0])
 
-        sendFile({body: formData, token}, resData => resData[Object.keys(resData)])
+        sendFile(formData)
     }
 
     return (
         <div className={classes['info-container']}>
             <div className={classes['presentation-container']}>
                 <div className={classes['text-name']}>Ciao, io sono {user && user.email.split('@')[0]}</div>
-                <div className={classes['from']}>Su NoloNolo dal 2021</div>
+                <div className={classes['from']}>Su NoloNolo dal {user && new Date(user.createdAt).getFullYear()}</div>
             </div>
             <div className={classes['image-container']}>
                 <div className={classes['image']}>
