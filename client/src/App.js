@@ -32,9 +32,13 @@ function App() {
                     {isLoggedIn && <ProfilePage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
                 </Route>
-                <Route path='/rentals' exact>
-                    <RentalsPage/>
+
+                <Route path='/rentals/*' element={<RentalsPage/>}>
+                    <Route path='active'/>
+                    <Route path='future'/>
+                    <Route path='previous'/>
                 </Route>
+
                 <Route path='/boats' exact>
                     <ResultsPage/>
                 </Route>
@@ -42,7 +46,7 @@ function App() {
                     <AdvertisementPage/>
                 </Route>
                 <Route path='/become-shipowner'>
-                    {isLoggedIn && <NewAdvertisementPage />}
+                    {isLoggedIn && <NewAdvertisementPage/>}
                     {!isLoggedIn && <Redirect to='/auth'/>}
                 </Route>
                 <Route path='*'>
@@ -52,7 +56,7 @@ function App() {
 
             {/*<div ref={ref}><Footer/></div>*/}
             {/*{!visible && <NavigationBar/>}*/}
-            {/*<NavigationBar/>*/}
+            <NavigationBar authenticated={isLoggedIn}/>
         </>
     );
 }

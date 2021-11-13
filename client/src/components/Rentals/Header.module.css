@@ -1,0 +1,19 @@
+.windows-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-bottom: 1px solid #efefef;
+    font-weight: bold;
+}
+
+.window:hover, .selected {
+    border-bottom: 2px solid black;
+}
+
+@media only screen and (min-width: 569px) {
+    .windows-bar {
+        justify-content: flex-start;
+        gap: 3rem;
+        padding-left: 2rem;
+    }
+}
