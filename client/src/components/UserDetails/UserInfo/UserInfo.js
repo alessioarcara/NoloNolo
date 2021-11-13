@@ -1,5 +1,10 @@
 import classes from './UserInfo.module.css';
-import Button from "../../UI/Button/Button";
+import {useRef} from "react";
+import {body_addAvatar} from "../../../helpers/httpConfig";
+import {DEFAULT_AVATAR, IMAGE_PATH} from "../../../helpers/constants";
+import LoadingSpinner from "../../UI/LoadingSpinner/LoadingSpinner";
+
+const getImagePath = (userObject) => `${IMAGE_PATH}${userObject.avatar.substring(1)}`
 
 const UserInfo = ({user}) => {
     return (
@@ -10,13 +15,18 @@ const UserInfo = ({user}) => {
             </div>
             <div className={classes['image-container']}>
                 <div className={classes['image']}>
-                    <img
-                        className={classes.avatar}
-                        src={'https://www.animeita.net/events/pippo_foto02.jpg'}
-                        alt={''}
-                    />
+                    {status === "pending" ? <LoadingSpinner/> :
+                        <img
+                            className={classes.avatar}
+                            src={user && (user.avatar ? getImagePath(user) : DEFAULT_AVATAR)}
+                            alt={''}
+                        />
+                    }
                 </div>
-                <Button className={`${classes['update-image']} btn btn-secondary`}>Aggiorna</Button>
+                <form onSubmit={fileUploadHandler}>
+                    <input ref={fileRef} name="avatar" type="file"/>
+                    <button>Upload</button>
+                </form>
             </div>
         </div>
     );
