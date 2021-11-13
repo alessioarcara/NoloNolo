@@ -1,7 +1,7 @@
 const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
-const {dateToString} = require("../../helpers/date");
+const {dateToString} = require("../../helpers/utils");
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {Error} = require("mongoose");
 

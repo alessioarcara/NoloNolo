@@ -43,7 +43,7 @@ const rootSchema = `
             removeFavorite(boatId: ID!): FavoritesPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             rentBoat(inputRental: RentalInput!): rentBoatPayload!
-            addImage(inputImage: ImageInput!): addImagePayload! 
+            addAvatar(upload: Upload!): addAvatarPayload!
         }
         
         schema {
@@ -51,4 +51,7 @@ const rootSchema = `
             mutation: RootMutation
         }      
 `
+
+// addImage(inputImage: ImageInput!): addImagePayload!
+
 module.exports = buildSchema(rootSchema);

@@ -8,12 +8,12 @@ const graphQlResolvers = require('./graphql/resolvers/index')
 // Middleware
 const isAuth = require('./middleware/is-auth')
 const {graphqlHTTP} = require('express-graphql');
-// const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { graphqlUploadExpress } = require('graphql-upload');
 const cookieParser = require('cookie-parser')
 
 const app = express();
 
+app.use('/public', express.static(__dirname + "/public"));
 app.use((req,
          res,
          next) => {
@@ -26,11 +26,10 @@ app.use((req,
     }
     next();
 })
-
 app.use(cookieParser())
 app.use(isAuth)
-
-app.use('/api', graphqlUploadExpress( {maxFileSize: 10000000, maxFiles: 10 }),
+app.use('/api',
+    graphqlUploadExpress({ maxFileSize: 10000000, maxFiles: 10 }),
     (req, res) => {
     graphqlHTTP({
         schema: graphQlSchema,

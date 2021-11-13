@@ -103,6 +103,7 @@ module.exports = {
             if (postalCode !== undefined) {
                 user.address.postalCode = postalCode;
             }
+            await user.save()
             return { updateUserData: user.address };
         } catch (err) { throw new Error(`Can't update user. ${err}`)}
     },

@@ -1,9 +1,9 @@
 import useForm from "../hooks/use-form";
-import {addressForm, newPasswordForm, singleUploadForm} from "../helpers/formConfig";
+import {addressForm, newPasswordForm} from "../helpers/formConfig";
 import Button from "../components/UI/Button/Button";
-import {useCallback, useContext, useState} from "react";
+import {useCallback, useContext, useRef, useState} from "react";
 import useHttp from "../hooks/use-http";
-import {body_changePassword, body_updateUser} from "../helpers/httpConfig";
+import {body_addAvatar, body_changePassword, body_updateUser} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 
 /* PROVVISORIO */
@@ -16,10 +16,6 @@ const userDetails = [
         type: "Password",
         form: newPasswordForm,
     },
-    {
-        type: "Foto",
-        form: singleUploadForm
-    }
 ]
 
 const UserDetailsPage = () => {
@@ -30,6 +26,8 @@ const UserDetailsPage = () => {
 
     const {sendRequest} = useHttp(false)
 
+    const fileRef = useRef()
+
     const openDetailsHandler = useCallback((form, which) => {
         if (which === whichUserDetailsOpen)
             setWhichUserDetailsOpen(-1)
@@ -38,6 +36,16 @@ const UserDetailsPage = () => {
             changeForm(form)
         }
     }, [changeForm, whichUserDetailsOpen])
+
+    const fileChangeHandler = (evt) => {
+        evt.preventDefault()
+        const formData = new FormData()
+        formData.append("operations", body_addAvatar.operations)
+        formData.append("map", body_addAvatar.map)
+        formData.append("0", fileRef.current.files[0])
+
+        sendRequest({body: formData, token}, resData => resData)
+    }
 
     const saveDetailsHandler = (event) => {
         event.preventDefault()
@@ -91,6 +99,10 @@ const UserDetailsPage = () => {
                     </form>
                 </div>
             ))}
+            <form onSubmit={fileChangeHandler}>
+                <input ref={fileRef} name="avatar" type="file"/>
+                <button>Upload</button>
+            </form>
         </section>
     );
 };
