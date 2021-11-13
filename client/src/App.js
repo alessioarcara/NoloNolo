@@ -28,7 +28,7 @@ function App() {
                 <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
                 <Route path='*' element={<Navigate replace to="/"/>}/>
             </Routes>
-            <NavigationBar/>
+            <NavigationBar authenticated={isLoggedIn}/>
         </>
     );
 }

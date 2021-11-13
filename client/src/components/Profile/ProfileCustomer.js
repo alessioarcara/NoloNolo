@@ -8,11 +8,13 @@ const ProfileCustomer = () => {
             <ProfileOption
                 title="Informazioni personali"
                 content="Inserisci o modifica i tuoi dati personali e i tuoi recapiti"
+                link="user-info"
                 icon={<UserIcon/>}
             />
             <ProfileOption
                 title="Noleggi"
                 content="Visualizza i tuoi noleggi attivi o futuri e modifica o cancella un noleggio futuro"
+                link="rentals"
                 icon={<RentalIcon/>}
             />
         </>
