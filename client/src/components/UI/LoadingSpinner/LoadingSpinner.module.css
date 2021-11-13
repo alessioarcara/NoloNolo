@@ -1,6 +1,7 @@
 .spinner {
     display: flex;
-    width: 5%;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     margin: auto;
 }
@@ -12,8 +13,8 @@
 .lds-dual-ring:after {
     content: '';
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
     border: 3px solid;
     border-color: #FF2677 transparent #FF2677 transparent;
