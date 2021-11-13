@@ -20,11 +20,6 @@
     text-transform: lowercase;
 }
 
-/*.react-datepicker__month-container {*/
-/*    width: 100%;*/
-/*}*/
-
-
 /*Calendar month text*/
 .react-datepicker__header {
     background-color: white;
@@ -47,8 +42,14 @@
 
 /*First selected single date number*/
 .react-datepicker__day--selected {
-    background-color: black !important;
+    background-color: black;
     border-radius: 50% !important;
+    color: #fff;
+}
+
+/*Override selected and range start date*/
+.react-datepicker__day--selected.react-datepicker__day--selecting-range-start {
+    background-color: black !important;
     color: #fff !important;
 }
 
@@ -82,7 +83,7 @@
 }
 
 /*Selected last range date*/
-.react-datepicker__day--range-end {
+.react-datepicker__day--range-end, .react-datepicker__day--range-start  {
     background-color: black !important;
     border-radius: 50% !important;
     color: #fff !important;
@@ -97,7 +98,7 @@
 
 /*Reverse dates selection*/
 .react-datepicker__day--in-selecting-range {
-    background-color: #fff;
+    background-color: #fff !important;
     color: black;
 }
 
@@ -126,10 +127,6 @@
 }
 
 @media only screen and (min-width: 769px) {
-    /*.react-datepicker__month-container{*/
-    /*    width: 50%;*/
-    /*}*/
-
     .react-datepicker {
         flex-direction: row;
         justify-content: center;
@@ -138,10 +135,6 @@
     .react-datepicker__month-container:nth-of-type(3){
         padding: 0 0.8rem;
     }
-
-    /*.react-datepicker__current-month {*/
-    /*    margin-top: 1.5rem;*/
-    /*}*/
 
     .react-datepicker__day {
         width: 3em;
@@ -163,14 +156,6 @@
     /*day names distances*/
     .react-datepicker__day-name{
         font-size: 0.9em;
-        /*padding-right: 2.1rem;*/
         margin: 0 0.47rem;
-    }
-    .react-datepicker__day-name:nth-of-type(1){
-        /*padding-left: 0.9rem;*/
-        /*padding-right: 2.3rem;*/
-    }
-    .react-datepicker__day-name:nth-last-of-type(4), .react-datepicker__day-name:nth-last-of-type(3), .react-datepicker__day-name:nth-last-of-type(2){
-        /*margin-left: 0.5rem;*/
     }
 }
