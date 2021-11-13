@@ -25,7 +25,8 @@ const UserDetailsPage = () => {
         <>
             {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
             {status === 'completed' && user && (
-                Object.keys(user).includes("addAvatarProblem") && <Modal title="Error">{user.addAvatarProblem}</Modal>
+                Object.keys(user).includes("addAvatarProblem") && user.addAvatarProblem &&
+                <Modal title="Error">{user.addAvatarProblem}</Modal>
             )}
             <UserDetailsHeader/>
             <UserInfo
