@@ -1,16 +1,14 @@
 import React, {useContext, useEffect} from "react";
 import AuthContext from "../store/auth-context";
 import useHttp from "../hooks/use-http";
-import ProfileOption from "../components/Profile/ProfileOption";
-import Button from "../components/UI/Button/Button";
-import classes from "./ProfilePage.module.css"
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 import {body_user} from "../helpers/httpConfig";
+import ProfileShipowner from "../components/Profile/ProfileShipowner";
+import ProfileCustomer from "../components/Profile/ProfileCustomer";
+import Profile from "../components/Profile/Profile";
 
 
 const ProfilePage = () => {
-
-    /* PROVVISORIO */
 
     const authCtx = useContext(AuthContext)
 
@@ -23,58 +21,15 @@ const ProfilePage = () => {
 
     let content = <LoadingSpinner/>
 
+    if (status === "completed" && user && user.userType === "customer") {
+        content = <ProfileCustomer/>
+    }
+
     if (status === "completed" && user && user.userType === "shipowner") {
         content = (
             <>
-            <div>{user.email}</div>
-            <div className={classes.container}>
-                <ProfileOption
-                    title="Informazioni personali"
-                    content="Comunicaci i tuoi dati personali e le informazioni per contattarti"
-                />
-                <ProfileOption
-                    title="Noleggi"
-                    content="Visualizza i tuoi noleggi o modifica e cancella un noleggio"
-                />
-                <ProfileOption
-                    title="3"
-                    content="lorem ipsum dolor sit amet"
-                />
-                <ProfileOption
-                    title="4"
-                    content="lorem ipsum dolor sit amet"
-                />
-                <ProfileOption
-                    title="5"
-                    content="lorem ipsum dolor sit amet"
-                />
-                <ProfileOption
-                    title="6"
-                    content="lorem ipsum dolor sit amet"
-                />
-            </div>
-        </>
-        )
-    }
-
-    if (status === "completed" && user && user.userType === "customer") {
-        content = (
-            <>
-                <div>{user.email}</div>
-                <div className={classes.container}>
-                    <ProfileOption
-                        title="Informazioni personali"
-                        content="Comunicaci i tuoi dati personali e le informazioni per contattarti"
-                    />
-                    <ProfileOption
-                        title="Noleggi"
-                        content="Visualizza i tuoi noleggi o modifica e cancella un noleggio"
-                    />
-                    <ProfileOption
-                        title="3"
-                        content="lorem ipsum dolor sit amet"
-                    />
-                </div>
+                <ProfileCustomer/>
+                <ProfileShipowner/>
             </>
         )
     }
@@ -84,13 +39,9 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className="centered">
-            <h1>Profilo</h1>
+        <Profile auth={authCtx}>
             {content}
-            <div className={classes.action}>
-                <Button onClick={authCtx.logout} type="button">Logout</Button>
-            </div>
-        </div>
+        </Profile>
     );
 };
 

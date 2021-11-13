@@ -6,7 +6,7 @@ import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import UserIcon from "../UI/icons/MenuIcons/UserIcon";
 import {throttle} from "../../helpers/utils";
 
-const NavigationBar = () => {
+const NavigationBar = ({authenticated}) => {
     const [showNavbar, setShowNavbar] = useState(true);
 
     const scrollHandler = useMemo(() => throttle(() => {
@@ -42,7 +42,7 @@ const NavigationBar = () => {
                 <li>
                     <NavLink to='/profile' activeClassName={classes.active} className={classes.item}>
                         <UserIcon/>
-                        <div>Accedi</div>
+                        {authenticated ? <div>Profilo</div> : <div>Accedi</div>}
                     </NavLink>
                 </li>
             </ul>
