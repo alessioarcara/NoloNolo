@@ -1,10 +1,8 @@
-import ProfileOption from "../ProfileOption";
-import classes from "./ProfileShipowner.module.css"
-import AdvertisementIcon from "../../UI/icons/ProfileIcons/AdvertisementIcon";
-import BoatIcon from "../../UI/icons/ProfileIcons/BoatIcon";
+import ProfileOption from "./ProfileOption";
+import AdvertisementIcon from "../UI/icons/ProfileIcons/AdvertisementIcon";
+import BoatIcon from "../UI/icons/ProfileIcons/BoatIcon";
 
 const ProfileShipowner = () => {
-
     return (
         <>
             <ProfileOption

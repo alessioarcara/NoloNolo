@@ -3,8 +3,8 @@ import AuthContext from "../store/auth-context";
 import useHttp from "../hooks/use-http";
 import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 import {body_user} from "../helpers/httpConfig";
-import ProfileShipowner from "../components/Profile/Shipowner/ProfileShipowner";
-import ProfileCustomer from "../components/Profile/Customer/ProfileCustomer";
+import ProfileShipowner from "../components/Profile/ProfileShipowner";
+import ProfileCustomer from "../components/Profile/ProfileCustomer";
 import Profile from "../components/Profile/Profile";
 
 

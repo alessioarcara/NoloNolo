@@ -1,10 +1,8 @@
-import ProfileOption from "../ProfileOption";
-import classes from "./ProfileCustomer.module.css"
-import RentalIcon from "../../UI/icons/ProfileIcons/RentalIcon";
-import UserIcon from "../../UI/icons/ProfileIcons/UserIcon";
+import ProfileOption from "./ProfileOption";
+import RentalIcon from "../UI/icons/ProfileIcons/RentalIcon";
+import UserIcon from "../UI/icons/ProfileIcons/UserIcon";
 
 const ProfileCustomer = () => {
-
     return (
         <>
             <ProfileOption

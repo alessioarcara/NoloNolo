@@ -2,7 +2,6 @@ import Button from "../UI/Button/Button";
 import classes from "./Profile.module.css"
 
 const Profile = ({children, auth}) => {
-
     return (
         <>
             <div className='centered'>

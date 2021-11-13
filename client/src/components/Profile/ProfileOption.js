@@ -1,5 +1,6 @@
 import {Link, useRouteMatch} from "react-router-dom";
 import classes from "./ProfileOption.module.css"
+import RightArrowIcon from "../UI/icons/RightArrowIcon";
 
 const ProfileOption = props => {
     let match = useRouteMatch()
@@ -10,6 +11,9 @@ const ProfileOption = props => {
                     {props.icon}
                     <h4>{props.title}</h4>
                     <p>{props.content}</p>
+                    <div className={classes.arrow}>
+                        <RightArrowIcon/>
+                    </div>
                 </Link>
             </div>
     )
