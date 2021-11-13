@@ -4,7 +4,7 @@ import classes from "./Header.module.css";
 const Header = props => {
     return (
         <>
-            <div className={classes.title}>NoloNolo Boat</div>
+            <div className={`title ${classes.title}`}>NoloNolo Boat</div>
             <SearchBar
                 openModalHandler={props.openModalHandler}
                 isShow={props.isShow}

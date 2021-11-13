@@ -1,15 +1,81 @@
 .option {
-    background-color: #b37aec;
+    background-color: rgba(41, 41, 41, 0.8);
     border-radius: 16px;
-    width: 30%;
-    margin: 0.5rem;
+    width: 100%;
+    padding: 1rem;
 }
 
-@media all and (max-width: 768px) {
+.option > a > svg {
+    width: 50%;
+}
+
+.singleop {
+    color: #e9e9e9;
+    animation-name: animation;
+    animation-duration: 0.9s;
+    animation-fill-mode: forwards;
+}
+
+.singleop:hover {
+    color: #000;
+}
+
+
+@media only screen and (max-width: 568px) {
     .option {
-        border-top: 2px solid #efefef;
-        border-radius: 0;
         width: 100%;
-        background-color: transparent;
+    }
+
+    .option > a > svg {
+        width: 20%;
+    }
+
+    .arrow > svg {
+        width: 1.5rem;
+    }
+
+    .option > a > p {
+        display: none;
+    }
+
+    .singleop {
+        display: flex;
+        align-items: center;
+        font-size: 0.9em;
+    }
+
+    .arrow {
+        flex-grow: 2;
+        text-align: right;
+    }
+
+    @keyframes animation {
+        from {
+            top: 15px;
+            color: rgba(189, 190, 189, 0.2);
+        }
+        to {
+            top: 0;
+        }
+    }
+}
+
+@media only screen and (min-width:569px) and (max-width: 768px) {
+    .option > a > svg {
+        width: 45%;
+    }
+
+    .arrow {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .option > a > svg {
+        width: 10rem;
+    }
+
+    .arrow {
+        display: none;
     }
 }

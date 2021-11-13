@@ -1,16 +1,21 @@
-import classes from "./ProfileOption.module.css"
 import {Link} from "react-router-dom";
+import classes from "./ProfileOption.module.css"
+import RightArrowIcon from "../UI/icons/RightArrowIcon";
 
 const ProfileOption = props => {
 
     return (
         <div className={classes.option}>
-            {/* provvisorio */}
-            <Link to='user-info'>
-            {/*<Link to={`${props.title.replace(/\s/g, "")}`}>*/}
-                {props.children}
-                <h3>{props.title}</h3>
+            <Link
+                className={classes.singleop}
+                to={props.link}
+            >
+                {props.icon}
+                <h4>{props.title}</h4>
                 <p>{props.content}</p>
+                <div className={classes.arrow}>
+                    <RightArrowIcon/>
+                </div>
             </Link>
         </div>
     )
