@@ -279,6 +279,7 @@ exports.body_user = {
     query {
         user {
             email
+            avatar
             address {
                 street
                 city
@@ -290,7 +291,7 @@ exports.body_user = {
     }`
 };
 exports.body_addAvatar = {
-    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
+    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
 
 }
