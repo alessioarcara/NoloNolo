@@ -69,7 +69,8 @@ const UserDetails = ({user, sendAddress}) => {
                         </div>
                         {idx === 0 && whichUserDetailsOpen !== 0 && user &&
                         <span className={classes['address-container']}>
-                                {user && user.address ? addressArrange(user.address) : 'Non fornito'}
+                                {user && Object.values(user.address).some(value => value !== null && value !== '')
+                                    ? addressArrange(user.address) : 'Non fornito'}
                             </span>
                         }
                         {idx === 1 && whichUserDetailsOpen !== 1 &&
