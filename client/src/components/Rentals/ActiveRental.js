@@ -5,6 +5,6 @@ const ActiveRental = () => {
         <>
         </>
     );
-}
+};
 
 export default ActiveRental;
