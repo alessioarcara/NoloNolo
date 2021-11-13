@@ -30,6 +30,7 @@ const Filter = ({onSubmitFilters, onClose, boatsMaxPrice}) => {
             <CapacityFilter dispatch={dispatch} guests={state.minCapacity}/>
             <PriceFilter minPrice={state.minPrice} maxPrice={state.maxPrice} maxValue={boatsMaxPrice} dispatch={dispatch}/>
             <ActionButtons
+                actionClassName={classes["modal-footer"]}
                 firstButtonClickHandler={clearHandler}
                 firstButtonDisabled={isDisabled}
                 firstButtonText='Pulisci'

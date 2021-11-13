@@ -1,0 +1,27 @@
+.numberSpinner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.numberSpinner input {
+    text-align: center;
+}
+
+
+.increase-btn, .decrease-btn {
+    border-radius: 40%;
+    color: rgba(0, 0, 0, 0.325);
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.325s ease;
+    width: 2rem;
+    height: 2rem;
+}
+
+.increase-btn:hover, .decrease-btn:hover {
+    color: rgba(0, 0, 0, 0.725);
+    border-color: rgba(0, 0, 0, 0.725);
+}

@@ -2,9 +2,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
-const {userNotFound, invalidPassword, duplicateEmail} = require("../../helpers/problemMessages");
+const {userNotFound, invalidPassword, duplicateEmail, samePassword} = require("../../helpers/problemMessages");
 
-const ACCESS_EXPIRE_TIME = '60m'
+const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
 
 const createTokens = (userId, email, count, res) => {
@@ -39,7 +39,8 @@ module.exports = {
             return user
         } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
     },
-    login: async ({email, password}, {_, res}) => {
+    login: async (args, {_, res}) => {
+        const {email, password} = args.inputUser
         try {
             const user = await User.findOne({email});
             if (!user) { return { authProblem: userNotFound } }
@@ -50,6 +51,24 @@ module.exports = {
             const accessToken = createTokens(user._id, user.email, user.count, res)
             return {authData: {userId: user._id, token: accessToken} };
         } catch (err) { throw new Error(`Can't login. ${err}`); }
+    },
+    changePassword: async (args, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        const {oldPassword, newPassword} = args.inputChangePassword
+        try {
+            if (oldPassword === newPassword) { return { changePasswordProblem: samePassword} }
+
+            const user = await User.findById(req.userId)
+            if (!user) { return { authProblem: userNotFound } }
+
+            const isEqual =  await bcrypt.compare(oldPassword, user.password)
+            if (!isEqual) { return { changePasswordProblem: invalidPassword } }
+
+            user.password = await bcrypt.hash(newPassword, 12)
+            await user.save()
+
+            return {changePasswordStatus: true };
+        } catch (err) { throw new Error(`Can't change password. ${err}`); }
     },
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
@@ -64,6 +83,29 @@ module.exports = {
             const accessToken = createTokens(user._id, user.email, user.count, res)
             return {authData: {userId: user._id, token: accessToken} }
         } catch (err) { throw new Error(`Can't create user. ${err}`); }
+    },
+    updateUser: async (args, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        const {street, city, region, postalCode} = args.inputUpdateUser
+        try {
+            const user = await User.findById(req.userId)
+            if (!user) { return { updateUserProblem: userNotFound } }
+
+            if (street !== undefined) {
+                user.address.street = street;
+            }
+            if (city !== undefined) {
+                user.address.city = city;
+            }
+            if (region !== undefined) {
+                user.address.region = region;
+            }
+            if (postalCode !== undefined) {
+                user.address.postalCode = postalCode;
+            }
+            await user.save()
+            return { updateUserData: user.address };
+        } catch (err) { throw new Error(`Can't update user. ${err}`)}
     },
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)

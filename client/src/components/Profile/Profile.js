@@ -4,8 +4,8 @@ import classes from "./Profile.module.css"
 const Profile = ({children, auth}) => {
     return (
         <>
+            <h1 className="title">Profilo</h1>
             <section className="centered">
-                <h1 className="title">Profilo</h1>
                 <div className={classes.container}>
                     {children}
                 </div>

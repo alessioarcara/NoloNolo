@@ -1,7 +1,7 @@
 const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
-const {dateToString} = require("../../helpers/date");
+const {dateToString} = require("../../helpers/utils");
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {Error} = require("mongoose");
 
@@ -44,8 +44,6 @@ module.exports = {
 
             const result = await rental.save();
             return { rentBoatData: transformRental(result._doc) };
-        } catch (err) {
-            `Can't rent boat. ${err}`
-        }
+        } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
     }
 }

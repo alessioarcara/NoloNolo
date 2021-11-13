@@ -1,24 +1,27 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useStore} from "../hooks-store/store";
 import BoatList from "../components/Advertisements/BoatList";
 import BoatListLayout from "../components/UI/Layout/BoatListLayout/BoatListLayout";
+import Header from "../components/Favorites/Header";
+import NotFoundFavorites from "../components/Favorites/NotFoundFavorites";
+import AuthContext from "../store/auth-context";
 
 const FavoritesPage = () => {
     const store = useStore()[0]
-
+    const {isLoggedIn} = useContext(AuthContext)
     let content;
 
-    if (store.userFavorites && store.userFavorites.length === 0) {
-        content = <p>You got no favorites yet. Start adding some?</p>
+    if ((isLoggedIn && store.userFavorites && store.userFavorites.length === 0)) {
+        content = <NotFoundFavorites/>
     } else {
         content = <BoatListLayout><BoatList boats={store.userFavorites}/></BoatListLayout>;
     }
 
     return (
-        <section className="centered">
-            <h1 className="title">I miei preferiti</h1>
+        <div>
+            <Header/>
             {content}
-        </section>
+        </div>
     )
 }
 

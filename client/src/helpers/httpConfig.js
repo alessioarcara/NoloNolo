@@ -1,8 +1,8 @@
-exports.body_login = (email, password) => {
+exports.body_login = ({enteredEmail, enteredPassword}) => {
     return {
         query: `
-          mutation($email: String!, $password: String!) {
-            login(email: $email, password: $password) {
+          mutation($userData: UserInput!) {
+            login(inputUser: $userData) {
               authData {
                 userId
                 token
@@ -11,7 +11,7 @@ exports.body_login = (email, password) => {
             }
           }
         `,
-        variables: {email, password}
+        variables: {userData: {email: enteredEmail, password: enteredPassword}}
     }
 };
 exports.body_signup = ({enteredEmail, enteredPassword}) => {
@@ -28,6 +28,37 @@ exports.body_signup = ({enteredEmail, enteredPassword}) => {
           }
         `,
         variables: {userData: {email: enteredEmail, password: enteredPassword}}
+    }
+};
+exports.body_changePassword = ({oldPassword, newPassword}) => {
+    return {
+        query: `
+          mutation($passwordData: ChangePasswordInput!) {
+              changePassword(inputChangePassword: $passwordData) {
+                  changePasswordStatus
+                  changePasswordProblem
+            }  
+          }
+        `,
+        variables: {passwordData: {oldPassword, newPassword}}
+    }
+};
+exports.body_updateUser = ({street, city, region, postalCode}) => {
+    return {
+        query: `
+            mutation($userData: UpdateUserInput!) {
+                updateUser(inputUpdateUser: $userData) {
+                    updateUserData {
+                        street
+                        city
+                        region
+                        postalCode
+                    }
+                    updateUserProblem
+                }  
+            }
+        `,
+        variables: {userData: {street, city, region, postalCode}}
     }
 };
 exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
@@ -217,20 +248,29 @@ exports.body_removeFavorite = (boatId) => {
         variables: boatId
     }
 };
+exports.body_userBoats = {
+    query: `
+           query {
+               boatsByUser {
+                   _id
+               }
+           }
+           `
+};
 exports.body_refresh = {
     query: `
           query {
-            refreshToken {
-              userId
-              token
-            }  
+              refreshToken {
+                  userId
+                  token
+              }  
           }
         `,
 };
 exports.invalidate = {
     query: `
           mutation {
-            invalidateTokens
+              invalidateTokens
           }
         `,
 };
@@ -239,7 +279,19 @@ exports.body_user = {
     query {
         user {
             email
+            avatar
+            address {
+                street
+                city
+                region
+                postalCode
+            }
             userType
         }
     }`
 };
+exports.body_addAvatar = {
+    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
+    map: `{"0": ["variables.file"]}`,
+
+}

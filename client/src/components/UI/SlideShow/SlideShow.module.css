@@ -48,8 +48,8 @@
     }
 
     .slideshowSlider {
-        overflow-x: scroll;
         scroll-snap-type: x mandatory;
+        overflow-y: hidden;
     }
 
     ::-webkit-scrollbar {

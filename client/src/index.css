@@ -92,7 +92,7 @@ hr {
 .btn-secondary {
   background-color: transparent;
   text-decoration: underline;
-  border: 0;
+  border: 1px solid transparent;
 }
 
 /* Letter spacing subtitle generico */

@@ -5,13 +5,15 @@ function useForm(formObj) {
 
     function renderFormInputs(classNames) {
         return Object.values(form).map((inputObj) => {
-            const {value, label, errorMessage, valid, touched, renderInput} = inputObj;
-            return renderInput(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames);
+            console.log(inputObj)
+            const {value, label, errorMessage, valid, touched, render} = inputObj;
+            return render(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames)
         });
     }
 
     const isInputFieldValid = useCallback(
         (inputField) => {
+            console.log(inputField)
             for (const rule of inputField.validationRules) {
                 if (!rule.validate(inputField.value, form)) {
                     inputField.errorMessage = rule.message;
@@ -22,9 +24,10 @@ function useForm(formObj) {
         }, [form]);
 
     const onInputChange = useCallback(event => {
-            const { name, value } = event.target;
+            console.log(event)
+            const {name, value} = event.target;
             // copy input object whose value was changed
-            const inputObj = { ...form[name] };
+            const inputObj = {...form[name]};
             // update value
             inputObj.value = value;
 
@@ -40,14 +43,14 @@ function useForm(formObj) {
                 inputObj.valid = false;
             }
 
-            setForm({ ...form, [name]: inputObj });
+            setForm({...form, [name]: inputObj});
         },
         [form, isInputFieldValid]
     );
 
     const onInputBlur = useCallback(event => {
-        const { name } = event.target;
-        const inputObj = { ...form[name] };
+        const {name} = event.target;
+        const inputObj = {...form[name]};
 
         // mark input field as touched
         inputObj.touched = true;
@@ -60,7 +63,7 @@ function useForm(formObj) {
             inputObj.valid = false;
         }
 
-        setForm({ ...form, [name]: inputObj });
+        setForm({...form, [name]: inputObj});
     }, [form, isInputFieldValid])
 
     const isFormValid = useCallback(() => {
@@ -76,12 +79,16 @@ function useForm(formObj) {
         return isValid;
     }, [form]);
 
+    const changeForm = useCallback((newFormObj) => {
+        setForm(newFormObj)
+    }, [])
+
     const resetForm = useCallback(() => {
         setForm(formObj)
     }, [formObj])
 
     const formValues = Object.values(form).map(inputObj => inputObj.value)
-    return {formValues, renderFormInputs, isFormValid, resetForm };
+    return {formValues, renderFormInputs, isFormValid, changeForm, resetForm};
 }
 
 export default useForm;

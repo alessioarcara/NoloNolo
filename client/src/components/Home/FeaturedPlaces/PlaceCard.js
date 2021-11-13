@@ -1,11 +1,11 @@
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import classes from './PlaceCard.module.css';
 
 const PlaceCard = (props) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const clickHandler = () => {
-        history.push(`/boats?region=${props.title}`);
+        navigate(`/boats?region=${props.title}`);
     }
 
     return (

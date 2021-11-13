@@ -22,6 +22,14 @@ export function minLengthRule(inputName, minCharacters) {
     );
 }
 
+export function maxLengthRule(inputName, maxCharacters) {
+    return createValidationRule(
+        "maxLenth",
+        `${inputName} should contain atleast ${maxCharacters} characters`,
+        (inputValue, formObj) => inputValue.length <= maxCharacters
+    );
+}
+
 export function isEmailRule(inputName) {
     return createValidationRule(
         "isEmail",
@@ -35,5 +43,13 @@ export function passwordMatchRule() {
         "passwordMatch",
         `passwords do not match`,
         (inputValue, formObj) => inputValue === formObj.password.value
+    );
+}
+
+export function isNumberRule(inputName) {
+    return createValidationRule(
+        "isNumber",
+        `${inputName} should be a number`,
+        (inputValue, formObj) => !isNaN(parseInt(inputValue))
     );
 }

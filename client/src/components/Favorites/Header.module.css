@@ -1,0 +1,15 @@
+.favorites-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: white;
+    text-align: left;
+    z-index: 1;
+}
+
+/*.favorites-text {*/
+/*    font-family: 'Lobster', cursive;*/
+/*    font-size: 1.3rem;*/
+/*    padding: 1rem;*/
+/*}*/

@@ -1,0 +1,51 @@
+.info-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+}
+
+.presentation-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.text-name {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.from {
+    font-size: 0.9rem;
+    font-family: "Noto Sans Old Italic", Serif, sans-serif;
+    color: #6e6d6d;
+}
+
+.update-image {
+    font-size: 0.7em;
+    color: #807e7e;
+    transition: color 0.325s ease-out;
+}
+
+.update-image:hover {
+    color: #434343;
+}
+
+.image {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.avatar {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}

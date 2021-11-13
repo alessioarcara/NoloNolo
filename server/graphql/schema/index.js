@@ -6,6 +6,7 @@ const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
 const favoriteType = require("./favorite");
+const imageType = require("./image");
 
 const rootSchema = `
         ${authType}
@@ -15,20 +16,26 @@ const rootSchema = `
         ${favoriteType}
         ${reviewType}
         ${rentalType}
+        ${imageType}
+        
+        scalar Upload
         
         type RootQuery {
             refreshToken: AuthData!
             user: User!
             boat(boatId: ID!): Boat!
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
+            boatsByUser: [Boat!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
         }
         
         type RootMutation {
-            login(email: String!, password: String!): AuthenticationPayload!
+            login(inputUser: UserInput!): AuthenticationPayload!
             createUser(inputUser: UserInput!): AuthenticationPayload!
+            updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
+            changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
@@ -36,6 +43,7 @@ const rootSchema = `
             removeFavorite(boatId: ID!): FavoritesPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             rentBoat(inputRental: RentalInput!): rentBoatPayload!
+            addAvatar(upload: Upload!): addAvatarPayload!
         }
         
         schema {
@@ -43,4 +51,7 @@ const rootSchema = `
             mutation: RootMutation
         }      
 `
+
+// addImage(inputImage: ImageInput!): addImagePayload!
+
 module.exports = buildSchema(rootSchema);

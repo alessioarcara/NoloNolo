@@ -2,7 +2,7 @@ const DataLoader = require('dataloader');
 
 const User = require('../../models/user');
 const Boat = require('../../models/boat');
-const {dateToString} = require("../../helpers/date");
+const {dateToString} = require("../../helpers/utils");
 
 
 const userLoader = new DataLoader(userIds => {

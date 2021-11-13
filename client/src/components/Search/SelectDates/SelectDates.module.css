@@ -13,6 +13,10 @@
     z-index: 1;
 }
 
+.btn-cancel {
+    color: black;
+}
+
 .days-text {
     font-size: 0.7em;
     font-weight: bold;
@@ -58,8 +62,13 @@
 }
 
 .btn-back {
+    color: #000;
     background-color: transparent;
     border: 0;
+}
+
+.btn-skip {
+    color: #000;
 }
 
 .btn-back svg {

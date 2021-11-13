@@ -30,7 +30,7 @@ const AuthForm = () => {
         const transformData = resData => resData[Object.keys(resData)]
 
         if (isLogin) {
-            authenticate({body: body_login(enteredEmail, enteredPassword)}, transformData)
+            authenticate({body: body_login({enteredEmail, enteredPassword})}, transformData)
         } else {
             authenticate({body: body_signup({enteredEmail, enteredPassword})}, transformData)
         }
@@ -49,7 +49,7 @@ const AuthForm = () => {
             <section className={classes.auth}>
                 <h1>{isLogin ? "Accedi" : "Registrati"}</h1>
                 <form onSubmit={submitHandler}>
-                    {renderFormInputs(classes.control)}
+                    {renderFormInputs()}
                     <div className={classes.actions}>
                         <Button isLoading={status === "pending"} disabled={!isFormValid()}>Continua</Button>
                         <Button
