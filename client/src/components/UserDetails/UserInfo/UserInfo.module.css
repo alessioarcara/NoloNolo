@@ -16,13 +16,29 @@
     font-weight: bolder;
 }
 
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .from {
     font-size: 0.9rem;
-    font-style: oblique;
+    font-family: "Noto Sans Old Italic", Serif, sans-serif;
     color: #6e6d6d;
 }
 
-.image-container {
+.update-image {
+    font-size: 0.7em;
+    color: #807e7e;
+    transition: color 0.325s ease-out;
+}
+
+.update-image:hover {
+    color: #434343;
+}
+
+.image {
     width: 4.5rem;
     height: 4.5rem;
 }

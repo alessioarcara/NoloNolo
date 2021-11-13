@@ -279,6 +279,12 @@ exports.body_user = {
     query {
         user {
             email
+            address {
+                street
+                city
+                region
+                postalCode
+            }
             userType
         }
     }`
