@@ -5,6 +5,7 @@ function useForm(formObj) {
 
     function renderFormInputs(classNames) {
         return Object.values(form).map((inputObj) => {
+            console.log(inputObj)
             const {value, label, errorMessage, valid, touched, render} = inputObj;
             return render(onInputChange, onInputBlur, value, valid, touched, errorMessage, label, classNames)
         });
@@ -12,6 +13,7 @@ function useForm(formObj) {
 
     const isInputFieldValid = useCallback(
         (inputField) => {
+            console.log(inputField)
             for (const rule of inputField.validationRules) {
                 if (!rule.validate(inputField.value, form)) {
                     inputField.errorMessage = rule.message;
@@ -22,6 +24,7 @@ function useForm(formObj) {
         }, [form]);
 
     const onInputChange = useCallback(event => {
+            console.log(event)
             const {name, value} = event.target;
             // copy input object whose value was changed
             const inputObj = {...form[name]};

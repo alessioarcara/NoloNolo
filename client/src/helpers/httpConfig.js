@@ -46,17 +46,17 @@ exports.body_changePassword = ({oldPassword, newPassword}) => {
 exports.body_updateUser = ({street, city, region, postalCode}) => {
     return {
         query: `
-          mutation($userData: UpdateUserInput!) {
-              updateUser(inputUpdateUser: $userData) {
-                  updateUserData {
-                      street
-                      city
-                      region
-                      postalCode
-                  }
-                  updateUserProblem
-            }  
-          }
+            mutation($userData: UpdateUserInput!) {
+                updateUser(inputUpdateUser: $userData) {
+                    updateUserData {
+                        street
+                        city
+                        region
+                        postalCode
+                    }
+                    updateUserProblem
+                }  
+            }
         `,
         variables: {userData: {street, city, region, postalCode}}
     }
@@ -289,3 +289,8 @@ exports.body_user = {
         }
     }`
 };
+exports.body_addAvatar = {
+    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
+    map: `{"0": ["variables.file"]}`,
+
+}

@@ -1,18 +1,11 @@
 const imageType = `
-       type Image {
-            _id: ID!
-            fileLocation: String
-            description: String
-       }
-       
-       type addImagePayload {
-            addImageData: Image
-            addImageProblem: String
+       type addAvatarPayload {
+            addAvatarData: User
+            addAvatarProblem: String
        }
        
        input ImageInput {
             file: Upload!
-            description: String
        }
 `
 
