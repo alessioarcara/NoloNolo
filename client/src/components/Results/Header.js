@@ -30,7 +30,7 @@ const Header = ({onSubmitFilters, boatsNumber, boatsMaxPrice}) => {
                     className={classes['btn-back']}
                     onClick={backPage}
                 >
-                    <BackIcon className={classes['results-header-icon']}/>
+                    <BackIcon/>
                 </button>
                 <div className='subtitle'>{!boatsNumber ?
                     "Caricamento risultati ..." :

@@ -1,0 +1,29 @@
+.not-found-container {
+    border-radius: 1rem;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 2rem;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.not-found-text {
+    font-size: 1em;
+    color: #8e9697;
+}
+
+@media only screen and (min-width: 769px) {
+    .not-found-container {
+        margin: 2rem auto;
+        width: 25rem;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+}

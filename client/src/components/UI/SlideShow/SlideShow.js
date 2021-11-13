@@ -1,11 +1,12 @@
 import classes from './SlideShow.module.css';
 import './SlideShow.module.css';
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 import Images from "../Images/Images";
 import SlideShowDots from "./SlideShowDots";
 import {circularSlice} from "../../../helpers/utils";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     // const imageRef = useRef(null)
@@ -34,6 +35,9 @@ const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(images.length - 1)
 
+    const [isLoading, setIsLoading] = useState(true)
+    const imageLoadedHandler = useCallback(() => setIsLoading(false), [])
+
     const leftClickHandler = () => {
         setStart(prevIndex => prevIndex === 0 ? images.length - 1 : prevIndex - 1)
         setEnd(prevIndex => prevIndex === 0 ? images.length - 1 : prevIndex - 1)
@@ -47,10 +51,12 @@ const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     return (
         <div className={classes.slideshow}>
             <div className={`${classes.slideshowSlider} ${classNameSlideShowSlider ? classNameSlideShowSlider : ''}`}>
+                {isLoading && <LoadingSpinner/>}
                 {circularSlice(images, start, end).map((place, index) => (
                     <Images
                         key={index}
                         images={place}
+                        imageLoadedHandler={imageLoadedHandler}
                     />
                 ))}
             </div>

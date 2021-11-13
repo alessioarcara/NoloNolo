@@ -33,7 +33,7 @@
     margin-top: 0;
 }
 
-.results-header-icon {
-    width: 24px;
+.results-header svg {
+    stroke: black;
 }
 
