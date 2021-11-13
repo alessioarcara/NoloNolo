@@ -6,7 +6,13 @@
     font-weight: bold;
 }
 
-.window:hover, .selected {
+.normal, .normal:hover, .normal:active, .normal:visited {
+    color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+}
+
+.selected {
+    color: black !important;
     border-bottom: 2px solid black;
 }
 

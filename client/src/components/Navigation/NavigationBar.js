@@ -34,13 +34,13 @@ const NavigationBar = ({authenticated}) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/favorites' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
+                    <NavLink to='/favorites' className={navData => navData.isActive ? `${classes.selected} ${classes.item}` : `${classes.item}`}>
                         <HeartIcon className={classes.heart}/>
                         <div>Preferiti</div>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/profile' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
+                    <NavLink to='/profile' className={navData => navData.isActive ? `${classes.selected} ${classes.item}` : `${classes.item}`}>
                         <UserIcon/>
                         {authenticated ? <div>Profilo</div> : <div>Accedi</div>}
                     </NavLink>

@@ -1,4 +1,4 @@
-import Header from "../components/Rentals/Header";
+import Header from "../components/Rentals/Header/Header";
 
 const RentalsPage = () => {
     return (
