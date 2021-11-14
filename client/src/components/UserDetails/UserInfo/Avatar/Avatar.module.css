@@ -2,7 +2,8 @@
     position: relative;
     width: 4.5rem;
     height: 4.5rem;
-    filter: drop-shadow(0.2rem 0.2rem 0.3rem rgba(0, 0, 0, 0.5));
+    border-radius: 50%;
+    box-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,0.5);
 }
 
 .avatar {
@@ -21,6 +22,7 @@
     position: absolute;
     right: 0;
     bottom: 0;
+    box-shadow: 0.15rem 0.15rem 0.3rem rgba(0,0,0,0.5);
 }
 
 .icon-container svg {
@@ -31,6 +33,7 @@
 }
 
 .upload svg {
+    padding: 0;
     stroke: lawngreen;
     fill: lawngreen;
 }
