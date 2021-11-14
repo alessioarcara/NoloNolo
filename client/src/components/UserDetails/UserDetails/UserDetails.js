@@ -18,7 +18,7 @@ const userDetails = [
 
 const addressArrange = (addressObject) => Object.keys(addressObject).map(key => ` ${addressObject[key]}`).toString().trim()
 
-const UserDetails = ({user, sendAddress}) => {
+const UserDetails = ({user, sendInfo}) => {
     const [whichUserDetailsOpen, setWhichUserDetailsOpen] = useState(-1)
     const {renderFormInputs, formValues, isFormValid, changeForm, resetForm} = useForm(addressForm)
 
@@ -35,14 +35,14 @@ const UserDetails = ({user, sendAddress}) => {
         event.preventDefault()
 
         if (whichUserDetailsOpen === 0)
-            sendAddress(body_updateUser({
+            sendInfo(body_updateUser({
                 street: formValues[0],
                 city: formValues[1],
                 region: formValues[2],
                 postalCode: parseInt(formValues[3])
             }))
         if (whichUserDetailsOpen === 1)
-            sendAddress(body_changePassword({
+            sendInfo(body_changePassword({
                 oldPassword: formValues[0],
                 newPassword: formValues[1]
             }))

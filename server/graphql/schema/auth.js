@@ -26,7 +26,7 @@ const AuthType = `
         }
         
         type changePasswordPayload {
-            changePasswordStatus: Boolean
+            changePasswordData: User
             changePasswordProblem: String
         }
         

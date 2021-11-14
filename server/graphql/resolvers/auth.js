@@ -68,7 +68,7 @@ module.exports = {
             user.password = await bcrypt.hash(newPassword, 12)
             await user.save()
 
-            return {changePasswordStatus: true };
+            return {changePasswordData: transformUser(user) };
         } catch (err) { throw new Error(`Can't change password. ${err}`); }
     },
     createUser: async (args, {_, res}) => {

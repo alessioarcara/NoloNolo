@@ -33,7 +33,8 @@ const UserDetailsPage = () => {
                 status={status}
                 user={user && (
                     Object.keys(user).includes("addAvatarData") ? user.addAvatarData :
-                    Object.keys(user).includes("updateUserData") ? user.updateUserData : user
+                    Object.keys(user).includes("updateUserData") ? user.updateUserData :
+                    Object.keys(user).includes("changePasswordData") ? user.changePasswordData : user
                 )}
                 sendFile={sendData}
             />
@@ -41,9 +42,10 @@ const UserDetailsPage = () => {
                 status={status}
                 user={user && (
                     Object.keys(user).includes("addAvatarData") ? user.addAvatarData :
-                    Object.keys(user).includes("updateUserData") ? user.updateUserData : user
+                    Object.keys(user).includes("updateUserData") ? user.updateUserData :
+                    Object.keys(user).includes("changePasswordData") ? user.changePasswordData : user
                 )}
-                sendAddress={sendData}
+                sendInfo={sendData}
             />
         </>
     );
