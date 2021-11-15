@@ -5,6 +5,7 @@ const RentalType = `
         boat: Boat!
         from: String!
         to: String!
+        redelivery: String
         totalAmount: Float!
         billNumber: Int!
         createdAt: String

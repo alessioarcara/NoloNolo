@@ -290,6 +290,36 @@ exports.body_user = {
         }
     }`
 };
+exports.body_userRentals = {
+    query: `
+        query {
+            rentalsByUser {
+                _id
+                billNumber
+                from
+                to
+                redelivery
+                totalAmount
+                boat {
+                    model
+                    yard
+                    owner {
+                        email
+                    }
+                    isDocked {
+                        region
+                        city
+                        harbour
+                    }
+                }
+                customer {
+                    email
+                }
+                createdAt
+            }
+        }
+    `
+}
 exports.body_addAvatar = {
     operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,

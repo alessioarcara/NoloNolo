@@ -21,6 +21,7 @@ const rentalSchema = new Schema({
         type: Date,
         required: [true, 'Please provide end date rental']
     },
+    redeliveryDate: Date,
     totalAmount: {
         type: mongoose.Types.Decimal128,
         required: [true, 'Please provide the total amount']

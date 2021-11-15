@@ -4,16 +4,22 @@ const {transformRental} = require("./merge");
 const {dateToString} = require("../../helpers/utils");
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {Error} = require("mongoose");
+const {authenticated} = require("../../helpers/authenticated-guard");
 
 module.exports = {
     boatRentals: async ({boatId}) => {
         try {
             const rentals = await Rental.find({boat: boatId})
             return rentals.map(transformRental)
-        } catch (err) { throw new Error(`Can't find rentals. ${err}`) }
+        } catch (err) { throw new Error(`Can't find boat rentals. ${err}`) }
     },
-    rentBoat: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    rentalsByUser: authenticated(async (_, {req}) => {
+        try {
+            const rentals = await Rental.find({customer: req.userId})
+            return rentals.map(transformRental)
+        } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
+    }),
+    rentBoat: authenticated(async (args, {req}) => {
         const {boatId, from, to, totalAmount} = args.inputRental
         try {
             const boat = await Boat.findOne({_id: boatId})
@@ -45,5 +51,5 @@ module.exports = {
             const result = await rental.save();
             return { rentBoatData: transformRental(result._doc) };
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
-    }
+    })
 }

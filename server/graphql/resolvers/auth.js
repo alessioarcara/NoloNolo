@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail, samePassword} = require("../../helpers/problemMessages");
+const {authenticated} = require("../../helpers/authenticated-guard");
 
 const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
@@ -30,15 +31,11 @@ const decodeRefreshToken = (req) => {
 }
 
 module.exports = {
-    user: async (_, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    user: authenticated(async (_, {req}) => {
         try {
-            const user = await User.findById(req.userId)
-            if (!user) { return { authProblem: userNotFound } }
-
-            return user
+            return await User.findById(req.userId)
         } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
-    },
+    }),
     login: async (args, {_, res}) => {
         const {email, password} = args.inputUser
         try {
@@ -52,8 +49,7 @@ module.exports = {
             return {authData: {userId: user._id, token: accessToken} };
         } catch (err) { throw new Error(`Can't login. ${err}`); }
     },
-    changePassword: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    changePassword: authenticated(async (args, {req}) => {
         const {oldPassword, newPassword} = args.inputChangePassword
         try {
             if (oldPassword === newPassword) { return { changePasswordProblem: samePassword} }
@@ -69,7 +65,7 @@ module.exports = {
 
             return {changePasswordStatus: true };
         } catch (err) { throw new Error(`Can't change password. ${err}`); }
-    },
+    }),
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
         try {
@@ -84,8 +80,7 @@ module.exports = {
             return {authData: {userId: user._id, token: accessToken} }
         } catch (err) { throw new Error(`Can't create user. ${err}`); }
     },
-    updateUser: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    updateUser: authenticated(async (args, {req}) => {
         const {street, city, region, postalCode} = args.inputUpdateUser
         try {
             const user = await User.findById(req.userId)
@@ -106,7 +101,7 @@ module.exports = {
             await user.save()
             return { updateUserData: user.address };
         } catch (err) { throw new Error(`Can't update user. ${err}`)}
-    },
+    }),
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)
 

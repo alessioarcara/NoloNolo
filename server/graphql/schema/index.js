@@ -26,6 +26,7 @@ const rootSchema = `
             boat(boatId: ID!): Boat!
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatsByUser: [Boat!]
+            rentalsByUser: [Rental!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
@@ -52,6 +53,5 @@ const rootSchema = `
         }      
 `
 
-// addImage(inputImage: ImageInput!): addImagePayload!
 
 module.exports = buildSchema(rootSchema);
