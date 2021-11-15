@@ -303,6 +303,10 @@ exports.body_userRentals = {
                 boat {
                     model
                     yard
+                    hasAdvertisement {
+                        images
+                        description
+                    }
                     owner {
                         email
                     }

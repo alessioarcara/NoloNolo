@@ -37,6 +37,13 @@ hr {
   margin-top: 1rem;
 }
 
+.card-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+}
+
 /* PROVVISORIO */
 .centered {
   padding-top: 1.5rem;

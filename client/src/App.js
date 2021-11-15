@@ -24,11 +24,7 @@ function App() {
                 {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}
                 <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
                 <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
-                <Route path='profile/rentals/*' element={<RentalsPage/>}>
-                    <Route path='active'/>
-                    <Route path='future'/>
-                    <Route path='previous'/>
-                </Route>
+                <Route path='profile/rentals/*' element={<RentalsPage/>}/>
                 <Route path='boats/*' element={<ResultsPage/>}/>
                 <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
                 <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>

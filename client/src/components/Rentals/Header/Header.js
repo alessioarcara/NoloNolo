@@ -9,19 +9,19 @@ const Header = () => {
                 <h1 className="title">Noleggi</h1>
                 <div className={classes[`windows-bar`]}>
                     <NavLink
-                        to='active'
+                        to='previous'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
                         <span>Attivi</span>
                     </NavLink>
                     <NavLink
-                        to='future'
+                        to='active'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
                         <span>Futuri</span>
                     </NavLink>
                     <NavLink
-                        to='previous'
+                        to='future'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
                         <span>Passati</span>

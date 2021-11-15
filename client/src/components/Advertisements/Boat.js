@@ -28,7 +28,7 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
                 {/* The second part with information */}
                 <div className={classes.adapter}
                      onClick={goAdvertisementPage.bind(this, searchParams.get('from'), searchParams.get('to'))}>
-                    <div className={classes.model}>{model}</div>
+                    <div className='card-title'>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri
                     </div>
                     <div

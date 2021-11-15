@@ -15,7 +15,7 @@ module.exports = {
     },
     rentalsByUser: authenticated(async (_, {req}) => {
         try {
-            const rentals = await Rental.find({customer: req.userId})
+            const rentals = await Rental.find({customer: req.userId}).lean()
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),

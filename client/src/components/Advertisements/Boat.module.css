@@ -27,13 +27,6 @@
     cursor: pointer;
 }
 
-.model {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.1em;
-    letter-spacing: 2px;
-}
-
 .capacity {
     color: #808080;
 }
