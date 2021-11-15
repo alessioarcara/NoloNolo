@@ -7,6 +7,7 @@ const RentalCard = ({
                         previous,
                         active,
                         future,
+                        images,
                         from,
                         to,
                         city,
@@ -16,7 +17,7 @@ const RentalCard = ({
         <div className={classes['card-container']}>
             <span className={`${classes[`delete-card`]} ${!future && classes.hide}`}>&times;</span>
             {/*First element*/}
-            {/*<SlideShow images={images}/>*/}
+            <SlideShow images={images}/>
             <div className={classes['details-container']}>
                 {/*Second element*/}
                 <section className={classes['details-section']}>
