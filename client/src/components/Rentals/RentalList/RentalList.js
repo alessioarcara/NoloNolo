@@ -1,5 +1,7 @@
 import RentalCard from "../RentalCard/RentalCard";
 import {useCallback} from "react";
+import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
+import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
 
 const RentalList = ({previousRentals, activeRentals, futureRentals, previous, active, future}) => {
     let content
@@ -31,6 +33,7 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
                         to={rental.to}
                         city={rental.boat.isDocked.city}
                         totalAmount={rental.totalAmount}
+                        images={rental.boat.hasAdvertisement.images}
                     />
                 ))}
             </BoatListLayout>
