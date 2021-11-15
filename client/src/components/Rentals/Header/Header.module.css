@@ -1,8 +1,10 @@
 .wrapper {
     position: sticky;
     top: 0;
+    z-index: 2;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 0.6rem 3rem rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -22,6 +24,7 @@
 .normal, .normal:hover, .normal:active, .normal:visited {
     color: rgba(0, 0, 0, 0.3);
     width: 100%;
+    padding-bottom: 0.5rem;
 }
 
 .selected {

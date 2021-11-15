@@ -12,19 +12,19 @@ const Header = () => {
                         to='previous'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
-                        <span>Attivi</span>
+                        <span>Passati</span>
                     </NavLink>
                     <NavLink
                         to='active'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
-                        <span>Futuri</span>
+                        <span>Attivi</span>
                     </NavLink>
                     <NavLink
                         to='future'
                         className={({isActive}) => `${classes.normal}` + (isActive ? ` ${classes.selected}` : "")}
                     >
-                        <span>Passati</span>
+                        <span>Futuri</span>
                     </NavLink>
                 </div>
             </div>
