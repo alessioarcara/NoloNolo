@@ -1,7 +1,7 @@
 const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
-const {dateToString} = require("../../helpers/utils");
+const {rangeDate} = require("../../helpers/utils");
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {Error} = require("mongoose");
 const {authenticated} = require("../../helpers/authenticated-guard");
@@ -20,14 +20,15 @@ module.exports = {
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
     rentBoat: authenticated(async (args, {req}) => {
-        const {boatId, from, to, totalAmount} = args.inputRental
         try {
-            const boat = await Boat.findOne({_id: boatId})
-            if (!boat) {return {rentBoatProblem: boatNotFound}}
+            const {boatId} = args.inputRental
+            const from = new Date(args.inputRental.from)
+            const to = new Date(args.inputRental.to)
 
-            if (dateToString(from) > dateToString(to)) {
-                return {rentBoatProblem: "End date must be greater than start date"}
-            }
+            const boat = await Boat.findOne({_id: boatId})
+            if (!boat) return { rentBoatProblem: boatNotFound }
+            if (from < new Date() ) return { rentBoatProblem: "You can't rent something in the past"}
+            if (from > to) return {rentBoatProblem: "End date must be greater than start date"}
 
             /* *----------------------------------------------*
              *                      |-- Date Range B --|      *
@@ -43,13 +44,27 @@ module.exports = {
             const rental = new Rental({
                 customer: req.userId,
                 boat: boatId,
-                totalAmount,
-                fromDate: new Date(from),
-                toDate: new Date(to)
+                totalAmount:
+                    parseFloat(boat.advertisement.dailyFee) * rangeDate(from, to)
+                    + parseFloat(boat.advertisement.fixedFee),
+                fromDate: from,
+                toDate: to
             })
 
             const result = await rental.save();
             return { rentBoatData: transformRental(result._doc) };
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
-    })
+
+    }),
+    updateRental: authenticated(async (args, {req}) => {
+        try {
+            const {rentalId, from, to} = args.inputRental
+            const rental = await Rental.findById(rentalId)
+        } catch (err) { throw new Error(`Can't update rental. ${err}`)}
+    }),
+    deleteRental: authenticated(async ({rentalId}) => {
+        try {
+            await Rental.findByIdAndDelete(rentalId)
+        } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
+    }),
 }

@@ -33,8 +33,8 @@ const rootSchema = `
         }
         
         type RootMutation {
-            login(inputUser: UserInput!): AuthenticationPayload!
             createUser(inputUser: UserInput!): AuthenticationPayload!
+            login(inputUser: UserInput!): AuthenticationPayload!
             updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
@@ -42,8 +42,10 @@ const rootSchema = `
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
-            publishReview(inputReview: ReviewInput!): publishReviewPayload!
             rentBoat(inputRental: RentalInput!): rentBoatPayload!
+            updateRental(inputRental: RentalInput!): updateRentalPayload!
+            deleteRental(rentalId: ID!): deleteRentalPayload!
+            publishReview(inputReview: ReviewInput!): publishReviewPayload!
             addAvatar(upload: Upload!): addAvatarPayload!
         }
         
