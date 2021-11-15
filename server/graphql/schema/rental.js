@@ -17,11 +17,20 @@ const RentalType = `
         rentBoatProblem: String
     }
     
+    type updateRentalPayload {
+        updateRentalData: Rental
+        updateRentalProblem: String
+    }
+    
+    type deleteRentalPayload {
+        deleteRentalStatus: Boolean
+        deleteRentalProblem: String
+    }
+    
     input RentalInput {
         boatId: ID!
         from: String!
         to: String!
-        totalAmount: Float!
     }
 `
 

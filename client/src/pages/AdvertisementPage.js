@@ -57,9 +57,6 @@ const AdvertisementPage = () => {
                 boatId,
                 from: formatDate(state.startDate),
                 to: formatDate(state.endDate),
-                totalAmount:
-                    (boatPayload.boat.hasAdvertisement.dailyFee * rangeDate(state.startDate, state.endDate))
-                    + boatPayload.boat.hasAdvertisement.fixedFee
             }),
             token
         }, transformData)
