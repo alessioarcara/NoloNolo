@@ -39,14 +39,12 @@ const RentalsPage = () => {
     return (
         <>
             <Header/>
-            <BoatListLayout>
-                <Routes>
-                    <Route path='previous' element={<RentalList previousRentals={filteredRentals.previous} previous/>}/>
-                    <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
-                    <Route path='future' element={<RentalList futureRentals={filteredRentals.future} future/>}/>
-                    <Route path='/' element={<Navigate to='active'/>}/>
-                </Routes>
-            </BoatListLayout>
+            <Routes>
+                <Route path='previous' element={<RentalList previousRentals={filteredRentals.previous} previous/>}/>
+                <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
+                <Route path='future' element={<RentalList futureRentals={filteredRentals.future} future/>}/>
+                <Route path='/' element={<Navigate to='active'/>}/>
+            </Routes>
         </>
     );
 };

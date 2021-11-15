@@ -2,32 +2,43 @@ import RentalCard from "../RentalCard/RentalCard";
 import {useCallback} from "react";
 
 const RentalList = ({previousRentals, activeRentals, futureRentals, previous, active, future}) => {
-
+    let content
     const openedRentals = useCallback(() => {
         return previousRentals || activeRentals || futureRentals
     }, [previousRentals, activeRentals, futureRentals])
 
-    const isActive = () => {
-        return previous ? 'Passato'
-            : active ? 'Attivo'
-            : future ? 'Futuro' : ''
+    const emptyName = () => {
+        return previous ? 'passati' : active ? 'attivi' : future ? 'futuri' : ''
+    }
+
+    if (openedRentals().length === 0) {
+        content =
+            <ElementsNotFound
+                warningText={`Non ci sono noleggi ${emptyName()}. Inizia a noleggiare! '&hearts;'`}
+                warningTextButton="Noleggia"
+                path="/"
+            />
+    } else {
+        content =
+            <BoatListLayout>
+                {openedRentals().map(rental => (
+                    <RentalCard
+                        key={rental._id}
+                        previous={previous}
+                        active={active}
+                        future={future}
+                        from={rental.from}
+                        to={rental.to}
+                        city={rental.boat.isDocked.city}
+                        totalAmount={rental.totalAmount}
+                    />
+                ))}
+            </BoatListLayout>
     }
 
     return (
         <>
-            {openedRentals().length === 0 && <h1>{isActive()}</h1>}
-            {openedRentals().map(rental => (
-                <RentalCard
-                    key={rental._id}
-                    previous={previous}
-                    active={active}
-                    future={future}
-                    from={rental.from}
-                    to={rental.to}
-                    city={rental.boat.isDocked.city}
-                    totalAmount={rental.totalAmount}
-                />
-            ))}
+            {content}
         </>
     );
 };
