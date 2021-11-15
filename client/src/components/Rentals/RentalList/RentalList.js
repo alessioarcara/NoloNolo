@@ -24,6 +24,7 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
                     future={future}
                     from={rental.from}
                     to={rental.to}
+                    images={rental.images}
                     city={rental.boat.isDocked.city}
                     totalAmount={rental.totalAmount}
                 />

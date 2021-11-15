@@ -10,13 +10,13 @@ const userLoader = new DataLoader(userIds => {
 });
 
 const boatLoader = new DataLoader(boatIds => {
-    return Boat.find({_id: {$in: boatIds}})
+    return Boat.find({_id: {$in: boatIds}});
 });
 
 const boat = async boatsId => {
     try {
         const boat = await boatLoader.load(boatsId.toString())
-        return transformBoat(boat._doc);
+        return transformBoat(boat.toObject());
     } catch (err) {throw err}
 }
 
