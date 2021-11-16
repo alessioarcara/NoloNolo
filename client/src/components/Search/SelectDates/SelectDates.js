@@ -45,6 +45,7 @@ const SelectDates = ({
                     monthsShown={2}
                     onChangeStartDate={changeStartDateHandler}
                     onChangeEndDate={changeEndDateHandler}
+                    alreadyRentedDates={alreadyRentedDates}
                 />
             </div>
             <ActionButtons

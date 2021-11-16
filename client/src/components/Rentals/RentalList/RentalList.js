@@ -23,9 +23,10 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
     } else {
         content =
             <BoatListLayout>
-                {openedRentals().map(rental => (
+                {openedRentals().map(rental =>
                     <RentalCard
                         key={rental._id}
+                        boatId={rental.boat._id}
                         previous={previous}
                         active={active}
                         future={future}
@@ -41,7 +42,7 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
                         dailyFee={rental.boat.hasAdvertisement.dailyFee}
                         fixedFee={rental.boat.hasAdvertisement.fixedFee}
                     />
-                ))}
+                )}
             </BoatListLayout>
     }
 

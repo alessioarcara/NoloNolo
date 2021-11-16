@@ -9,6 +9,7 @@ import BoatBill from "../../Advertisement/BoatBill/BoatBill";
 import ReviewModal from "../RentalCard/ReviewModal/ReviewModal";
 
 const RentalCard = ({
+                        boatId,
                         previous,
                         active,
                         future,

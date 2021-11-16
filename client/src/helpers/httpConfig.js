@@ -166,6 +166,19 @@ exports.body_rentBoat = ({boatId, from, to}) => {
         variables: {rentalData: {boatId, from, to}}
     }
 }
+exports.body_boatRentals = (boatId) => {
+    return {
+        query: `
+            query($boatId: ID!) {
+                boatRentals(boatId: $boatId) {
+                    from
+                    to
+                }
+            }
+        `,
+        variables: boatId
+    }
+}
 exports.body_search = (contains) => {
     return {
         query: `
@@ -301,6 +314,7 @@ exports.body_userRentals = {
                 redelivery
                 totalAmount
                 boat {
+                    _id
                     model
                     yard
                     hasAdvertisement {
