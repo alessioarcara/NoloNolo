@@ -14,9 +14,9 @@ const ReviewModal = () => {
     return (
         <>
             <div className={classes['review-container']}>
-                <span className={classes[`review-title`]}>Lasciaci il tuo feedback!</span>
+                <span className={classes[`review-title`]}>Scrivi la tua recensione!</span>
                 <div className={classes[`five-stars`]}>
-                    <span className={classes.quote}>{quotes[quoteIndex] ? quotes[quoteIndex] : 'Valutaci'}</span>
+                    <span className={classes.quote}>{quotes[quoteIndex] ? quotes[quoteIndex] : 'Valuta questa barca'}</span>
                     <div className={classes.stars}>
                         {quotes.map((quote, index) => (
                             <Star
@@ -29,7 +29,7 @@ const ReviewModal = () => {
                     </div>
                 </div>
                 <div className={classes['review-text-container']}>
-                    <span>Raccontaci la tua esperienza:</span>
+                    <span>Lasciaci il tuo feedback:</span>
                     <textarea className={classes['review-text']}/>
                 </div>
                 <Button className={`${classes['btn-publish']} btn btn-outline-primary`}>Pubblica</Button>

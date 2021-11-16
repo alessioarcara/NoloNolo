@@ -80,9 +80,7 @@ const RentalCard = ({
                         />
                     }
                     {openModal === "review" &&
-                        <ReviewModal
-
-                        />
+                        <ReviewModal/>
                     }
                 </Modal>
             }

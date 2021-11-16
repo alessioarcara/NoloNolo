@@ -17,6 +17,11 @@
     align-items: center;
 }
 
+.quote {
+    font-family: 'Lobster';
+    font-weight: bold;
+}
+
 .stars {
     display: flex;
     gap: 0.55rem;
