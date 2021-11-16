@@ -32,8 +32,9 @@ const DatesModal = ({boatId, start, end, openModal}) => {
     const {data: rentedDates, sendRequest: fetchRentedDates} = useHttp(true)
 
     useEffect(() => {
+        console.log(boatId)
         fetchRentedDates({body: body_boatRentals({boatId}), token}, resData => resData.boatRentals)
-    }, [fetchRentedDates, token])
+    }, [fetchRentedDates, token, boatId])
 
     return (
         <SelectDates

@@ -9,7 +9,9 @@ const {authenticated} = require("../../helpers/authenticated-guard");
 module.exports = {
     boatRentals: async ({boatId}) => {
         try {
+            console.log(boatId)
             const rentals = await Rental.find({boat: boatId})
+            console.log(rentals)
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find boat rentals. ${err}`) }
     },
@@ -69,7 +71,7 @@ module.exports = {
             if (!rental) return { deleteRentalProblem: rentalNotFound }
             if (new Date() >= rental.from) return { deleteRentalProblem: "Can't delete past rentals!" }
             await Rental.deleteOne({_id: rental})
-            return true
+            return { deleteRentalStatus: true }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
     }),
 }

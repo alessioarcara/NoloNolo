@@ -182,11 +182,12 @@ exports.body_boatRentals = (boatId) => {
 exports.body_deleteRental = (rentalId) => {
     return {
         query: `
-            mutation($rentalId: ID!)
+            mutation($rentalId: ID!) {
                 deleteRental(rentalId: $rentalId) {
                     deleteRentalStatus
                     deleteRentalProblem
                 }
+            }
         `,
         variables: rentalId
     }

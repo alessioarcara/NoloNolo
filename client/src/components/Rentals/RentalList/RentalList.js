@@ -1,22 +1,22 @@
 import RentalCard from "../RentalCard/RentalCard";
-import {useCallback} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
 import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
 
-const RentalList = ({previousRentals, activeRentals, futureRentals, previous, active, future}) => {
+const RentalList = ({onDeleteRental, previousRentals, activeRentals, futureRentals, previous, active, future}) => {
     let content
     const openedRentals = useCallback(() => {
         return previousRentals || activeRentals || futureRentals
     }, [previousRentals, activeRentals, futureRentals])
 
-    const emptyName = () => {
+    const emptyName = useMemo(() => {
         return previous ? 'passati' : active ? 'attivi' : future ? 'futuri' : ''
-    }
+    }, [previous, active, future])
 
     if (openedRentals().length === 0) {
         content =
             <ElementsNotFound
-                warningText={`Non ci sono noleggi ${emptyName()}. Inizia a noleggiare la tua barca!`}
+                warningText={`Non ci sono noleggi ${emptyName}. Inizia a noleggiare la tua barca!`}
                 warningTextButton="Noleggia"
                 path="/"
             />
@@ -25,7 +25,9 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
             <BoatListLayout>
                 {openedRentals().map(rental =>
                     <RentalCard
+                        onDeleteRental={onDeleteRental}
                         key={rental._id}
+                        rentalId={rental._id}
                         boatId={rental.boat._id}
                         previous={previous}
                         active={active}
