@@ -4,8 +4,6 @@ import useHttp from "../hooks/use-http";
 import {useContext, useEffect, useMemo} from "react";
 import {body_userRentals} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
-import RentalCard from "../components/Rentals/RentalCard/RentalCard";
-import BoatListLayout from "../components/UI/Layout/BoatListLayout/BoatListLayout";
 import RentalList from "../components/Rentals/RentalList/RentalList";
 
 const filterRentals = rentals => {

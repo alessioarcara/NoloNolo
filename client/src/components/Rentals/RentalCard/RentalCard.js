@@ -16,6 +16,12 @@ const RentalCard = ({
                         from,
                         to,
                         city,
+                        billNumber,
+                        boatData,
+                        customer,
+                        createdAt,
+                        dailyFee,
+                        fixedFee,
                         totalAmount
                     }) => {
 
@@ -105,4 +111,4 @@ const RentalCard = ({
     );
 };
 
-export default RentalCard
+export default RentalCard;

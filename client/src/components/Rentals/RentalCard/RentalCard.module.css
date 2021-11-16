@@ -27,6 +27,8 @@
     font-size: 1.8rem;
     font-weight: bold;
     z-index: 1;
+    border: 0;
+    background: transparent;
 }
 
 .details-container {
@@ -39,7 +41,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.7rem;
-    padding: 1rem;
+    padding: 1.2rem;
 }
 
 .dates {
