@@ -16,7 +16,7 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
     if (openedRentals().length === 0) {
         content =
             <ElementsNotFound
-                warningText={`Non ci sono noleggi ${emptyName()}. Inizia a noleggiare! '&hearts;'`}
+                warningText={`Non ci sono noleggi ${emptyName()}. Inizia a noleggiare la tua barca!`}
                 warningTextButton="Noleggia"
                 path="/"
             />
@@ -34,6 +34,12 @@ const RentalList = ({previousRentals, activeRentals, futureRentals, previous, ac
                         city={rental.boat.isDocked.city}
                         totalAmount={rental.totalAmount}
                         images={rental.boat.hasAdvertisement.images}
+                        billNumber={rental.billNumber}
+                        boatData={rental.boat}
+                        customer={rental.customer.email}
+                        createdAt={rental.createdAt}
+                        dailyFee={rental.boat.hasAdvertisement.dailyFee}
+                        fixedFee={rental.boat.hasAdvertisement.fixedFee}
                     />
                 ))}
             </BoatListLayout>

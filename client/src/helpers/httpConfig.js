@@ -306,6 +306,8 @@ exports.body_userRentals = {
                     hasAdvertisement {
                         images
                         description
+                        dailyFee
+                        fixedFee
                     }
                     owner {
                         email

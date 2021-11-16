@@ -2,6 +2,10 @@
     overflow-x: hidden;
 }
 
+.hide {
+    display: none;
+}
+
 .header-datepicker {
     position: absolute;
     top: 0;
@@ -55,10 +59,11 @@
     justify-content: space-around;
     gap: 5rem;
     align-items: center;
+    background-color: #fff;
 }
 
 .actions-bottom button {
-    width: 25%;
+    width: fit-content;
 }
 
 .btn-back {

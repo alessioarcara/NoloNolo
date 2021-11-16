@@ -32,7 +32,6 @@
 .details-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .details-section, .optional-section {
@@ -62,11 +61,13 @@
 
 .option {
     text-transform: uppercase;
+    background-color: #efefef;
+    font-weight: bold;
+    border: 0;
     width: 100%;
 }
 
 .option:hover {
-    background-color: #efefef;
     color: #F20574;
     cursor: pointer;
 }

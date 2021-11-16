@@ -11,7 +11,7 @@ import RentalList from "../components/Rentals/RentalList/RentalList";
 const filterRentals = rentals => {
     return {
         previous: rentals ?
-            rentals.filter(rental => rental.redelivery) : [],
+            rentals.filter(rental => !rental.redelivery) : [],
         active: rentals ?
             rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)) : [],
         future: rentals ?

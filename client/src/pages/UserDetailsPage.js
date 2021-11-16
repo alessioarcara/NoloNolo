@@ -5,8 +5,6 @@ import UserDetailsHeader from "../components/UserDetails/Header/UserDetailsHeade
 import UserInfo from "../components/UserDetails/UserInfo/UserInfo";
 import UserDetails from "../components/UserDetails/UserDetails";
 import {body_user} from "../helpers/httpConfig";
-import Modal from "../components/UI/Modal/Modal";
-
 
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
