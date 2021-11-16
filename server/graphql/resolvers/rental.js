@@ -2,7 +2,7 @@ const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
 const {rangeDate} = require("../../helpers/utils");
-const {boatNotFound} = require("../../helpers/problemMessages");
+const {boatNotFound, rentalNotFound} = require("../../helpers/problemMessages");
 const {Error} = require("mongoose");
 const {authenticated} = require("../../helpers/authenticated-guard");
 
@@ -58,13 +58,18 @@ module.exports = {
     }),
     updateRental: authenticated(async (args, {req}) => {
         try {
+            //TODO: SOLO SE FUTURO FINO AL GIORNO PRIMA
             const {rentalId, from, to} = args.inputRental
             const rental = await Rental.findById(rentalId)
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
     deleteRental: authenticated(async ({rentalId}) => {
         try {
-            await Rental.findByIdAndDelete(rentalId)
+            const rental = await Rental.findById(rentalId)
+            if (!rental) return { deleteRentalProblem: rentalNotFound }
+            if (new Date() >= rental.from) return { deleteRentalProblem: "Can't delete past rentals!" }
+            await Rental.deleteOne({_id: rental})
+            return true
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
     }),
 }

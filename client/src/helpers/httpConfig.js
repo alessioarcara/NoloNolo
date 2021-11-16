@@ -166,6 +166,18 @@ exports.body_rentBoat = ({boatId, from, to}) => {
         variables: {rentalData: {boatId, from, to}}
     }
 }
+exports.body_deleteRental = (rentalId) => {
+    return {
+        query: `
+            mutation($rentalId: ID!)
+                deleteRental(rentalId: $rentalId) {
+                    deleteRentalStatus
+                    deleteRentalProblem
+                }
+        `,
+        variables: rentalId
+    }
+}
 exports.body_search = (contains) => {
     return {
         query: `
