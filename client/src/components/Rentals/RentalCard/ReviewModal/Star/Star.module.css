@@ -1,0 +1,12 @@
+.star input[type=radio] {
+    display: none;
+}
+
+.star-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.star-icon-color svg {
+    fill: #FF2267;
+}

@@ -4,11 +4,10 @@ import AuthContext from "../store/auth-context";
 import {advertisementReducer} from "../reducers/advertisementReducer";
 import useHttp from "../hooks/use-http";
 import {body_informations, body_rentBoat} from "../helpers/httpConfig";
-import {formatDate, rangeDate} from "../helpers/utils";
+import {formatDate} from "../helpers/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 import Modal from "../components/UI/Modal/Modal";
-import BoatBill from "../components/Advertisement/BoatBill/BoatBill";
 import InvoiceReport from "../components/Advertisement/BoatBill/InvoiceReport/InvoiceReport";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
@@ -78,21 +77,21 @@ const AdvertisementPage = () => {
                 Prenotazione già presente
             </Modal>
             }
-            {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
-            <Modal title='Fattura'>
-                <BoatBill
-                    billNumber={rentalPayload.rentBoatData.billNumber}
-                    from={rentalPayload.rentBoatData.from}
-                    to={rentalPayload.rentBoatData.to}
-                    boatData={rentalPayload.rentBoatData.boat}
-                    customer={rentalPayload.rentBoatData.customer.email}
-                    createdAt={rentalPayload.rentBoatData.createdAt}
-                    dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                    fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
-                    total={rentalPayload.rentBoatData.totalAmount}
-                />
-            </Modal>
-            }
+            {/*{statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&*/}
+            {/*<Modal title='Fattura'>*/}
+            {/*    <BoatBill*/}
+            {/*        billNumber={rentalPayload.rentBoatData.billNumber}*/}
+            {/*        from={rentalPayload.rentBoatData.from}*/}
+            {/*        to={rentalPayload.rentBoatData.to}*/}
+            {/*        boatData={rentalPayload.rentBoatData.boat}*/}
+            {/*        customer={rentalPayload.rentBoatData.customer.email}*/}
+            {/*        createdAt={rentalPayload.rentBoatData.createdAt}*/}
+            {/*        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}*/}
+            {/*        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}*/}
+            {/*        total={rentalPayload.rentBoatData.totalAmount}*/}
+            {/*    />*/}
+            {/*</Modal>*/}
+            {/*}*/}
             {state.isBillShow &&
             <Modal
                 title="Conferma prenotazione"

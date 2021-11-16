@@ -26,7 +26,7 @@ const BillBody = ({
                     </span>
                     <span>
                         <span className={classes['object-title']}>Data: </span>
-                        {formatDayMonthYearDate(reservationDay, {day: 'numeric', month: 'short'})}</span>
+                        {formatDayMonthYearDate(reservationDay, {day: 'numeric', month: 'short', year: 'numeric'})}</span>
                     <span>
                         <span className={classes['object-title']}>Valuta: </span>
                         <span>EUR</span>

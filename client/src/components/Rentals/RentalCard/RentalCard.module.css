@@ -5,12 +5,12 @@
     border-radius: 1rem;
     user-select: none;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.5);
     box-shadow: 0.2rem 0.1rem 0.3rem rgba(0, 0, 0, 0.4);
 }
 
 .card-container:hover {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
 .hide {
@@ -27,12 +27,13 @@
     font-size: 1.8rem;
     font-weight: bold;
     z-index: 1;
+    border: 0;
+    background: transparent;
 }
 
 .details-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .details-section, .optional-section {
@@ -40,7 +41,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.7rem;
-    padding: 1rem;
+    padding: 1.2rem;
 }
 
 .dates {
@@ -62,11 +63,13 @@
 
 .option {
     text-transform: uppercase;
+    background-color: #efefef;
+    font-weight: bold;
+    border: 0;
     width: 100%;
 }
 
 .option:hover {
-    background-color: #efefef;
     color: #F20574;
     cursor: pointer;
 }

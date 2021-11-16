@@ -166,14 +166,28 @@ exports.body_rentBoat = ({boatId, from, to}) => {
         variables: {rentalData: {boatId, from, to}}
     }
 }
+exports.body_boatRentals = (boatId) => {
+    return {
+        query: `
+            query($boatId: ID!) {
+                boatRentals(boatId: $boatId) {
+                    from
+                    to
+                }
+            }
+        `,
+        variables: boatId
+    }
+}
 exports.body_deleteRental = (rentalId) => {
     return {
         query: `
-            mutation($rentalId: ID!)
+            mutation($rentalId: ID!) {
                 deleteRental(rentalId: $rentalId) {
                     deleteRentalStatus
                     deleteRentalProblem
                 }
+            }
         `,
         variables: rentalId
     }
@@ -313,11 +327,14 @@ exports.body_userRentals = {
                 redelivery
                 totalAmount
                 boat {
+                    _id
                     model
                     yard
                     hasAdvertisement {
                         images
                         description
+                        dailyFee
+                        fixedFee
                     }
                     owner {
                         email

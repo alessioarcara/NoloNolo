@@ -23,7 +23,9 @@ const checkRentDates = async (boatId, from, to) => {
 module.exports = {
     boatRentals: async ({boatId}) => {
         try {
+            console.log(boatId)
             const rentals = await Rental.find({boat: boatId})
+            console.log(rentals)
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find boat rentals. ${err}`) }
     },
@@ -87,7 +89,7 @@ module.exports = {
             if (!rental) return { deleteRentalProblem: rentalNotFound }
             if (rental.from <= new Date()) return { deleteRentalProblem: "Can't delete started rentals!" }
             await Rental.deleteOne({_id: rental})
-            return true
+            return { deleteRentalStatus: true }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
     }),
 }

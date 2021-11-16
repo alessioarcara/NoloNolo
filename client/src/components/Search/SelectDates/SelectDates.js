@@ -4,8 +4,16 @@ import DayPicker from "../../UI/DatePicker/DayPicker";
 import classes from "./SelectDates.module.css";
 
 const SelectDates = ({
-                         moveClickHandler, changeStartDateHandler, changeEndDateHandler,
-                         searchClickHandler, cancelSelectionHandler, startDate, endDate
+                         moveClickHandler,
+                         changeStartDateHandler,
+                         changeEndDateHandler,
+                         searchClickHandler,
+                         cancelSelectionHandler,
+                         startDate,
+                         endDate,
+                         skipTextButton,
+                         confirmTextButton,
+                         alreadyRentedDates
                      }) => {
 
     return (
@@ -37,16 +45,17 @@ const SelectDates = ({
                     monthsShown={2}
                     onChangeStartDate={changeStartDateHandler}
                     onChangeEndDate={changeEndDateHandler}
+                    alreadyRentedDates={alreadyRentedDates}
                 />
             </div>
             <ActionButtons
                 actionClassName={classes[`actions-bottom`]}
-                firstButtonClassName={`btn btn-secondary ${classes[`btn-skip`]}`}
-                firstButtonClickHandler={searchClickHandler}
-                firstButtonText='Salta'
-                secondButtonClassName={`btn btn-outline-primary ${classes['btn-forward']}`}
+                firstButtonClassName={skipTextButton ? `btn btn-secondary ${classes[`btn-skip`]}` : classes.hide}
+                firstButtonClickHandler={skipTextButton && searchClickHandler}
+                firstButtonText={skipTextButton && skipTextButton}
+                secondButtonClassName={`btn btn-outline-primary`}
                 secondButtonClickHandler={searchClickHandler}
-                secondButtonText='Avanti'
+                secondButtonText={confirmTextButton ? confirmTextButton : 'Avanti'}
                 secondButtonDisabled={!startDate || !endDate || startDate.getTime() === endDate.getTime()}
             />
         </div>

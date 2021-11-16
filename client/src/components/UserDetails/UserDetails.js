@@ -1,5 +1,5 @@
 import classes from './UserDetails.module.css';
-import {addressForm, newPasswordForm, singleUploadForm} from "../../helpers/formConfig";
+import {addressForm, newPasswordForm} from "../../helpers/formConfig";
 import {useCallback, useContext, useState} from "react";
 import useForm from "../../hooks/use-form";
 import Button from "../UI/Button/Button";
@@ -15,11 +15,7 @@ const userDetails = [
     {
         type: "Password",
         form: newPasswordForm
-    },
-    // {
-    //     type: "Foto",
-    //     form: singleUploadForm
-    // }
+    }
 ]
 
 const addressArrange = (addressObject) => Object.keys(addressObject).map(key => ` ${addressObject[key]}`).toString().trim()
