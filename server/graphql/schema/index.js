@@ -42,8 +42,8 @@ const rootSchema = `
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
-            rentBoat(inputRental: RentalInput!): rentBoatPayload!
-            updateRental(inputRental: RentalInput!): updateRentalPayload!
+            rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!
+            updateRental(inputUpdateRental: UpdateRentalInput!): updateRentalPayload!
             deleteRental(rentalId: ID!): deleteRentalPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             addAvatar(upload: Upload!): addAvatarPayload!

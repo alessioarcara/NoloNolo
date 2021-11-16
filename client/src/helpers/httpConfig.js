@@ -135,8 +135,8 @@ exports.body_informations = (boatId) => {
 exports.body_rentBoat = ({boatId, from, to}) => {
     return {
         query: `
-            mutation($rentalData: RentalInput!) {
-                rentBoat(inputRental: $rentalData) {
+            mutation($rentalData: RentBoatInput!) {
+                rentBoat(inputRentBoat: $rentalData) {
                     rentBoatData {
                         billNumber
                         from

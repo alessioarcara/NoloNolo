@@ -27,8 +27,14 @@ const RentalType = `
         deleteRentalProblem: String
     }
     
-    input RentalInput {
+    input RentBoatInput {
         boatId: ID!
+        from: String!
+        to: String!
+    }
+    
+    input UpdateRentalInput {
+        rentalId: ID!
         from: String!
         to: String!
     }

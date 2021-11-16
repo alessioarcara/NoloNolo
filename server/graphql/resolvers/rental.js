@@ -2,9 +2,23 @@ const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
 const {rangeDate} = require("../../helpers/utils");
-const {boatNotFound, rentalNotFound} = require("../../helpers/problemMessages");
-const {Error} = require("mongoose");
+const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, SelectedRentDatesTooClose} = require("../../helpers/problemMessages");
 const {authenticated} = require("../../helpers/authenticated-guard");
+
+const checkRentDates = async (boatId, from, to) => {
+    if (from <= new Date()) return SelectedRentDatesTooClose;
+    if (from > to) return invalidRange;
+
+    /* *----------------------------------------------*
+     *                      |-- Date Range B --|      *
+     * |-- Date Range A --|                           *
+     *     (StartA <= EndB) and (EndA >= StartB)      *
+     *------------------------------------------------*/
+    const rentals = await Rental.find({
+        $and: [{boat: boatId}, {fromDate: {$lte: to}}, {toDate: {$gte: from}}]
+    })
+    if (rentals.length > 0) return alreadyRented;
+}
 
 module.exports = {
     boatRentals: async ({boatId}) => {
@@ -21,25 +35,15 @@ module.exports = {
     }),
     rentBoat: authenticated(async (args, {req}) => {
         try {
-            const {boatId} = args.inputRental
-            const from = new Date(args.inputRental.from)
-            const to = new Date(args.inputRental.to)
+            const {boatId} = args.inputRentBoat
+            const from = new Date(args.inputRentBoat.from)
+            const to = new Date(args.inputRentBoat.to)
 
             const boat = await Boat.findOne({_id: boatId})
             if (!boat) return { rentBoatProblem: boatNotFound }
-            if (from < new Date() ) return { rentBoatProblem: "You can't rent something in the past"}
-            if (from > to) return {rentBoatProblem: "End date must be greater than start date"}
 
-            /* *----------------------------------------------*
-             *                      |-- Date Range B --|      *
-             * |-- Date Range A --|                           *
-             *     (StartA <= EndB) and (EndA >= StartB)      *
-             *------------------------------------------------*/
-            const rentals = await Rental.find({
-                $and: [{boat: boatId}, {fromDate: {$lte: to}}, {toDate: {$gte: from}}]
-                })
-
-            if (rentals.length > 0) {return {rentBoatProblem: "Already rented for these dates."}}
+            const isInvalidRentDates = await checkRentDates(boatId, from, to)
+            if (isInvalidRentDates) return { rentBoatProblem: isInvalidRentDates }
 
             const rental = new Rental({
                 customer: req.userId,
@@ -51,23 +55,37 @@ module.exports = {
                 toDate: to
             })
 
-            const result = await rental.save();
-            return { rentBoatData: transformRental(result._doc) };
+            await rental.save();
+            return { rentBoatData: transformRental(rental._doc) };
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
 
     }),
-    updateRental: authenticated(async (args, {req}) => {
+    updateRental: authenticated(async (args) => {
         try {
-            //TODO: SOLO SE FUTURO FINO AL GIORNO PRIMA
-            const {rentalId, from, to} = args.inputRental
-            const rental = await Rental.findById(rentalId)
+            const {rentalId} = args.inputUpdateRental
+            const from = new Date(args.inputUpdateRental.from)
+            const to = new Date(args.inputUpdateRental.to)
+            const rental = await Rental.findById(rentalId).populate('boat')
+            if (!rental) return {updateRentalProblem: rentalNotFound}
+            if (rental.from <= new Date()) return { updateRentalProblem: "Can't update started rentals!" }
+
+            const isInvalidRentDates = checkRentDates(rental.boat._id, from, to)
+            if (isInvalidRentDates) return { updateRentalProblem: isInvalidRentDates }
+
+            rental.from = from;
+            rental.to = to
+            rental.totalAmount = parseFloat(rental.boat.advertisement.dailyFee) * rangeDate(from, to)
+                + parseFloat(rental.boat.advertisement.fixedFee)
+
+            await rental.save();
+            return { rentBoatData: transformRental(rental._doc) };
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
     deleteRental: authenticated(async ({rentalId}) => {
         try {
             const rental = await Rental.findById(rentalId)
             if (!rental) return { deleteRentalProblem: rentalNotFound }
-            if (new Date() >= rental.from) return { deleteRentalProblem: "Can't delete past rentals!" }
+            if (rental.from <= new Date()) return { deleteRentalProblem: "Can't delete started rentals!" }
             await Rental.deleteOne({_id: rental})
             return true
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
