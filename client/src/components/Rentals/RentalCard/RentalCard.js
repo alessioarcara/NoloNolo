@@ -1,6 +1,6 @@
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
-import {useCallback, useContext, useReducer, useState} from "react";
+import {useCallback, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Modal from "../../UI/Modal/Modal";
 import BreakpointContext from "../../../store/breakpoint-context";
