@@ -56,9 +56,9 @@
 
 .optional-section {
     display: flex;
+    align-items: center;
     background-color: #efefef;
     color: rgba(0, 0, 0, 0.6);
-    text-align: center;
 }
 
 .option {
