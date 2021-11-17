@@ -6,6 +6,7 @@ import Button from "../../../UI/Button/Button";
 const ReviewModal = () => {
     const quotes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
     const [quoteIndex, setQuoteIndex] = useState()
+    const [textArea, setTextArea] = useState('')
 
     const changeQuoteIndex = useCallback((index) => {
         setQuoteIndex(index)

@@ -59,7 +59,7 @@ const SelectDates = ({
                 secondButtonDisabled={!startDate || !endDate || startDate.getTime() === endDate.getTime()}
             />
         </div>
-    )
-}
+    );
+};
 
 export default SelectDates;

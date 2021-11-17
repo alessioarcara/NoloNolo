@@ -8,7 +8,7 @@ import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
 import {formatNumber, rangeDate} from "../../../../helpers/utils";
 
-const DatesModal = ({boatId, start, end, openModal}) => {
+const DatesModal = ({boatId, start, end, openModal, dailyFee, fixedFee}) => {
     const {token} = useContext(AuthContext)
     const [state, dispatch] = useReducer(searchReducer, {
         ...initialState, startDate: new Date(start), endDate: new Date(end)

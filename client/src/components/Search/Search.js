@@ -43,6 +43,7 @@ const Search = ({closeModalHandler}) => {
                 searchClickHandler={searchClickHandler}
                 moveClickHandler={moveClickHandler}
                 skipTextButton="Salta"
+                confirmTextButton="Avanti"
             />}
         </>
     );

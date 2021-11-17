@@ -1,5 +1,4 @@
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import classes from './RentalCard.module.css';
 import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
 import {useCallback, useContext, useReducer, useState} from "react";
 import {useNavigate} from "react-router-dom";
