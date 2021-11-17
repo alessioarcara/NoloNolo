@@ -6,7 +6,7 @@ import useHttp from "../../../../hooks/use-http";
 import {body_boatRentals} from "../../../../helpers/httpConfig";
 import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
-import {formatNumber, rangeDate} from "../../../../helpers/utils";
+import {formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
 
 const DatesModal = ({boatId, start, end, openModal, dailyFee, fixedFee}) => {
     const {token} = useContext(AuthContext)
@@ -50,14 +50,15 @@ const DatesModal = ({boatId, start, end, openModal, dailyFee, fixedFee}) => {
             />
             <div className={classes['bottom-container']}>
                 <span className={classes['total-amount']}>
-                    Totale {state.endDate
-                        ? formatNumber((dailyFee * rangeDate(state.startDate, state.endDate)) + fixedFee)
-                        : formatNumber(0)
+                    {state.endDate && rangeDate(state.startDate, state.endDate) !== 0
+                        ? `Totale ${formatNumber((dailyFee * rangeDate(state.startDate, state.endDate)) + fixedFee)}`
+                        : ""
                     }
                 </span>
                 <button
                     className={`${classes['btn-update']} btn btn-outline-primary`}
                     onClick={openModal}
+                    disabled={!state.endDate || formatDate(state.startDate) === formatDate(state.endDate)}
                 >
                     Aggiorna
                 </button>

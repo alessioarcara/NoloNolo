@@ -11,10 +11,10 @@
     font-weight: bold;
     font-size: 0.9em;
     font-style: italic;
+    width: 25%;
 }
 
 .btn-update {
-    width: fit-content;
     align-self: center;
     height: 2.7rem;
 }
