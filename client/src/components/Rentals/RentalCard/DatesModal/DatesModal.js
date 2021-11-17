@@ -5,12 +5,13 @@ import searchReducer, {initialState} from "../../../../reducers/searchReducer";
 import useHttp from "../../../../hooks/use-http";
 import {body_boatRentals} from "../../../../helpers/httpConfig";
 import AuthContext from "../../../../store/auth-context";
+import classes from './DatesModal.module.css';
+import {formatNumber, rangeDate} from "../../../../helpers/utils";
 
 const DatesModal = ({boatId, start, end, openModal}) => {
     const {token} = useContext(AuthContext)
-
     const [state, dispatch] = useReducer(searchReducer, {
-        ...initialState, startDate: start, endDate: end
+        ...initialState, startDate: new Date(start), endDate: new Date(end)
     })
 
     const backClickHandler = () => {
@@ -37,16 +38,31 @@ const DatesModal = ({boatId, start, end, openModal}) => {
     }, [fetchRentedDates, token, boatId])
 
     return (
-        <SelectDates
-            startDate={state.startDate}
-            endDate={state.endDate}
-            changeStartDateHandler={changeStartDateHandler}
-            changeEndDateHandler={changeEndDateHandler}
-            moveClickHandler={backClickHandler}
-            cancelSelectionHandler={cancelSelectionHandler}
-            alreadyRentedDates={rentedDates}
-            confirmTextButton="Aggiorna"
-        />
+        <>
+            <SelectDates
+                startDate={state.startDate}
+                endDate={state.endDate}
+                changeStartDateHandler={changeStartDateHandler}
+                changeEndDateHandler={changeEndDateHandler}
+                moveClickHandler={backClickHandler}
+                cancelSelectionHandler={cancelSelectionHandler}
+                alreadyRentedDates={rentedDates}
+            />
+            <div className={classes['bottom-container']}>
+                <span className={classes['total-amount']}>
+                    Totale {state.endDate
+                        ? formatNumber((dailyFee * rangeDate(state.startDate, state.endDate)) + fixedFee)
+                        : formatNumber(0)
+                    }
+                </span>
+                <button
+                    className={`${classes['btn-update']} btn btn-outline-primary`}
+                    onClick={openModal}
+                >
+                    Aggiorna
+                </button>
+            </div>
+        </>
     );
 };
 

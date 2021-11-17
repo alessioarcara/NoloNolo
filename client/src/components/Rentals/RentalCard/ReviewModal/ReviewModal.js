@@ -11,6 +11,10 @@ const ReviewModal = () => {
         setQuoteIndex(index)
     }, [setQuoteIndex])
 
+    const changeTextHandler = (event) => {
+        setTextArea(event.target.value)
+    }
+
     return (
         <>
             <div className={classes['review-container']}>
@@ -30,9 +34,18 @@ const ReviewModal = () => {
                 </div>
                 <div className={classes['review-text-container']}>
                     <span>Lasciaci il tuo feedback:</span>
-                    <textarea className={classes['review-text']}/>
+                    <textarea
+                        className={classes['review-text']}
+                        onChange={changeTextHandler}
+                        value={textArea}
+                    />
                 </div>
-                <Button className={`${classes['btn-publish']} btn btn-outline-primary`}>Pubblica</Button>
+                <button
+                    className={`${classes['btn-publish']} btn btn-outline-primary`}
+                    disabled={!quoteIndex || !textArea}
+                >
+                    Pubblica
+                </button>
             </div>
         </>
     );
