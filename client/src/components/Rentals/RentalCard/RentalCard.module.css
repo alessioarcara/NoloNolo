@@ -62,6 +62,7 @@
 }
 
 .option {
+    color: #000;
     text-transform: uppercase;
     background-color: #efefef;
     font-weight: bold;
