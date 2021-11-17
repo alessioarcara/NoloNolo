@@ -11,6 +11,7 @@ import {Routes, Route, Navigate} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
+import ShipownerProfilePage from "./pages/ShipownerProfilePage";
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
@@ -27,6 +28,9 @@ function App() {
             <Route path='boats/*' element={<ResultsPage/>}/>
             <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
             <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
+
+
+            <Route path='prova' element={<ShipownerProfilePage/>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
         </Routes>
     );
