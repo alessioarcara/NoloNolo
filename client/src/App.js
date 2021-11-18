@@ -33,7 +33,7 @@ function App() {
             <Route path='prova' element={<ShipownerProfilePage/>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
         </Routes>
-    );
+    )
 }
 
 export default App;

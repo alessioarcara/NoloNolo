@@ -1,0 +1,35 @@
+
+/* CSS solo da desktop */
+.row-layout {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.inline-rental {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    border-bottom: 2px solid #efefef;
+}
+
+.date {
+    font-size: 0.8em;
+    color: #9e9d9d;
+}
+
+.stars {
+    display: flex;
+}
+
+.star {
+    width: 1.2rem;
+}
+
+.bill-button {
+    justify-self: start;
+    font-size: 0.8em;
+}
+/* CSS solo da desktop */
