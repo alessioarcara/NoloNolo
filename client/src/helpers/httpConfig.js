@@ -61,6 +61,19 @@ exports.body_updateUser = ({street, city, region, postalCode}) => {
         variables: {userData: {street, city, region, postalCode}}
     }
 };
+exports.body_search = (contains) => {
+    return {
+        query: `
+            query($filter: LocationFilter!) {
+                listAllLocations(filter: $filter) {
+                    region
+                    city
+                }
+            }
+        `,
+        variables: {filter: {contains}}
+    }
+};
 exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
@@ -165,7 +178,23 @@ exports.body_rentBoat = ({boatId, from, to}) => {
         `,
         variables: {rentalData: {boatId, from, to}}
     }
-}
+};
+exports.body_updateRental = ({rentalId, from, to}) => {
+    return {
+        query: `
+            mutation($rentalData: UpdateRentalInput!) {
+                rentBoat(inputUpdateRental: $rentalData) {
+                    rentBoatData {
+                        from
+                        to
+                    }
+                    rentBoatProblem
+                }
+            }
+        `,
+        variables: {rentalData: {rentalId, from, to}}
+    }
+};
 exports.body_boatRentals = (boatId) => {
     return {
         query: `
@@ -178,7 +207,7 @@ exports.body_boatRentals = (boatId) => {
         `,
         variables: boatId
     }
-}
+};
 exports.body_deleteRental = (rentalId) => {
     return {
         query: `
@@ -191,20 +220,28 @@ exports.body_deleteRental = (rentalId) => {
         `,
         variables: rentalId
     }
-}
-exports.body_search = (contains) => {
-    return {
-        query: `
-            query($filter: LocationFilter!) {
-                listAllLocations(filter: $filter) {
-                    region
-                    city
+};
+exports.body_publishReview = ({rentalId, body, rating}) => {
+        return {
+            query: `
+            mutation($reviewData: ReviewInput!) {
+                publishReview(inputReview: $reviewData) {
+                    publishReviewData {
+                        body
+                        rating
+                        createdAt
+                        creator {
+                            email
+                            avatar
+                        }
+                    }
+                    publishReviewProblem
                 }
             }
         `,
-        variables: {filter: {contains}}
-    }
-}
+            variables: {reviewData: {rentalId, body, rating}}
+        }
+};
 exports.body_favorites = {
     query: `
           query {
@@ -223,7 +260,7 @@ exports.body_favorites = {
               }  
           }
     `,
-}
+};
 exports.body_addFavorite = (boatId) => {
     return {
         query: `
@@ -352,9 +389,9 @@ exports.body_userRentals = {
             }
         }
     `
-}
+};
 exports.body_addAvatar = {
     operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
 
-}
+};

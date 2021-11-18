@@ -68,5 +68,13 @@ const transformRental = rental => {
     }
 }
 
+const transformReview = review => {
+    return {
+        ...review,
+        creator: user.bind(this, review.customer)
+    }
+}
+
 exports.transformBoat = transformBoat;
 exports.transformRental = transformRental;
+exports.transformReview = transformReview;

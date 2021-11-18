@@ -8,7 +8,12 @@ const notImage = "Not an image! Please upload only images.";
 const noFileAttached = "No file provided!";
 const invalidRange = "End date must be greater than start date.";
 const alreadyRented = "Already rented for these dates.";
-const SelectedRentDatesTooClose = "You can only rent from tomorrow!";
+const selectedRentDatesTooClose = "You can only rent from tomorrow!";
+const someoneIsAlreadyBookingBoat = "Someone is already booking your dates! Retry again.";
+const isAlreadyStarted = "Can't change started rentals!";
+const isAlreadyPublished = "Already published review for this rental.";
+const rentalNotYours = "You can write a review only on your rentals!";
+const rentalNotClosed = "You cannot write a review on what you have not returned";
 
 module.exports = {
     duplicateEmail,
@@ -21,5 +26,10 @@ module.exports = {
     rentalNotFound,
     invalidRange,
     alreadyRented,
-    SelectedRentDatesTooClose
+    selectedRentDatesTooClose,
+    someoneIsAlreadyBookingBoat,
+    isAlreadyStarted,
+    isAlreadyPublished,
+    rentalNotYours,
+    rentalNotClosed
 };

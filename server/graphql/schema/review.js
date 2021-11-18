@@ -13,7 +13,7 @@ const reviewType = `
         }
         
         input ReviewInput {
-            boatId: ID!
+            rentalId: ID!
             body: String!
             rating: Int!
         }
