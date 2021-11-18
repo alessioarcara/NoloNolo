@@ -49,17 +49,17 @@ const SelectDates = ({
                 />
             </div>
             <ActionButtons
-                actionClassName={classes[`actions-bottom`]}
+                actionClassName={(skipTextButton || confirmTextButton) && classes[`actions-bottom`]}
                 firstButtonClassName={skipTextButton ? `btn btn-secondary ${classes[`btn-skip`]}` : classes.hide}
                 firstButtonClickHandler={skipTextButton && searchClickHandler}
                 firstButtonText={skipTextButton && skipTextButton}
-                secondButtonClassName={`btn btn-outline-primary`}
-                secondButtonClickHandler={searchClickHandler}
-                secondButtonText={confirmTextButton ? confirmTextButton : 'Avanti'}
+                secondButtonClassName={confirmTextButton ? 'btn btn-outline-primary' : classes.hide}
+                secondButtonClickHandler={confirmTextButton && searchClickHandler}
+                secondButtonText={confirmTextButton}
                 secondButtonDisabled={!startDate || !endDate || startDate.getTime() === endDate.getTime()}
             />
         </div>
-    )
-}
+    );
+};
 
 export default SelectDates;
