@@ -1,8 +1,8 @@
-import classes from "./RentalRow.module.css";
+import classes from "./RentalActivePage.module.css";
 import StarIcon from "../../../UI/icons/StarIcon";
 import Button from "../../../UI/Button/Button";
 
-const RentalRow = ({start, end, customer, totalAmount}) => {
+const RentalActivePage = ({start, end, customer, totalAmount}) => {
 
     return (
         <div className={classes['row-layout']}>
@@ -28,4 +28,4 @@ const RentalRow = ({start, end, customer, totalAmount}) => {
     )
 }
 
-export default RentalRow;
+export default RentalActivePage;

@@ -3,7 +3,7 @@ import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
 import Modal from "../../UI/Modal/Modal";
-import RentalRow from "./RentalsModal/RentalRow";
+import RentalActivePage from "./RentalActivePage/RentalActivePage";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
 import EyeIcon from "../../UI/icons/EyeIcon";
@@ -34,9 +34,8 @@ const AnnouncementCard = () => {
             {openDetailsModal &&
                 <Modal
                     closeModalHandler={() => setOpenDetailsModal(false)}
-                    title={<div className={classes['modal-header']}><div>Passati</div><div>Attivi</div><div>Futuri</div></div>}
                 >
-                    <RentalRow
+                    <DetailsModal
                         start={object.from}
                         end={object.to}
                         customer={object.customer}

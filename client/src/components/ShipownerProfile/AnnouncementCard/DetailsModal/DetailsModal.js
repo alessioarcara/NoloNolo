@@ -1,16 +1,22 @@
 import classes from './DetailsModal.module.css'
 import {useState} from "react";
 import DetailsModalHeader from "./DetailsModalHeader/DetailsModalHeader";
-import RentalsPreviousPage from "./RentalsPreviousPage/RentalsPreviousPage";
-import RentalActivePage from "./RentalActivePage/RentalActivePage";
-import RentalsFuturePage from "./RentalsFuturePage/RentalsFuturePage";
+import RentalActivePage from "../RentalActivePage/RentalActivePage";
 
-const DetailsModal = () => {
+const DetailsModal = ({start, end, customer, totalAmount}) => {
     const [rentalsState, setRentalsState] = useState("active")
 
     return (
         <>
             <DetailsModalHeader rentalsState={rentalsState} setRentals={setRentalsState}/>
+            {rentalsState === 'active' &&
+                <RentalActivePage
+                    start={start}
+                    end={end}
+                    customer={customer}
+                    totalAmount={totalAmount}
+                />
+            }
         </>
     );
 }
