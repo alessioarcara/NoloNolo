@@ -11,6 +11,6 @@ const HourglassIcon = () => {
             />
         </svg>
     );
-}
+};
 
-export default HourglassIcon
+export default HourglassIcon;

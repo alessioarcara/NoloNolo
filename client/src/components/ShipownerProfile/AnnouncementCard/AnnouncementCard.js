@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {formatDayMonthYearDate} from "../../../helpers/utils";
+import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
 import Modal from "../../UI/Modal/Modal";
+import RentalRow from "./RentalsModal/RentalRow";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
+import EyeIcon from "../../UI/icons/EyeIcon";
 import DetailsModal from "./DetailsModal/DetailsModal";
 
 const object = {
@@ -14,10 +16,14 @@ const object = {
     average: 4,
     reviews: 78,
     customer: "Massimo",
+    preferredBy: ["Alessio", "Alessia", "Michael"],
     images: [
         'https://www.ilmessaggero.it/photos/MED_HIGH/92/67/5519267_1942_foto_340_regina.jpg',
         'https://www.barchemagazine.com/wp-content/uploads/2021/05/FIM-340-Regina_01-800x600.jpg'
-    ]
+    ],
+    from: formatDayMonthYearDate(new Date(2021,11,17), {year: 'numeric', month: 'short', day: 'numeric'}),
+    to: formatDayMonthYearDate(new Date(2021,11,18), {year: 'numeric', month: 'short', day: 'numeric'}),
+    totalAmount: formatNumber(1200)
 }
 
 const AnnouncementCard = () => {
@@ -26,8 +32,16 @@ const AnnouncementCard = () => {
     return (
         <>
             {openDetailsModal &&
-                <Modal closeModalHandler={() => setOpenDetailsModal(false)}>
-                    <DetailsModal/>
+                <Modal
+                    closeModalHandler={() => setOpenDetailsModal(false)}
+                    title={<div className={classes['modal-header']}><div>Passati</div><div>Attivi</div><div>Futuri</div></div>}
+                >
+                    <RentalRow
+                        start={object.from}
+                        end={object.to}
+                        customer={object.customer}
+                        totalAmount={object.totalAmount}
+                    />
                 </Modal>
             }
 
@@ -48,6 +62,10 @@ const AnnouncementCard = () => {
                         </div>
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
                         <div>Prenotazioni future: <span className={classes.parameter}>{object.future}</span></div>
+                        <div className={classes['inline-elements']}>
+                            <EyeIcon/>
+                            <div>Osservato da: <span className={classes.parameter}>{object.preferredBy.length} persone</span></div>
+                        </div>
 
                         {object.customer &&
                         <div className={classes['inline-elements']}>
@@ -60,7 +78,7 @@ const AnnouncementCard = () => {
                         <div className={classes['inline-elements']}>
                             <div
                                 className={`${classes['point-icon']}
-                            ${classes[object.customer ? 'icon-color-red' : 'icon-color-green']}`}
+                                ${classes[object.customer ? 'icon-color-red' : 'icon-color-green']}`}
                             />
                             {object.customer ? <div>Non disponibile</div> : <div>Attualmente disponibile</div>}
                         </div>
