@@ -30,6 +30,7 @@ const RentalsPrevious = () => {
     return (
         previousRentals.map(previous =>
             <RentalPreviousCard
+                key={previous.id}
                 start={previous.start}
                 end={previous.end}
                 customer={previous.customer}

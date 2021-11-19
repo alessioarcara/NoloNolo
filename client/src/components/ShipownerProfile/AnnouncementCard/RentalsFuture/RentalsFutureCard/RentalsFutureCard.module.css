@@ -1,0 +1,16 @@
+.future-container {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr 1.5fr 2.5fr 0.5fr;
+    padding: 1rem;
+}
+
+.future-container {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.date {
+    font-size: 0.8em;
+    color: #9e9d9d;
+}

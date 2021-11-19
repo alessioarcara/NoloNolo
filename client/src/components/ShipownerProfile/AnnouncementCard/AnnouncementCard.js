@@ -34,11 +34,7 @@ const AnnouncementCard = () => {
                 <Modal
                     closeModalHandler={() => setOpenDetailsModal(false)}
                 >
-                    <DetailsModal
-                        start={object.from}
-                        end={object.to}
-                        customer={object.customer}
-                    />
+                    <DetailsModal/>
                 </Modal>
             }
 
