@@ -1,5 +1,5 @@
-export const GRAPHQL_API_URL = "http://172.20.10.2:3010/api"
-export const IMAGE_PATH = "http://172.20.10.2:3010"
+export const GRAPHQL_API_URL = "http://192.168.1.226:3010/api"
+export const IMAGE_PATH = "http://192.168.1.226:3010"
 export const DEFAULT_AVATAR = `${IMAGE_PATH}/public/images/default.jpg`
 
 /* Constants filterReducer */
