@@ -49,3 +49,9 @@ export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum 
 /* Set general date with options */
 export const formatDayMonthYearDate = (date, options) =>
     new Date(date).toLocaleDateString("it-IT", options)
+
+/* Date sorting */
+/* Così facendo viene ordinato l'array padre, utilizzando slice() prima di sort si ordina solo la variabile */
+export const dateSorting = (object, growing = false) => {
+   return growing ? object.sort((a, b) => a.start - b.start) : object.sort((a, b) => b.start - a.start)
+}

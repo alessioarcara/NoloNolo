@@ -3,7 +3,6 @@ import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
 import Modal from "../../UI/Modal/Modal";
-import RentalActivePage from "./RentalActivePage/RentalActivePage";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
 import EyeIcon from "../../UI/icons/EyeIcon";
@@ -15,7 +14,7 @@ const object = {
     future: 37,
     average: 4,
     reviews: 78,
-    customer: "Massimo",
+    customer: "michael.carchesio@test.it",
     preferredBy: ["Alessio", "Alessia", "Michael"],
     images: [
         'https://www.ilmessaggero.it/photos/MED_HIGH/92/67/5519267_1942_foto_340_regina.jpg',
@@ -39,7 +38,6 @@ const AnnouncementCard = () => {
                         start={object.from}
                         end={object.to}
                         customer={object.customer}
-                        totalAmount={object.totalAmount}
                     />
                 </Modal>
             }
@@ -61,25 +59,28 @@ const AnnouncementCard = () => {
                         </div>
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
                         <div>Prenotazioni future: <span className={classes.parameter}>{object.future}</span></div>
-                        <div className={classes['inline-elements']}>
-                            <EyeIcon/>
+                        <div className={classes['grid-elements']}>
+                            <div className={classes['eye-icon']}><EyeIcon/></div>
                             <div>Osservato da: <span className={classes.parameter}>{object.preferredBy.length} persone</span></div>
                         </div>
 
                         {object.customer &&
-                        <div className={classes['inline-elements']}>
+                        <div className={classes['grid-elements']}>
                             <div className={classes['hourglass-icon']}><HourglassIcon/></div>
                             <div>
-                                Attualmente noleggiato da: <span className={classes.parameter}>{object.customer}</span>
+                                Attualmente noleggiato da: <span className={classes.parameter}>{object.customer.split('@')[0]}</span>
                             </div>
                         </div>
                         }
-                        <div className={classes['inline-elements']}>
+                        <div className={classes['grid-elements']}>
                             <div
                                 className={`${classes['point-icon']}
                                 ${classes[object.customer ? 'icon-color-red' : 'icon-color-green']}`}
                             />
-                            {object.customer ? <div>Non disponibile</div> : <div>Attualmente disponibile</div>}
+                            {object.customer
+                                ? <div>Non disponibile</div>
+                                : <div>Attualmente disponibile</div>
+                            }
                         </div>
                     </div>
                     {/*Third element*/}

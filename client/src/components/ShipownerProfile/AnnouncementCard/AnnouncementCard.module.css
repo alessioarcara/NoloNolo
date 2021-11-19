@@ -55,12 +55,13 @@
     gap: 0.2rem;
     align-items: center;
 }
-.inline-elements {
+.grid-elements {
     display: grid;
     grid-template-columns: 5% 95%;
+    align-items: center;
     gap: 0.5rem;
 }
-.hourglass-icon, .point-icon {
+.hourglass-icon, .point-icon, .eye-icon {
     justify-self: center;
     align-self: center;
 }

@@ -2,6 +2,7 @@
     position: sticky;
     top: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    user-select: none;
 }
 
 .header-container {
@@ -11,6 +12,7 @@
 
 .state-item {
     color: #8d8989;
+    font-weight: bold;
     cursor: pointer;
     text-align: center;
     width: 100%;
