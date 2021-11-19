@@ -3,8 +3,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    flex: 1 1 350px;
-
     border-radius: 1rem;
     user-select: none;
     overflow: hidden;
@@ -15,7 +13,6 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-/* x */
 .delete-card {
     position: absolute;
     top: 0.1rem;
@@ -60,12 +57,12 @@
 }
 .inline-elements {
     display: grid;
-    grid-template-columns: 4% 96%;
-    gap: 0.6rem;
-    align-items: center;
+    grid-template-columns: 5% 95%;
+    gap: 0.5rem;
 }
 .hourglass-icon, .point-icon {
     justify-self: center;
+    align-self: center;
 }
 .point-icon {
     border-radius: 50%;

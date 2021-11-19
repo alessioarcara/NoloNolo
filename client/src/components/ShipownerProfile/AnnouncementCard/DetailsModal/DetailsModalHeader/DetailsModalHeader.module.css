@@ -1,0 +1,23 @@
+.modal-header-container {
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.state-item {
+    color: #8d8989;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    transition: color 0.425s ease-out;
+}
+
+.state-item.active {
+    color: #000;
+    border-bottom: 1px solid #000;
+}

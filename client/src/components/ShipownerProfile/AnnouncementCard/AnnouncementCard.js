@@ -5,6 +5,7 @@ import {formatDayMonthYearDate} from "../../../helpers/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
+import DetailsModal from "./DetailsModal/DetailsModal";
 
 const object = {
     model: "Regina IV",
@@ -26,7 +27,7 @@ const AnnouncementCard = () => {
         <>
             {openDetailsModal &&
                 <Modal closeModalHandler={() => setOpenDetailsModal(false)}>
-
+                    <DetailsModal/>
                 </Modal>
             }
 
