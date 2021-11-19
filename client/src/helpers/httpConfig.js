@@ -372,6 +372,11 @@ exports.body_userRentals = {
                         description
                         dailyFee
                         fixedFee
+                        reviews {
+                            _id
+                            body
+                            rating
+                        }
                     }
                     owner {
                         email
@@ -383,6 +388,7 @@ exports.body_userRentals = {
                     }
                 }
                 customer {
+                    _id
                     email
                 }
                 createdAt

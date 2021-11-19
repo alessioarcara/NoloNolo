@@ -60,41 +60,41 @@ const RentalCard = ({
                 adapterSize={openModal === "dates" && breakpointCtx.breakpoint}
             >
                 {openModal === "delete" &&
-                <div className={classes['delete-section']}>
-                    <p>Eliminare questo noleggio?</p>
-                    <button
-                        className={`btn btn-outline-primary ${classes['btn-confirm']}`}
-                        onClick={deleteRentalHandler}
-                    >
-                        Conferma
-                    </button>
-                </div>
+                    <div className={classes['delete-section']}>
+                        <p>Eliminare questo noleggio?</p>
+                        <button
+                            className={`btn btn-outline-primary ${classes['btn-confirm']}`}
+                            onClick={deleteRentalHandler}
+                        >
+                            Conferma
+                        </button>
+                    </div>
                 }
                 {openModal === "dates" &&
-                <DatesModal
-                    openModal={() => setOpenModal("")}
-                    boatId={boatId}
-                    start={from}
-                    end={to}
-                    fixedFee={fixedFee}
-                    dailyFee={dailyFee}
-                />
+                    <DatesModal
+                        openModal={() => setOpenModal("")}
+                        boatId={boatId}
+                        start={from}
+                        end={to}
+                        fixedFee={fixedFee}
+                        dailyFee={dailyFee}
+                    />
                 }
                 {openModal === "bill" &&
-                <BoatBill
-                    billNumber={billNumber}
-                    from={from}
-                    to={to}
-                    boatData={boatData}
-                    customer={customer}
-                    createdAt={createdAt}
-                    dailyFee={dailyFee}
-                    fixedFee={fixedFee}
-                    total={totalAmount}
-                />
+                    <BoatBill
+                        billNumber={billNumber}
+                        from={from}
+                        to={to}
+                        boatData={boatData}
+                        customer={customer}
+                        createdAt={createdAt}
+                        dailyFee={dailyFee}
+                        fixedFee={fixedFee}
+                        total={totalAmount}
+                    />
                 }
                 {openModal === "review" &&
-                <ReviewModal/>
+                    <ReviewModal/>
                 }
             </Modal>
             }
