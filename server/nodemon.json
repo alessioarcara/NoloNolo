@@ -1,6 +1,6 @@
 {
   "env": {
-    "DATABASE_URL": "mongodb://argonauta.synology.me:49153/nolonolo",
+    "DATABASE_URL": "mongodb://argonauta.synology.me:49158/nolonolo",
     "CORS_ORIGIN": "http://192.168.178.38:3000",
     "PORT": 3010,
     "ACCESS_TOKEN_KEY": "asjdsajdadhuasjadshjahdasdjasdjsakkdjhashjdhjasdsdhkdas",
