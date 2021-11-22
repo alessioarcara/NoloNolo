@@ -188,6 +188,9 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                         _id
                         from
                         to
+                        boat {
+                            _id
+                        }
                     }
                     updateRentalProblem
                 }
