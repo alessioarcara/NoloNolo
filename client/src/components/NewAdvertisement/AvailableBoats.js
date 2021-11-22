@@ -2,16 +2,34 @@ import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout"
 import {Link} from "react-router-dom";
 
 import classes from "./AvailableBoats.module.css"
+import Button from "../UI/Button/Button";
 
-const AvailableBoats = ({userName, boats}) => {
+const AvailableBoats = ({userName, userBoats, onDeleteUserBoat}) => {
 
-    let title = <h1>Ciao {userName}, siamo felici di rivederti</h1>
+    let title = <h1>Ciao {userName && userName.split('@')[0]}, siamo felici di rivederti</h1>
     let content = (
         <>
             <div className={classes["user-boats"]}>
                 <h3>Completa il tuo annuncio</h3>
-                {boats ? boats.map((boat, id) => <Link className={classes["user-boat"]} to={boat._id}>Barca {id}</Link>):
-                <p>Ancora nessuna barca inserita</p>}
+                {userBoats ?
+                    userBoats.map((boat, id) =>
+                        <Link
+                            key={boat._id}
+                            to={`${boat._id}/boat`}
+                            className={classes["user-boat"]}>
+                                Barca {id + 1}
+                            <Button
+                                onClick={evt => {
+                                    evt.preventDefault()
+                                    evt.stopPropagation()
+                                    onDeleteUserBoat(boat._id)
+                                }}
+                                type="button"
+                                className={`btn ${classes.cross}`}>
+                                &#10060;
+                            </Button>
+                        </Link>) :
+                    <p>Ancora nessuna barca inserita</p>}
             </div>
             <div className={classes["new-boat"]}>
                 <h3>Inizia ad aggiungere una nuova barca</h3>
@@ -19,7 +37,8 @@ const AvailableBoats = ({userName, boats}) => {
             </div>
         </>
     )
-    return <SplitScreenLayout contentLeft={title} rightLayoutContentClassName={classes['new-boat-options']} contentRight={content}/>;
+    return <SplitScreenLayout contentLeft={title} rightLayoutContentClassName={classes['new-boat-options']}
+                              contentRight={content}/>;
 };
 
 export default AvailableBoats;

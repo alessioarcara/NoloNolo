@@ -42,10 +42,11 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
+    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
-        hasAdvertisement: {
+        hasAdvertisement: boat.advertisement && {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee),
@@ -56,7 +57,7 @@ const transformBoat = boat => {
                 }
             })
         },
-        isDocked: {
+        isDocked: boat.location && {
             region: boat.location.region,
             city: boat.location.city,
             harbour: boat.location.harbour,

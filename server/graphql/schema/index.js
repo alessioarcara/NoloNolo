@@ -38,7 +38,9 @@ const rootSchema = `
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
-            publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
+            removeBoat(boatId: ID!): removeBoatPayload!
+            insertBoatLocation(inputInsertBoatLocation: InsertBoatLocationInput!): insertBoatLocationPayload!
+            publishAdvertisement(inputPublishAdvertisement: PublishAdvertisementInput!): publishAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!

@@ -49,7 +49,8 @@ const NumberSpinner = (props) => {
         <div className={`${classes.control} ${inputClasses}`}>
             <label htmlFor={name}>{label}</label>
             <div className={numberSpinnerClasses.numberSpinner}>
-                <button disabled={value <= 0}
+                <button type="button"
+                        disabled={value <= 0}
                         className={numberSpinnerClasses["decrease-btn"]}
                         onClick={handleDecrease.bind(this, parseInt(value))}>&#45;
                 </button>
@@ -58,7 +59,8 @@ const NumberSpinner = (props) => {
                        value={value}
                        onChange={handleChange}
                        onBlur={handleBlur}/>
-                <button disabled={value >= valueChange * 100}
+                <button type="button"
+                        disabled={value >= valueChange * 100}
                         className={numberSpinnerClasses["increase-btn"]}
                         onClick={handleIncrease.bind(this, parseInt(value))}>
                     &#43;

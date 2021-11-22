@@ -17,14 +17,31 @@
     height: 50%;
 }
 
+
 .user-boats h3, .new-boat h3 {
     align-self: flex-start;
 }
 
+.user-boat {
+    position: relative;
+}
+
+.cross {
+    position: absolute;
+    right: 0;
+    border: 0;
+    background-color: transparent;
+    font-size: 0.8em;
+}
+
+.cross:hover {
+    background-color: #efefef;
+    border-radius: 50%;
+}
 
 .add-boat,.user-boat {
     display: flex;
-    border: 2px solid rgba(145, 145, 145, 0.49);
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
@@ -35,8 +52,8 @@
     color: black;
 }
 
-.add-boat:hover {
-    border: 2px solid black
+.add-boat:hover, .user-boat:hover {
+    border: 2px solid black;
 }
 
 .add-boat:before{

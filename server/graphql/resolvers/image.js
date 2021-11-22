@@ -67,10 +67,9 @@ module.exports = {
             const user = await User.findById(req.userId)
             if (!user) { return { addAvatarProblem: userNotFound } }
 
-            if (user.avatar) clearAvatar(user.avatar)
-
             const pathObj = await storeFile(upload.file, req.userId, true)
             if (pathObj.problem) return { addAvatarProblem: pathObj.problem}
+            if (user.avatar) clearAvatar(user.avatar)
             user.avatar = pathObj.path
 
             await user.save()

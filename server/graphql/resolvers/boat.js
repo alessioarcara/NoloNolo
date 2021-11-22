@@ -1,6 +1,7 @@
 const Boat = require('../../models/boat');
 const {transformBoat} = require("./merge");
 const Rental = require("../../models/rental");
+const mongoose = require('mongoose');
 
 module.exports = {
     boat: async ({boatId}) => {
@@ -13,6 +14,7 @@ module.exports = {
         const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
 
         let pipeline = [
+            { $match: {"advertisement": {$exists: true} } },
             {
                 $facet: {
                     "Boats": [
@@ -79,30 +81,78 @@ module.exports = {
     boatsByUser: async (args, {req}) => {
         if (!req.isAuth) { throw new Error("Unauthenticated.") }
         try {
-            req.userId = "61013cd2cbcb99c21fbe91e2"
-            const boats = await Boat.find({"location.region": "emilia-romagna"}).lean()
-            console.log("ciao")
+            const boats = await Boat.find({
+                $and: [
+                    {shipowner: req.userId},
+                    {$or: [
+                            {advertisement: { $exists: false } },
+                            {location: { $exists: false } }
+                        ]
+                    }
+                ]
+            }).lean()
+
             console.log(boats)
-            // return transformBoat(boat)
+            return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },
     addBoat: async (args, {req}) => {
-        req.userId = "61013cd2cbcb99c21fbe91e2"
-        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
-        const {yard, model, length, maximumCapacity, boatType, isDocked, publishAdvertisement} = args.inputBoat
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
         try {
-            const boat = new Boat({
-                yard, model, length, maximumCapacity, boatType, shipowner: req.userId,
-                location: {
-                    ...isDocked,
-                    geometry: {
-                        coordinates: [isDocked.longitude, isDocked.latitude]
+            const {yard, model, length, maximumCapacity, boatType} = args.inputBoat
+            const _id = typeof args.inputBoat._id === "undefined" ? new mongoose.Types.ObjectId() : args.inputBoat._id
+
+            const boat = await Boat.findOneAndUpdate(
+                {_id},
+                {
+                    yard,
+                    model,
+                    length,
+                    maximumCapacity,
+                    boatType,
+                    shipowner: req.userId
+                },
+                {
+                    new: true,
+                    upsert: true,
+                    runValidators: true,
+                    setDefaultsOnInsert: false,
+                    useFindAndModify: false
+                }
+            ).lean()
+
+            return {addBoatData: transformBoat(boat)}
+        } catch (err) { throw new Error(`Can't add boat. ${err}`) }
+    },
+    removeBoat: async ({boatId}, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        try {
+            const {_id} = await Boat.findByIdAndDelete(boatId, {useFindAndModify: false})
+            return _id ? { removedBoatId: _id} : { removeBoatProblem: "Can't find boat"}
+        } catch (err) { throw new Error(`Can't remove boat. ${err}`)}
+    },
+    insertBoatLocation: async (args, {req}) => {
+        if (!req.isAuth) { throw new Error("Unauthenticated") }
+        try {
+            const {boatId, isDocked} = args.inputInsertBoatLocation
+
+            const boat = await Boat.findByIdAndUpdate(
+                boatId,
+                {
+                    location: {
+                        ...isDocked,
+                        geometry: {
+                            coordinates: [isDocked.longitude, isDocked.latitude]
+                        }
                     }
                 },
-                advertisement: {...publishAdvertisement}
-            })
-            await boat.save();
-            return {addBoatData: transformBoat(boat._doc)}
-        } catch (err) { throw new Error(`Can't add boat. ${err}`) }
+                {
+                    new: true,
+                    runValidators: true,
+                    useFindAndModify: false
+                }
+            ).lean();
+            return {insertBoatLocationData: transformBoat(boat)}
+        } catch (err) { throw new Error(`Can't insert boat location. ${err}`)}
     }
 }

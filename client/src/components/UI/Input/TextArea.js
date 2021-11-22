@@ -1,11 +1,9 @@
-import React from "react";
-import classes from "./Input.module.css"
+import classes from "./Input.module.css";
 
-const Input = (props) => {
+const TextArea = (props) => {
     const {
         id,
         label,
-        type,
         name,
         handleChange,
         handleBlur,
@@ -22,9 +20,8 @@ const Input = (props) => {
     return (
         <div className={`${inputClasses} ${classes.control}`}>
             <label htmlFor={id || name}>{label}</label>
-            <input
+            <textarea
                 id={id}
-                type={type}
                 name={name}
                 value={value}
                 onChange={handleChange}
@@ -35,4 +32,4 @@ const Input = (props) => {
     )
 }
 
-export default React.memo(Input)
+export default TextArea;

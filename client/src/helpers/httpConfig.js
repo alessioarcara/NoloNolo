@@ -147,6 +147,85 @@ exports.body_informations = (boatId) => {
         variables: boatId
     }
 };
+exports.body_addBoat = ({yard, model, length, maximumCapacity, boatType, _id}) => {
+    return {
+        query: `
+            mutation($boatData: BoatInput!) {
+                addBoat(inputBoat: $boatData) {
+                    addBoatData {
+                        _id
+                        yard
+                        model
+                        length
+                        maximumCapacity
+                        boatType
+                        isDocked {
+                            harbour
+                            city
+                            region
+                            coordinates   
+                        }
+                    }
+                    addBoatProblem
+                }
+            }
+        `,
+        variables: {boatData: {yard, model, length, maximumCapacity, boatType, _id}}
+    }
+};
+exports.body_removeBoat = (boatId) => {
+    return {
+        query: `
+            mutation($boatId: ID!) {
+                removeBoat(boatId: $boatId) {
+                    removedBoatId
+                    removeBoatProblem
+                }
+            }
+        `,
+        variables: boatId
+    }
+};
+exports.body_insertBoatLocation = ({boatId, harbour, city, region, latitude, longitude}) => {
+    return {
+        query: `
+            mutation($locationData: InsertBoatLocationInput!) {
+                insertBoatLocation(inputInsertBoatLocation: $locationData) {
+                    insertBoatLocationData {
+                        _id
+                        yard
+                        model
+                        length
+                        maximumCapacity
+                        boatType
+                        isDocked {
+                            region
+                            city
+                            harbour
+                            coordinates 
+                        }
+                    }
+                    insertBoatLocationProblem
+                }
+            }
+        `,
+        variables: {locationData: {boatId, isDocked: {harbour, city, region, latitude, longitude}}}
+    }
+};
+exports.body_publishAdvertisement = ({boatId, description, dailyFee, fixedFee}) => {
+    return {
+        query: `
+            mutation($advertisementData: PublishAdvertisementInput!) {
+                publishAdvertisement(inputPublishAdvertisement: $advertisementData) {
+                    publishAdvertisementData {
+                        _id
+                    publishAdvertisementProblem
+                }
+            }
+        `,
+        variables: {advertisementData: {boatId, publishAdvertisement: {description, dailyFee, fixedFee}}}
+    }
+};
 exports.body_rentBoat = ({boatId, from, to, totalAmount}) => {
     return {
         query: `
@@ -268,6 +347,20 @@ exports.body_userBoats = {
         query {
             boatsByUser {
                 _id
+                yard
+                model
+                length
+                maximumCapacity
+                boatType
+                isDocked {
+                    harbour
+                    city
+                    region
+                    coordinates
+                }
+            }
+            user {
+                email
             }
         }
     `

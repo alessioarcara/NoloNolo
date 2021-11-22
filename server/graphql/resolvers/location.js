@@ -6,11 +6,26 @@ module.exports = {
         try {
             const locations = await Boat
                 .aggregate([
-                    {$match: {"location.region": {$regex: `^${contains}`, $options: "i"}}},
+                    {
+                        $match: {
+                            $and: [
+                                {"location.region": {$regex: `^${contains}`, $options: "i"}},
+                                {"advertisement": {$exists: true}}
+                            ]
+                        }
+                    },
                     {$group: {"_id": {"region": "$location.region"}}},
-                    {$unionWith: {
+                    {
+                        $unionWith: {
                             coll: "boats", pipeline: [
-                                {$match: {"location.city": {$regex: `^${contains}`, $options: "i"}}},
+                                {
+                                    $match: {
+                                        $and: [
+                                            {"advertisement": {$exists: true}},
+                                            {"location.city": {$regex: `^${contains}`, $options: "i"}},
+                                        ]
+                                    }
+                                },
                                 {$group: {"_id": {"region": "$location.region", "city": "$location.city"}}}
                             ]
                         }
@@ -19,8 +34,10 @@ module.exports = {
                 .limit(take)
 
             return locations.map(location => {
-                return { city: location._id.city, region: location._id.region }
+                return {city: location._id.city, region: location._id.region}
             })
-        } catch (err) { throw new Error(`Can't find locations. ${err}`) }
+        } catch (err) {
+            throw new Error(`Can't find locations. ${err}`)
+        }
     }
 }

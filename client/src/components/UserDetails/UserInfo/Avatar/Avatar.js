@@ -29,6 +29,7 @@ const Avatar = ({status, user, sendFile}) => {
                 <img
                     className={classes.avatar}
                     src={user && (user.avatar ? getImagePath(user) : DEFAULT_AVATAR)}
+                    onError={event => event.target.src = DEFAULT_AVATAR}
                     alt={''}
                 />
             }

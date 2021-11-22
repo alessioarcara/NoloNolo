@@ -11,6 +11,7 @@ const NotFoundFavorites = () => {
                 <Link
                     className='btn btn-primary'
                     to='/'
+                    state={{isOpenModal: true}}
                 >
                     Cerca
                 </Link>

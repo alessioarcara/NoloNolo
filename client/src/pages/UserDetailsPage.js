@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import useHttp from "../hooks/use-http";
 import AuthContext from "../store/auth-context";
 import UserDetailsHeader from "../components/UserDetails/Header/UserDetailsHeader";
@@ -10,41 +10,37 @@ import Modal from "../components/UI/Modal/Modal";
 
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
-    const {error, status, data: user, sendRequest} = useHttp(false)
+    const [user, setUser] = useState(null)
+    const {error, status, data: problem, sendRequest} = useHttp(false)
 
-    const sendData = useCallback(body_user =>
-            sendRequest({body: body_user, token}, resData => resData[Object.keys(resData)]),
+    const sendData = useCallback(body =>
+            sendRequest({body, token}, resData => {
+                const payload = Object.values(resData[Object.keys(resData)])
+                if (payload[0])
+                    setUser(payload[0])
+                return payload[1]
+            }),
         [sendRequest, token])
 
     useEffect(() => {
-        const transformDataUser = resData => resData.user
-        sendRequest({body: body_user, token: token}, transformDataUser)
+        sendRequest({body: body_user, token: token}, resData => {
+            setUser(resData.user)
+        })
     }, [sendRequest, token])
 
     return (
         <>
             {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
-            {status === 'completed' && user && (
-                Object.keys(user).includes("addAvatarProblem") && user.addAvatarProblem &&
-                <Modal title="Error">{user.addAvatarProblem}</Modal>
-            )}
+            {status === 'completed' && problem && <Modal title="Error">{problem}</Modal>}
             <UserDetailsHeader/>
             <UserInfo
                 status={status}
-                user={user && (
-                    Object.keys(user).includes("addAvatarData") ? user.addAvatarData :
-                    Object.keys(user).includes("updateUserData") ? user.updateUserData :
-                    Object.keys(user).includes("changePasswordData") ? user.changePasswordData : user
-                )}
+                user={user}
                 sendFile={sendData}
             />
             <UserDetails
                 status={status}
-                user={user && (
-                    Object.keys(user).includes("addAvatarData") ? user.addAvatarData :
-                    Object.keys(user).includes("updateUserData") ? user.updateUserData :
-                    Object.keys(user).includes("changePasswordData") ? user.changePasswordData : user
-                )}
+                user={user}
                 sendInfo={sendData}
             />
         </>

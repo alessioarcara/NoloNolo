@@ -13,9 +13,9 @@ const NewAdvertisementFooter = ({stepPosition}) => {
     const goBackHandler = () => {
         navigate(-1)
     }
-    const goForwardHandler = () => {
-        navigate(`../${steps[stepPosition].toLowerCase()}`)
-    }
+    // const goForwardHandler = () => {
+    //     navigate(`../${steps[stepPosition].toLowerCase()}`)
+    // }
 
     return (
         <div className={classes["newAdvertisement-footer"]}>
@@ -24,9 +24,9 @@ const NewAdvertisementFooter = ({stepPosition}) => {
                 firstButtonText="Indietro"
                 secondButtonText="Avanti"
                 firstButtonClickHandler={goBackHandler}
-                secondButtonClickHandler={goForwardHandler}
                 firstButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-secondary`}
                 secondButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-outline-primary`}
+                secondButtonType="submit"
             />
         </div>
     );

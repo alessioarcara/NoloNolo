@@ -10,10 +10,6 @@ const boatSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    length: {
-        type: String,
-        required: [true, 'Please provide a length']
-    },
     yard: {
         type: String,
         required: [true, 'Please provide a yard']
@@ -21,6 +17,10 @@ const boatSchema = new Schema({
     model: {
         type: String,
         required: [true, 'Please provide a model']
+    },
+    length: {
+        type: Number,
+        required: [true, 'Please provide a length']
     },
     maximumCapacity: {
         type: Number,
@@ -33,7 +33,7 @@ const boatSchema = new Schema({
     advertisement: advertisementSchema,
     location: {
         type: locationSchema,
-        required: [true, 'Please provide a location']
+        // required: [true, 'Please provide a location']
     }
 })
 

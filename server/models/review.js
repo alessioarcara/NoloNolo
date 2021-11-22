@@ -20,8 +20,6 @@ const reviewSchema = new Schema({
     customer: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        index: true,
-        unique: true
     },
 })
 

@@ -6,7 +6,7 @@ import {
     passwordMatchRule,
     maxLengthRule
 } from "./InputValidationRules"
-import {renderInput, renderNumberSpinner} from "./inputConfig";
+import {renderInput, renderNumberSpinner, renderTextArea} from "./inputConfig";
 
 function createFormFieldConfig(label, name, type, defaultValue = '', extension = renderInput, valueChange = 1) {
     return {
@@ -37,34 +37,6 @@ export const authForm = {
             minLengthRule("password", 8),
         ]
     }
-};
-export const boatForm = {
-    yard: {
-        ...createFormFieldConfig('Yard', 'yard', 'text'),
-        validationRules: [
-            requiredRule("yard")
-        ]
-    },
-    model: {
-        ...createFormFieldConfig('Model', 'model', 'text'),
-        validationRules: [
-            requiredRule("model")
-        ]
-    },
-    length: {
-        ...createFormFieldConfig('Length', 'length', 'text', 0, renderNumberSpinner),
-        validationRules: [
-            requiredRule("length"),
-            isNumberRule("length")
-        ]
-    },
-    maximumCapacity: {
-        ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', 0, renderNumberSpinner),
-        validationRules: [
-            requiredRule("maximum capacity"),
-            isNumberRule("maximum capacity")
-        ]
-    },
 };
 export const addressForm = {
     street: {
@@ -111,11 +83,89 @@ export const newPasswordForm = {
             requiredRule("new password"),
             minLengthRule("new password", 8)
         ]
-},
+    },
     confirmPassword: {
         ...createFormFieldConfig('Conferma la password', 'confirmPassword', 'password'),
         validationRules: [
             passwordMatchRule()
         ]
     }
+};
+export const boatForm = (yard = '', model = '', length = 0, maximumCapacity = 0) => {
+    return {
+        yard: {
+            ...createFormFieldConfig('Yard', 'yard', 'text', yard),
+            validationRules: [
+                requiredRule("yard")
+            ]
+        },
+        model: {
+            ...createFormFieldConfig('Model', 'model', 'text', model),
+            validationRules: [
+                requiredRule("model")
+            ]
+        },
+        length: {
+            ...createFormFieldConfig('Length', 'length', 'text', length, renderNumberSpinner),
+            validationRules: [
+                requiredRule("length"),
+                isNumberRule("length")
+            ]
+        },
+        maximumCapacity: {
+            ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', maximumCapacity, renderNumberSpinner),
+            validationRules: [
+                requiredRule("maximum capacity"),
+                isNumberRule("maximum capacity")
+            ]
+        },
+    };
+};
+export const boatLocationForm = (harbour = '', city = '', region = '') => {
+    return {
+        harbour: {
+            ...createFormFieldConfig('Porto', 'harbour', 'text', harbour),
+            validationRules: [
+                requiredRule("harbour"),
+                minLengthRule("harbour", 4)
+            ]
+        },
+        city: {
+            ...createFormFieldConfig('Città', 'city', 'text', city),
+            validationRules: [
+                requiredRule("city"),
+                minLengthRule("city", 4)
+            ]
+        },
+        region: {
+            ...createFormFieldConfig('Regione', 'region', 'text', region),
+            validationRules: [
+                requiredRule("region"),
+                minLengthRule("region", 4)
+            ]
+        }
+    };
+};
+export const boatAdvertisementForm = {
+    description: {
+        ...createFormFieldConfig('Descrizione', 'description', '', '', renderTextArea),
+        validationRules: [
+            requiredRule("description"),
+            minLengthRule("description", 10)
+        ]
+    },
+    dailyFee: {
+        ...createFormFieldConfig('Tariffa giornaliera', 'dailyFee', 'number', 0, renderNumberSpinner, 25),
+        validationRules: [
+            requiredRule("dailyFee"),
+            isNumberRule("dailyFee")
+        ]
+    },
+    fixedFee: {
+        ...createFormFieldConfig('Tariffa fissa', 'fixedFee', 'number', 0, renderNumberSpinner, 25),
+        validationRules: [
+            requiredRule("fixedFee"),
+            isNumberRule("fixedFee")
+        ]
+    },
 }

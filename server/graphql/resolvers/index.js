@@ -1,3 +1,4 @@
+const advertisementResolver = require('./advertisement');
 const authResolver = require('./auth');
 const boatResolver = require('./boat');
 const locationResolver = require('./location');
@@ -9,6 +10,7 @@ const {GraphQLUpload} = require("graphql-upload");
 
 const rootResolver =  {
     Upload: GraphQLUpload,
+    ...advertisementResolver,
     ...authResolver,
     ...boatResolver,
     ...favoriteResolver,

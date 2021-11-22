@@ -13,11 +13,16 @@ const advertisementType = `
             publishAdvertisementData: Advertisement
             publishAdvertisementProblem: String
         }
+        
+        input PublishAdvertisementInput {
+            boatId: ID!
+            publishAdvertisement: AdvertisementInput!
+        }
 
         input AdvertisementInput {
-            description: String
-            fixedFee: Float
-            dailyFee: Float
+            description: String!
+            fixedFee: Float!
+            dailyFee: Float!
             images: [String!]
         }
 `

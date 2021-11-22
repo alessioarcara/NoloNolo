@@ -4,10 +4,10 @@ const boatType = `
             owner: User!
             yard: String!
             model: String!
-            length: String!
+            length: Int!
             maximumCapacity: Int!
             boatType: BoatType!
-            isDocked: Location!
+            isDocked: Location
             hasAdvertisement: Advertisement
             totalCount: Int
             minPrice: Float
@@ -19,14 +19,28 @@ const boatType = `
             addBoatProblem: String
         }
         
+        type removeBoatPayload {
+            removedBoatId: ID
+            removeBoatProblem: String
+        }
+        
+        type insertBoatLocationPayload {
+            insertBoatLocationData: Boat
+            insertBoatLocationProblem: String
+        }
+        
         input BoatInput {
+            _id: ID
             yard: String!
             model: String!
-            length: String!
+            length: Int!
             maximumCapacity: Int!
             boatType: BoatType!
+        }
+        
+        input InsertBoatLocationInput {
+            boatId: ID!
             isDocked: LocationInput!
-            publishAdvertisement: AdvertisementInput
         }
         
         input BoatFilter {
