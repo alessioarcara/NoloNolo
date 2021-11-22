@@ -1,16 +1,16 @@
-import StarIcon from "../../../../UI/icons/StarIcon";
+import StarIcon from "../../icons/StarIcon";
 import classes from './Star.module.css';
 
-const Star = ({index, changeQuote, isSelected, modifyQuote = true}) => {
+const Star = ({index, changeQuote, isSelected, placeholderQuote = false}) => {
     /* Return index value */
     const changeStarHandler = (event) => {
         changeQuote(event.target.value)
     }
 
     return (
-        <label className={classes['star-container']}>
+        <label className={`${placeholderQuote ? classes['star-container'] : classes['star-container-pointer']}`}>
             {/*If modifyQuote then change quote*/}
-            {modifyQuote &&
+            {!placeholderQuote &&
                 <input
                     type='radio'
                     name='radio-group'

@@ -1,9 +1,17 @@
 import RentalCard from "../RentalCard/RentalCard";
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useMemo} from "react";
 import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
 import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
 
-const RentalList = ({onDeleteRental, previousRentals, activeRentals, futureRentals, previous, active, future}) => {
+const RentalList = ({
+                        onUpdateOrDeleteRentals,
+                        previousRentals,
+                        activeRentals,
+                        futureRentals,
+                        previous,
+                        active,
+                        future
+                    }) => {
     let content
     const openedRentals = useCallback(() => {
         return previousRentals || activeRentals || futureRentals
@@ -25,7 +33,7 @@ const RentalList = ({onDeleteRental, previousRentals, activeRentals, futureRenta
             <BoatListLayout>
                 {openedRentals().map(rental =>
                     <RentalCard
-                        onDeleteRental={onDeleteRental}
+                        onUpdateOrDeleteRentals={onUpdateOrDeleteRentals}
                         key={rental._id}
                         rentalId={rental._id}
                         boatId={rental.boat._id}
@@ -39,10 +47,11 @@ const RentalList = ({onDeleteRental, previousRentals, activeRentals, futureRenta
                         images={rental.boat.hasAdvertisement.images}
                         billNumber={rental.billNumber}
                         boatData={rental.boat}
-                        customer={rental.customer.email}
+                        customer={rental.customer}
                         createdAt={rental.createdAt}
                         dailyFee={rental.boat.hasAdvertisement.dailyFee}
                         fixedFee={rental.boat.hasAdvertisement.fixedFee}
+                        reviews={rental.boat.hasAdvertisement.reviews}
                     />
                 )}
             </BoatListLayout>

@@ -87,7 +87,7 @@ module.exports = {
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },
     addBoat: async (args, {req}) => {
-        req.userId = "61901fbc4478dd5c7cd703f8"
+        req.userId = "619b8420bc6fe126e2af3e9f"
         // if (!req.isAuth) { throw new Error("Unauthenticated.") }
         const {yard, model, length, maximumCapacity, boatType, isDocked, publishAdvertisement} = args.inputBoat
         try {

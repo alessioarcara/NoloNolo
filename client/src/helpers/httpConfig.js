@@ -373,7 +373,9 @@ exports.body_userRentals = {
                         dailyFee
                         fixedFee
                         reviews {
-                            _id
+                            creator {
+                                _id
+                            }
                             body
                             rating
                         }
@@ -399,5 +401,4 @@ exports.body_userRentals = {
 exports.body_addAvatar = {
     operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
-
 };

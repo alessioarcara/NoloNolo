@@ -13,7 +13,7 @@ import AuthContext from "../../../store/auth-context";
 import classes from './RentalCard.module.css';
 
 const RentalCard = ({
-                        onDeleteRental,
+                        onUpdateOrDeleteRentals,
                         rentalId,
                         boatId,
                         previous,
@@ -29,7 +29,8 @@ const RentalCard = ({
                         createdAt,
                         dailyFee,
                         fixedFee,
-                        totalAmount
+                        totalAmount,
+                        reviews
                     }) => {
 
     const breakpointCtx = useContext(BreakpointContext)
@@ -37,71 +38,83 @@ const RentalCard = ({
     const [openModal, setOpenModal] = useState("")
     const navigate = useNavigate()
 
-    const {sendRequest} = useHttp()
-    const {token} = useContext(AuthContext)
+    const handleUpdateRental = useCallback((body, applyData) => {
+        onUpdateOrDeleteRentals(body, applyData)
+        setModal("")
+    }, [onUpdateOrDeleteRentals])
 
-    const deleteRentalHandler = () => {
-        sendRequest({
-            body: body_deleteRental({rentalId}),
-            token
-        }, resData => resData.deleteRental)
-        onDeleteRental(rentalId)
+    const handleDeleteRental = () => {
+        onUpdateOrDeleteRentals(
+            body_deleteRental({rentalId}),
+            (prevRentals, newRentalId) => prevRentals.filter(userRental => userRental._id !== newRentalId)
+        )
     }
 
     const goAdvertisementPage = useCallback(() => {
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
     }, [navigate, boatId, from, to])
 
+    const isReview = useCallback(() => {
+        return reviews.some(review => review.creator._id === customer._id)
+    }, [reviews, customer._id])
+
     return (
         <>
-            {openModal !== "" &&
+            {modal !== "" &&
             <Modal
                 closeModalHandler={() => setOpenModal("")}
                 adapterSize={openModal === "dates" && breakpointCtx.breakpoint}
             >
-                {openModal === "delete" &&
-                    <div className={classes['delete-section']}>
-                        <p>Eliminare questo noleggio?</p>
-                        <button
-                            className={`btn btn-outline-primary ${classes['btn-confirm']}`}
-                            onClick={deleteRentalHandler}
-                        >
-                            Conferma
-                        </button>
-                    </div>
+                {modal === "review" &&
+                <ReviewModal
+                    rentalId={rentalId}
+                    customerId={customer._id}
+                    reviews={reviews}
+                    onPublishReview={handleUpdateRental}
+                    isReview={isReview}
+                />
                 }
-                {openModal === "dates" &&
-                    <DatesModal
-                        openModal={() => setOpenModal("")}
-                        boatId={boatId}
-                        start={from}
-                        end={to}
-                        fixedFee={fixedFee}
-                        dailyFee={dailyFee}
-                    />
+                {modal === "delete" &&
+                <div className={classes['delete-section']}>
+                    <p>Eliminare questo noleggio?</p>
+                    <button
+                        className={`btn btn-outline-primary ${classes['btn-confirm']}`}
+                        onClick={handleDeleteRental}
+                    >
+                        Conferma
+                    </button>
+                </div>
                 }
-                {openModal === "bill" &&
-                    <BoatBill
-                        billNumber={billNumber}
-                        from={from}
-                        to={to}
-                        boatData={boatData}
-                        customer={customer}
-                        createdAt={createdAt}
-                        dailyFee={dailyFee}
-                        fixedFee={fixedFee}
-                        total={totalAmount}
-                    />
+                {modal === "dates" &&
+                <DatesModal
+                    onUpdateRentalDates={handleUpdateRental}
+                    boatId={boatId}
+                    rentalId={rentalId}
+                    start={from}
+                    end={to}
+                    fixedFee={fixedFee}
+                    dailyFee={dailyFee}
+                />
                 }
-                {openModal === "review" &&
-                    <ReviewModal/>
+                {modal === "bill" &&
+                <BoatBill
+                    billNumber={billNumber}
+                    from={from}
+                    to={to}
+                    boatData={boatData}
+                    customer={customer.email}
+                    createdAt={createdAt}
+                    dailyFee={dailyFee}
+                    fixedFee={fixedFee}
+                    total={totalAmount}
+                />
                 }
             </Modal>
             }
             <div className={classes['card-container']}>
                 <button
-                    className={`${classes[`delete-card`]} ${!future && classes.hide}`}
-                    onClick={() => setOpenModal("delete")}
+                    className={`${classes[`delete-card`]} ${!future && 'hide'}`}
+                    onClick={handleSelectModal.bind(this, "delete")}
                 >
                     &times;
                 </button>
@@ -125,24 +138,30 @@ const RentalCard = ({
                         <span className={classes.price}>{`Prezzo totale ${formatNumber(totalAmount)}`}</span>
                     </section>
                     {/*Third element (optional)*/}
-                    <section className={`${classes['optional-section']} ${active && classes.hide}`}>
+                    <section className={`${classes['optional-section']} ${active && 'hide'}`}>
                         <button
-                            className={`${classes.option} ${!future && classes.hide}`}
-                            onClick={() => setOpenModal("dates")}
+                            className={`${classes.option} ${!future && 'hide'}`}
+                            onClick={handleSelectModal.bind(this, "dates")}
                         >
                             Modifica date
                         </button>
                         <button
-                            className={`${classes.option} ${!previous && classes.hide}`}
-                            onClick={() => setOpenModal("bill")}
+                            className={`${classes.option} ${!previous && 'hide'}`}
+                            onClick={handleSelectModal.bind(this, "bill")}
                         >
                             Mostra fattura
                         </button>
                         <button
-                            className={`${classes.option} ${!previous && classes.hide}`}
-                            onClick={() => setOpenModal("review")}
+                            className={`${classes.option} ${(!previous || isReview()) && "hide"}`}
+                            onClick={handleSelectModal.bind(this, "review")}
                         >
                             Lascia recensione
+                        </button>
+                        <button
+                            className={`${classes.option} ${(!previous || !isReview()) && "hide"}`}
+                            onClick={handleSelectModal.bind(this, "review")}
+                        >
+                            Mostra recensione
                         </button>
                     </section>
                 </div>

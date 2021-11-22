@@ -8,14 +8,22 @@ import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
 import {formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
 
-const DatesModal = ({boatId, start, end, openModal, dailyFee, fixedFee}) => {
+const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateRentalDates}) => {
     const {token} = useContext(AuthContext)
     const [state, dispatch] = useReducer(searchReducer, {
         ...initialState, startDate: new Date(start), endDate: new Date(end)
     })
 
-    const backClickHandler = () => {
-        openModal()
+    const handleUpdateRentalDates = () => {
+        onUpdateRentalDates(
+            body_updateRental({
+                rentalId,
+                from: state.startDate,
+                to: state.endDate
+            }),
+            (prevRentals, newRental) =>
+                prevRentals.map(userRental => userRental._id === newRental._id ? newRental : userRental)
+        )
     }
 
     const cancelSelectionHandler = useCallback(() => {
@@ -57,7 +65,7 @@ const DatesModal = ({boatId, start, end, openModal, dailyFee, fixedFee}) => {
                 </span>
                 <button
                     className={`${classes['btn-update']} btn btn-outline-primary`}
-                    onClick={openModal}
+                    onClick={handleUpdateRentalDates}
                     disabled={!state.endDate || formatDate(state.startDate) === formatDate(state.endDate)}
                 >
                     Aggiorna

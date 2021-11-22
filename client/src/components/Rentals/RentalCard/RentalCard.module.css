@@ -67,7 +67,7 @@
     background-color: #efefef;
     font-weight: bold;
     border: 0;
-    width: 100%;
+    width: fit-content;
 }
 
 .option:hover {

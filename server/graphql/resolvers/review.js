@@ -11,7 +11,7 @@ module.exports = {
             const rental = await Rental.findById(rentalId)
             if (!rental) return {publishReviewProblem: rentalNotFound}
             if (!rental.customer.equals(req.userId)) return {publishReviewProblem: rentalNotYours}
-            if (typeof rental.redeliveryDate === "undefined") return {publishReviewProblem: rentalNotClosed}
+            // if (typeof rental.redeliveryDate === "undefined") return {publishReviewProblem: rentalNotClosed}
 
             const boat = await Boat.findOneAndUpdate(
                 {

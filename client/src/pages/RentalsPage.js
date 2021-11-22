@@ -9,7 +9,7 @@ import RentalList from "../components/Rentals/RentalList/RentalList";
 const filterRentals = rentals => {
     return {
         previous: rentals ?
-            rentals.filter(rental => rental.redelivery) : [],
+            rentals.filter(rental => !rental.redelivery) : [],
         active: rentals ?
             rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)) : [],
         future: rentals ?
@@ -26,9 +26,14 @@ const RentalsPage = () => {
             filterRentals(rentals),
         [rentals])
 
-    const handleDeleteRental = useCallback((rentalId) => {
-        setRentals(prevRentals => prevRentals.filter(rental => rental._id !== rentalId))
-    }, [])
+    const handleUpdateOrDeleteRentals = useCallback((body, applyData) => {
+        sendRequest({body, token}, resData => {
+            const payload = destructurePayload(resData)
+            if (payload[0])
+                setRentals(prevRentals => applyData(prevRentals, payload[0]))
+            return payload[1]
+        })
+    }, [sendRequest, token])
 
     useEffect(() => {
         sendRequest({
@@ -41,7 +46,7 @@ const RentalsPage = () => {
         <>
             <Header/>
             <Routes>
-                <Route path='previous' element={<RentalList previousRentals={filteredRentals.previous} previous/>}/>
+                <Route path='previous' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals} previousRentals={filteredRentals.previous} previous/>}/>
                 <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
                 <Route path='future' element={<RentalList onDeleteRental={handleDeleteRental} futureRentals={filteredRentals.future} future/>}/>
                 <Route path='/' element={<Navigate to='active'/>}/>

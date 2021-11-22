@@ -39,7 +39,7 @@ app.use('/api',
     })(req, res)
 });
 
-mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.lyqxa.mongodb.net/nolonolo?retryWrites=true&w=majority`, {
+mongoose.connect(process.env.DATABASE_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true })

@@ -3,7 +3,11 @@
 }
 
 .star-container {
-    position: relative;
+    /*position: relative;*/
+    pointer-events: none;
+}
+
+.star-container-pointer {
     cursor: pointer;
 }
 
