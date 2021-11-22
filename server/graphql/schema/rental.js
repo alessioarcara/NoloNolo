@@ -23,7 +23,7 @@ const RentalType = `
     }
     
     type deleteRentalPayload {
-        deleteRentalStatus: Boolean
+        deletedRentalId: ID
         deleteRentalProblem: String
     }
     

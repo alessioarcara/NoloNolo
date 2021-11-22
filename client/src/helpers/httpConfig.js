@@ -183,12 +183,13 @@ exports.body_updateRental = ({rentalId, from, to}) => {
     return {
         query: `
             mutation($rentalData: UpdateRentalInput!) {
-                rentBoat(inputUpdateRental: $rentalData) {
-                    rentBoatData {
+                updateRental(inputUpdateRental: $rentalData) {
+                    updateRentalData {
+                        _id
                         from
                         to
                     }
-                    rentBoatProblem
+                    updateRentalProblem
                 }
             }
         `,
@@ -213,7 +214,7 @@ exports.body_deleteRental = (rentalId) => {
         query: `
             mutation($rentalId: ID!) {
                 deleteRental(rentalId: $rentalId) {
-                    deleteRentalStatus
+                    deletedRentalId
                     deleteRentalProblem
                 }
             }

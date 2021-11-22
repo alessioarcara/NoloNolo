@@ -7,10 +7,9 @@ import BreakpointContext from "../../../store/breakpoint-context";
 import DatesModal from "./DatesModal/DatesModal";
 import BoatBill from "../../Advertisement/BoatBill/BoatBill";
 import ReviewModal from "../RentalCard/ReviewModal/ReviewModal";
-import useHttp from "../../../hooks/use-http";
-import {body_deleteRental} from "../../../helpers/httpConfig";
-import AuthContext from "../../../store/auth-context";
 import classes from './RentalCard.module.css';
+import {body_deleteRental} from "../../../helpers/httpConfig";
+
 
 const RentalCard = ({
                         onUpdateOrDeleteRentals,
@@ -35,8 +34,10 @@ const RentalCard = ({
 
     const breakpointCtx = useContext(BreakpointContext)
 
-    const [openModal, setOpenModal] = useState("")
     const navigate = useNavigate()
+
+    const [modal, setModal] = useState("")
+    const handleSelectModal = useCallback(whichModal => setModal(whichModal), [])
 
     const handleUpdateRental = useCallback((body, applyData) => {
         onUpdateOrDeleteRentals(body, applyData)
@@ -62,8 +63,8 @@ const RentalCard = ({
         <>
             {modal !== "" &&
             <Modal
-                closeModalHandler={() => setOpenModal("")}
-                adapterSize={openModal === "dates" && breakpointCtx.breakpoint}
+                closeModalHandler={handleSelectModal.bind(this, "")}
+                adapterSize={modal === "dates" && breakpointCtx.breakpoint}
             >
                 {modal === "review" &&
                 <ReviewModal

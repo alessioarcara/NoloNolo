@@ -33,7 +33,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
     const filterReview = () => reviews.filter(review => review.creator._id === customerId)
 
     return (
-        <>
+        <form onSubmit={submitFormHandler}>
             <div className={classes['review-container']}>
                 <span className={classes[`review-title`]}>
                     {isReview
@@ -59,7 +59,12 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                     </div>
                 </div>
                 <div className={classes['review-text-container']}>
-                    <span>Lasciaci il tuo feedback:</span>
+                    <span>
+                        {isReview
+                            ? "Il tuo feedback:"
+                            : "Lasciaci il tuo feedback:"
+                        }
+                    </span>
                     <textarea
                         className={classes['review-text']}
                         onChange={changeTextHandler}
@@ -74,7 +79,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                     Pubblica
                 </button>
             </div>
-        </>
+        </form>
     );
 };
 

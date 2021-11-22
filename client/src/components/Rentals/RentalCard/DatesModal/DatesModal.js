@@ -3,7 +3,7 @@ import SelectDates from "../../../Search/SelectDates/SelectDates";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../../helpers/constants";
 import searchReducer, {initialState} from "../../../../reducers/searchReducer";
 import useHttp from "../../../../hooks/use-http";
-import {body_boatRentals} from "../../../../helpers/httpConfig";
+import {body_boatRentals, body_updateRental} from "../../../../helpers/httpConfig";
 import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
 import {formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
@@ -41,7 +41,6 @@ const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateR
     const {data: rentedDates, sendRequest: fetchRentedDates} = useHttp(true)
 
     useEffect(() => {
-        console.log(boatId)
         fetchRentedDates({body: body_boatRentals({boatId}), token}, resData => resData.boatRentals)
     }, [fetchRentedDates, token, boatId])
 
@@ -52,7 +51,6 @@ const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateR
                 endDate={state.endDate}
                 changeStartDateHandler={changeStartDateHandler}
                 changeEndDateHandler={changeEndDateHandler}
-                moveClickHandler={backClickHandler}
                 cancelSelectionHandler={cancelSelectionHandler}
                 alreadyRentedDates={rentedDates}
             />

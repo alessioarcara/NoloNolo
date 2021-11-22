@@ -107,3 +107,8 @@ hr {
   letter-spacing: 0.08rem;
   font-size: 0.9rem;
 }
+
+/* Hide elements */
+.hide {
+  display: none !important;
+}

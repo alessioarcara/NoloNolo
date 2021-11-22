@@ -5,6 +5,7 @@ import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {body_userRentals} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 import RentalList from "../components/Rentals/RentalList/RentalList";
+import {destructurePayload} from "../helpers/utils";
 
 const filterRentals = rentals => {
     return {
@@ -22,9 +23,7 @@ const RentalsPage = () => {
     const [rentals, setRentals] = useState([])
     const {sendRequest} = useHttp(true)
 
-    const filteredRentals = useMemo(() =>
-            filterRentals(rentals),
-        [rentals])
+    const filteredRentals = useMemo(() => filterRentals(rentals), [rentals])
 
     const handleUpdateOrDeleteRentals = useCallback((body, applyData) => {
         sendRequest({body, token}, resData => {
@@ -48,7 +47,7 @@ const RentalsPage = () => {
             <Routes>
                 <Route path='previous' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals} previousRentals={filteredRentals.previous} previous/>}/>
                 <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
-                <Route path='future' element={<RentalList onDeleteRental={handleDeleteRental} futureRentals={filteredRentals.future} future/>}/>
+                <Route path='future' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals} futureRentals={filteredRentals.future} future/>}/>
                 <Route path='/' element={<Navigate to='active'/>}/>
             </Routes>
         </>

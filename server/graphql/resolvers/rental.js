@@ -32,6 +32,8 @@ module.exports = {
     rentalsByUser: authenticated(async (_, {req}) => {
         try {
             const rentals = await Rental.find({customer: req.userId}).lean()
+
+            console.log(rentals)
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
@@ -107,8 +109,8 @@ module.exports = {
             const rental = await Rental.findById(rentalId)
             if (!rental) return { deleteRentalProblem: rentalNotFound }
             if (rental.from <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
-            await Rental.deleteOne({_id: rental})
-            return { deleteRentalStatus: true }
+            await Rental.deleteOne({_id: rental._id})
+            return { deletedRentalId: rental._id }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
     }),
 }

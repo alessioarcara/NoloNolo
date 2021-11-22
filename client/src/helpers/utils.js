@@ -49,3 +49,5 @@ export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum 
 /* Set general date with options */
 export const formatDayMonthYearDate = (date, options) =>
     new Date(date).toLocaleDateString("it-IT", options)
+
+export const destructurePayload = resData => Object.values(resData[Object.keys(resData)]);
