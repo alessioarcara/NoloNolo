@@ -55,9 +55,9 @@ const RentalCard = ({
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
     }, [navigate, boatId, from, to])
 
-    const isReview = () => {
+    const isReview = useCallback(() => {
         return reviews.some(review => review.creator._id === customer._id)
-    }
+    }, [reviews, customer._id])
 
     return (
         <>
@@ -153,17 +153,17 @@ const RentalCard = ({
                             Mostra fattura
                         </button>
                         <button
-                            className={`${classes.option} ${!previous && "hide"}`}
+                            className={`${classes.option} ${(!previous || isReview()) && "hide"}`}
                             onClick={handleSelectModal.bind(this, "review")}
                         >
                             Lascia recensione
                         </button>
-                        {/*<button*/}
-                        {/*    className={`${classes.option} ${!previous && "hide"}`}*/}
-                        {/*    onClick={handleSelectModal.bind(this, "review")}*/}
-                        {/*>*/}
-                        {/*    Mostra recensione*/}
-                        {/*</button>*/}
+                        <button
+                            className={`${classes.option} ${(!previous || !isReview()) && "hide"}`}
+                            onClick={handleSelectModal.bind(this, "review")}
+                        >
+                            Mostra recensione
+                        </button>
                     </section>
                 </div>
             </div>
