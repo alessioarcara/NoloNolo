@@ -77,9 +77,9 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                         // disabled={isReview()}
                     />
                 </div>
-                <div className={`${isReview() ? classes['created-at-container'] : "hide"}`}>
-                    <span>Lasciata il {formatDayMonthYearDate(new Date(+filterReview()[0].createdAt), {day: 'numeric', month: 'long', year: 'numeric'})}</span>
-                </div>
+                {/*<div className={`${isReview() ? classes['created-at-container'] : "hide"}`}>*/}
+                {/*    <span>Lasciata il {formatDayMonthYearDate(new Date(+filterReview()[0].createdAt), {day: 'numeric', month: 'long', year: 'numeric'})}</span>*/}
+                {/*</div>*/}
                 <button
                     className={`${classes['btn-publish']} btn btn-outline-primary`}
                     disabled={!quoteIndex || textArea.length < 10}

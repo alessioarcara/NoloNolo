@@ -273,6 +273,7 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
                             email
                             avatar
                         }
+                        rental
                     }
                     publishReviewProblem
                 }
