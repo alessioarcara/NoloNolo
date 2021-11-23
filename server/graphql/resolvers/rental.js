@@ -33,7 +33,6 @@ module.exports = {
         try {
             const rentals = await Rental.find({customer: req.userId}).lean()
 
-            console.log(rentals)
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
@@ -87,8 +86,8 @@ module.exports = {
 
             const areInvalidSelectedDates = await validateRentDates(rental.boat._id, from, to)
             if (!areInvalidSelectedDates) {
-                rental.from = from;
-                rental.to = to
+                rental.fromDate = from;
+                rental.toDate = to
                 rental.totalAmount = parseFloat(rental.boat.advertisement.dailyFee) * rangeDate(from, to)
                     + parseFloat(rental.boat.advertisement.fixedFee)
 
@@ -96,7 +95,7 @@ module.exports = {
 
                 /* END SEMAPHORE IF SUCCESSFUL */
                 await releaseLock(rental.boat._id)
-                return { updateRentalData: transformRental(rental._doc)};
+                return { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id})};
             }
 
             /* END SEMAPHORE EVEN IF NOT SUCCESSFUL */
