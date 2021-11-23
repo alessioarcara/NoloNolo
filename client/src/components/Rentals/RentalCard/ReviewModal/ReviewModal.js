@@ -4,7 +4,7 @@ import Vote from "../../../UI/Vote/Vote";
 import {body_publishReview} from "../../../../helpers/httpConfig";
 import {formatDayMonthYearDate} from "../../../../helpers/utils";
 
-const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview}) => {
+const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview}) => {
     const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
     const [quoteIndex, setQuoteIndex] = useState()
     const [textArea, setTextArea] = useState('')
@@ -40,55 +40,51 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
         )
     }
 
+    const filterReview = () => reviews.filter(review => review.rental === rentalId && review.creator._id === customerId)
+
     return (
         <form onSubmit={submitFormHandler}>
             <div className={classes['review-container']}>
                 <span className={classes[`review-title`]}>
-                    {/*{isReview*/}
-                    {/*    ? "La tua recensione"*/}
-                    {/*    : "Scrivi la tua recensione!"*/}
-                    {/*}*/}
+                    {isReviewed ? "La tua recensione" : "Scrivi la tua recensione!"}
                 </span>
                 <div className={classes[`five-stars`]}>
                     <span className={classes.quote}>
-                        {/*{isReview()*/}
-                        {/*    ? `Valutata: ${votes[filterReview()[0].rating - 1]}`*/}
-                        {/*    : votes[quoteIndex]*/}
-                        {/*        ? votes[quoteIndex]*/}
-                        {/*        : 'Valuta questa barca'}*/}
-                        {votes[quoteIndex] ? votes[quoteIndex] : 'Valuta questa barca'}
+                        {isReviewed
+                            ? `Valutata: ${votes[filterReview()[0].rating - 1]}`
+                            : votes[quoteIndex]
+                                ? votes[quoteIndex]
+                                : 'Valuta questa barca'
+                        }
                     </span>
                     <div className={classes.stars}>
                         <Vote
                             votes={votes}
-                            // quoteIndex={isReview() ? filterReview()[0].rating - 1 : quoteIndex}
-                            quoteIndex={quoteIndex}
+                            quoteIndex={isReviewed ? filterReview()[0].rating - 1 : quoteIndex}
                             changeQuoteIndex={changeQuoteIndex}
-                            // placeholder={isReview()}
+                            placeholder={isReviewed}
                         />
                     </div>
                 </div>
                 <div className={classes['review-text-container']}>
                     <span>
-                        {/*{isReview*/}
-                        {/*    ? "Il tuo feedback:"*/}
-                        {/*    : "Lasciaci il tuo feedback:"*/}
-                        {/*}*/}
-                        Lascia il tuo feedback
+                        {isReviewed ? "Il tuo feedback:" : "Lasciaci il tuo feedback:"}
                     </span>
                     <textarea
                         className={classes['review-text']}
                         onChange={changeTextHandler}
-                        // value={isReview() ? filterReview()[0].body : textArea}
-                        value={textArea}
-                        // disabled={isReview()}
+                        value={isReviewed ? filterReview()[0].body : textArea}
+                        disabled={isReviewed}
                     />
                 </div>
-                {/*<div className={`${isReview() ? classes['created-at-container'] : "hide"}`}>*/}
-                {/*    <span>Lasciata il {formatDayMonthYearDate(new Date(+filterReview()[0].createdAt), {day: 'numeric', month: 'long', year: 'numeric'})}</span>*/}
-                {/*</div>*/}
+                <div className={`${isReviewed ? classes['created-at-container'] : "hide"}`}>
+                    <span>Lasciata il {isReviewed &&
+                        formatDayMonthYearDate(new Date(+filterReview()[0].createdAt),
+                            {day: 'numeric', month: 'long', year: 'numeric'})}
+                    </span>
+                </div>
                 <button
-                    className={`${classes['btn-publish']} btn btn-outline-primary`}
+                    className={`${classes['btn-publish']} btn btn-outline-primary ${isReviewed && "hide"}`}
                     disabled={!quoteIndex || textArea.length < 10}
                 >
                     Pubblica

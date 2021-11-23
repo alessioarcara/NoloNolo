@@ -7,7 +7,7 @@
     padding: 0 3rem;
 }
 
-@media only screen and (min-width: 570px) and (max-width: 900px) {
+@media only screen and (min-width: 648px) and (max-width: 900px) {
     .results-layout {
         grid-template-columns: repeat(2, 1fr);
     }

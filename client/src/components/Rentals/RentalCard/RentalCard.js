@@ -34,7 +34,6 @@ const RentalCard = ({
                     }) => {
 
     const breakpointCtx = useContext(BreakpointContext)
-
     const navigate = useNavigate()
 
     const [modal, setModal] = useState("")
@@ -150,16 +149,10 @@ const RentalCard = ({
                             Mostra fattura
                         </button>
                         <button
-                            className={`${classes.option} ${(!previous || isReviewed) && "hide"}`}
+                            className={`${classes.option} ${!previous && "hide"}`}
                             onClick={handleSelectModal.bind(this, "review")}
                         >
-                            Lascia recensione
-                        </button>
-                        <button
-                            className={`${classes.option} ${(!previous || !isReviewed) && "hide"}`}
-                            onClick={handleSelectModal.bind(this, "review")}
-                        >
-                            Mostra recensione
+                            {isReviewed ? 'Mostra recensione' : 'Lascia recensione'}
                         </button>
                     </section>
                 </div>

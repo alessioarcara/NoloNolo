@@ -29,8 +29,6 @@ const RentalsPage = () => {
     const [rentals, setRentals] = useState([])
     const {sendRequest} = useHttp(true)
 
-    console.log(rentals)
-
     const filteredRentals = useMemo(() => filterRentals(rentals), [rentals])
 
     const handleUpdateOrDeleteRentals = useCallback((body, applyData) => {
