@@ -5,6 +5,7 @@
 .card {
     display: flex;
     flex-direction: column;
+    height: 20rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     transition: all 0.425s ease-out;
@@ -83,6 +84,7 @@
 @media only screen and (min-width: 901px) {
     .card {
         flex-direction: row;
+        height: 15rem;
     }
 
     /* Remove events onClick in all adapter */

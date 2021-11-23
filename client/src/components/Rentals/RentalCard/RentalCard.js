@@ -55,9 +55,9 @@ const RentalCard = ({
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
     }, [navigate, boatId, from, to])
 
-    const isReview = useCallback(() => {
+    const isReview = () => {
         return reviews.some(review => review.creator._id === customer._id)
-    }, [reviews, customer._id])
+    }
 
     return (
         <>

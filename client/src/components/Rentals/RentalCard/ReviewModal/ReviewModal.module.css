@@ -18,7 +18,7 @@
 }
 
 .quote {
-    font-family: 'Lobster';
+    font-family: 'Lobster', Serif, sans-serif;
     font-weight: bold;
 }
 
@@ -49,6 +49,7 @@
     resize: none;
     align-self: center;
     outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .btn-publish {

@@ -31,6 +31,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
     }
 
     const filterReview = () => reviews.filter(review => review.creator._id === customerId)
+    console.log(filterReview(), isReview())
 
     return (
         <form onSubmit={submitFormHandler}>
@@ -43,7 +44,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                 </span>
                 <div className={classes[`five-stars`]}>
                     <span className={classes.quote}>
-                        {isReview
+                        {isReview()
                             ? votes[filterReview()[0].rating - 1]
                             : votes[quoteIndex]
                                 ? votes[quoteIndex]
@@ -52,9 +53,9 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                     <div className={classes.stars}>
                         <Vote
                             votes={votes}
-                            quoteIndex={isReview ? filterReview()[0].rating - 1 : quoteIndex}
+                            quoteIndex={isReview() ? filterReview()[0].rating - 1 : quoteIndex}
                             changeQuoteIndex={changeQuoteIndex}
-                            placeholder={isReview}
+                            placeholder={isReview()}
                         />
                     </div>
                 </div>
@@ -68,12 +69,11 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                     <textarea
                         className={classes['review-text']}
                         onChange={changeTextHandler}
-                        value={isReview ? filterReview()[0].body : textArea}
-                        readOnly={isReview}
+                        value={isReview() ? filterReview()[0].body : textArea}
                     />
                 </div>
                 <button
-                    className={`${classes['btn-publish']} btn btn-outline-primary ${isReview && 'hide'}`}
+                    className={`${classes['btn-publish']} btn btn-outline-primary ${isReview() && 'hide'}`}
                     disabled={!quoteIndex || textArea.length < 10}
                 >
                     Pubblica

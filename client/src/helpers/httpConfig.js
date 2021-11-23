@@ -192,6 +192,7 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                         to
                         totalAmount
                         boat {
+                            _id
                             yard
                             model
                             length
