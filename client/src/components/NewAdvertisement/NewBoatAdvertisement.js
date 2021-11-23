@@ -5,18 +5,18 @@ import useForm from "../../hooks/use-form";
 import {boatAdvertisementForm} from "../../helpers/formConfig";
 import {body_publishAdvertisement} from "../../helpers/httpConfig";
 
-const NewBoatAdvertisement = ({onChangeUserBoat}) => {
+const NewBoatAdvertisement = ({boatId, onChangeUserBoat}) => {
     const navigate = useNavigate()
     const {formValues, renderFormInputs} = useForm(boatAdvertisementForm)
 
     const submitFormHandler = evt => {
         evt.preventDefault()
         onChangeUserBoat(body_publishAdvertisement({
+            boatId,
             description: formValues[0],
             dailyFee: parseFloat(formValues[1]),
             fixedFee: parseFloat(formValues[2])
-            })
-        )
+        }))
         navigate(`/profile`, {replace: true})
     }
 

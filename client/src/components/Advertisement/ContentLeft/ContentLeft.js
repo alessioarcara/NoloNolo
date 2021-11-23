@@ -5,6 +5,7 @@ import BoatMapPosition from "../../UI/Map/BoatMapPosition";
 import classes from './ContentLeft.module.css';
 
 const ContentLeft = ({isVisible, images, boatPosition}) => {
+    console.log(boatPosition)
     return (
         <>
             {/* TO DO: margin-top in classes['container'] */}
@@ -21,7 +22,7 @@ const ContentLeft = ({isVisible, images, boatPosition}) => {
             </div>
 
             <div className={classes['container-desktop']}>
-                <BoatMapPosition boatPosition={boatPosition}/>
+                <BoatMapPosition boatPosition={boatPosition.reverse()}/>
             </div>
         </>
     );

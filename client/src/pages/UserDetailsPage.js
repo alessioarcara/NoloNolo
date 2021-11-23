@@ -6,6 +6,7 @@ import UserInfo from "../components/UserDetails/UserInfo/UserInfo";
 import UserDetails from "../components/UserDetails/UserDetails/UserDetails";
 import {body_user} from "../helpers/httpConfig";
 import Modal from "../components/UI/Modal/Modal";
+import {parseMutationResponse} from "../helpers/utils";
 
 
 const UserDetailsPage = () => {
@@ -13,20 +14,11 @@ const UserDetailsPage = () => {
     const [user, setUser] = useState(null)
     const {error, status, data: problem, sendRequest} = useHttp(false)
 
-    const sendData = useCallback(body =>
-            sendRequest({body, token}, resData => {
-                const payload = Object.values(resData[Object.keys(resData)])
-                if (payload[0])
-                    setUser(payload[0])
-                return payload[1]
-            }),
+    const sendData = useCallback(body => sendRequest({body, token}, parseMutationResponse(setUser)),
         [sendRequest, token])
 
-    useEffect(() => {
-        sendRequest({body: body_user, token: token}, resData => {
-            setUser(resData.user)
-        })
-    }, [sendRequest, token])
+    useEffect(() => sendRequest({body: body_user, token}, resData => setUser(resData.user)),
+        [sendRequest, token])
 
     return (
         <>

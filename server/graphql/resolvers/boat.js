@@ -92,7 +92,6 @@ module.exports = {
                 ]
             }).lean()
 
-            console.log(boats)
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },

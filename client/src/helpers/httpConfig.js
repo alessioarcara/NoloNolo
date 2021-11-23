@@ -219,6 +219,7 @@ exports.body_publishAdvertisement = ({boatId, description, dailyFee, fixedFee}) 
                 publishAdvertisement(inputPublishAdvertisement: $advertisementData) {
                     publishAdvertisementData {
                         _id
+                    }
                     publishAdvertisementProblem
                 }
             }

@@ -42,7 +42,6 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
-    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),

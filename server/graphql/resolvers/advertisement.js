@@ -1,4 +1,7 @@
 const Boat = require('../../models/boat');
+const User = require('../../models/user');
+const {transformBoat} = require("./merge");
+const {boatNotFound} = require("../../helpers/problemMessages")
 
 module.exports = {
     publishAdvertisement: async (args, {req}) => {
@@ -16,10 +19,17 @@ module.exports = {
                 {
                     new: true,
                     runValidators: true,
-                    useFindAndModify: true
+                    useFindAndModify: false
                 }
             )
 
+            if (!boat) return {publishAdvertisementProblem: boatNotFound}
+            const user = await User.findById(req.userId)
+
+            user.userType = 'shipowner'
+            user.save()
+
+            return {publishAdvertisementData: transformBoat(boat)}
         } catch (err) { throw new Error(`Can't publish advertisement. ${err}`)}
     },
 }

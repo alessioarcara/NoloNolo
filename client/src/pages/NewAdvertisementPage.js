@@ -56,6 +56,7 @@ const NewAdvertisementPage = () => {
             <Route path={'advertisement'} element={
                 <NewBoatAdvertisement
                     onChangeUserBoat={handleChangeUserBoat}
+                    boatId={boatId}
                 />
             }/>
         </>
