@@ -1,7 +1,7 @@
 .review-container {
     display: flex;
     flex-direction: column;
-    gap: 1.7rem;
+    gap: 1.3rem;
 }
 
 .review-title {
@@ -57,6 +57,13 @@
     height: 2.7rem;
 }
 
+.created-at-container {
+    font-size: 0.7em;
+    align-self: flex-end;
+    color: #8d8989;
+    font-style: italic;
+}
+
 @media only screen and (max-width: 768px) {
     .review-title {
         font-size: 0.9em;
@@ -86,5 +93,9 @@
     .btn-publish {
         height: 2.5rem;
         font-size: 0.8em;
+    }
+
+    .created-at-container {
+        font-size: 0.5em;
     }
 }

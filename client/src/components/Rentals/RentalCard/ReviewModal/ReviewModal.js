@@ -46,7 +46,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                 <div className={classes[`five-stars`]}>
                     <span className={classes.quote}>
                         {isReview()
-                            ? votes[filterReview()[0].rating - 1]
+                            ? `Valutata: ${votes[filterReview()[0].rating - 1]}`
                             : votes[quoteIndex]
                                 ? votes[quoteIndex]
                                 : 'Valuta questa barca'}
