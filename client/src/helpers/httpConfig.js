@@ -165,6 +165,7 @@ exports.body_rentBoat = ({boatId, from, to}) => {
                                 region
                                 city
                                 harbour
+                                coordinates
                             }
                         }
                         customer {
@@ -186,10 +187,43 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                 updateRental(inputUpdateRental: $rentalData) {
                     updateRentalData {
                         _id
+                        billNumber
                         from
                         to
+                        totalAmount
                         boat {
-                            _id
+                            yard
+                            model
+                            length
+                            maximumCapacity
+                            boatType
+                            owner {
+                                email
+                            }
+                            isDocked {
+                                region
+                                city
+                                harbour
+                            }
+                            hasAdvertisement {
+                                description
+                                images
+                                dailyFee
+                                fixedFee
+                                reviews {
+                                  _id
+                                  body
+                                  rating
+                                  createdAt
+                                  creator {
+                                    email
+                                    avatar
+                                  }
+                                }
+                            }
+                        }
+                        customer {
+                            email
                         }
                     }
                     updateRentalProblem
