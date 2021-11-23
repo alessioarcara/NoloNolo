@@ -270,8 +270,7 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
                         rating
                         createdAt
                         creator {
-                            email
-                            avatar
+                            _id
                         }
                         rental
                     }
@@ -419,6 +418,7 @@ exports.body_userRentals = {
                             createdAt
                             body
                             rating
+                            rental
                         }
                     }
                     owner {
