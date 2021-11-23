@@ -41,6 +41,8 @@ const RentalsPage = () => {
         }, resData => setRentals(resData.rentalsByUser))
     }, [sendRequest, token])
 
+    console.log(rentals)
+
     return (
         <>
             <Header/>

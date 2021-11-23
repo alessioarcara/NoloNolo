@@ -153,17 +153,17 @@ const RentalCard = ({
                             Mostra fattura
                         </button>
                         <button
-                            className={`${classes.option} ${(!previous || isReview()) && "hide"}`}
+                            className={`${classes.option} ${!previous && "hide"}`}
                             onClick={handleSelectModal.bind(this, "review")}
                         >
                             Lascia recensione
                         </button>
-                        <button
-                            className={`${classes.option} ${(!previous || !isReview()) && "hide"}`}
-                            onClick={handleSelectModal.bind(this, "review")}
-                        >
-                            Mostra recensione
-                        </button>
+                        {/*<button*/}
+                        {/*    className={`${classes.option} ${!previous && "hide"}`}*/}
+                        {/*    onClick={handleSelectModal.bind(this, "review")}*/}
+                        {/*>*/}
+                        {/*    Mostra recensione*/}
+                        {/*</button>*/}
                     </section>
                 </div>
             </div>
