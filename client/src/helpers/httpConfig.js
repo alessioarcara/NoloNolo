@@ -415,6 +415,7 @@ exports.body_userRentals = {
                             creator {
                                 _id
                             }
+                            createdAt
                             body
                             rating
                         }

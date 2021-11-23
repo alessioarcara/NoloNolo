@@ -2,6 +2,7 @@ import classes from "./ReviewModal.module.css";
 import {useCallback, useState} from "react";
 import Vote from "../../../UI/Vote/Vote";
 import {body_publishReview} from "../../../../helpers/httpConfig";
+import {formatDayMonthYearDate} from "../../../../helpers/utils";
 
 const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview}) => {
     const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
@@ -70,7 +71,11 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
                         className={classes['review-text']}
                         onChange={changeTextHandler}
                         value={isReview() ? filterReview()[0].body : textArea}
+                        disabled={isReview()}
                     />
+                </div>
+                <div className={`${isReview() ? classes['created-at-container'] : "hide"}`}>
+                    <span>Lasciata il {formatDayMonthYearDate(new Date(+filterReview()[0].createdAt), {day: 'numeric', month: 'long', year: 'numeric'})}</span>
                 </div>
                 <button
                     className={`${classes['btn-publish']} btn btn-outline-primary ${isReview() && 'hide'}`}
