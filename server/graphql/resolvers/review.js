@@ -17,11 +17,13 @@ module.exports = {
                 {
                     $and: [
                         {_id: rental.boat},
-                        {'advertisement.reviews.rental': {$ne: rentalId}},
+                        {'advertisement.reviews':
+                                { $elemMatch: { rental: {$ne: rentalId}, customer: {$ne: req.userId} } }
+                        },
                     ]
                 },
                 {
-                    $addToSet: {
+                    $push: {
                         'advertisement.reviews': {
                             customer: req.userId,
                             rental: rental._id,

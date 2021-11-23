@@ -5,6 +5,7 @@ const reviewType = `
             rating: Int!
             createdAt: String!
             creator: User!
+            rental: ID!
         }
         
         type publishReviewPayload {
