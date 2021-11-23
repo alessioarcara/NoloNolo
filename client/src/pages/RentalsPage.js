@@ -10,7 +10,13 @@ import {destructurePayload} from "../helpers/utils";
 const filterRentals = rentals => {
     return {
         previous: rentals ?
-            rentals.filter(rental => !rental.redelivery) : [],
+            rentals.reduce((previousRentals, rental) => {
+                if (!rental.redelivery) {
+                    previousRentals.push(rental.boat.hasAdvertisement.reviews.some(review => review.rental === rental._id && review.creator._id === rental.customer._id) ?
+                        { ...rental, isReviewed: true } : {...rental, isReviewed: false})
+                }
+                return previousRentals
+            }, []) : [],
         active: rentals ?
             rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)) : [],
         future: rentals ?
@@ -22,6 +28,8 @@ const RentalsPage = () => {
     const {token} = useContext(AuthContext)
     const [rentals, setRentals] = useState([])
     const {sendRequest} = useHttp(true)
+
+    console.log(rentals)
 
     const filteredRentals = useMemo(() => filterRentals(rentals), [rentals])
 
@@ -40,8 +48,6 @@ const RentalsPage = () => {
             token
         }, resData => setRentals(resData.rentalsByUser))
     }, [sendRequest, token])
-
-    console.log(rentals)
 
     return (
         <>

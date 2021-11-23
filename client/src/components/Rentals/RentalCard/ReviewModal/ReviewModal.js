@@ -22,16 +22,23 @@ const ReviewModal = ({rentalId, customerId, reviews, isReview, onPublishReview})
 
         onPublishReview(
             body_publishReview({
-                rentalId: rentalId.toString(),
-                body: textArea.toString(),
+                rentalId,
+                body: textArea,
                 rating: parseInt(quoteIndex) + 1
             }),
-            (prevRentals, newRental) =>
-                prevRentals.map(userRental => userRental._id === newRental._id ? newRental : userRental)
+            (prevRentals, newReview) => prevRentals.map(userRental => userRental._id === newReview.rental ? {
+                    ...userRental,
+                    boat: {
+                        ...userRental.boat,
+                        hasAdvertisement: {
+                            ...userRental.boat.hasAdvertisement,
+                            reviews: userRental.boat.hasAdvertisement.reviews.concat(newReview)
+                        }
+                    }
+                } : userRental
+            )
         )
     }
-
-    // const filterReview = () => reviews.filter(review => review.creator._id === customerId)
 
     return (
         <form onSubmit={submitFormHandler}>

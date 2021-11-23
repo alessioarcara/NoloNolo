@@ -29,7 +29,8 @@ const RentalCard = ({
                         dailyFee,
                         fixedFee,
                         totalAmount,
-                        reviews
+                        reviews,
+                        isReviewed
                     }) => {
 
     const breakpointCtx = useContext(BreakpointContext)
@@ -55,10 +56,6 @@ const RentalCard = ({
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
     }, [navigate, boatId, from, to])
 
-    const isReview = () => {
-        return reviews.some(review => review.creator._id === customer._id)
-    }
-
     return (
         <>
             {modal !== "" &&
@@ -72,7 +69,7 @@ const RentalCard = ({
                     customerId={customer._id}
                     reviews={reviews}
                     onPublishReview={handleUpdateRental}
-                    isReview={isReview}
+                    isReviewed={isReviewed}
                 />
                 }
                 {modal === "delete" &&
@@ -153,17 +150,17 @@ const RentalCard = ({
                             Mostra fattura
                         </button>
                         <button
-                            className={`${classes.option} ${!previous && "hide"}`}
+                            className={`${classes.option} ${(!previous || isReviewed) && "hide"}`}
                             onClick={handleSelectModal.bind(this, "review")}
                         >
                             Lascia recensione
                         </button>
-                        {/*<button*/}
-                        {/*    className={`${classes.option} ${!previous && "hide"}`}*/}
-                        {/*    onClick={handleSelectModal.bind(this, "review")}*/}
-                        {/*>*/}
-                        {/*    Mostra recensione*/}
-                        {/*</button>*/}
+                        <button
+                            className={`${classes.option} ${(!previous || !isReviewed) && "hide"}`}
+                            onClick={handleSelectModal.bind(this, "review")}
+                        >
+                            Mostra recensione
+                        </button>
                     </section>
                 </div>
             </div>

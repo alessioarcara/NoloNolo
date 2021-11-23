@@ -21,6 +21,8 @@ const RentalList = ({
         return previous ? 'passati' : active ? 'attivi' : future ? 'futuri' : ''
     }, [previous, active, future])
 
+    console.log(previousRentals)
+
     if (openedRentals().length === 0) {
         content =
             <ElementsNotFound
@@ -52,6 +54,7 @@ const RentalList = ({
                         dailyFee={rental.boat.hasAdvertisement.dailyFee}
                         fixedFee={rental.boat.hasAdvertisement.fixedFee}
                         reviews={rental.boat.hasAdvertisement.reviews}
+                        isReviewed={rental.isReviewed}
                     />
                 )}
             </BoatListLayout>
