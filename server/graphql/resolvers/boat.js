@@ -82,7 +82,6 @@ module.exports = {
             req.userId = "61013cd2cbcb99c21fbe91e2"
             const boats = await Boat.find({"location.region": "emilia-romagna"}).lean()
             console.log("ciao")
-            console.log(boats)
             // return transformBoat(boat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },
