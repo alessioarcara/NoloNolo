@@ -10,7 +10,9 @@ import AdvertisementPage from "./pages/AdvertisementPage";
 import {Routes, Route, Navigate} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import UserDetailsPage from "./pages/UserDetailsPage";
+import ResultsPage from "./pages/ResultsPage";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
+
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)

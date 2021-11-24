@@ -232,13 +232,16 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                                   rating
                                   createdAt
                                   creator {
+                                    _id
                                     email
                                     avatar
                                   }
+                                  rental
                                 }
                             }
                         }
                         customer {
+                            _id
                             email
                         }
                     }
