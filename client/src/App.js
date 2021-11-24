@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import {useContext} from "react";
 import AuthContext from "./store/auth-context";
 import ProfilePage from "./pages/ProfilePage";
-import ResultsPage from "./pages/ResultsPage";
+import RentalsPage from "./pages/RentalsPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import NewAdvertisementPage from "./pages/NewAdvertisementPage";
 import AdvertisementPage from "./pages/AdvertisementPage";
@@ -24,6 +24,7 @@ function App() {
                 <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
             </Route>
             <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
+            <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
             <Route path='boats/*' element={<ResultsPage/>}/>
             <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
             <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>

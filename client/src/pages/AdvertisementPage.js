@@ -4,11 +4,10 @@ import AuthContext from "../store/auth-context";
 import {advertisementReducer} from "../reducers/advertisementReducer";
 import useHttp from "../hooks/use-http";
 import {body_informations, body_rentBoat} from "../helpers/httpConfig";
-import {formatDate, rangeDate} from "../helpers/utils";
+import {formatDate} from "../helpers/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 import Modal from "../components/UI/Modal/Modal";
-import BoatBill from "../components/Advertisement/BoatBill/BoatBill";
 import InvoiceReport from "../components/Advertisement/BoatBill/InvoiceReport/InvoiceReport";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
@@ -25,8 +24,8 @@ const AdvertisementPage = () => {
     const [state, dispatch] = useReducer(advertisementReducer, {
         visibleContent: false,
         isBillShow: false,
-        startDate: location.state.startUrlDate ? new Date(location.state.startUrlDate) : null,
-        endDate: location.state.endUrlDate ? new Date(location.state.endUrlDate) : null
+        startDate: location.state && location.state.startUrlDate ? new Date(location.state.startUrlDate) : null,
+        endDate: location.state && location.state.endUrlDate ? new Date(location.state.endUrlDate) : null
     })
 
     const showBillHandler = useCallback(() => {
@@ -57,9 +56,6 @@ const AdvertisementPage = () => {
                 boatId,
                 from: formatDate(state.startDate),
                 to: formatDate(state.endDate),
-                totalAmount:
-                    (boatPayload.boat.hasAdvertisement.dailyFee * rangeDate(state.startDate, state.endDate))
-                    + boatPayload.boat.hasAdvertisement.fixedFee
             }),
             token
         }, transformData)
@@ -79,21 +75,6 @@ const AdvertisementPage = () => {
             {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
             <Modal title="Errore">
                 Prenotazione già presente
-            </Modal>
-            }
-            {statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&
-            <Modal title='Fattura'>
-                <BoatBill
-                    billNumber={rentalPayload.rentBoatData.billNumber}
-                    from={rentalPayload.rentBoatData.from}
-                    to={rentalPayload.rentBoatData.to}
-                    boatData={rentalPayload.rentBoatData.boat}
-                    customer={rentalPayload.rentBoatData.customer.email}
-                    createdAt={rentalPayload.rentBoatData.createdAt}
-                    dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                    fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
-                    total={rentalPayload.rentBoatData.totalAmount}
-                />
             </Modal>
             }
             {state.isBillShow &&

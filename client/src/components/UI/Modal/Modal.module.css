@@ -61,7 +61,7 @@
     cursor: pointer;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .modal {
         min-width: 42rem;
         width: auto;
