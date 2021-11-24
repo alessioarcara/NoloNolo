@@ -4,7 +4,7 @@ const {isImage} = require("../../helpers/utils");
 const {notImage, userNotFound, noFileAttached} = require("../../helpers/problemMessages");
 const User = require("../../models/user");
 const {transformUser} = require("./merge");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated} = require("../../auth/auth");
 
 const clearAvatar = filePath => {
     unlink(filePath, err => err && console.log(`unlink failed: ${err}`))

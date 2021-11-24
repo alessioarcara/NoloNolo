@@ -3,8 +3,9 @@ const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
 const {rangeDate} = require("../../helpers/utils");
 const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDatesTooClose, isAlreadyStarted} = require("../../helpers/problemMessages");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
+const mongoose = require('mongoose');
 
 const validateRentDates = async (boatId, from, to) => {
     if (from <= new Date()) return selectedRentDatesTooClose;
@@ -25,7 +26,7 @@ const validateRentDates = async (boatId, from, to) => {
 module.exports = {
     boatRentals: async ({boatId}) => {
         try {
-            const rentals = await Rental.find({boat: boatId})
+            const rentals = await Rental.find({boat: boatId}).lean()
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find boat rentals. ${err}`) }
     },
@@ -35,13 +36,28 @@ module.exports = {
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
+    rentalsByShipowner: authenticated(authorization('shipowner')(async (_, {req}) => {
+        try {
+            const rentals = await Rental.aggregate([
+                { $lookup: {
+                    from: 'boats',
+                    localField: 'boat',
+                    foreignField: '_id',
+                    as: 'boat'
+                } },
+                { $unwind: "$boat" },
+                { $match: { "boat.shipowner": mongoose.Types.ObjectId(req.userId) }}
+            ])
+            return rentals.map(transformRental)
+        } catch (err) { throw new Error(`Can't find shipowner rentals. ${err}`) }
+    })),
     rentBoat: authenticated(async (args, {req}) => {
         try {
             const {boatId} = args.inputRentBoat
             const from = new Date(args.inputRentBoat.from).setHours(0, 0, 0)
             const to = new Date(args.inputRentBoat.to).setHours(0, 0, 0)
 
-            const boat = await Boat.findOne({_id: boatId})
+            const boat = await Boat.findOne({_id: boatId}).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
 
             /* START SEMAPHORE */
@@ -104,7 +120,7 @@ module.exports = {
     }),
     deleteRental: authenticated(async ({rentalId}) => {
         try {
-            const rental = await Rental.findById(rentalId)
+            const rental = await Rental.findById(rentalId).lean()
             if (!rental) return { deleteRentalProblem: rentalNotFound }
             if (rental.from <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
             await Rental.deleteOne({_id: rental._id})

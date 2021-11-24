@@ -6,18 +6,18 @@ const {dateToString} = require("../../helpers/utils");
 
 
 const userLoader = new DataLoader(userIds => {
-    return User.find({_id: {$in: userIds}});
+    return User.find({_id: {$in: userIds}}).lean();
 });
 
 const boatLoader = new DataLoader(boatIds => {
-    return Boat.find({_id: {$in: boatIds}});
+    return Boat.find({_id: {$in: boatIds}}).lean();
 });
 
 const boat = async boatsId => {
     try {
         const boat = await boatLoader.load(boatsId.toString())
         boatLoader.clear(boatsId.toString())
-        return transformBoat(boat.toObject());
+        return transformBoat(boat);
     } catch (err) {throw err}
 }
 

@@ -299,6 +299,43 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
             variables: {reviewData: {rentalId, body, rating}}
         }
 };
+
+/* TODO: dailyFee e fixedFee non devono essere presi da advertisement ma da rental */
+exports.body_shipownerAdvertisements = {
+    query: `
+        query shipownerAdvertisements {
+            advertisementsByShipowner {
+                _id
+                yard
+                model
+                hasAdvertisement {
+                    images
+                    reviews {
+                        _id
+                        rating
+                    }
+                    dailyFee
+                    fixedFee
+                }
+                isDocked {
+                    region
+                    city
+                    harbour
+                }
+            }
+            rentalsByShipowner {
+                _id
+                from
+                to
+                customer {
+                    email
+                }
+                totalAmount
+                billNumber
+            }
+        }
+    `
+}
 exports.body_favorites = {
     query: `
         query {

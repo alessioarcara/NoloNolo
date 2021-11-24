@@ -53,7 +53,7 @@ module.exports = {
         if (from && to) {
             const rentalsById = await Rental.find(
                 {$and: [{fromDate: {$lte: to}}, {toDate: {$gte: from}}]},
-                {boat: 1})
+                {boat: 1}).lean()
 
             const ids = rentalsById.map(item => item['boat'])
             pipeline.unshift({$match: {"_id": {$nin: ids}}})

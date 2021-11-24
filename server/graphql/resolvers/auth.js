@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const {userNotFound, invalidPassword, duplicateEmail, samePassword} = require("../../helpers/problemMessages");
 const {transformUser} = require("./merge");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated} = require("../../auth/auth");
 
 const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
 
-const createTokens = (userId, email, count, res) => {
-    const accessToken = jwt.sign({ userId, email }, process.env.ACCESS_TOKEN_KEY, {
+const createTokens = (userId, userRole, count, res) => {
+    const accessToken = jwt.sign({userId, userRole}, process.env.ACCESS_TOKEN_KEY, {
         expiresIn: ACCESS_EXPIRE_TIME});
     const refreshToken = jwt.sign({userId, count}, process.env.REFRESH_TOKEN_KEY, {
         expiresIn: REFRESH_EXPIRE_TIME});
@@ -34,22 +34,21 @@ const decodeRefreshToken = (req) => {
 module.exports = {
     user: authenticated(async (_, {req}) => {
         try {
-            const user = await User.findById(req.userId)
+            const user = await User.findById(req.userId).lean()
             if (!user) { return { authProblem: userNotFound } }
-
             return transformUser(user)
         } catch (err) { throw new Error(`Can't retrieve user info. ${err}`); }
     }),
     login: async (args, {_, res}) => {
         const {email, password} = args.inputUser
         try {
-            const user = await User.findOne({email});
+            const user = await User.findOne({email}).lean()
             if (!user) { return { authProblem: userNotFound } }
 
             const isEqual =  await bcrypt.compare(password, user.password)
             if (!isEqual) { return { authProblem: invalidPassword } }
 
-            const accessToken = createTokens(user._id, user.email, user.count, res)
+            const accessToken = createTokens(user._id, user.userType, user.count, res)
             return {authData: {userId: user._id, token: accessToken} };
         } catch (err) { throw new Error(`Can't login. ${err}`); }
     },
@@ -73,14 +72,13 @@ module.exports = {
     createUser: async (args, {_, res}) => {
         const {email, password} = args.inputUser
         try {
-            const existingUser = await User.findOne({email})
+            const existingUser = await User.findOne({email}).lean()
             if (existingUser) { return { authProblem: duplicateEmail} }
 
             const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({email: email, password: hashedPassword})
-            await user.save();
+            const user = await User.create({email: email, password: hashedPassword})
 
-            const accessToken = createTokens(user._id, user.email, user.count, res)
+            const accessToken = createTokens(user._id, user.userType, user.count, res)
             return {authData: {userId: user._id, token: accessToken} }
         } catch (err) { throw new Error(`Can't create user. ${err}`); }
     },
@@ -103,7 +101,7 @@ module.exports = {
                 user.address.postalCode = postalCode;
             }
             await user.save()
-            return { updateUserData: transformUser(user) };
+            return { updateUserData: transformUser(user) }
         } catch (err) { throw new Error(`Can't update user. ${err}`)}
     }),
     refreshToken: async (_, {req, res}) => {
@@ -114,7 +112,7 @@ module.exports = {
         user.count += 1;
         await user.save();
 
-        const accessToken = createTokens(user._id, user.email, user.count, res)
+        const accessToken = createTokens(user._id, user.userType, user.count, res)
         return {userId: user._id, token: accessToken}
     },
     invalidateTokens: async (_, {req, res}) => {

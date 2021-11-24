@@ -1,7 +1,7 @@
 const Boat = require('../../models/boat');
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {transformBoat} = require("./merge");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated} = require("../../auth/auth");
 
 module.exports = {
     favorites: authenticated(async (_, {req}) => {
