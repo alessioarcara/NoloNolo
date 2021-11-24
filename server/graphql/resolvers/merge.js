@@ -6,12 +6,10 @@ const {dateToString} = require("../../helpers/utils");
 
 
 const userLoader = new DataLoader(userIds => {
-    console.log("ALESSIO")
     return User.find({_id: {$in: userIds}});
 });
 
 const boatLoader = new DataLoader(boatIds => {
-    console.log("MICHAEL")
     return Boat.find({_id: {$in: boatIds}});
 });
 

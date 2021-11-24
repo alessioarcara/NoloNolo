@@ -10,7 +10,6 @@ import ReviewModal from "../RentalCard/ReviewModal/ReviewModal";
 import classes from './RentalCard.module.css';
 import {body_deleteRental} from "../../../helpers/httpConfig";
 
-
 const RentalCard = ({
                         onUpdateOrDeleteRentals,
                         rentalId,
