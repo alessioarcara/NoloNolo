@@ -1,5 +1,5 @@
 import Header from "../components/UI/Header/Header";
-import AdvertisementAdministrationCard from "../components/AdvertisementAdministration/AdvertisementAdministrationCard";
+import AdvertisementAdministrationList from "../components/AdvertisementAdministration/AdvertisementAdministrationList";
 import useHttp from "../hooks/use-http";
 import {useContext, useEffect} from "react";
 import AuthContext from "../store/auth-context";
@@ -16,9 +16,9 @@ const AdvertisementAdministrationPage = () => {
     return (
         <>
             <Header textTitle="Annunci"/>
-            <AdvertisementAdministrationCard/>
+            <AdvertisementAdministrationList/>
         </>
     )
 }
 
-export default AdvertisementAdministrationPage
+export default AdvertisementAdministrationPage;

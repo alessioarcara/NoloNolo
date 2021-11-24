@@ -3,6 +3,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 35rem;
     border-radius: 1rem;
     user-select: none;
     overflow: hidden;
@@ -15,7 +16,7 @@
 
 .delete-card {
     position: absolute;
-    top: 0.1rem;
+    top: 0.2rem;
     right: 0.5rem;
     color: red;
     stroke: white;
@@ -35,6 +36,7 @@
 .details-container svg {
     width: 1.5rem;
 }
+
 .details-section, .option-section {
     display: flex;
     flex-direction: column;
@@ -58,12 +60,17 @@
 .grid-elements {
     display: grid;
     grid-template-columns: 5% 95%;
+    justify-items: start;
     align-items: center;
     gap: 0.5rem;
 }
 .hourglass-icon, .point-icon, .eye-icon {
     justify-self: center;
     align-self: center;
+}
+
+.eye-icon svg, .hourglass-icon svg {
+    width: 1.9rem;
 }
 .point-icon {
     border-radius: 50%;
@@ -124,11 +131,28 @@
 }
 
 @media only screen and (max-width: 449px) {
-     .date {
+    .card-container {
+        height: 30rem;
+    }
+
+    .date {
         font-size: 0.8em;
     }
 
     .details-container {
         font-size: 0.9em;
+    }
+}
+
+@media only screen and (min-width: 769px) {
+    .eye-icon svg, .hourglass-icon svg {
+        width: 2.2rem;
+    }
+}
+
+/* Card dimension */
+@media only screen and (min-width: 1920px) {
+    .card-container {
+        height: 45rem;
     }
 }
