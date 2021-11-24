@@ -77,17 +77,15 @@ module.exports = {
         } catch (err) { throw new Error(`Can't find boats. ${err}`) }
     },
     boatsByUser: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+        // if (!req.isAuth) { throw new Error("Unauthenticated.") }
         try {
             req.userId = "61013cd2cbcb99c21fbe91e2"
-            const boats = await Boat.find({"location.region": "emilia-romagna"}).lean()
-            console.log("ciao")
-            console.log(boats)
+            await Boat.find({"location.region": "emilia-romagna"}).lean()
             // return transformBoat(boat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },
     addBoat: async (args, {req}) => {
-        req.userId = "61013cd2cbcb99c21fbe91e2"
+        req.userId = "619b8420bc6fe126e2af3e9f"
         // if (!req.isAuth) { throw new Error("Unauthenticated.") }
         const {yard, model, length, maximumCapacity, boatType, isDocked, publishAdvertisement} = args.inputBoat
         try {

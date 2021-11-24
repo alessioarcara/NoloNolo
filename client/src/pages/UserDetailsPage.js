@@ -7,7 +7,6 @@ import UserDetails from "../components/UserDetails/UserDetails/UserDetails";
 import {body_user} from "../helpers/httpConfig";
 import Modal from "../components/UI/Modal/Modal";
 
-
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
     const {error, status, data: user, sendRequest} = useHttp(false)

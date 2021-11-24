@@ -10,13 +10,14 @@ const userLoader = new DataLoader(userIds => {
 });
 
 const boatLoader = new DataLoader(boatIds => {
-    return Boat.find({_id: {$in: boatIds}})
+    return Boat.find({_id: {$in: boatIds}});
 });
 
 const boat = async boatsId => {
     try {
         const boat = await boatLoader.load(boatsId.toString())
-        return transformBoat(boat._doc);
+        boatLoader.clear(boatsId.toString())
+        return transformBoat(boat.toObject());
     } catch (err) {throw err}
 }
 
@@ -81,6 +82,14 @@ const transformRental = rental => {
     }
 }
 
+const transformReview = review => {
+    return {
+        ...review,
+        creator: user.bind(this, review.customer)
+    }
+}
+
 exports.transformUser = transformUser;
 exports.transformBoat = transformBoat;
 exports.transformRental = transformRental;
+exports.transformReview = transformReview;

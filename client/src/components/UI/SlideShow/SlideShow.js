@@ -9,29 +9,6 @@ import {circularSlice} from "../../../helpers/utils";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const SlideShow = ({images, children, classNameSlideShowSlider}) => {
-    // const imageRef = useRef(null)
-    // const [isVisible, setIsVisible] = useState(false)
-
-    // const callbackFunction = entries => {
-    //     const [entry] = entries
-    //     setIsVisible(entry.isIntersecting)
-    // }
-
-    // const options = {
-    //     root: null,
-    //     rootMargin: "0px",
-    //     threshold: 0.5
-    // }
-    //
-    // console.log(imageRef)
-    //
-    // useEffect(() => {
-    //     const observer = new IntersectionObserver(callbackFunction, options)
-    //     if (imageRef.current) observer.observe(imageRef.current)
-    //
-    //     return () => { if (imageRef.current) observer.unobserve((imageRef.current)) }
-    // }, [imageRef, options])
-
     const [start, setStart] = useState(0)
     const [end, setEnd] = useState(images.length - 1)
 

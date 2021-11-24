@@ -14,15 +14,19 @@ const Search = ({closeModalHandler}) => {
     const searchClickHandler = useCallback(() => {
         navigate(`/boats?${state.region && `region=${state.region}`}${state.city ? `&city=${state.city}` : ``}${(state.startDate && state.endDate) ? `&from=${formatDate(state.startDate)}&to=${formatDate(state.endDate)}` : ``}`)
     }, [navigate, state])
+
     const moveClickHandler = useCallback((city, region) => {
         dispatch({ type: SWITCH_SEARCH, payload: {city, region}})
     }, []);
+
     const changeStartDateHandler = useCallback((start) => {
         dispatch({type: CHANGE_START_DATE, payload: start})
     }, [])
+
     const changeEndDateHandler = useCallback((end) => {
         dispatch({type: CHANGE_END_DATE, payload: end})
     }, [])
+
     const cancelSelectionHandler = useCallback(() => {
         dispatch({type: CLEAR_DATES})
     }, [])
@@ -38,6 +42,8 @@ const Search = ({closeModalHandler}) => {
                 cancelSelectionHandler={cancelSelectionHandler}
                 searchClickHandler={searchClickHandler}
                 moveClickHandler={moveClickHandler}
+                skipTextButton="Salta"
+                confirmTextButton="Avanti"
             />}
         </>
     );

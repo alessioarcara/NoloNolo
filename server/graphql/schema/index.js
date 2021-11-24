@@ -26,14 +26,15 @@ const rootSchema = `
             boat(boatId: ID!): Boat!
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatsByUser: [Boat!]
+            rentalsByUser: [Rental!]
             boatRentals(boatId: ID!): [Rental!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
         }
         
         type RootMutation {
-            login(inputUser: UserInput!): AuthenticationPayload!
             createUser(inputUser: UserInput!): AuthenticationPayload!
+            login(inputUser: UserInput!): AuthenticationPayload!
             updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             invalidateTokens: Boolean!
@@ -41,8 +42,10 @@ const rootSchema = `
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
+            rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!
+            updateRental(inputUpdateRental: UpdateRentalInput!): updateRentalPayload!
+            deleteRental(rentalId: ID!): deleteRentalPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
-            rentBoat(inputRental: RentalInput!): rentBoatPayload!
             addAvatar(upload: Upload!): addAvatarPayload!
         }
         
@@ -52,6 +55,5 @@ const rootSchema = `
         }      
 `
 
-// addImage(inputImage: ImageInput!): addImagePayload!
 
 module.exports = buildSchema(rootSchema);

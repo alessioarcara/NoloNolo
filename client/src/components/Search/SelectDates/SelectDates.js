@@ -4,8 +4,16 @@ import DayPicker from "../../UI/DatePicker/DayPicker";
 import classes from "./SelectDates.module.css";
 
 const SelectDates = ({
-                         moveClickHandler, changeStartDateHandler, changeEndDateHandler,
-                         searchClickHandler, cancelSelectionHandler, startDate, endDate
+                         moveClickHandler,
+                         changeStartDateHandler,
+                         changeEndDateHandler,
+                         searchClickHandler,
+                         cancelSelectionHandler,
+                         startDate,
+                         endDate,
+                         skipTextButton,
+                         confirmTextButton,
+                         alreadyRentedDates
                      }) => {
 
     return (
@@ -37,20 +45,21 @@ const SelectDates = ({
                     monthsShown={2}
                     onChangeStartDate={changeStartDateHandler}
                     onChangeEndDate={changeEndDateHandler}
+                    alreadyRentedDates={alreadyRentedDates}
                 />
             </div>
             <ActionButtons
-                actionClassName={classes[`actions-bottom`]}
-                firstButtonClassName={`btn btn-secondary ${classes[`btn-skip`]}`}
-                firstButtonClickHandler={searchClickHandler}
-                firstButtonText='Salta'
-                secondButtonClassName={`btn btn-outline-primary ${classes['btn-forward']}`}
-                secondButtonClickHandler={searchClickHandler}
-                secondButtonText='Avanti'
+                actionClassName={(skipTextButton || confirmTextButton) && classes[`actions-bottom`]}
+                firstButtonClassName={skipTextButton ? `btn btn-secondary ${classes[`btn-skip`]}` : classes.hide}
+                firstButtonClickHandler={skipTextButton && searchClickHandler}
+                firstButtonText={skipTextButton && skipTextButton}
+                secondButtonClassName={confirmTextButton ? 'btn btn-outline-primary' : classes.hide}
+                secondButtonClickHandler={confirmTextButton && searchClickHandler}
+                secondButtonText={confirmTextButton}
                 secondButtonDisabled={!startDate || !endDate || startDate.getTime() === endDate.getTime()}
             />
         </div>
-    )
-}
+    );
+};
 
 export default SelectDates;
