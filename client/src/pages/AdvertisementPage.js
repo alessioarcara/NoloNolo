@@ -24,8 +24,8 @@ const AdvertisementPage = () => {
     const [state, dispatch] = useReducer(advertisementReducer, {
         visibleContent: false,
         isBillShow: false,
-        startDate: location.state.startUrlDate ? new Date(location.state.startUrlDate) : null,
-        endDate: location.state.endUrlDate ? new Date(location.state.endUrlDate) : null
+        startDate: location.state && location.state.startUrlDate ? new Date(location.state.startUrlDate) : null,
+        endDate: location.state && location.state.endUrlDate ? new Date(location.state.endUrlDate) : null
     })
 
     const showBillHandler = useCallback(() => {
@@ -77,21 +77,6 @@ const AdvertisementPage = () => {
                 Prenotazione già presente
             </Modal>
             }
-            {/*{statusRental === 'completed' && rentalPayload && !rentalPayload.rentBoatProblem &&*/}
-            {/*<Modal title='Fattura'>*/}
-            {/*    <BoatBill*/}
-            {/*        billNumber={rentalPayload.rentBoatData.billNumber}*/}
-            {/*        from={rentalPayload.rentBoatData.from}*/}
-            {/*        to={rentalPayload.rentBoatData.to}*/}
-            {/*        boatData={rentalPayload.rentBoatData.boat}*/}
-            {/*        customer={rentalPayload.rentBoatData.customer.email}*/}
-            {/*        createdAt={rentalPayload.rentBoatData.createdAt}*/}
-            {/*        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}*/}
-            {/*        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}*/}
-            {/*        total={rentalPayload.rentBoatData.totalAmount}*/}
-            {/*    />*/}
-            {/*</Modal>*/}
-            {/*}*/}
             {state.isBillShow &&
             <Modal
                 title="Conferma prenotazione"

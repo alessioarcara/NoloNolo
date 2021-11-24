@@ -36,19 +36,21 @@ const RentalCard = ({
     const navigate = useNavigate()
 
     const [modal, setModal] = useState("")
-    const handleSelectModal = useCallback(whichModal => setModal(whichModal), [])
+    const handleSelectModal = useCallback(
+        e => e.target.dataset.modal ? setModal(e.target.dataset.modal) : setModal(""),
+        [])
 
     const handleUpdateRental = useCallback((body, applyData) => {
         onUpdateOrDeleteRentals(body, applyData)
         setModal("")
     }, [onUpdateOrDeleteRentals])
 
-    const handleDeleteRental = () => {
+    const handleDeleteRental = useCallback(() => {
         onUpdateOrDeleteRentals(
             body_deleteRental({rentalId}),
             (prevRentals, newRentalId) => prevRentals.filter(userRental => userRental._id !== newRentalId)
         )
-    }
+    }, [onUpdateOrDeleteRentals, rentalId])
 
     const goAdvertisementPage = useCallback(() => {
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
@@ -58,7 +60,7 @@ const RentalCard = ({
         <>
             {modal !== "" &&
             <Modal
-                closeModalHandler={handleSelectModal.bind(this, "")}
+                closeModalHandler={handleSelectModal}
                 adapterSize={modal === "dates" && breakpointCtx.breakpoint}
             >
                 {modal === "review" &&
@@ -90,6 +92,7 @@ const RentalCard = ({
                     end={to}
                     fixedFee={fixedFee}
                     dailyFee={dailyFee}
+                    onGoRentalsPage={handleSelectModal}
                 />
                 }
                 {modal === "bill" &&
@@ -109,8 +112,9 @@ const RentalCard = ({
             }
             <div className={classes['card-container']}>
                 <button
+                    data-modal="delete"
                     className={`${classes[`delete-card`]} ${!future && 'hide'}`}
-                    onClick={handleSelectModal.bind(this, "delete")}
+                    onClick={handleSelectModal}
                 >
                     &times;
                 </button>
@@ -136,20 +140,23 @@ const RentalCard = ({
                     {/*Third element (optional)*/}
                     <section className={`${classes['optional-section']} ${active && 'hide'}`}>
                         <button
+                            data-modal="dates"
                             className={`${classes.option} ${!future && 'hide'}`}
-                            onClick={handleSelectModal.bind(this, "dates")}
+                            onClick={handleSelectModal}
                         >
                             Modifica date
                         </button>
                         <button
+                            data-modal="bill"
                             className={`${classes.option} ${!previous && 'hide'}`}
-                            onClick={handleSelectModal.bind(this, "bill")}
+                            onClick={handleSelectModal}
                         >
                             Mostra fattura
                         </button>
                         <button
+                            data-modal="review"
                             className={`${classes.option} ${!previous && "hide"}`}
-                            onClick={handleSelectModal.bind(this, "review")}
+                            onClick={handleSelectModal}
                         >
                             {isReviewed ? 'Mostra recensione' : 'Lascia recensione'}
                         </button>

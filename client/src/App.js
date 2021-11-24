@@ -24,7 +24,7 @@ function App() {
                 {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}
                 <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
                 <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
-                <Route path='profile/rentals/*' element={<RentalsPage/>}/>
+                <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
                 <Route path='boats/*' element={<ResultsPage/>}/>
                 <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
                 <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>

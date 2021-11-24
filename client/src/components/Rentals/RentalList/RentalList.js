@@ -21,8 +21,6 @@ const RentalList = ({
         return previous ? 'passati' : active ? 'attivi' : future ? 'futuri' : ''
     }, [previous, active, future])
 
-    console.log(previousRentals)
-
     if (openedRentals().length === 0) {
         content =
             <ElementsNotFound

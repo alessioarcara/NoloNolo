@@ -8,7 +8,7 @@ import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
 import {formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
 
-const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateRentalDates}) => {
+const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateRentalDates, onGoRentalsPage}) => {
     const {token} = useContext(AuthContext)
     const [state, dispatch] = useReducer(searchReducer, {
         ...initialState, startDate: new Date(start), endDate: new Date(end)
@@ -49,6 +49,7 @@ const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateR
             <SelectDates
                 startDate={state.startDate}
                 endDate={state.endDate}
+                moveClickHandler={onGoRentalsPage}
                 changeStartDateHandler={changeStartDateHandler}
                 changeEndDateHandler={changeEndDateHandler}
                 cancelSelectionHandler={cancelSelectionHandler}

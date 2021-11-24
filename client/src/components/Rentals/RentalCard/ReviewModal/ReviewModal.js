@@ -9,17 +9,11 @@ const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview
     const [quoteIndex, setQuoteIndex] = useState()
     const [textArea, setTextArea] = useState('')
 
-    const changeQuoteIndex = useCallback((index) => {
-        setQuoteIndex(index)
-    }, [setQuoteIndex])
+    const changeQuoteIndex = useCallback(index => setQuoteIndex(index), [])
+    const changeTextHandler = useCallback(event => setTextArea(event.target.value), [])
 
-    const changeTextHandler = (event) => {
-        setTextArea(event.target.value)
-    }
-
-    const submitFormHandler = (evt) => {
+    const submitFormHandler = evt => {
         evt.preventDefault()
-
         onPublishReview(
             body_publishReview({
                 rentalId,

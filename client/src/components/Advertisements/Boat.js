@@ -10,9 +10,12 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
     const navigate = useNavigate()
     const searchParams = useSearchParams()[0]
 
-    const goAdvertisementPage = useCallback((start, end) => {
-        navigate(`/boats/${id}`, {state: {startUrlDate: start, endUrlDate: end}})
-    }, [navigate, id])
+    const goAdvertisementPage = useCallback(() => {
+        navigate(
+            `/boats/${id}`,
+            {state: {startUrlDate: searchParams.get('from'), endUrlDate: searchParams.get('to')}}
+        )
+    }, [navigate, id, searchParams])
 
     return (
         <>
@@ -27,7 +30,7 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
                 </SlideShow>
                 {/* The second part with information */}
                 <div className={classes.adapter}
-                     onClick={goAdvertisementPage.bind(this, searchParams.get('from'), searchParams.get('to'))}>
+                     onClick={goAdvertisementPage}>
                     <div className='card-title'>{model}</div>
                     <div className={`${classes.capacity} ${classes['text-style']}`}>Fino a {maxCapacity} passeggeri
                     </div>
@@ -41,7 +44,10 @@ const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}
                     {/* Button in desktop */}
                     <button
                         className={`btn btn-primary ${classes['btn-details']}`}
-                        onClick={goAdvertisementPage.bind(this, searchParams.get('from'), searchParams.get('to'))}
+                        onClick={e => {
+                            e.stopPropagation()
+                            goAdvertisementPage()
+                        }}
                     >
                         Dettagli
                     </button>
