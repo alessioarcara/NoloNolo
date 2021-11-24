@@ -12,7 +12,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import ResultsPage from "./pages/ResultsPage";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
-import AdvertisementAmministrationPage from "./pages/AdvertisementAmministrationPage";
+import AdvertisementAdministrationPage from "./pages/AdvertisementAdministrationPage";
 
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
             <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
 
 
-            <Route path='prova' element={<AdvertisementAmministrationPage/>}/>
+            <Route path='prova' element={<AdvertisementAdministrationPage/>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
         </Routes>
     )

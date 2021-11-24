@@ -1,7 +1,7 @@
 import AnnouncementCard from "./AnnouncementCard/AnnouncementCard";
 import AnnouncementListLayout from "../UI/Layout/AnnouncementListLayout/AnnouncementListLayout";
 
-const AdvertisementAmministrationCard = () => {
+const AdvertisementAdministrationList = () => {
     return (
         <AnnouncementListLayout>
             <AnnouncementCard/>
@@ -11,4 +11,4 @@ const AdvertisementAmministrationCard = () => {
     )
 }
 
-export default AdvertisementAmministrationCard
+export default AdvertisementAdministrationList
