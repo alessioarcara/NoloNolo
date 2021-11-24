@@ -6,7 +6,6 @@ import RightArrowIcon from "../icons/RightArrowIcon";
 import Images from "../Images/Images";
 import SlideShowDots from "./SlideShowDots";
 import {circularSlice} from "../../../helpers/utils";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     const [start, setStart] = useState(0)
@@ -28,7 +27,7 @@ const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     return (
         <div className={classes.slideshow}>
             <div className={`${classes.slideshowSlider} ${classNameSlideShowSlider ? classNameSlideShowSlider : ''}`}>
-                {isLoading && <LoadingSpinner/>}
+                {isLoading && <img style={{objectFit: 'cover', width: '100%', height: '100%'}} src="https://www.trroofingsheets.co.uk/wp-content/uploads/2016/05/default-no-image-1.png" alt=""/>}
                 {circularSlice(images, start, end).map((place, index) => (
                     <Images
                         key={index}
