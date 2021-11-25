@@ -15,7 +15,7 @@ module.exports = {
             const boat = await Boat.findOne({ _id: boatId } )
             if (!boat) { return { favoritesProblem: boatNotFound }}
 
-            boat.advertisement.preferredBy.push(req.userId)
+            boat.advertisement.preferredBy.addToSet(req.userId)
             await boat.save()
 
             return { favoritesData: transformBoat(boat.toObject())}

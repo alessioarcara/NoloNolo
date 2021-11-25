@@ -42,6 +42,7 @@ const rootSchema = `
             invalidateTokens: Boolean!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             publishAdvertisement(inputAdvertisement: AdvertisementInput!): publishAdvertisementPayload!
+            withdrawAdvertisement(boatId: ID!): withdrawAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
             rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!

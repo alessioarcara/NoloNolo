@@ -122,7 +122,7 @@ module.exports = {
         try {
             const rental = await Rental.findById(rentalId).lean()
             if (!rental) return { deleteRentalProblem: rentalNotFound }
-            if (rental.from <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
+            if (rental.fromDate <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
             await Rental.deleteOne({_id: rental._id})
             return { deletedRentalId: rental._id }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}

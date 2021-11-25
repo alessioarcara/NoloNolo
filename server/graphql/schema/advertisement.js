@@ -13,6 +13,11 @@ const advertisementType = `
             publishAdvertisementData: Advertisement
             publishAdvertisementProblem: String
         }
+        
+        type withdrawAdvertisementPayload {
+            withdrawnAdvertisementId: ID
+            withdrawAdvertisementProblem: String
+        }
 
         input AdvertisementInput {
             description: String
