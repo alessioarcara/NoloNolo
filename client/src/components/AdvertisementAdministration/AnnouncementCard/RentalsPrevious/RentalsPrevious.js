@@ -1,39 +1,18 @@
 import RentalPreviousCard from "./RentalPreviousCard/RentalPreviousCard";
 import {dateSorting} from "../../../../helpers/utils";
 
-const previousRentals = [
-    {
-        id: "01",
-        start: new Date('2021-11-3'),
-        end: new Date("2021-11-8"),
-        customer: 'mario.verdi@test.it'
-    },
-    {
-        id: "02",
-        start: new Date('2021-10-10'),
-        end: new Date("2021-10-15"),
-        customer: 'mario.rossi@test.it'
-    },
-    {
-        id: "03",
-        start: new Date('2021-11-18'),
-        end: new Date("2021-11-19"),
-        customer: 'mario.arancioni@test.it'
-    }
-]
-
-const RentalsPrevious = () => {
-
-    // TO DO: add data request (server)
-    dateSorting(previousRentals, true)
+const RentalsPrevious = ({previousRentals}) => {
+    const data = dateSorting(previousRentals, true)
 
     return (
         previousRentals.map(previous =>
             <RentalPreviousCard
-                key={previous.id}
-                start={previous.start}
-                end={previous.end}
+                key={previous._id}
+                start={previous.from}
+                end={previous.to}
                 customer={previous.customer}
+                review={previous.boat.reviews.filter(review =>
+                    previous._id === review.rental && review.creator._id === previous.customer._id)[0]}
             />
         )
     )

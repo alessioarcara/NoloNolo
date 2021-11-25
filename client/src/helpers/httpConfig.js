@@ -329,10 +329,19 @@ exports.body_shipownerAdvertisements = {
                 dailyFee
                 fixedFee
                 billNumber
+                createdAt
                 boat {
                     _id
+                    reviews {
+                        rating
+                        rental
+                        creator {
+                            _id
+                        }
+                    }
                 }
                 customer {
+                    _id
                     email
                 }
             }

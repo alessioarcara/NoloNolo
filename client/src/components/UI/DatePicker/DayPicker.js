@@ -37,7 +37,7 @@ const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown,
         <DatePicker
             locale="it"
             wrapperClassName={"input-container"}
-            minDate={addDays(new Date(), 1)}
+            // minDate={addDays(new Date(), 1)}
             selected={start}
             startDate={start}
             endDate={end}

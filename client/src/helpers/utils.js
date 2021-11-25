@@ -51,7 +51,7 @@ export const formatDayMonthYearDate = (date, options) => new Date(date).toLocale
 /* Date sorting */
 /* Così facendo viene ordinato l'array padre, utilizzando slice() prima di sort si ordina solo la variabile */
 export const dateSorting = (object, growing = false) => {
-   return growing ? object.sort((a, b) => a.start - b.start) : object.sort((a, b) => b.start - a.start)
+   return growing ? object.sort((a, b) => a.from - b.from) : object.sort((a, b) => b.from - a.from)
 };
 
 export const destructurePayload = resData => Object.values(resData[Object.keys(resData)]);

@@ -12,5 +12,5 @@
 }
 
 .star-icon-color svg {
-    fill: #FF2267;
+    fill: #FF2267 !important;
 }

@@ -7,7 +7,7 @@ import {body_shipownerAdvertisements} from "../helpers/httpConfig";
 
 const AdvertisementAdministrationPage = () => {
     const {token} = useContext(AuthContext)
-    const {sendRequest} = useHttp(true)
+    const {data, sendRequest} = useHttp(true)
 
     useEffect(() => {
         sendRequest({body: body_shipownerAdvertisements, token}, resData => resData)
@@ -16,7 +16,10 @@ const AdvertisementAdministrationPage = () => {
     return (
         <>
             <Header textTitle="Annunci"/>
-            <AdvertisementAdministrationList/>
+            <AdvertisementAdministrationList
+                advertisements={data ? data.advertisementsByShipowner : []}
+                rentals={data ? data.rentalsByShipowner : []}
+            />
         </>
     )
 }

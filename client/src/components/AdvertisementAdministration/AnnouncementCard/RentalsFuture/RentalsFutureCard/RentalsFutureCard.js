@@ -8,7 +8,7 @@ const RentalsFutureCard = ({customer, createdAt, start, end, totalAmount}) => {
                 {formatDayMonthYearDate(createdAt, {day: "numeric", month: 'numeric', year: 'numeric'})}
             </div>
             <div className={classes['customer']}>
-                {customer.split('@')[0]}
+                {customer.email.split('@')[0]}
             </div>
             <span className={classes['date']}>
                 {`

@@ -1,17 +1,23 @@
 import classes from './RentalPreviousCard.module.css';
 import StarIcon from "../../../../UI/icons/StarIcon";
 import {formatDayMonthYearDate} from "../../../../../helpers/utils";
+import Vote from "../../../../UI/Vote/Vote";
 
 const stars = [0, 1, 2, 3, 4]
 
-const RentalPreviousCard = ({start, end, customer}) => {
+const RentalPreviousCard = ({start, end, customer, review}) => {
+
+    console.log(review.rating - 1)
+
     return (
         <div className={classes['container']}>
-            <div className={classes['customer-email']}>{customer.split('@')[0]}</div>
+            <div className={classes['customer-email']}>{customer.email.split('@')[0]}</div>
             <div className={classes['stars-container']}>
-                {stars.map(index => {
-                    return <StarIcon key={index}/>
-                })}
+                <Vote
+                    votes={stars}
+                    quoteIndex={review.rating - 1}
+                    placeholder={true}
+                />
             </div>
             <div className={classes.date}>
                 {`
@@ -21,7 +27,7 @@ const RentalPreviousCard = ({start, end, customer}) => {
             </div>
             <button className={`${classes['bill-btn']} btn btn-primary`}>Fattura</button>
         </div>
-    );
+    )
 }
 
 export default RentalPreviousCard
