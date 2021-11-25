@@ -4,22 +4,20 @@ import RentalsPrevious from "../RentalsPrevious/RentalsPrevious";
 import RentalActive from "../RentalActive/RentalActive";
 import RentalsFuture from "../RentalsFuture/RentalsFuture";
 
-const DetailsModal = () => {
+const DetailsModal = ({previousRentals, activeRental, futureRentals}) => {
     const [rentalsState, setRentalsState] = useState("active")
-
-    // TO DO: passare i dati come props oppure fare una fetch qui passando rentalId ?
 
     return (
         <>
             <DetailsModalHeader rentalsState={rentalsState} setRentals={setRentalsState}/>
             {rentalsState === 'previous' &&
-                <RentalsPrevious/>
+                <RentalsPrevious previousRentals={previousRentals}/>
             }
             {rentalsState === 'active' &&
-                <RentalActive/>
+                <RentalActive activeRental={activeRental[0]}/>
             }
             {rentalsState === 'future' &&
-                <RentalsFuture/>
+                <RentalsFuture futureRentals={futureRentals}/>
             }
         </>
     );

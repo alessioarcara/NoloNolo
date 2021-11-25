@@ -22,10 +22,8 @@ const previousRentals = [
     }
 ]
 
-const RentalsPrevious = () => {
-
-    // TO DO: add data request (server)
-    dateSorting(previousRentals, true)
+const RentalsPrevious = ({previousRentals}) => {
+    const data = dateSorting(previousRentals, true)
 
     return (
         previousRentals.map(previous =>

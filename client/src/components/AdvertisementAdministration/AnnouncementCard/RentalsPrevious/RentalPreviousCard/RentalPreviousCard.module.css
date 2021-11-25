@@ -25,6 +25,11 @@
     align-items: center;
 }
 
+.stars-container svg {
+    fill: #fff;
+    stroke: #FF2267;
+}
+
 .date {
     font-size: 0.8em;
     color: #9e9d9d;

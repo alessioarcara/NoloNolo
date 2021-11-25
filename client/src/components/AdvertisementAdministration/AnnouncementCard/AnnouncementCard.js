@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
+import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
@@ -25,8 +25,14 @@ const object = {
     totalAmount: formatNumber(1200)
 }
 
-const AnnouncementCard = () => {
+const AnnouncementCard = ({model, reviews, rentals}) => {
     const [openDetailsModal, setOpenDetailsModal] = useState(false)
+
+    const filterRentals = {
+        previous: rentals.filter(rental => !rental.redelivery),
+        active: rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)),
+        future: rentals.filter(rental => new Date(rental.from) > new Date())
+    }
 
     return (
         <>
@@ -34,7 +40,11 @@ const AnnouncementCard = () => {
                 <Modal
                     closeModalHandler={() => setOpenDetailsModal(false)}
                 >
-                    <DetailsModal/>
+                    <DetailsModal
+                        previousRentals={filterRentals.previous ? filterRentals.previous : []}
+                        activeRental={filterRentals.active ? filterRentals.active : []}
+                        futureRentals={filterRentals.future ? filterRentals.future : []}
+                    />
                 </Modal>
             }
 
@@ -49,8 +59,8 @@ const AnnouncementCard = () => {
                             <span className="card-title">{object.model}</span>
                             <div className={classes['average-reviews-container']}>
                                 <StarIcon/>
-                                <span>{object.average}</span>
-                                <span>{`(${object.reviews})`}</span>
+                                <span>{reviews.length > 0 && averageReviews(reviews)}</span>
+                                <span>{`(${reviews.length})`}</span>
                             </div>
                         </div>
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>

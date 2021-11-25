@@ -7,7 +7,7 @@ const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
 const mongoose = require('mongoose');
 
 const validateRentDates = async (boatId, from, to) => {
-    if (from <= new Date()) return selectedRentDatesTooClose;
+    // if (from <= new Date()) return selectedRentDatesTooClose;
     if (from >= to) return invalidRange;
 
     /* *----------------------------------------------*

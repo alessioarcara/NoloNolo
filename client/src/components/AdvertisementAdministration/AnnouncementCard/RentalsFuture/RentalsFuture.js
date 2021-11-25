@@ -1,4 +1,5 @@
 import RentalsFutureCard from "./RentalsFutureCard/RentalsFutureCard";
+import {calculateTotal} from "../../../../helpers/utils";
 
 const futureRentals = [
     {
@@ -19,16 +20,16 @@ const futureRentals = [
     }
 ]
 
-const RentalsFuture = () => {
+const RentalsFuture = ({futureRentals}) => {
     return (
         futureRentals.map(rental =>
             <RentalsFutureCard
-                key={rental.id}
+                key={rental._id}
                 customer={rental.customer}
                 createdAt={rental.createdAt}
-                start={rental.start}
-                end={rental.end}
-                totalAmount={rental.totalAmount}
+                start={rental.from}
+                end={rental.to}
+                totalAmount={calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to)}
             />
         )
     );
