@@ -1,5 +1,6 @@
 import AnnouncementCard from "./AnnouncementCard/AnnouncementCard";
 import AnnouncementListLayout from "../UI/Layout/AnnouncementListLayout/AnnouncementListLayout";
+import {useMemo} from "react";
 
 const AdvertisementAdministrationList = ({advertisements, rentals}) => {
 

@@ -47,7 +47,6 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
                     />
                 </Modal>
             }
-
             <div className={classes['card-container']}>
                 {/*First element*/}
                 <div className={classes['delete-card']}>&times;</div>
