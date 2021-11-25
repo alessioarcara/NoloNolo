@@ -13,7 +13,7 @@ const filterRentals = rentals => {
             rentals.reduce((previousRentals, rental) => {
                 if (!rental.redelivery) {
                     previousRentals.push(rental.boat.reviews.some(review => review.rental === rental._id && review.creator._id === rental.customer._id) ?
-                        { ...rental, isReviewed: true } : {...rental, isReviewed: false})
+                        {...rental, isReviewed: true} : {...rental, isReviewed: false})
                 }
                 return previousRentals
             }, []) : [],
@@ -51,9 +51,11 @@ const RentalsPage = () => {
         <>
             <Header/>
             <Routes>
-                <Route path='previous' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals} previousRentals={filteredRentals.previous} previous/>}/>
+                <Route path='previous' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                                                            previousRentals={filteredRentals.previous} previous/>}/>
                 <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
-                <Route path='future' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals} futureRentals={filteredRentals.future} future/>}/>
+                <Route path='future' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                                                          futureRentals={filteredRentals.future} future/>}/>
                 <Route path='/' element={<Navigate to='active'/>}/>
             </Routes>
         </>

@@ -56,7 +56,7 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
                 <div className={classes['details-container']}>
                     <div className={classes['details-section']}>
                         <div className={classes['card-header']}>
-                            <span className="card-title">{object.model}</span>
+                            <span className="card-title">{model}</span>
                             <div className={classes['average-reviews-container']}>
                                 <StarIcon/>
                                 <span>{reviews.length > 0 && averageReviews(reviews)}</span>
@@ -64,7 +64,7 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
                             </div>
                         </div>
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
-                        <div>Prenotazioni future: <span className={classes.parameter}>{object.future}</span></div>
+                        <div>Prenotazioni future: <span className={classes.parameter}>{filterRentals.future.length}</span></div>
                         <div className={classes['grid-elements']}>
                             <div className={classes['eye-icon']}><EyeIcon/></div>
                             <div>Osservato da: <span className={classes.parameter}>{object.preferredBy.length} persone</span></div>

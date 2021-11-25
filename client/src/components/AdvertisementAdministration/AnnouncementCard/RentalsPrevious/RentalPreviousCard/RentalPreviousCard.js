@@ -27,7 +27,7 @@ const RentalPreviousCard = ({start, end, customer, review}) => {
             </div>
             <button className={`${classes['bill-btn']} btn btn-primary`}>Fattura</button>
         </div>
-    );
+    )
 }
 
 export default RentalPreviousCard
