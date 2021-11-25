@@ -99,7 +99,7 @@ const AdvertisementPage = () => {
                         boatId={boatId}
                         dispatch={dispatch}
                         boatModel={boatPayload.boat.model}
-                        boatReviews={boatPayload.boat.hasAdvertisement.reviews}
+                        boatReviews={boatPayload.boat.reviews}
                         place={boatPayload.boat.isDocked}
                         images={boatPayload.boat.hasAdvertisement.images}
                         ownerEmail={boatPayload.boat.owner.email}

@@ -37,14 +37,14 @@ exports.body_changePassword = ({oldPassword, newPassword}) => {
                 changePassword(inputChangePassword: $passwordData) {
                     changePasswordData {
                         email
+                        avatar
+                        createdAt
                         address {
                             street
                             city
                             region   
                             postalCode
                         }
-                        avatar
-                        createdAt
                     }
                     changePasswordProblem
                 }  
@@ -60,14 +60,14 @@ exports.body_updateUser = ({street, city, region, postalCode}) => {
                 updateUser(inputUpdateUser: $userData) {
                     updateUserData {
                         email
+                        avatar
+                        createdAt
                         address {
                             street
                             city
                             region
                             postalCode
                         }
-                        avatar
-                        createdAt
                     }
                     updateUserProblem
                 }  
@@ -104,9 +104,9 @@ exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice,
                         description
                         images
                         dailyFee
-                        reviews {
-                            rating
-                        }
+                    }
+                    reviews {
+                        rating
                     }
                 }
             }
@@ -119,36 +119,36 @@ exports.body_informations = (boatId) => {
         query: `
             query BoatInformations($boatId: ID!) {
                 boat(boatId: $boatId) {
-                    owner {
-                        email
-                        avatar
-                    }
                     model
                     yard
                     length
                     maximumCapacity
                     boatType
+                    owner {
+                        email
+                        avatar
+                    }
                     hasAdvertisement {
                         description
                         images
                         dailyFee
                         fixedFee
-                        reviews {
-                            _id
-                            body
-                            rating
-                            createdAt
-                            creator {
-                                email
-                                avatar
-                            }
-                        }
                     }
                     isDocked {
                         region
                         city
                         harbour
                         coordinates 
+                    }
+                    reviews {
+                        _id
+                        body
+                        rating
+                        createdAt
+                        creator {
+                            email
+                            avatar
+                        }
                     }
                 }
                 boatRentals(boatId: $boatId) {
@@ -169,7 +169,12 @@ exports.body_rentBoat = ({boatId, from, to}) => {
                         billNumber
                         from
                         to
-                        totalAmount
+                        dailyFee
+                        fixedFee
+                        createdAt
+                        customer {
+                            email
+                        }
                         boat {
                             model
                             yard
@@ -183,10 +188,6 @@ exports.body_rentBoat = ({boatId, from, to}) => {
                                 coordinates
                             }
                         }
-                        customer {
-                            email
-                        }
-                        createdAt
                     }
                     rentBoatProblem
                 }
@@ -205,7 +206,13 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                         billNumber
                         from
                         to
-                        totalAmount
+                        dailyFee
+                        fixedFee
+                        createdAt
+                        customer {
+                            _id
+                            email
+                        }
                         boat {
                             _id
                             yard
@@ -216,33 +223,29 @@ exports.body_updateRental = ({rentalId, from, to}) => {
                             owner {
                                 email
                             }
-                            isDocked {
-                                region
-                                city
-                                harbour
-                            }
                             hasAdvertisement {
                                 description
                                 images
                                 dailyFee
                                 fixedFee
-                                reviews {
-                                  _id
-                                  body
-                                  rating
-                                  createdAt
-                                  creator {
+                            }
+                            isDocked {
+                                region
+                                city
+                                harbour
+                            }
+                            reviews {
+                                _id
+                                body
+                                rating
+                                rental
+                                createdAt
+                                creator {
                                     _id
                                     email
                                     avatar
-                                  }
-                                  rental
                                 }
                             }
-                        }
-                        customer {
-                            _id
-                            email
                         }
                     }
                     updateRentalProblem
@@ -286,11 +289,11 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
                     publishReviewData {
                         body
                         rating
+                        rental
                         createdAt
                         creator {
                             _id
                         }
-                        rental
                     }
                     publishReviewProblem
                 }
@@ -299,8 +302,6 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
             variables: {reviewData: {rentalId, body, rating}}
         }
 };
-
-/* TODO: dailyFee e fixedFee non devono essere presi da advertisement ma da rental */
 exports.body_shipownerAdvertisements = {
     query: `
         query shipownerAdvertisements {
@@ -310,32 +311,34 @@ exports.body_shipownerAdvertisements = {
                 model
                 hasAdvertisement {
                     images
-                    reviews {
-                        _id
-                        rating
-                    }
-                    dailyFee
-                    fixedFee
                 }
                 isDocked {
                     region
                     city
                     harbour
                 }
+                reviews {
+                    _id
+                    rating
+                }
             }
             rentalsByShipowner {
                 _id
                 from
                 to
+                dailyFee
+                fixedFee
+                billNumber
+                boat {
+                    _id
+                }
                 customer {
                     email
                 }
-                totalAmount
-                billNumber
             }
         }
     `
-}
+};
 exports.body_favorites = {
     query: `
         query {
@@ -347,9 +350,9 @@ exports.body_favorites = {
                     images
                     description
                     dailyFee
-                    reviews {
-                        rating
-                    }
+                }
+                reviews {
+                    rating
                 }
             }  
         }
@@ -368,9 +371,9 @@ exports.body_addFavorite = (boatId) => {
                             images
                             description
                             dailyFee
-                            reviews {
-                                rating
-                            }
+                        }
+                        reviews {
+                            rating
                         }
                     }
                     favoritesProblem
@@ -393,9 +396,9 @@ exports.body_removeFavorite = (boatId) => {
                             images
                             description
                             dailyFee
-                            reviews {
-                                rating
-                            }
+                        }
+                        reviews {
+                            rating
                         }
                     }
                     favoritesProblem
@@ -437,14 +440,14 @@ exports.body_user = {
             user {
                 email
                 avatar
+                userType
+                createdAt
                 address {
                     street
                     city
                     region
                     postalCode
                 }
-                userType
-                createdAt
             }
         }
     `,
@@ -458,45 +461,46 @@ exports.body_userRentals = {
                 from
                 to
                 redelivery
-                totalAmount
+                dailyFee
+                fixedFee
+                createdAt
+                customer {
+                    _id
+                    email
+                }
                 boat {
                     _id
                     model
                     yard
+                    owner {
+                        email
+                    }
                     hasAdvertisement {
                         images
                         description
                         dailyFee
                         fixedFee
-                        reviews {
-                            creator {
-                                _id
-                            }
-                            createdAt
-                            body
-                            rating
-                            rental
-                        }
-                    }
-                    owner {
-                        email
                     }
                     isDocked {
                         region
                         city
                         harbour
                     }
+                    reviews {
+                        creator {
+                            _id
+                        }
+                        createdAt
+                        body
+                        rating
+                        rental
+                    }
                 }
-                customer {
-                    _id
-                    email
-                }
-                createdAt
             }
         }
     `
 };
 exports.body_addAvatar = {
-    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar createdAt } addAvatarProblem }  }", "variables": { "file": null } }`,
+    operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email avatar createdAt address { street city region postalCode } } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
 };

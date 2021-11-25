@@ -43,6 +43,7 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
+    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
@@ -50,12 +51,6 @@ const transformBoat = boat => {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee),
-            reviews: boat.advertisement.reviews.map(review => {
-                return {
-                    ...review,
-                    creator: user.bind(this, review.customer),
-                }
-            })
         },
         isDocked: {
             region: boat.location.region,
@@ -63,6 +58,7 @@ const transformBoat = boat => {
             harbour: boat.location.harbour,
             coordinates: boat.location.geometry.coordinates
         },
+        reviews: boat.reviews.map(transformReview),
         totalCount: boat.totalCount,
         minPrice: parseFloat(boat.minPrice),
         maxPrice: parseFloat(boat.maxPrice)
@@ -75,7 +71,8 @@ const transformRental = rental => {
         customer: user.bind(this, rental.customer),
         from: dateToString(rental.fromDate),
         to: dateToString(rental.toDate),
-        totalAmount: parseFloat(rental.totalAmount),
+        dailyFee: parseFloat(rental.dailyFee),
+        fixedFee: parseFloat(rental.fixedFee),
         boat: boat.bind(this, rental.boat),
         createdAt: dateToString(rental.createdAt),
         updatedAt: dateToString(rental.updatedAt)

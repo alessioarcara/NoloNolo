@@ -12,7 +12,7 @@ const filterRentals = rentals => {
         previous: rentals ?
             rentals.reduce((previousRentals, rental) => {
                 if (!rental.redelivery) {
-                    previousRentals.push(rental.boat.hasAdvertisement.reviews.some(review => review.rental === rental._id && review.creator._id === rental.customer._id) ?
+                    previousRentals.push(rental.boat.reviews.some(review => review.rental === rental._id && review.creator._id === rental.customer._id) ?
                         { ...rental, isReviewed: true } : {...rental, isReviewed: false})
                 }
                 return previousRentals

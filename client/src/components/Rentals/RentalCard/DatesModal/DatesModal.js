@@ -6,7 +6,7 @@ import useHttp from "../../../../hooks/use-http";
 import {body_boatRentals, body_updateRental} from "../../../../helpers/httpConfig";
 import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
-import {formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
+import {calculateTotal, formatDate, formatNumber, rangeDate} from "../../../../helpers/utils";
 
 const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateRentalDates, onGoRentalsPage}) => {
     const {token} = useContext(AuthContext)
@@ -58,7 +58,7 @@ const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateR
             <div className={classes['bottom-container']}>
                 <span className={classes['total-amount']}>
                     {state.endDate && rangeDate(state.startDate, state.endDate) !== 0
-                        ? `Totale ${formatNumber((dailyFee * rangeDate(state.startDate, state.endDate)) + fixedFee)}`
+                        ? `Totale ${formatNumber(calculateTotal(dailyFee, fixedFee, state.startDate, state.endDate))}`
                         : ""
                     }
                 </span>

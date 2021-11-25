@@ -25,10 +25,12 @@ const RentalCard = ({
                         boatData,
                         customer,
                         createdAt,
-                        dailyFee,
-                        fixedFee,
+                        rentalDailyFee,
+                        rentalFixedFee,
+                        advertisementDailyFee,
+                        advertisementFixedFee,
                         totalAmount,
-                        reviews,
+                        review,
                         isReviewed
                     }) => {
 
@@ -67,7 +69,7 @@ const RentalCard = ({
                 <ReviewModal
                     rentalId={rentalId}
                     customerId={customer._id}
-                    reviews={reviews}
+                    review={review}
                     onPublishReview={handleUpdateRental}
                     isReviewed={isReviewed}
                 />
@@ -90,8 +92,8 @@ const RentalCard = ({
                     rentalId={rentalId}
                     start={from}
                     end={to}
-                    fixedFee={fixedFee}
-                    dailyFee={dailyFee}
+                    dailyFee={advertisementDailyFee}
+                    fixedFee={advertisementFixedFee}
                     onGoRentalsPage={handleSelectModal}
                 />
                 }
@@ -103,9 +105,9 @@ const RentalCard = ({
                     boatData={boatData}
                     customer={customer.email}
                     createdAt={createdAt}
-                    dailyFee={dailyFee}
-                    fixedFee={fixedFee}
-                    total={totalAmount}
+                    dailyFee={rentalDailyFee}
+                    fixedFee={rentalFixedFee}
+                    totalAmount={totalAmount}
                 />
                 }
             </Modal>

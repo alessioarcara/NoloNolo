@@ -1,7 +1,6 @@
 const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
-const {rangeDate} = require("../../helpers/utils");
 const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDatesTooClose, isAlreadyStarted} = require("../../helpers/problemMessages");
 const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
@@ -48,7 +47,7 @@ module.exports = {
                 { $unwind: "$boat" },
                 { $match: { "boat.shipowner": mongoose.Types.ObjectId(req.userId) }}
             ])
-            return rentals.map(transformRental)
+            return rentals.map(rental => transformRental({ ...rental, boat: rental.boat._id }))
         } catch (err) { throw new Error(`Can't find shipowner rentals. ${err}`) }
     })),
     rentBoat: authenticated(async (args, {req}) => {
@@ -68,9 +67,8 @@ module.exports = {
                 const rental = await Rental.create({
                     customer: req.userId,
                     boat: boatId,
-                    totalAmount:
-                        parseFloat(boat.advertisement.dailyFee) * rangeDate(from, to)
-                        + parseFloat(boat.advertisement.fixedFee),
+                    dailyFee: boat.advertisement.dailyFee,
+                    fixedFee: boat.advertisement.fixedFee,
                     fromDate: from,
                     toDate: to
                 })
@@ -102,9 +100,9 @@ module.exports = {
             const areInvalidSelectedDates = await validateRentDates(rental.boat._id, from, to)
             if (!areInvalidSelectedDates) {
                 rental.fromDate = from;
-                rental.toDate = to
-                rental.totalAmount = parseFloat(rental.boat.advertisement.dailyFee) * rangeDate(from, to)
-                    + parseFloat(rental.boat.advertisement.fixedFee)
+                rental.toDate = to;
+                rental.dailyFee = rental.boat.advertisement.dailyFee;
+                rental.fixedFee = rental.boat.advertisement.fixedFee;
 
                 await rental.save();
 

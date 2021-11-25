@@ -4,7 +4,7 @@ import Vote from "../../../UI/Vote/Vote";
 import {body_publishReview} from "../../../../helpers/httpConfig";
 import {formatDayMonthYearDate} from "../../../../helpers/utils";
 
-const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview}) => {
+const ReviewModal = ({rentalId, review, isReviewed, onPublishReview}) => {
     const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
     const [quoteIndex, setQuoteIndex] = useState()
     const [textArea, setTextArea] = useState('')
@@ -24,17 +24,12 @@ const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview
                     ...userRental,
                     boat: {
                         ...userRental.boat,
-                        hasAdvertisement: {
-                            ...userRental.boat.hasAdvertisement,
-                            reviews: userRental.boat.hasAdvertisement.reviews.concat(newReview)
-                        }
+                        reviews: userRental.boat.reviews.concat(newReview)
                     }
                 } : userRental
             )
         )
     }
-
-    const filterReview = () => reviews.filter(review => review.rental === rentalId && review.creator._id === customerId)
 
     return (
         <form onSubmit={submitFormHandler}>
@@ -45,7 +40,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview
                 <div className={classes[`five-stars`]}>
                     <span className={classes.quote}>
                         {isReviewed
-                            ? `Valutata: ${votes[filterReview()[0].rating - 1]}`
+                            ? `Valutata: ${votes[review.rating - 1]}`
                             : votes[quoteIndex]
                                 ? votes[quoteIndex]
                                 : 'Valuta questa barca'
@@ -54,7 +49,7 @@ const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview
                     <div className={classes.stars}>
                         <Vote
                             votes={votes}
-                            quoteIndex={isReviewed ? filterReview()[0].rating - 1 : quoteIndex}
+                            quoteIndex={isReviewed ? review.rating - 1 : quoteIndex}
                             changeQuoteIndex={changeQuoteIndex}
                             placeholder={isReviewed}
                         />
@@ -67,13 +62,13 @@ const ReviewModal = ({rentalId, customerId, reviews, isReviewed, onPublishReview
                     <textarea
                         className={classes['review-text']}
                         onChange={changeTextHandler}
-                        value={isReviewed ? filterReview()[0].body : textArea}
+                        value={isReviewed ? review.body : textArea}
                         disabled={isReviewed}
                     />
                 </div>
                 <div className={`${isReviewed ? classes['created-at-container'] : "hide"}`}>
                     <span>Lasciata il {isReviewed &&
-                        formatDayMonthYearDate(new Date(+filterReview()[0].createdAt),
+                        formatDayMonthYearDate(new Date(+review.createdAt),
                             {day: 'numeric', month: 'long', year: 'numeric'})}
                     </span>
                 </div>

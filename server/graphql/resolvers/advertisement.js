@@ -18,14 +18,17 @@ module.exports = {
     })),
     withdrawAdvertisement: authenticated(authorization('shipowner')(async ({boatId}) => {
         try {
-            const boat = await Boat.findByIdAndUpdate(boatId, {$unset: {'advertisement': 1} } )
+            await Boat.updateOne(
+                {_id: boatId},
+                {$unset: {'advertisement': 1} }
+            )
             await Rental.deleteMany({
                 $and: [
                     {boat: boatId},
                     {fromDate: { $gt: new Date() } }
                 ]
             })
-            return {withdrawnAdvertisementId: boat._id}
+            return {withdrawnAdvertisementId: boatId }
         } catch (err) {throw new Error(`Can't withdraw advertisement. ${err}`)}
     })),
 }

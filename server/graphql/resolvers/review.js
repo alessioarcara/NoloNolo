@@ -17,12 +17,12 @@ module.exports = {
                 {
                     $and: [
                         {_id: rental.boat},
-                        {'advertisement.reviews': { $not: { $elemMatch: {rental: rentalId, customer: req.userId } } } },
+                        {reviews: { $not: { $elemMatch: {rental: rentalId, customer: req.userId } } } },
                     ]
                 },
                 {
                     $push: {
-                        'advertisement.reviews': {
+                        reviews: {
                             customer: req.userId,
                             rental: rental._id,
                             body,
@@ -38,7 +38,7 @@ module.exports = {
             )
             if (!boat) return {publishReviewProblem: isAlreadyPublished}
 
-            return {publishReviewData: transformReview(boat.advertisement.reviews.toObject().slice(-1)[0])}
+            return {publishReviewData: transformReview(boat.reviews.toObject().slice(-1)[0])}
         } catch (err) {
             throw new Error(`Can't publish review. ${err}`)
         }

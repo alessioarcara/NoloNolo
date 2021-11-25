@@ -12,7 +12,7 @@ const BoatList = ({boats}) => {
                     description={boat.hasAdvertisement.description}
                     maxCapacity={boat.maximumCapacity}
                     dailyFee={boat.hasAdvertisement.dailyFee}
-                    reviews={boat.hasAdvertisement.reviews}
+                    reviews={boat.reviews}
                     advIsFavorite={boat.advIsFavorite}
                 />
             ))}

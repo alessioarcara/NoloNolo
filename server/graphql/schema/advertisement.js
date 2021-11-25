@@ -6,7 +6,6 @@ const advertisementType = `
             fixedFee: Float!
             dailyFee: Float!
             images: [String!]
-            reviews: [Review!]
         }
 
         type publishAdvertisementPayload {
