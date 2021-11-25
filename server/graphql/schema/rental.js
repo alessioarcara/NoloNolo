@@ -23,9 +23,9 @@ const RentalType = `
         updateRentalProblem: String
     }
     
-    type returnRentedBoatPayload {
-        returnRentedBoatData : Rental
-        returnRentedBoatProblem: String
+    type recordBoatReturnPayload {
+        recordBoatReturnData : Rental
+        recordBoatReturnProblem: String
     }
     
     type deleteRentalPayload {
