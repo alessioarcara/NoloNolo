@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/Utils/utils";
@@ -7,6 +7,7 @@ import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
 import EyeIcon from "../../UI/icons/EyeIcon";
 import DetailsModal from "./DetailsModal/DetailsModal";
+import {useNavigate} from "react-router-dom";
 
 const object = {
     model: "Regina IV",
@@ -27,6 +28,11 @@ const object = {
 
 const AnnouncementCard = ({model, reviews, rentals}) => {
     const [openDetailsModal, setOpenDetailsModal] = useState(false)
+    const navigate = useNavigate()
+
+    const goAdvertisementPage = useCallback(() => {
+        navigate(`/boats/${advertisementId}`)
+    }, [navigate])
 
     const filterRentals = {
         previous: rentals.filter(rental => !rental.redelivery),
@@ -37,23 +43,28 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
     return (
         <>
             {openDetailsModal &&
-                <Modal
-                    closeModalHandler={() => setOpenDetailsModal(false)}
-                >
-                    <DetailsModal
-                        previousRentals={filterRentals.previous ? filterRentals.previous : []}
-                        activeRental={filterRentals.active ? filterRentals.active : []}
-                        futureRentals={filterRentals.future ? filterRentals.future : []}
-                    />
-                </Modal>
+            <Modal
+                closeModalHandler={() => setOpenDetailsModal(false)}
+            >
+                <DetailsModal
+                    previousRentals={filterRentals.previous ? filterRentals.previous : []}
+                    activeRental={filterRentals.active ? filterRentals.active : []}
+                    futureRentals={filterRentals.future ? filterRentals.future : []}
+                />
+            </Modal>
             }
             <div className={classes['card-container']}>
                 {/*First element*/}
                 <div className={classes['delete-card']}>&times;</div>
-                <SlideShow images={object.images}/>
+                <SlideShow images={images}/>
+
                 {/*Second element*/}
                 <div className={classes['details-container']}>
-                    <div className={classes['details-section']}>
+                    <div
+                        className={classes['details-section']}
+                        onClick={goAdvertisementPage}
+                    >
+                        {/* Boat title */}
                         <div className={classes['card-header']}>
                             <span className="card-title">{model}</span>
                             <div className={classes['average-reviews-container']}>
@@ -63,31 +74,36 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
                             </div>
                         </div>
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
-                        <div>Prenotazioni future: <span className={classes.parameter}>{filterRentals.future.length}</span></div>
-                        <div className={classes['grid-elements']}>
-                            <div className={classes['eye-icon']}><EyeIcon/></div>
-                            <div>Osservato da: <span className={classes.parameter}>{object.preferredBy.length} persone</span></div>
+
+                        {/* Future Rentals */}
+                        <div>Prenotazioni future: <span
+                            className={classes.parameter}>{filterRentals.future.length}</span>
                         </div>
 
-                        {object.customer &&
+                        {/* Number of Favorites */}
                         <div className={classes['grid-elements']}>
-                            <div className={classes['hourglass-icon']}><HourglassIcon/></div>
-                            <div>
-                                Attualmente noleggiato da: <span className={classes.parameter}>{object.customer.split('@')[0]}</span>
+                            <div className={classes['eye-icon']}><EyeIcon/></div>
+                            <div>Osservato da: <span
+                                className={classes.parameter}>{object.preferredBy.length} persone</span>
                             </div>
                         </div>
+
+                        {/* Disponibility or Active Rental */}
+                        {filterRentals.active[0] ?
+                            <div className={classes['grid-elements']}>
+                                <div className={classes['hourglass-icon']}><HourglassIcon/></div>
+                                <div>
+                                    Attualmente noleggiato da: <span className={classes.parameter}>{filterRentals.active[0].customer.email.split('@')[0]}</span>
+                                </div>
+                            </div>
+                            :
+                            <div className={classes['grid-elements']}>
+                                <div className={classes['point-green-icon']}/>
+                                <div>Attualmente disponibile</div>
+                            </div>
                         }
-                        <div className={classes['grid-elements']}>
-                            <div
-                                className={`${classes['point-icon']}
-                                ${classes[object.customer ? 'icon-color-red' : 'icon-color-green']}`}
-                            />
-                            {object.customer
-                                ? <div>Non disponibile</div>
-                                : <div>Attualmente disponibile</div>
-                            }
-                        </div>
                     </div>
+
                     {/*Third element*/}
                     <div className={classes['option-section']}>
                         <button

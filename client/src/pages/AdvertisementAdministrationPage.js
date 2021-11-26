@@ -4,6 +4,7 @@ import useHttp from "../hooks/use-http";
 import {useContext, useEffect} from "react";
 import AuthContext from "../store/auth-context";
 import {body_shipownerAdvertisements} from "../helpers/httpConfig";
+import BackIcon from "../components/UI/icons/BackIcon";
 
 const AdvertisementAdministrationPage = () => {
     const {token} = useContext(AuthContext)
@@ -15,7 +16,10 @@ const AdvertisementAdministrationPage = () => {
 
     return (
         <>
-            <Header textTitle="Annunci"/>
+            <Header
+                backElement={<BackIcon/>}
+                textTitle="Annunci"
+            />
             <AdvertisementAdministrationList
                 advertisements={data ? data.advertisementsByShipowner : []}
                 rentals={data ? data.rentalsByShipowner : []}

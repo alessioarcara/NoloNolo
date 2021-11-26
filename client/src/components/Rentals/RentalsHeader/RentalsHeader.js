@@ -1,8 +1,10 @@
-import classes from "./Header.module.css";
-import {NavLink} from "react-router-dom";
 import React from "react";
+import classes from "./RentalsHeader.module.css";
+import {NavLink} from "react-router-dom";
+import Header from "../../UI/Header/Header";
+import BackIcon from "../../UI/icons/BackIcon";
 
-const Header = () => {
+const RentalsHeader = () => {
     return (
         <div className={classes['wrapper']}>
             <div className={classes['header-container']}>
@@ -32,4 +34,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default RentalsHeader

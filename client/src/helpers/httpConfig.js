@@ -331,6 +331,7 @@ exports.body_shipownerAdvertisements = {
                 to
                 dailyFee
                 fixedFee
+                redelivery
                 billNumber
                 createdAt
                 boat {

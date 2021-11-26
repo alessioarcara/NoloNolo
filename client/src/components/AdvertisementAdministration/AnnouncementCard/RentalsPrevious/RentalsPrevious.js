@@ -4,6 +4,8 @@ import {dateSorting} from "../../../../helpers/Utils/utils";
 const RentalsPrevious = ({previousRentals}) => {
     const data = dateSorting(previousRentals, true)
 
+    console.log(previousRentals)
+
     return (
         previousRentals.map(previous =>
             <RentalPreviousCard

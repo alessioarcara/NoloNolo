@@ -1,10 +1,10 @@
-import Header from "../components/Rentals/Header/Header";
+import RentalsHeader from "../components/Rentals/RentalsHeader/RentalsHeader";
 import {Routes, Route, Navigate} from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {body_userRentals} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
-import RentalList from "../components/Rentals/RentalList/RentalList";
+import RentalsList from "../components/Rentals/RentalsList/RentalsList";
 import {destructurePayload} from "../helpers/Utils/utils";
 
 const filterRentals = rentals => {
@@ -49,13 +49,13 @@ const RentalsPage = () => {
 
     return (
         <>
-            <Header/>
+            <RentalsHeader/>
             <Routes>
-                <Route path='previous' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
-                                                            previousRentals={filteredRentals.previous} previous/>}/>
-                <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
-                <Route path='future' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
-                                                          futureRentals={filteredRentals.future} future/>}/>
+                <Route path='previous' element={<RentalsList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                                                             previousRentals={filteredRentals.previous} previous/>}/>
+                <Route path='active' element={<RentalsList activeRentals={filteredRentals.active} active/>}/>
+                <Route path='future' element={<RentalsList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                                                           futureRentals={filteredRentals.future} future/>}/>
                 <Route path='/' element={<Navigate to='active'/>}/>
             </Routes>
         </>

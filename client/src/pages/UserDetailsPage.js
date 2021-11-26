@@ -6,6 +6,8 @@ import UserInfo from "../components/UserDetails/UserInfo/UserInfo";
 import UserDetails from "../components/UserDetails/UserDetails/UserDetails";
 import {body_user} from "../helpers/httpConfig";
 import Modal from "../components/UI/Modal/Modal";
+import Header from "../components/UI/Header/Header";
+import BackIcon from "../components/UI/icons/BackIcon";
 
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
@@ -27,7 +29,10 @@ const UserDetailsPage = () => {
                 Object.keys(user).includes("addAvatarProblem") && user.addAvatarProblem &&
                 <Modal title="Error">{user.addAvatarProblem}</Modal>
             )}
-            <UserDetailsHeader/>
+            <Header
+                backElement={<BackIcon/>}
+                textTitle="Informazioni"
+            />
             <UserInfo
                 status={status}
                 user={user && (
