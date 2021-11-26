@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useEffect} from "react";
 import useHttp from "../hooks/use-http";
 import AuthContext from "../store/auth-context";
-import UserDetailsHeader from "../components/UserDetails/Header/UserDetailsHeader";
 import UserInfo from "../components/UserDetails/UserInfo/UserInfo";
 import UserDetails from "../components/UserDetails/UserDetails/UserDetails";
 import {body_user} from "../helpers/httpConfig";

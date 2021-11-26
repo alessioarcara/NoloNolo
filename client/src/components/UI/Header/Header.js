@@ -25,7 +25,7 @@ const Header = ({classNameHeader, navigatePath, backElement, textTitle, optionsE
                 {children}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

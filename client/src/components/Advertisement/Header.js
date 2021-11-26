@@ -10,7 +10,7 @@ const Header = ({boatId}) => {
     const store = useStore(true)[0]
 
     const goBackClickHandler = () => {
-        location.state ? navigate(-1) : navigate('/', {replace: true});
+        location.state ? navigate(-1) : navigate('/', {replace: true})
     }
 
     return (

@@ -12,9 +12,15 @@
 
 .star-active-color svg {
     fill: #FF2267 !important;
+    stroke: #FF2267;
 }
 
 .star-color svg {
     fill: #fff;
     stroke: #FF2267;
+}
+
+.no-review svg {
+    fill: #d0cece;
+    stroke: #d0cece;
 }

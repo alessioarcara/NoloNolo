@@ -12,7 +12,7 @@ const Vote = ({votes, quoteIndex, changeQuoteIndex, placeholder = false}) => {
                 quoteIndex={quoteIndex}
             />
         )
-    );
+    )
 }
 
 export default Vote

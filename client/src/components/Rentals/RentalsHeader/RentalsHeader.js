@@ -6,9 +6,13 @@ import BackIcon from "../../UI/icons/BackIcon";
 
 const RentalsHeader = () => {
     return (
-        <div className={classes['wrapper']}>
-            <div className={classes['header-container']}>
-                <h1 className="title">Noleggi</h1>
+            <Header
+                textTitle="Noleggi"
+                backElement={<BackIcon/>}
+                navigatePath="/profile"
+                classNameHeader={classes['bottom-header']}
+            >
+                {/* children */}
                 <div className={classes[`windows-bar`]}>
                     <NavLink
                         to='previous'
@@ -29,9 +33,9 @@ const RentalsHeader = () => {
                         <span>Futuri</span>
                     </NavLink>
                 </div>
-            </div>
-        </div>
-    );
-};
+
+            </Header>
+    )
+}
 
 export default RentalsHeader

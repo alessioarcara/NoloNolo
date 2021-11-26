@@ -64,7 +64,7 @@
     align-items: center;
     gap: 0.5rem;
 }
-.hourglass-icon, .point-icon, .eye-icon {
+.eye-icon, .point-green-icon, .hourglass-icon {
     justify-self: center;
     align-self: center;
 }
@@ -72,18 +72,11 @@
 .eye-icon svg, .hourglass-icon svg {
     width: 1.9rem;
 }
-.point-icon {
+.point-green-icon {
     border-radius: 50%;
     width: 1rem;
     height: 1rem;
-}
-.icon-color-green {
     background-color: lawngreen;
-    color: lawngreen;
-}
-.icon-color-red {
-    background-color: red;
-    color: red;
 }
 .date {
     font-size: 0.9em;

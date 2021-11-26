@@ -21,12 +21,12 @@ const object = {
         'https://www.ilmessaggero.it/photos/MED_HIGH/92/67/5519267_1942_foto_340_regina.jpg',
         'https://www.barchemagazine.com/wp-content/uploads/2021/05/FIM-340-Regina_01-800x600.jpg'
     ],
-    from: formatDayMonthYearDate(new Date(2021,11,17), {year: 'numeric', month: 'short', day: 'numeric'}),
-    to: formatDayMonthYearDate(new Date(2021,11,18), {year: 'numeric', month: 'short', day: 'numeric'}),
+    from: formatDayMonthYearDate(new Date(2021, 11, 17), {year: 'numeric', month: 'short', day: 'numeric'}),
+    to: formatDayMonthYearDate(new Date(2021, 11, 18), {year: 'numeric', month: 'short', day: 'numeric'}),
     totalAmount: formatNumber(1200)
 }
 
-const AnnouncementCard = ({model, reviews, rentals}) => {
+const AnnouncementCard = ({advertisementId, model, reviews, images, rentals}) => {
     const [openDetailsModal, setOpenDetailsModal] = useState(false)
     const navigate = useNavigate()
 
@@ -73,6 +73,8 @@ const AnnouncementCard = ({model, reviews, rentals}) => {
                                 <span>{`(${reviews.length})`}</span>
                             </div>
                         </div>
+
+                        {/* Announcement Creation Date */}
                         <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
 
                         {/* Future Rentals */}

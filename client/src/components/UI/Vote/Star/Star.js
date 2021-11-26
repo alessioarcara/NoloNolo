@@ -20,12 +20,12 @@ const Star = ({index, quoteIndex, changeQuote, isSelected, placeholderQuote = fa
         >
             {/*If modifyQuote then change quote*/}
             {!placeholderQuote &&
-                <input
-                    type='radio'
-                    name='radio-group'
-                    value={index}
-                    onClick={changeStarHandler}
-                />
+            <input
+                type='radio'
+                name='radio-group'
+                value={index}
+                onClick={changeStarHandler}
+            />
             }
             <div className={isSelected ? classes['star-active-color'] : classes['star-color']}>
                 <StarIcon/>
