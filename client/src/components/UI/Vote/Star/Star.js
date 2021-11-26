@@ -18,7 +18,7 @@ const Star = ({index, changeQuote, isSelected, placeholderQuote = false}) => {
                     onClick={changeStarHandler}
                 />
             }
-            <div className={isSelected ? classes['star-icon-color'] : ''}>
+            <div className={isSelected ? classes['star-active-color'] : classes['star-color']}>
                 <StarIcon/>
             </div>
         </label>

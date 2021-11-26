@@ -1,5 +1,4 @@
 import classes from './RentalPreviousCard.module.css';
-import StarIcon from "../../../../UI/icons/StarIcon";
 import {formatDayMonthYearDate} from "../../../../../helpers/utils";
 import Vote from "../../../../UI/Vote/Vote";
 

@@ -26,8 +26,7 @@
 }
 
 .stars-container svg {
-    fill: #fff;
-    stroke: #FF2267;
+    width: 1.2rem;
 }
 
 .date {
