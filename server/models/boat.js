@@ -31,10 +31,7 @@ const boatSchema = new Schema({
         enum : ['sailboat', 'motorboat', 'catamaran', 'dinghy']
     },
     advertisement: advertisementSchema,
-    location: {
-        type: locationSchema,
-        // required: [true, 'Please provide a location']
-    }
+    location: locationSchema,
 })
 
 module.exports = mongoose.model('Boat', boatSchema)

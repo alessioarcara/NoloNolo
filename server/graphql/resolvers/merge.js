@@ -46,16 +46,11 @@ const transformBoat = boat => {
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
+        reviews: boat.reviews.map(transformReview),
         hasAdvertisement: boat.advertisement && {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee),
-            reviews: boat.advertisement.reviews.map(review => {
-                return {
-                    ...review,
-                    creator: user.bind(this, review.customer),
-                }
-            })
         },
         isDocked: boat.location && {
             region: boat.location.region,

@@ -2,10 +2,10 @@ const Boat = require('../../models/boat');
 const User = require('../../models/user');
 const {transformBoat} = require("./merge");
 const {boatNotFound} = require("../../helpers/problemMessages")
+const {authenticated} = require("../../helpers/authenticated-guard");
 
 module.exports = {
-    publishAdvertisement: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    publishAdvertisement: authenticated(async (args, {req}) => {
         try {
             const {boatId, publishAdvertisement} = args.inputPublishAdvertisement
 
@@ -31,5 +31,5 @@ module.exports = {
 
             return {publishAdvertisementData: transformBoat(boat)}
         } catch (err) { throw new Error(`Can't publish advertisement. ${err}`)}
-    },
+    }),
 }

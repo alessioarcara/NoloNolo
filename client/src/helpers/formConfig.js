@@ -168,5 +168,4 @@ export const boatAdvertisementForm = {
             isNumberRule("fixedFee")
         ]
     },
-}
 };

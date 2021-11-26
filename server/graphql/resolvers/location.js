@@ -21,8 +21,8 @@ module.exports = {
                                 {
                                     $match: {
                                         $and: [
-                                            {"advertisement": {$exists: true}},
                                             {"location.city": {$regex: `^${contains}`, $options: "i"}},
+                                            {"advertisement": {$exists: true}},
                                         ]
                                     }
                                 },

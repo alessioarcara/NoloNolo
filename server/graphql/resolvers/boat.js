@@ -3,6 +3,7 @@ const {transformBoat} = require("./merge");
 const Rental = require("../../models/rental");
 const mongoose = require('mongoose');
 const {boatNotFound, boatWithRentals} = require("../../helpers/problemMessages")
+const {authenticated} = require("../../helpers/authenticated-guard");
 
 module.exports = {
     boat: async ({boatId}) => {
@@ -76,11 +77,11 @@ module.exports = {
 
         try {
             const boats = await Boat.aggregate(pipeline)
+            console.log(boats)
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`) }
     },
-    boatsByUser: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    boatsByUser: authenticated(async (args, {req}) => {
         try {
             const boats = await Boat.find({
                 $and: [
@@ -94,9 +95,8 @@ module.exports = {
             }).lean()
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
-    },
-    addBoat: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    }),
+    addBoat: authenticated(async (args, {req}) => {
         try {
             const {yard, model, length, maximumCapacity, boatType} = args.inputBoat
             const _id = typeof args.inputBoat._id === "undefined" ? new mongoose.Types.ObjectId() : args.inputBoat._id
@@ -122,9 +122,8 @@ module.exports = {
 
             return {addBoatData: transformBoat(boat)}
         } catch (err) { throw new Error(`Can't add boat. ${err}`) }
-    },
-    removeBoat: async ({boatId}, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated.") }
+    }),
+    removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
             const rentals = Rental.find({boat: boatId}).lean()
             if (rentals) return { removeBoatProblem: boatWithRentals}
@@ -132,12 +131,10 @@ module.exports = {
             const {deletedCount} = await Boat.deleteOne({_id: boatId})
             return deletedCount === 0 ? { removeBoatProblem: boatNotFound} : { removedBoatId: boatId}
         } catch (err) { throw new Error(`Can't remove boat. ${err}`)}
-    },
-    insertBoatLocation: async (args, {req}) => {
-        if (!req.isAuth) { throw new Error("Unauthenticated") }
+    }),
+    insertBoatLocation: authenticated(async (args, {req}) => {
         try {
             const {boatId, isDocked} = args.inputInsertBoatLocation
-
             const boat = await Boat.findByIdAndUpdate(
                 boatId,
                 {
@@ -156,5 +153,5 @@ module.exports = {
             ).lean();
             return {insertBoatLocationData: transformBoat(boat)}
         } catch (err) { throw new Error(`Can't insert boat location. ${err}`)}
-    }
+    })
 }
