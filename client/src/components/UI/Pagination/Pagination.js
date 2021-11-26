@@ -24,7 +24,6 @@ const Pagination = ({dataCount, dataLimit = 10, currentPage, setCurrentPage}) =>
     */
     const changePage = useCallback(event => {
         const pageNumber = (+event.target.textContent - 1) * dataLimit;
-        console.log(pageNumber)
         setCurrentPage(pageNumber);
     }, [setCurrentPage, dataLimit]);
 

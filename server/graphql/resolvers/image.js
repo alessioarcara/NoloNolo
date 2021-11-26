@@ -4,6 +4,7 @@ const {isImage} = require("../../helpers/utils");
 const {notImage, userNotFound, noFileAttached} = require("../../helpers/problemMessages");
 const User = require("../../models/user");
 const {transformUser} = require("./merge");
+const {authenticated} = require("../../helpers/authenticated-guard");
 
 const clearAvatar = filePath => {
     unlink(filePath, err => err && console.log(`unlink failed: ${err}`))
@@ -57,11 +58,7 @@ const storeFile = async (upload, userId, resize = false) => {
 
 
 module.exports = {
-    addAvatar: async ({upload, description}, {req, res}) => {
-        if (!req.isAuth) {
-            res.status(401)
-            throw new Error("Unauthenticated.")
-        }
+    addAvatar: authenticated(async ({upload, description}, {req}) => {
         try {
             if (!upload.file) { return { addAvatarProblem: noFileAttached } }
             const user = await User.findById(req.userId)
@@ -75,7 +72,7 @@ module.exports = {
             await user.save()
             return { addAvatarData: transformUser(user) }
         } catch (err) { throw new Error(`Can't add avatar. ${err}`); }
-    },
+    }),
     addBoatImages: async () => {
     }
 }

@@ -8,7 +8,6 @@ import {body_user} from "../helpers/httpConfig";
 import Modal from "../components/UI/Modal/Modal";
 import {parseMutationResponse} from "../helpers/utils";
 
-
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
     const [user, setUser] = useState(null)

@@ -5,6 +5,7 @@ const reviewType = `
             rating: Int!
             createdAt: String!
             creator: User!
+            rental: ID!
         }
         
         type publishReviewPayload {
@@ -13,7 +14,7 @@ const reviewType = `
         }
         
         input ReviewInput {
-            boatId: ID!
+            rentalId: ID!
             body: String!
             rating: Int!
         }

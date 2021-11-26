@@ -26,7 +26,7 @@ export const circularSlice = (arr, start, end) => {
 };
 
 /* Settiamo lo style come valuta e prendiamo la valuta Euro. de-DE sta per Germania */
-export const formatNumber = (number) =>
+export const formatNumber = number =>
     new Intl.NumberFormat('de-DE', {
         style: 'currency',
         currency: 'EUR'
@@ -35,12 +35,13 @@ export const formatNumber = (number) =>
 /* Set data from dd/mm/yyyy to yyyy-mm-dd */
 export const formatDate = date =>
     new Date(date.getTime() - (date.getTimezoneOffset() * 60 * 1000))
-        .toISOString().split('T')[0]
+        .toISOString().split('T')[0];
 
 export const rangeDate = ((startDate, endDate) => {
     const oneDayMilliseconds = 24 * 60 * 60 * 1000
     return endDate ? Math.round((new Date(endDate) - new Date(startDate)) / oneDayMilliseconds) : 0
 });
+
 
 /* Set averageReviews */
 export const averageReviews = reviews =>

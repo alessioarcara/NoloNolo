@@ -76,6 +76,19 @@ exports.body_updateUser = ({street, city, region, postalCode}) => {
         variables: {userData: {street, city, region, postalCode}}
     }
 };
+exports.body_search = (contains) => {
+    return {
+        query: `
+            query($filter: LocationFilter!) {
+                listAllLocations(filter: $filter) {
+                    region
+                    city
+                }
+            }
+        `,
+        variables: {filter: {contains}}
+    }
+};
 exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
@@ -227,11 +240,11 @@ exports.body_publishAdvertisement = ({boatId, description, dailyFee, fixedFee}) 
         variables: {advertisementData: {boatId, publishAdvertisement: {description, dailyFee, fixedFee}}}
     }
 };
-exports.body_rentBoat = ({boatId, from, to, totalAmount}) => {
+exports.body_rentBoat = ({boatId, from, to}) => {
     return {
         query: `
-            mutation($rentalData: RentalInput!) {
-                rentBoat(inputRental: $rentalData) {
+            mutation($rentalData: RentBoatInput!) {
+                rentBoat(inputRentBoat: $rentalData) {
                     rentBoatData {
                         billNumber
                         from
@@ -247,6 +260,7 @@ exports.body_rentBoat = ({boatId, from, to, totalAmount}) => {
                                 region
                                 city
                                 harbour
+                                coordinates
                             }
                         }
                         customer {
@@ -258,22 +272,113 @@ exports.body_rentBoat = ({boatId, from, to, totalAmount}) => {
                 }
             }
         `,
-        variables: {rentalData: {boatId, from, to, totalAmount}}
+        variables: {rentalData: {boatId, from, to}}
     }
-}
-exports.body_search = (contains) => {
+};
+exports.body_updateRental = ({rentalId, from, to}) => {
     return {
         query: `
-            query($filter: LocationFilter!) {
-                listAllLocations(filter: $filter) {
-                    region
-                    city
+            mutation($rentalData: UpdateRentalInput!) {
+                updateRental(inputUpdateRental: $rentalData) {
+                    updateRentalData {
+                        _id
+                        billNumber
+                        from
+                        to
+                        totalAmount
+                        boat {
+                            _id
+                            yard
+                            model
+                            length
+                            maximumCapacity
+                            boatType
+                            owner {
+                                email
+                            }
+                            isDocked {
+                                region
+                                city
+                                harbour
+                            }
+                            hasAdvertisement {
+                                description
+                                images
+                                dailyFee
+                                fixedFee
+                                reviews {
+                                  _id
+                                  body
+                                  rating
+                                  createdAt
+                                  creator {
+                                    _id
+                                    email
+                                    avatar
+                                  }
+                                  rental
+                                }
+                            }
+                        }
+                        customer {
+                            _id
+                            email
+                        }
+                    }
+                    updateRentalProblem
                 }
             }
         `,
-        variables: {filter: {contains}}
+        variables: {rentalData: {rentalId, from, to}}
     }
-}
+};
+exports.body_boatRentals = (boatId) => {
+    return {
+        query: `
+            query($boatId: ID!) {
+                boatRentals(boatId: $boatId) {
+                    from
+                    to
+                }
+            }
+        `,
+        variables: boatId
+    }
+};
+exports.body_deleteRental = (rentalId) => {
+    return {
+        query: `
+            mutation($rentalId: ID!) {
+                deleteRental(rentalId: $rentalId) {
+                    deletedRentalId
+                    deleteRentalProblem
+                }
+            }
+        `,
+        variables: rentalId
+    }
+};
+exports.body_publishReview = ({rentalId, body, rating}) => {
+        return {
+            query: `
+            mutation($reviewData: ReviewInput!) {
+                publishReview(inputReview: $reviewData) {
+                    publishReviewData {
+                        body
+                        rating
+                        createdAt
+                        creator {
+                            _id
+                        }
+                        rental
+                    }
+                    publishReviewProblem
+                }
+            }
+        `,
+            variables: {reviewData: {rentalId, body, rating}}
+        }
+};
 exports.body_favorites = {
     query: `
         query {
@@ -292,7 +397,7 @@ exports.body_favorites = {
             }  
         }
     `,
-}
+};
 exports.body_addFavorite = (boatId) => {
     return {
         query: `
@@ -401,8 +506,54 @@ exports.body_user = {
         }
     `,
 };
+exports.body_userRentals = {
+    query: `
+        query {
+            rentalsByUser {
+                _id
+                billNumber
+                from
+                to
+                redelivery
+                totalAmount
+                boat {
+                    _id
+                    model
+                    yard
+                    hasAdvertisement {
+                        images
+                        description
+                        dailyFee
+                        fixedFee
+                        reviews {
+                            creator {
+                                _id
+                            }
+                            createdAt
+                            body
+                            rating
+                            rental
+                        }
+                    }
+                    owner {
+                        email
+                    }
+                    isDocked {
+                        region
+                        city
+                        harbour
+                    }
+                }
+                customer {
+                    _id
+                    email
+                }
+                createdAt
+            }
+        }
+    `
+};
 exports.body_addAvatar = {
     operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email address { street city region postalCode } avatar createdAt } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
-
-}
+};

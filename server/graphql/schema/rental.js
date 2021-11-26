@@ -5,6 +5,7 @@ const RentalType = `
         boat: Boat!
         from: String!
         to: String!
+        redelivery: String
         totalAmount: Float!
         billNumber: Int!
         createdAt: String
@@ -16,11 +17,26 @@ const RentalType = `
         rentBoatProblem: String
     }
     
-    input RentalInput {
+    type updateRentalPayload {
+        updateRentalData: Rental
+        updateRentalProblem: String
+    }
+    
+    type deleteRentalPayload {
+        deletedRentalId: ID
+        deleteRentalProblem: String
+    }
+    
+    input RentBoatInput {
         boatId: ID!
         from: String!
         to: String!
-        totalAmount: Float!
+    }
+    
+    input UpdateRentalInput {
+        rentalId: ID!
+        from: String!
+        to: String!
     }
 `
 

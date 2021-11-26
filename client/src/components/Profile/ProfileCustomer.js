@@ -12,7 +12,7 @@ const ProfileCustomer = () => {
                 icon={<UserIcon/>}
             />
             <ProfileOption
-                title="Noleggi"
+                title="Calendario dei noleggi"
                 content="Visualizza i tuoi noleggi attivi o futuri e modifica o cancella un noleggio futuro"
                 link="rentals"
                 icon={<RentalIcon/>}
