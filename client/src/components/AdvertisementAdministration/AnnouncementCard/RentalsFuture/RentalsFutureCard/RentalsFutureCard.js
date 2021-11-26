@@ -1,5 +1,5 @@
 import classes from './RentalsFutureCard.module.css';
-import {formatDayMonthYearDate, formatNumber} from "../../../../../helpers/utils";
+import {formatDayMonthYearDate, formatNumber} from "../../../../../helpers/Utils/utils";
 
 const RentalsFutureCard = ({customer, createdAt, start, end, totalAmount}) => {
     return (

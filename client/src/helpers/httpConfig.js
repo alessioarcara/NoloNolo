@@ -311,6 +311,9 @@ exports.body_shipownerAdvertisements = {
                 model
                 hasAdvertisement {
                     images
+                    preferredBy {
+                        _id
+                    }
                 }
                 isDocked {
                     region

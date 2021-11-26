@@ -1,7 +1,7 @@
 import {useCallback, useState} from "react";
 import classes from './BoatReviews.module.css';
 import StarIcon from "../../../UI/icons/StarIcon";
-import {averageReviews} from "../../../../helpers/utils";
+import {averageReviews} from "../../../../helpers/Utils/utils";
 import ReviewsList from "./ReviewsList";
 import LeftArrowIcon from "../../../UI/icons/LeftArrowIcon";
 import RightArrowIcon from "../../../UI/icons/RightArrowIcon";

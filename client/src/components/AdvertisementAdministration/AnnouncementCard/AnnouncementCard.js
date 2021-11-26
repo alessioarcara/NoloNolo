@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classes from './AnnouncementCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
+import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/Utils/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";

@@ -2,8 +2,8 @@ import React, {useCallback} from "react";
 import DayPicker from "../../../UI/DatePicker/DayPicker";
 import classes from "./BoatAvailability.module.css";
 import Button from "../../../UI/Button/Button";
-import {rangeDate} from "../../../../helpers/utils";
-import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../../helpers/constants";
+import {rangeDate} from "../../../../helpers/Utils/utils";
+import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../../helpers/Utils/constants";
 
 const BoatAvailability = ({
                               startDate,

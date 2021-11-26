@@ -1,5 +1,5 @@
 import RentalsFutureCard from "./RentalsFutureCard/RentalsFutureCard";
-import {calculateTotal} from "../../../../helpers/utils";
+import {calculateTotal} from "../../../../helpers/Utils/utils";
 
 const futureRentals = [
     {

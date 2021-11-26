@@ -2,7 +2,7 @@ import RentalCard from "../RentalCard/RentalCard";
 import {useCallback, useMemo} from "react";
 import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
 import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
-import {calculateTotal} from "../../../helpers/utils";
+import {calculateTotal} from "../../../helpers/Utils/utils";
 
 const RentalList = ({
                         onUpdateOrDeleteRentals,

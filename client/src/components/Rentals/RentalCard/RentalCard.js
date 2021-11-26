@@ -1,5 +1,5 @@
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {formatDayMonthYearDate, formatNumber} from "../../../helpers/utils";
+import {formatDayMonthYearDate, formatNumber} from "../../../helpers/Utils/utils";
 import {useCallback, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Modal from "../../UI/Modal/Modal";

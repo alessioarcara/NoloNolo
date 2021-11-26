@@ -2,7 +2,7 @@ import classes from "./ReviewModal.module.css";
 import {useCallback, useState} from "react";
 import Vote from "../../../UI/Vote/Vote";
 import {body_publishReview} from "../../../../helpers/httpConfig";
-import {formatDayMonthYearDate} from "../../../../helpers/utils";
+import {formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 
 const ReviewModal = ({rentalId, review, isReviewed, onPublishReview}) => {
     const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
