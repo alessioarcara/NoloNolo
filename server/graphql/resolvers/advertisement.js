@@ -19,7 +19,7 @@ module.exports = {
     })),
     withdrawAdvertisement: authenticated(authorization('shipowner')(async ({boatId}, {req}) => {
         try {
-            const result = await Boat.updateOne(
+            const {modifiedCount} = await Boat.updateOne(
                 {
                     $and: [
                         {_id: boatId},
@@ -28,7 +28,7 @@ module.exports = {
                 },
                 {$unset: {'advertisement': 1}}
             )
-            if (result.deletedCount === 0) return {withdrawAdvertisementProblem: boatNotFound}
+            if (modifiedCount === 0) return {withdrawAdvertisementProblem: boatNotFound}
             await Rental.deleteMany({
                 $and: [
                     {boat: boatId},
