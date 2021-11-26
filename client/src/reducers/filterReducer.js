@@ -5,7 +5,7 @@ import {
     MANAGE_MAX_PRICE,
     MANAGE_MIN_PRICE,
     REMOVE_GUEST
-} from "../helpers/constants";
+} from "../helpers/Utils/constants";
 
 export const initialState = {
     boatTypes: ['motorboat', 'sailboat', 'catamaran', 'dinghy'],

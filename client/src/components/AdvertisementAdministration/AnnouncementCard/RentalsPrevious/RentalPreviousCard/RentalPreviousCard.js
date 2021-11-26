@@ -1,5 +1,5 @@
 import classes from './RentalPreviousCard.module.css';
-import {formatDayMonthYearDate} from "../../../../../helpers/utils";
+import {formatDayMonthYearDate} from "../../../../../helpers/Utils/utils";
 import Vote from "../../../../UI/Vote/Vote";
 
 const stars = [0, 1, 2, 3, 4]

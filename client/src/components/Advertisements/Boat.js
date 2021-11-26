@@ -4,7 +4,7 @@ import StarIcon from "../UI/icons/StarIcon";
 import SlideShow from "../UI/SlideShow/SlideShow";
 import Favorite from "../Favorite/Favorite";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {averageReviews, formatNumber} from "../../helpers/utils";
+import {averageReviews, formatNumber} from "../../helpers/Utils/utils";
 
 const Boat = ({id, images, model, dailyFee, reviews, maxCapacity, advIsFavorite}) => {
     const navigate = useNavigate()

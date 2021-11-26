@@ -1,5 +1,5 @@
 import RentalPreviousCard from "./RentalPreviousCard/RentalPreviousCard";
-import {dateSorting} from "../../../../helpers/utils";
+import {dateSorting} from "../../../../helpers/Utils/utils";
 
 const RentalsPrevious = ({previousRentals}) => {
     const data = dateSorting(previousRentals, true)

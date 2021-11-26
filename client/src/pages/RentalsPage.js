@@ -5,7 +5,7 @@ import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {body_userRentals} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 import RentalList from "../components/Rentals/RentalList/RentalList";
-import {destructurePayload} from "../helpers/utils";
+import {destructurePayload} from "../helpers/Utils/utils";
 
 const filterRentals = rentals => {
     return {

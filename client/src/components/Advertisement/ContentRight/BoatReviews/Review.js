@@ -1,6 +1,6 @@
 import classes from './Review.module.css';
 import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
-import {formatDayMonthYearDate} from "../../../../helpers/utils";
+import {formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 
 const Review = ({avatar, creator, createdAt, body}) => {
 

@@ -4,7 +4,7 @@ import AuthContext from "../store/auth-context";
 import {advertisementReducer} from "../reducers/advertisementReducer";
 import useHttp from "../hooks/use-http";
 import {body_informations, body_rentBoat} from "../helpers/httpConfig";
-import {formatDate} from "../helpers/utils";
+import {formatDate} from "../helpers/Utils/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 import Modal from "../components/UI/Modal/Modal";
@@ -13,7 +13,7 @@ import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitSc
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
 import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
 import AdvertisementActions from "../components/Advertisement/AdvertisementActions/AdvertisementActions";
-import {CLEAR_RENTAL, SHOW_BILL} from "../helpers/constants";
+import {CLEAR_RENTAL, SHOW_BILL} from "../helpers/Utils/constants";
 
 const AdvertisementPage = () => {
     /* Data recovery */

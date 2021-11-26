@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import {boats} from "../../../helpers/elements";
-import {MANAGE_BOATS} from "../../../helpers/constants";
+import {MANAGE_BOATS} from "../../../helpers/Utils/constants";
 import classes from "./TypeFilter.module.css";
 
 const TypeFilter = ({dispatch, types}) => {

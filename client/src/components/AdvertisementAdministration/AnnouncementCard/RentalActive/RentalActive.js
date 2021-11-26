@@ -1,6 +1,6 @@
 import classes from './RentalActive.module.css';
 import ClockIcon from "../../../UI/icons/ClockIcon";
-import {rangeDate, formatDayMonthYearDate} from "../../../../helpers/utils";
+import {rangeDate, formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 import CheckInIcon from "../../../UI/icons/CheckInIcon";
 
 const RentalActive = ({activeRental}) => {

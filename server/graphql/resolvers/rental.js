@@ -2,14 +2,15 @@ const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
 const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDatesTooClose,
-    isAlreadyStarted, yourBoat, rentalNotFinished
+    isAlreadyStarted, itsYourBoat, rentalNotFinished
 } = require("../../helpers/problemMessages");
 const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
 const mongoose = require('mongoose');
+const {rangeDate} = require("../../helpers/utils");
 
 const validateRentDates = async (boatId, from, to) => {
-    // if (from <= new Date()) return selectedRentDatesTooClose;
+    if (from <= new Date()) return selectedRentDatesTooClose;
     if (from >= to) return invalidRange;
 
     /* *----------------------------------------------*
@@ -60,7 +61,7 @@ module.exports = {
 
             const boat = await Boat.findOne({_id: boatId}).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
-            if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: yourBoat }
+                if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
 
             /* START SEMAPHORE */
             await acquireLock(boatId)
@@ -134,8 +135,6 @@ module.exports = {
             });
             if (!rental) return {recordBoatReturnProblem: rentalNotFound}
             if (rental.toDate > new Date()) return {recordBoatReturnProblem: rentalNotFinished}
-
-            /* TODO: Penalties */
 
             rental.redeliveryDate = new Date().setHours(0,0,0)
             await rental.save()

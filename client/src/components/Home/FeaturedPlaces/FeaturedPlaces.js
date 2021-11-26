@@ -1,7 +1,7 @@
 import PlaceCard from "./PlaceCard";
 import classes from './FeaturedPlaces.module.css';
 import {useCallback, useState} from "react";
-import {circularSlice} from "../../../helpers/utils";
+import {circularSlice} from "../../../helpers/Utils/utils";
 import LeftArrowIcon from "../../UI/icons/LeftArrowIcon";
 import RightArrowIcon from "../../UI/icons/RightArrowIcon";
 
