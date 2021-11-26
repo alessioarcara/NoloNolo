@@ -43,11 +43,9 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
-    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
-        reviews: boat.reviews.map(transformReview),
         hasAdvertisement: boat.advertisement && {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
@@ -59,7 +57,7 @@ const transformBoat = boat => {
             harbour: boat.location.harbour,
             coordinates: boat.location.geometry.coordinates
         },
-        reviews: boat.reviews.map(transformReview),
+        reviews: boat.reviews && boat.reviews.map(transformReview),
         totalCount: boat.totalCount,
         minPrice: parseFloat(boat.minPrice),
         maxPrice: parseFloat(boat.maxPrice)

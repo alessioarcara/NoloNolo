@@ -3,7 +3,7 @@ const {transformBoat} = require("./merge");
 const Rental = require("../../models/rental");
 const mongoose = require('mongoose');
 const {boatNotFound, boatWithRentals} = require("../../helpers/problemMessages")
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated} = require("../../auth/auth");
 
 module.exports = {
     boat: async ({boatId}) => {
@@ -124,8 +124,8 @@ module.exports = {
     }),
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
-            const rentals = Rental.find({boat: boatId}).lean()
-            if (rentals) return { removeBoatProblem: boatWithRentals}
+            const rentals = await Rental.find({boat: boatId}).lean()
+            if (rentals.length > 0) return { removeBoatProblem: boatWithRentals}
 
             const {deletedCount} = await Boat.deleteOne({_id: boatId})
             return deletedCount === 0 ? { removeBoatProblem: boatNotFound} : { removedBoatId: boatId}

@@ -31,7 +31,7 @@ function App() {
             <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
             <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
             <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
-            <Route path='profile/your-advertisements' element={<AdvertisementAdministrationPage/>}/>
+            <Route path='profile/your-advertisements' element={<RequireAuth><AdvertisementAdministrationPage/></RequireAuth>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
         </Routes>
     )

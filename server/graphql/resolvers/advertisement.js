@@ -3,7 +3,7 @@ const User = require('../../models/user');
 const Rental = require("../../models/rental");
 const {transformBoat} = require("./merge");
 const {boatNotFound} = require("../../helpers/problemMessages")
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated, authorization} = require("../../auth/auth");
 
 module.exports = {
     advertisementsByShipowner: authenticated(authorization('shipowner')(async (_, {req}) => {

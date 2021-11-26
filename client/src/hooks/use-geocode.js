@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {NOMINATIM_BASE_URL} from "../helpers/constants";
-import {debounce} from "../helpers/utils";
+import {NOMINATIM_BASE_URL} from "../helpers/Utils/constants";
+import {debounce} from "../helpers/Utils/utils";
 
 const UseGeocode = (region, city, delay = 1000) => {
     const [coordinates, setCoordinates] = useState({lat: null, lon: null})

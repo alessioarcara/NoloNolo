@@ -7,7 +7,6 @@ const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDa
 const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
 const mongoose = require('mongoose');
-const {rangeDate} = require("../../helpers/utils");
 
 const validateRentDates = async (boatId, from, to) => {
     if (from <= new Date()) return selectedRentDatesTooClose;
@@ -61,7 +60,7 @@ module.exports = {
 
             const boat = await Boat.findOne({_id: boatId}).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
-                if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
+            if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
 
             /* START SEMAPHORE */
             await acquireLock(boatId)
