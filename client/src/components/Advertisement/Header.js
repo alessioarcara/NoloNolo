@@ -1,17 +1,18 @@
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import BackIcon from "../UI/icons/BackIcon";
 import classes from './Header.module.css';
 import Favorite from "../Favorite/Favorite";
 import {useStore} from "../../hooks-store/store";
+import {useCallback} from "react";
 
 const Header = ({boatId}) => {
-    const location = useLocation();
+    const {state} = useLocation();
     const navigate = useNavigate();
     const store = useStore(true)[0]
 
-    const goBackClickHandler = () => {
-        location.state ? navigate(-1) : navigate('/', {replace: true})
-    }
+    const goBackClickHandler = useCallback(() => {
+        state ? navigate(-1) : navigate('/', {replace: true})
+    }, [navigate])
 
     return (
         <div className={classes[`header-bar`]}>
