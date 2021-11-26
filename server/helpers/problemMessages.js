@@ -5,5 +5,6 @@ const invalidPassword = "Password is incorrect!";
 const samePassword = "Old password and new password are the same!";
 const notImage = "Not an image! Please upload only images."
 const noFileAttached = "No file provided!"
+const boatWithRentals = "You cannot edit or delete boat with active or previous rentals"
 
-module.exports = {duplicateEmail, userNotFound, boatNotFound, invalidPassword, samePassword, notImage, noFileAttached};
+module.exports = {duplicateEmail, userNotFound, boatNotFound, invalidPassword, samePassword, notImage, noFileAttached, boatWithRentals};

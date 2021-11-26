@@ -2,6 +2,7 @@ const Boat = require('../../models/boat');
 const {transformBoat} = require("./merge");
 const Rental = require("../../models/rental");
 const mongoose = require('mongoose');
+const {boatNotFound, boatWithRentals} = require("../../helpers/problemMessages")
 
 module.exports = {
     boat: async ({boatId}) => {
@@ -91,7 +92,6 @@ module.exports = {
                     }
                 ]
             }).lean()
-
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`)}
     },
@@ -126,8 +126,11 @@ module.exports = {
     removeBoat: async ({boatId}, {req}) => {
         if (!req.isAuth) { throw new Error("Unauthenticated.") }
         try {
-            const {_id} = await Boat.findByIdAndDelete(boatId, {useFindAndModify: false})
-            return _id ? { removedBoatId: _id} : { removeBoatProblem: "Can't find boat"}
+            const rentals = Rental.find({boat: boatId}).lean()
+            if (rentals) return { removeBoatProblem: boatWithRentals}
+
+            const {deletedCount} = await Boat.deleteOne({_id: boatId})
+            return deletedCount === 0 ? { removeBoatProblem: boatNotFound} : { removedBoatId: boatId}
         } catch (err) { throw new Error(`Can't remove boat. ${err}`)}
     },
     insertBoatLocation: async (args, {req}) => {
