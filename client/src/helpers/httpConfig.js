@@ -255,6 +255,41 @@ exports.body_updateRental = ({rentalId, from, to}) => {
         variables: {rentalData: {rentalId, from, to}}
     }
 };
+exports.body_recordBoatReturn = (rentalId) => {
+  return {
+      query: `
+          mutation($rentalId: ID!) {
+              recordBoatReturn(rentalId: $rentalId) {
+                  recordBoatReturnData {
+                      _id
+                      from
+                      to
+                      dailyFee
+                      fixedFee
+                      billNumber
+                      createdAt
+                      boat {
+                          _id
+                          reviews {
+                              rating
+                              rental
+                              creator {
+                                  _id
+                              }
+                          }
+                      }
+                      customer {
+                          _id
+                          email
+                      }
+                  }
+                  recordBoatReturnProblem
+              }
+          }
+      `,
+      variables: rentalId
+  }
+};
 exports.body_boatRentals = (boatId) => {
     return {
         query: `
@@ -351,6 +386,19 @@ exports.body_shipownerAdvertisements = {
         }
     `
 };
+exports.body_withdrawAdvertisement = (boatId) => {
+    return {
+        query: `
+            mutation($boatId: ID!) {
+                withdrawAdvertisement(boatId: $boatId) {
+                    withdrawnAdvertisementId
+                    withdrawAdvertisementProblem
+                }
+            }
+        `,
+        variables: boatId
+    }
+}
 exports.body_favorites = {
     query: `
         query {
