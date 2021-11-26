@@ -5,7 +5,7 @@ import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 import Images from "../Images/Images";
 import SlideShowDots from "./SlideShowDots";
-import {circularSlice} from "../../../helpers/utils";
+import {circularSlice} from "../../../helpers/Utils/utils";
 
 const SlideShow = ({images, children, classNameSlideShowSlider}) => {
     const [start, setStart] = useState(0)

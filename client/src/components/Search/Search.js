@@ -1,10 +1,10 @@
 import React, {useCallback, useReducer} from "react";
 import SelectPlaces from "./SelectPlaces/SelectPlaces";
 import SelectDates from "./SelectDates/SelectDates";
-import {formatDate} from "../../helpers/utils";
+import {formatDate} from "../../helpers/Utils/utils";
 import {useNavigate} from "react-router-dom";
 import searchReducer, {initialState} from "../../reducers/searchReducer";
-import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../../helpers/constants";
+import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../../helpers/Utils/constants";
 
 
 const Search = ({closeModalHandler}) => {

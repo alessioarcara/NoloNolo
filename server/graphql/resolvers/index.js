@@ -6,6 +6,7 @@ const reviewResolver = require('./review');
 const rentalResolver = require('./rental')
 const favoriteResolver = require('./favorite')
 const imageResolver = require('./image')
+const advertisementResolver = require('./advertisement')
 const {GraphQLUpload} = require("graphql-upload");
 
 const rootResolver =  {

@@ -9,6 +9,7 @@ const boatType = `
             boatType: BoatType!
             isDocked: Location
             hasAdvertisement: Advertisement
+            reviews: [Review!]
             totalCount: Int
             minPrice: Float
             maxPrice: Float

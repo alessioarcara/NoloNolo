@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.active-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 3fr 1fr;
+    justify-items: center;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem;
+}
+
+.active-container svg {
+    width: 1.2rem;
+}
+
+.range-container, .dates {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.text-style, .email {
+    font-size: 0.9em;
+}
+
+.text-style {
+    color: #8d8989;
+}
+
+.close-btn {
+    border-color: red;
+    color: red;
+    font-size: 0.9em;
+    width: fit-content;
+    border-radius: 2rem;
+    align-self: center;
+}
+
+.close-btn:hover {
+    background-color: red;
+    color: #fff;
+}
+
+@media only screen and (max-width: 350px) {
+    .active-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media only screen and (min-width: 351px) and (max-width: 768px) {
+    .active-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

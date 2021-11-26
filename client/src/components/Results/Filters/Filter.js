@@ -2,7 +2,7 @@ import React, {useCallback, useReducer} from "react";
 import TypeFilter from "./TypeFilter";
 import CapacityFilter from "./CapacityFilter";
 import PriceFilter from "./PriceFilter";
-import {CLEAR_FORM, NUMBER_BOAT_TYPES} from "../../../helpers/constants";
+import {CLEAR_FORM, NUMBER_BOAT_TYPES} from "../../../helpers/Utils/constants";
 import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 
 import classes from "./Filter.module.css";

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GRAPHQL_API_URL} from "../helpers/constants";
+import {GRAPHQL_API_URL} from "../helpers/Utils/constants";
 
 const http = axios.create({
     method: "post",

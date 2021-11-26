@@ -1,6 +1,6 @@
 import Review from "./Review";
 import classes from './ReviewsList.module.css';
-import {circularSlice} from "../../../../helpers/utils";
+import {circularSlice} from "../../../../helpers/Utils/utils";
 
 const ReviewsList = ({reviews, start, end}) => {
 

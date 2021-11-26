@@ -1,10 +1,13 @@
 const Rental = require('../../models/rental');
 const Boat = require("../../models/boat");
 const {transformRental} = require("./merge");
-const {rangeDate} = require("../../helpers/utils");
-const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDatesTooClose, isAlreadyStarted} = require("../../helpers/problemMessages");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDatesTooClose,
+    isAlreadyStarted, itsYourBoat, rentalNotFinished
+} = require("../../helpers/problemMessages");
+const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
+const mongoose = require('mongoose');
+const {rangeDate} = require("../../helpers/utils");
 
 const validateRentDates = async (boatId, from, to) => {
     if (from <= new Date()) return selectedRentDatesTooClose;
@@ -25,7 +28,7 @@ const validateRentDates = async (boatId, from, to) => {
 module.exports = {
     boatRentals: async ({boatId}) => {
         try {
-            const rentals = await Rental.find({boat: boatId})
+            const rentals = await Rental.find({boat: boatId}).lean()
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find boat rentals. ${err}`) }
     },
@@ -35,14 +38,30 @@ module.exports = {
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
+    rentalsByShipowner: authenticated(authorization('shipowner')(async (_, {req}) => {
+        try {
+            const rentals = await Rental.aggregate([
+                { $lookup: {
+                    from: 'boats',
+                    localField: 'boat',
+                    foreignField: '_id',
+                    as: 'boat'
+                } },
+                { $unwind: "$boat" },
+                { $match: { "boat.shipowner": mongoose.Types.ObjectId(req.userId) }}
+            ])
+            return rentals.map(rental => transformRental({ ...rental, boat: rental.boat._id }))
+        } catch (err) { throw new Error(`Can't find shipowner rentals. ${err}`) }
+    })),
     rentBoat: authenticated(async (args, {req}) => {
         try {
             const {boatId} = args.inputRentBoat
             const from = new Date(args.inputRentBoat.from).setHours(0, 0, 0)
             const to = new Date(args.inputRentBoat.to).setHours(0, 0, 0)
 
-            const boat = await Boat.findOne({_id: boatId})
+            const boat = await Boat.findOne({_id: boatId}).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
+                if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
 
             /* START SEMAPHORE */
             await acquireLock(boatId)
@@ -52,9 +71,8 @@ module.exports = {
                 const rental = await Rental.create({
                     customer: req.userId,
                     boat: boatId,
-                    totalAmount:
-                        parseFloat(boat.advertisement.dailyFee) * rangeDate(from, to)
-                        + parseFloat(boat.advertisement.fixedFee),
+                    dailyFee: boat.advertisement.dailyFee,
+                    fixedFee: boat.advertisement.fixedFee,
                     fromDate: from,
                     toDate: to
                 })
@@ -70,13 +88,18 @@ module.exports = {
 
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
     }),
-    updateRental: authenticated(async (args) => {
+    updateRental: authenticated(async (args, {req}) => {
         try {
             const {rentalId} = args.inputUpdateRental
             const from = new Date(args.inputUpdateRental.from).setHours(0, 0, 0)
             const to = new Date(args.inputUpdateRental.to).setHours(0, 0, 0)
 
-            const rental = await Rental.findById(rentalId).populate('boat')
+            const rental = await Rental.findOne({
+                $and: [
+                    {_id: rentalId},
+                    {customer: req.userId}
+                ]
+            }).populate('boat')
             if (!rental) return {updateRentalProblem: rentalNotFound}
             if (rental.from <= new Date()) return { updateRentalProblem: isAlreadyStarted }
 
@@ -86,9 +109,9 @@ module.exports = {
             const areInvalidSelectedDates = await validateRentDates(rental.boat._id, from, to)
             if (!areInvalidSelectedDates) {
                 rental.fromDate = from;
-                rental.toDate = to
-                rental.totalAmount = parseFloat(rental.boat.advertisement.dailyFee) * rangeDate(from, to)
-                    + parseFloat(rental.boat.advertisement.fixedFee)
+                rental.toDate = to;
+                rental.dailyFee = rental.boat.advertisement.dailyFee;
+                rental.fixedFee = rental.boat.advertisement.fixedFee;
 
                 await rental.save();
 
@@ -102,11 +125,33 @@ module.exports = {
             return { updateRentalProblem: areInvalidSelectedDates }
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
-    deleteRental: authenticated(async ({rentalId}) => {
+    recordBoatReturn: authenticated(authorization('shipowner')(async ({rentalId}, {req}) => {
         try {
-            const rental = await Rental.findById(rentalId)
+            const rental = await Rental.findOne({
+                $and: [
+                    {_id: rentalId},
+                    {customer: req.userId}
+                ]
+            });
+            if (!rental) return {recordBoatReturnProblem: rentalNotFound}
+            if (rental.toDate > new Date()) return {recordBoatReturnProblem: rentalNotFinished}
+
+            rental.redeliveryDate = new Date().setHours(0,0,0)
+            await rental.save()
+
+            return { recordBoatReturnData: transformRental(rental) }
+        } catch (err) { throw new Error(`Can't close rental.`)}
+    })),
+    deleteRental: authenticated(async ({rentalId}, {req}) => {
+        try {
+            const rental = await Rental.findOne({
+                $and: [
+                    {_id: rentalId},
+                    {customer: req.userId}
+                ]
+            }).lean()
             if (!rental) return { deleteRentalProblem: rentalNotFound }
-            if (rental.from <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
+            if (rental.fromDate <= new Date()) return { deleteRentalProblem: isAlreadyStarted }
             await Rental.deleteOne({_id: rental._id})
             return { deletedRentalId: rental._id }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}

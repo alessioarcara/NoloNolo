@@ -3,7 +3,7 @@ import BillHeader from "./BillHeader/BillHeader";
 import BillBody from "./BillBody/BillBody";
 import Note from "./Note/Note";
 
-const BoatBill = ({billNumber, from, to, boatData, customer, createdAt, dailyFee, fixedFee, total}) => {
+const BoatBill = ({billNumber, from, to, boatData, customer, createdAt, dailyFee, fixedFee, totalAmount}) => {
     return (
         <div className={classes['bill-container']}>
             <BillHeader
@@ -23,7 +23,7 @@ const BoatBill = ({billNumber, from, to, boatData, customer, createdAt, dailyFee
                 endDate={to}
                 dailyFee={dailyFee}
                 fixedFee={fixedFee}
-                totalAmount={total}
+                totalAmount={totalAmount}
             />
             <hr/>
             <Note/>

@@ -1,0 +1,19 @@
+.announcements-layout {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    padding: 3rem;
+    gap: 2.5rem;
+}
+
+@media only screen and (min-width: 769px) {
+    .announcements-layout {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 1367px) {
+    .announcements-layout {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

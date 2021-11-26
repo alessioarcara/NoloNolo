@@ -22,9 +22,13 @@ const rentalSchema = new Schema({
         required: [true, 'Please provide end date rental']
     },
     redeliveryDate: Date,
-    totalAmount: {
+    dailyFee: {
         type: mongoose.Types.Decimal128,
-        required: [true, 'Please provide the total amount']
+        required: [true, 'Please provide a daily fee']
+    },
+    fixedFee: {
+        type: mongoose.Types.Decimal128,
+        required: [true, 'Please provide a fixed fee']
     },
     billNumber: {
         type: String

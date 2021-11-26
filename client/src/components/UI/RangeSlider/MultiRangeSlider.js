@@ -1,7 +1,7 @@
 import {useRef, useCallback, useEffect} from "react";
 import './MultiRangeSlider.module.css';
-import {formatNumber} from '../../../helpers/utils';
-import {INITIAL_PRICE, MANAGE_MAX_PRICE, MANAGE_MIN_PRICE} from "../../../helpers/constants";
+import {formatNumber} from '../../../helpers/Utils/utils';
+import {INITIAL_PRICE, MANAGE_MAX_PRICE, MANAGE_MIN_PRICE} from "../../../helpers/Utils/constants";
 import classes from './MultiRangeSlider.module.css';
 
 const changeValue = (a, b) => {

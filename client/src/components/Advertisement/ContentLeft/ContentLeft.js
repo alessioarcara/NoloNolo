@@ -12,12 +12,14 @@ const ContentLeft = ({isVisible, images, boatPosition}) => {
             {/*<div className={classes['mobile-header']}><Header/></div>*/}
             <div className={classes['container']}>
                 {!isVisible &&
-                    <div className={classes[`map-container`]}>
-                        <BoatMapPosition boatPosition={boatPosition}/>
-                    </div>
+                <div className={classes[`map-container`]}>
+                    <BoatMapPosition boatPosition={boatPosition}/>
+                </div>
                 }
                 {isVisible &&
+                <div className={classes['images-container']}>
                     <SlideShow classNameSlideShowSlider={classes['custom-images']} images={images}/>
+                </div>
                 }
             </div>
 

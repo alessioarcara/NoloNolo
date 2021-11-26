@@ -26,8 +26,10 @@ const rootSchema = `
             boat(boatId: ID!): Boat!
             boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatsByUser: [Boat!]
-            rentalsByUser: [Rental!]
             boatRentals(boatId: ID!): [Rental!]
+            rentalsByUser: [Rental!]
+            rentalsByShipowner: [Rental!]
+            advertisementsByShipowner: [Boat!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
         }
@@ -42,10 +44,12 @@ const rootSchema = `
             removeBoat(boatId: ID!): removeBoatPayload!
             insertBoatLocation(inputInsertBoatLocation: InsertBoatLocationInput!): insertBoatLocationPayload!
             publishAdvertisement(inputPublishAdvertisement: PublishAdvertisementInput!): publishAdvertisementPayload!
+            withdrawAdvertisement(boatId: ID!): withdrawAdvertisementPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
             rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!
             updateRental(inputUpdateRental: UpdateRentalInput!): updateRentalPayload!
+            recordBoatReturn(rentalId: ID!): recordBoatReturnPayload!
             deleteRental(rentalId: ID!): deleteRentalPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             addAvatar(upload: Upload!): addAvatarPayload!

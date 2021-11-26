@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const advertisementSchema = require('./advertisement').schema;
 const locationSchema = require('./location').schema;
+const reviewSchema = require('./review').schema
 
 const boatSchema = new Schema({
     shipowner: {
@@ -32,6 +33,7 @@ const boatSchema = new Schema({
     },
     advertisement: advertisementSchema,
     location: locationSchema,
+    reviews: [reviewSchema]
 })
 
 module.exports = mongoose.model('Boat', boatSchema)

@@ -1,0 +1,34 @@
+.header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 1rem;
+    z-index: 2;
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.first-element {
+    grid-column: 1 / 2;
+    justify-self: start;
+}
+
+.header-container svg {
+    width: 1.7rem;
+}
+
+.second-element {
+    grid-column: 2 / 3;
+}
+
+.third-element {
+    grid-column: 3 / 4;
+    justify-self: end;
+}

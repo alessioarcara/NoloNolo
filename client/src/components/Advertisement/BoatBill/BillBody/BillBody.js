@@ -1,6 +1,6 @@
 import classes from './BillBody.module.css';
-import {formatDayMonthYearDate, formatNumber} from "../../../../helpers/utils";
-import {rangeDate} from "../../../../helpers/utils";
+import {formatDayMonthYearDate, formatNumber} from "../../../../helpers/Utils/utils";
+import {rangeDate} from "../../../../helpers/Utils/utils";
 import BillTable from "../Table/BillTable";
 
 const BillBody = ({

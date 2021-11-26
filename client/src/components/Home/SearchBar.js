@@ -2,7 +2,7 @@ import React, {useImperativeHandle, useMemo, useRef} from "react";
 import classes from './SearchBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import {useEffect, useState } from "react";
-import {throttle} from "../../helpers/utils";
+import {throttle} from "../../helpers/Utils/utils";
 
 const SearchBar = React.forwardRef((props, ref) => {
     const [isWhite, setIsWhite] = useState(props.isWhite);

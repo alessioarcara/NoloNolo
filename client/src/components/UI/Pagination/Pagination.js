@@ -5,7 +5,7 @@ import RightArrowIcon from "../icons/RightArrowIcon";
 
 const Pagination = ({dataCount, dataLimit = 10, currentPage, setCurrentPage}) => {
     /* lastPage (1, 2, ..., N) register total page number */
-    const lastPage = useMemo(() => Math.floor(dataCount / dataLimit) + 1 , [dataCount, dataLimit])
+    const lastPage = useMemo(() => Math.ceil(dataCount/dataLimit), [dataCount, dataLimit])
     /* currPage (e.g. dataLimit = 20 then 0, 1, 2, ..., N - 1) register the first element on a page / data limit on a page */
     const currPage = useMemo(() => Math.floor(currentPage / dataLimit), [currentPage, dataLimit])
     /* pagesGroup to shows the user the page group in the pagination: if last page > 3 then 3 at a time */

@@ -6,18 +6,18 @@ const {dateToString} = require("../../helpers/utils");
 
 
 const userLoader = new DataLoader(userIds => {
-    return User.find({_id: {$in: userIds}});
+    return User.find({_id: {$in: userIds}}).lean();
 });
 
 const boatLoader = new DataLoader(boatIds => {
-    return Boat.find({_id: {$in: boatIds}});
+    return Boat.find({_id: {$in: boatIds}}).lean();
 });
 
 const boat = async boatsId => {
     try {
         const boat = await boatLoader.load(boatsId.toString())
         boatLoader.clear(boatsId.toString())
-        return transformBoat(boat.toObject());
+        return transformBoat(boat);
     } catch (err) {throw err}
 }
 
@@ -43,6 +43,7 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
+    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
@@ -58,6 +59,7 @@ const transformBoat = boat => {
             harbour: boat.location.harbour,
             coordinates: boat.location.geometry.coordinates
         },
+        reviews: boat.reviews.map(transformReview),
         totalCount: boat.totalCount,
         minPrice: parseFloat(boat.minPrice),
         maxPrice: parseFloat(boat.maxPrice)
@@ -70,7 +72,8 @@ const transformRental = rental => {
         customer: user.bind(this, rental.customer),
         from: dateToString(rental.fromDate),
         to: dateToString(rental.toDate),
-        totalAmount: parseFloat(rental.totalAmount),
+        dailyFee: parseFloat(rental.dailyFee),
+        fixedFee: parseFloat(rental.fixedFee),
         boat: boat.bind(this, rental.boat),
         createdAt: dateToString(rental.createdAt),
         updatedAt: dateToString(rental.updatedAt)

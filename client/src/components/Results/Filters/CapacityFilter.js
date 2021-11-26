@@ -1,6 +1,6 @@
 import React, {useCallback} from "react";
 import './CapacityFilter.module.css';
-import {ADD_GUEST, REMOVE_GUEST} from "../../../helpers/constants";
+import {ADD_GUEST, REMOVE_GUEST} from "../../../helpers/Utils/constants";
 
 import classes from "./CapacityFilter.module.css"
 

@@ -1,6 +1,6 @@
 import classes from './Avatar.module.css';
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
-import {DEFAULT_AVATAR, IMAGE_PATH} from "../../../../helpers/constants";
+import {DEFAULT_AVATAR, IMAGE_PATH} from "../../../../helpers/Utils/constants";
 import {body_addAvatar} from "../../../../helpers/httpConfig";
 import {useState} from "react";
 import PencilIcon from "../../../UI/icons/PencilIcon";

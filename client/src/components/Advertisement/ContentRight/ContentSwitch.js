@@ -1,6 +1,6 @@
 import classes from './ContentSwitch.module.css'
 import {useCallback} from "react";
-import {SHOW_VISIBLE_CONTENT} from "../../../helpers/constants";
+import {SHOW_VISIBLE_CONTENT} from "../../../helpers/Utils/constants";
 
 const ContentSwitch = ({dispatch}) => {
     const scrollTopPage = useCallback(() => {

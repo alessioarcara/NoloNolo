@@ -57,7 +57,7 @@ module.exports = {
         if (from && to) {
             const rentalsById = await Rental.find(
                 {$and: [{fromDate: {$lte: to}}, {toDate: {$gte: from}}]},
-                {boat: 1})
+                {boat: 1}).lean()
 
             const ids = rentalsById.map(item => item['boat'])
             pipeline.unshift({$match: {"_id": {$nin: ids}}})
@@ -77,7 +77,6 @@ module.exports = {
 
         try {
             const boats = await Boat.aggregate(pipeline)
-            console.log(boats)
             return boats.map(transformBoat)
         } catch (err) { throw new Error(`Can't find boats. ${err}`) }
     },

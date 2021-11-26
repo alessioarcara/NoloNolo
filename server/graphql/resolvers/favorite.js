@@ -1,7 +1,7 @@
 const Boat = require('../../models/boat');
 const {boatNotFound} = require("../../helpers/problemMessages");
 const {transformBoat} = require("./merge");
-const {authenticated} = require("../../helpers/authenticated-guard");
+const {authenticated} = require("../../auth/auth");
 
 module.exports = {
     favorites: authenticated(async (_, {req}) => {
@@ -15,7 +15,7 @@ module.exports = {
             const boat = await Boat.findOne({ _id: boatId } )
             if (!boat) { return { favoritesProblem: boatNotFound }}
 
-            boat.advertisement.preferredBy.push(req.userId)
+            boat.advertisement.preferredBy.addToSet(req.userId)
             await boat.save()
 
             return { favoritesData: transformBoat(boat.toObject())}

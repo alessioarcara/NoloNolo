@@ -5,7 +5,7 @@ import {
     CLEAR_RENTAL,
     SHOW_BILL,
     SHOW_VISIBLE_CONTENT
-} from "../helpers/constants";
+} from "../helpers/Utils/constants";
 
 export const advertisementReducer = (state, {type, payload}) => {
     switch (type) {

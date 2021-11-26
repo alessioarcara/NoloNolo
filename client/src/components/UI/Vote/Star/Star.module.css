@@ -11,6 +11,11 @@
     cursor: pointer;
 }
 
-.star-icon-color svg {
-    fill: #FF2267;
+.star-active-color svg {
+    fill: #FF2267 !important;
+}
+
+.star-color svg {
+    fill: #fff;
+    stroke: #FF2267;
 }

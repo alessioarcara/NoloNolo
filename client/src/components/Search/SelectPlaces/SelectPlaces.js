@@ -3,7 +3,7 @@ import classes from "./SelectPlaces.module.css";
 import SearchBar from "../../Home/SearchBar";
 import Location from "./Location";
 import useHttp from "../../../hooks/use-http";
-import {debounce} from "../../../helpers/utils";
+import {debounce} from "../../../helpers/Utils/utils";
 import {body_search} from "../../../helpers/httpConfig";
 import BreakpointContext from "../../../store/breakpoint-context";
 

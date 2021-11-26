@@ -6,7 +6,6 @@ const advertisementType = `
             fixedFee: Float!
             dailyFee: Float!
             images: [String!]
-            reviews: [Review!]
         }
 
         type publishAdvertisementPayload {
@@ -17,6 +16,11 @@ const advertisementType = `
         input PublishAdvertisementInput {
             boatId: ID!
             publishAdvertisement: AdvertisementInput!
+        }
+        
+        type withdrawAdvertisementPayload {
+            withdrawnAdvertisementId: ID
+            withdrawAdvertisementProblem: String
         }
 
         input AdvertisementInput {

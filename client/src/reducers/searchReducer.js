@@ -1,4 +1,4 @@
-import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../helpers/constants";
+import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../helpers/Utils/constants";
 
 export const initialState = {
     startDate: null,

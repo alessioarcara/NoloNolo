@@ -12,6 +12,7 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import UserDetailsPage from "./pages/UserDetailsPage";
 import ResultsPage from "./pages/ResultsPage";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
+import AdvertisementAdministrationPage from "./pages/AdvertisementAdministrationPage";
 
 
 function App() {
@@ -25,14 +26,15 @@ function App() {
                 {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}
                 <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
             </Route>
-            <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
-            <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
             <Route path='boats/*' element={<ResultsPage/>}/>
             <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
+            <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
+            <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
             <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
+            <Route path='profile/your-advertisements' element={<AdvertisementAdministrationPage/>}/>
             <Route path='*' element={<Navigate replace to="/"/>}/>
         </Routes>
-    );
+    )
 }
 
 export default App;

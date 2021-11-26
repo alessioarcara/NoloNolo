@@ -2,6 +2,7 @@ import RentalCard from "../RentalCard/RentalCard";
 import {useCallback, useMemo} from "react";
 import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
 import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
+import {calculateTotal} from "../../../helpers/Utils/utils";
 
 const RentalList = ({
                         onUpdateOrDeleteRentals,
@@ -43,15 +44,20 @@ const RentalList = ({
                         from={rental.from}
                         to={rental.to}
                         city={rental.boat.isDocked.city}
-                        totalAmount={rental.totalAmount}
+                        /* TODO: rental.to -> rental.redelivery */
+                        totalAmount={calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to)}
                         images={rental.boat.hasAdvertisement.images}
                         billNumber={rental.billNumber}
                         boatData={rental.boat}
                         customer={rental.customer}
                         createdAt={rental.createdAt}
-                        dailyFee={rental.boat.hasAdvertisement.dailyFee}
-                        fixedFee={rental.boat.hasAdvertisement.fixedFee}
-                        reviews={rental.boat.hasAdvertisement.reviews}
+                        rentalDailyFee={rental.dailyFee}
+                        rentalFixedFee={rental.fixedFee}
+                        advertisementDailyFee={rental.boat.hasAdvertisement.dailyFee}
+                        advertisementFixedFee={rental.boat.hasAdvertisement.fixedFee}
+                        review={rental.boat.reviews.filter
+                            (review => review.rental === rental._id && review.creator._id === rental.customer._id)[0]
+                        }
                         isReviewed={rental.isReviewed}
                     />
                 )}

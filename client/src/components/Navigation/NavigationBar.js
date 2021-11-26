@@ -4,7 +4,7 @@ import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
 import HeartIcon from "../UI/icons/MenuIcons/HeartIcon";
 import UserIcon from "../UI/icons/MenuIcons/UserIcon";
-import {throttle} from "../../helpers/utils";
+import {throttle} from "../../helpers/Utils/utils";
 
 const NavigationBar = ({authenticated}) => {
     const [showNavbar, setShowNavbar] = useState(true);
