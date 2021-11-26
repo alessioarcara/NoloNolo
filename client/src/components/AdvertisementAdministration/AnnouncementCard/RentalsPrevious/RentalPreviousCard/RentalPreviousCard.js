@@ -6,26 +6,28 @@ const stars = [0, 1, 2, 3, 4]
 
 const RentalPreviousCard = ({start, end, customer, review}) => {
 
-    console.log(review.rating - 1)
-
     return (
-        <div className={classes['container']}>
-            <div className={classes['customer-email']}>{customer.email.split('@')[0]}</div>
-            <div className={classes['stars-container']}>
-                <Vote
-                    votes={stars}
-                    quoteIndex={review.rating - 1}
-                    placeholder={true}
-                />
+        <>
+            {review &&
+            <div className={classes['container']}>
+                <div className={classes['customer-email']}>{customer.email.split('@')[0]}</div>
+                <div className={classes['stars-container']}>
+                    <Vote
+                        votes={stars}
+                        quoteIndex={review.rating - 1}
+                        placeholder={true}
+                    />
+                </div>
+                <div className={classes.date}>
+                    {`
+                        ${formatDayMonthYearDate(start, {day: 'numeric', month: 'short', year: 'numeric'})} -
+                        ${formatDayMonthYearDate(end, {day: 'numeric', month: 'short', year: 'numeric'})}
+                    `}
+                </div>
+                <button className={`${classes['bill-btn']} btn btn-primary`}>Fattura</button>
             </div>
-            <div className={classes.date}>
-                {`
-                    ${formatDayMonthYearDate(start, {day: 'numeric', month: 'short', year: 'numeric'})} - 
-                    ${formatDayMonthYearDate(end, {day: 'numeric', month: 'short', year: 'numeric'})}
-                `}
-            </div>
-            <button className={`${classes['bill-btn']} btn btn-primary`}>Fattura</button>
-        </div>
+            }
+        </>
     )
 }
 
