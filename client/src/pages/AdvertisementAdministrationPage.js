@@ -39,8 +39,8 @@ const AdvertisementAdministrationPage = () => {
                 textTitle="Annunci"
             />
             <AdvertisementAdministrationList
-                advertisements={advertisements ? advertisements : []}
-                rentals={rentals ? rentals : []}
+                advertisements={advertisements}
+                rentals={rentals}
                 handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
             />
         </>

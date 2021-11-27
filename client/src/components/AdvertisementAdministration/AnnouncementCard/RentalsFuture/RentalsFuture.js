@@ -1,9 +1,11 @@
 import RentalsFutureCard from "./RentalsFutureCard/RentalsFutureCard";
-import {calculateTotal} from "../../../../helpers/Utils/utils";
+import {calculateTotal, dateSorting} from "../../../../helpers/Utils/utils";
 
 const RentalsFuture = ({futureRentals}) => {
+    const futureData = dateSorting(futureRentals, true)
+
     return (
-        futureRentals.map(rental =>
+        futureData.map(rental =>
             <RentalsFutureCard
                 key={rental._id}
                 customer={rental.customer}

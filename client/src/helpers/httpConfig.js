@@ -372,6 +372,16 @@ exports.body_shipownerAdvertisements = {
                 createdAt
                 boat {
                     _id
+                    model
+                    yard
+                    owner {
+                        email
+                    }
+                    isDocked {
+                        city
+                        region
+                        harbour
+                    }
                     reviews {
                         rating
                         rental

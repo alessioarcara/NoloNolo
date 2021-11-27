@@ -1,6 +1,7 @@
 import AnnouncementCard from "./AnnouncementCard/AnnouncementCard";
 import AnnouncementListLayout from "../UI/Layout/AnnouncementListLayout/AnnouncementListLayout";
 import {useMemo} from "react";
+import ElementsNotFound from "../UI/ElementsNotFound/ElementsNotFound";
 
 const AdvertisementAdministrationList = ({advertisements, rentals, handleCloseRentalOrDeleteAdvertisement}) => {
 
@@ -13,22 +14,32 @@ const AdvertisementAdministrationList = ({advertisements, rentals, handleCloseRe
                 acc[item.boat._id].rentals.push(item)
             }
             return acc
-    }, {}), [advertisements, rentals])
+        }, {}), [advertisements, rentals])
 
     return (
-        <AnnouncementListLayout>
-            {Object.values(result).map(announcement =>
-                <AnnouncementCard
-                    key={announcement._id}
-                    boatId={announcement._id}
-                    images={announcement.hasAdvertisement.images}
-                    model={announcement.model}
-                    rentals={announcement.rentals}
-                    reviews={announcement.reviews}
-                    handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
-                />
-            )}
-        </AnnouncementListLayout>
+        <>
+            {Object.values(result).length > 0
+                ?   <AnnouncementListLayout>
+                        {Object.values(result).map(announcement =>
+                            <AnnouncementCard
+                                key={announcement._id}
+                                boatId={announcement._id}
+                                images={announcement.hasAdvertisement.images}
+                                model={announcement.model}
+                                rentals={announcement.rentals}
+                                reviews={announcement.reviews}
+                                preferredBy={announcement.hasAdvertisement.preferredBy.length}
+                                handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
+                            />
+                        )}
+                    </AnnouncementListLayout>
+                :   <ElementsNotFound
+                        warningText="Non hai aggiunto nuovi annunci. Aggiungi la tua &#128741; nella sezione barche e inizia una nuova esperienza"
+                        warningTextButton="Aggiungi"
+                        path="/become-shipowner"
+                    />
+            }
+        </>
     )
 }
 
