@@ -1,12 +1,18 @@
-import classes from "./Header.module.css";
-import {NavLink} from "react-router-dom";
 import React from "react";
+import classes from "./RentalsHeader.module.css";
+import {NavLink} from "react-router-dom";
+import Header from "../../UI/Header/Header";
+import BackIcon from "../../UI/icons/BackIcon";
 
-const Header = () => {
+const RentalsHeader = () => {
     return (
-        <div className={classes['wrapper']}>
-            <div className={classes['header-container']}>
-                <h1 className="title">Noleggi</h1>
+            <Header
+                textTitle="Noleggi"
+                backElement={<BackIcon/>}
+                navigatePath="/profile"
+                classNameHeader={classes['bottom-header']}
+            >
+                {/* children */}
                 <div className={classes[`windows-bar`]}>
                     <NavLink
                         to='previous'
@@ -27,9 +33,9 @@ const Header = () => {
                         <span>Futuri</span>
                     </NavLink>
                 </div>
-            </div>
-        </div>
-    );
-};
 
-export default Header;
+            </Header>
+    )
+}
+
+export default RentalsHeader

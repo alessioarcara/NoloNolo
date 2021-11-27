@@ -2,8 +2,9 @@ import AnnouncementCard from "./AnnouncementCard/AnnouncementCard";
 import AnnouncementListLayout from "../UI/Layout/AnnouncementListLayout/AnnouncementListLayout";
 import {useMemo} from "react";
 
-const AdvertisementAdministrationList = ({advertisements, rentals}) => {
+const AdvertisementAdministrationList = ({advertisements, rentals, handleCloseRentalOrDeleteAdvertisement}) => {
 
+    /* Aggregate advertisement with rentals (item._id === item.boat._id) */
     const result = useMemo(() => [...advertisements, ...rentals].reduce(
         (acc, item, i) => {
             if (i < advertisements.length) {
@@ -19,9 +20,12 @@ const AdvertisementAdministrationList = ({advertisements, rentals}) => {
             {Object.values(result).map(announcement =>
                 <AnnouncementCard
                     key={announcement._id}
+                    boatId={announcement._id}
+                    images={announcement.hasAdvertisement.images}
                     model={announcement.model}
                     rentals={announcement.rentals}
                     reviews={announcement.reviews}
+                    handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
                 />
             )}
         </AnnouncementListLayout>

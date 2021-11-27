@@ -9,9 +9,10 @@ const Vote = ({votes, quoteIndex, changeQuoteIndex, placeholder = false}) => {
                 changeQuote={changeQuoteIndex}
                 isSelected={index <= quoteIndex}
                 placeholderQuote={placeholder}
+                quoteIndex={quoteIndex}
             />
         )
-    );
+    )
 }
 
 export default Vote

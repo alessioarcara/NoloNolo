@@ -73,6 +73,3 @@ export const parseMutationResponse = (setState, applyData) => (resData) => {
         setState(applyData ? prevState => applyData(prevState, payload[0]) : payload[0])
     return payload[1]
 };
-
-
-

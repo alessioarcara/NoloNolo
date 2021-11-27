@@ -4,7 +4,7 @@ import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
 import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
 import {calculateTotal} from "../../../helpers/Utils/utils";
 
-const RentalList = ({
+const RentalsList = ({
                         onUpdateOrDeleteRentals,
                         previousRentals,
                         activeRentals,
@@ -68,4 +68,4 @@ const RentalList = ({
     return content
 };
 
-export default RentalList;
+export default RentalsList;

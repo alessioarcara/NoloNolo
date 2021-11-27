@@ -17,7 +17,7 @@ const BillBody = ({
                   }) => {
     return (
         <div className={classes['body-container']}>
-            {/* Body Header */}
+            {/* Body RentalsHeader */}
             <div className={classes['bill-data-container']}>
                 <div className={classes['bill-data']}>
                     <span>
