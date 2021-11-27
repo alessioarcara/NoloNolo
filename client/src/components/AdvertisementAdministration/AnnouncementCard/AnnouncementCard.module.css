@@ -14,6 +14,7 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
+/* X */
 .delete-card {
     position: absolute;
     top: 0.2rem;
@@ -36,7 +37,6 @@
 .details-container svg {
     width: 1.5rem;
 }
-
 .details-section, .option-section {
     display: flex;
     flex-direction: column;
@@ -68,7 +68,6 @@
     justify-self: center;
     align-self: center;
 }
-
 .eye-icon svg, .hourglass-icon svg {
     width: 1.9rem;
 }
@@ -77,6 +76,7 @@
     width: 1rem;
     height: 1rem;
     background-color: lawngreen;
+    margin: 0.7rem;
 }
 .date {
     font-size: 0.9em;

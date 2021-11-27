@@ -7,7 +7,7 @@ import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
 import EyeIcon from "../../UI/icons/EyeIcon";
 import DetailsModal from "./DetailsModal/DetailsModal";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const object = {
     model: "Regina IV",
@@ -29,10 +29,11 @@ const object = {
 const AnnouncementCard = ({advertisementId, model, reviews, images, rentals}) => {
     const [openDetailsModal, setOpenDetailsModal] = useState(false)
     const navigate = useNavigate()
+    const location = useLocation()
 
     const goAdvertisementPage = useCallback(() => {
-        navigate(`/boats/${advertisementId}`)
-    }, [navigate])
+        navigate(`/boats/${advertisementId}`, {state: {from: location} })
+    }, [navigate, location, advertisementId])
 
     const filterRentals = {
         previous: rentals.filter(rental => !rental.redelivery),
