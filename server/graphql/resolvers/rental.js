@@ -48,7 +48,11 @@ module.exports = {
                     as: 'boat'
                 } },
                 { $unwind: "$boat" },
-                { $match: { "boat.shipowner": mongoose.Types.ObjectId(req.userId) }}
+                { $match: { $and: [
+                        {"boat.shipowner": mongoose.Types.ObjectId(req.userId)},
+                        {"boat.advertisement": {$exists: true}}
+                    ]
+                } }
             ])
             return rentals.map(rental => transformRental({ ...rental, boat: rental.boat._id }))
         } catch (err) { throw new Error(`Can't find shipowner rentals. ${err}`) }
@@ -125,12 +129,12 @@ module.exports = {
             return { updateRentalProblem: areInvalidSelectedDates }
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
-    recordBoatReturn: authenticated(authorization('shipowner')(async ({rentalId}, {req}) => {
+    recordBoatReturn: authenticated(authorization('shipowner')(async ({rentalId}) => {
         try {
             const rental = await Rental.findOne({
                 $and: [
                     {_id: rentalId},
-                    {customer: req.userId}
+                    {redeliveryDate: {$exists: false}}
                 ]
             });
             if (!rental) return {recordBoatReturnProblem: rentalNotFound}

@@ -2,8 +2,22 @@ import classes from './RentalActive.module.css';
 import {rangeDate, formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 import CheckInIcon from "../../../UI/icons/CheckInIcon";
 import HourglassIcon from "../../../UI/icons/HourglassIcon";
+import {body_recordBoatReturn} from "../../../../helpers/httpConfig";
+import {useCallback} from "react";
 
-const RentalActive = ({activeRental}) => {
+const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) => {
+    const handleCloseRental = useCallback(() => {
+        handleCloseRentalOrDeleteAdvertisement(
+            body_recordBoatReturn({rentalId: activeRental._id}),
+            (prevAdvertisements, newRental) => {
+                return {
+                    ...prevAdvertisements,
+                    rentals: prevAdvertisements.rentals.map(rental => rental._id === newRental._id ? newRental : rental)
+                }
+            }
+        )
+    }, [activeRental])
+
     return (
         <div className={classes['container']}>
             {activeRental &&
@@ -43,6 +57,7 @@ const RentalActive = ({activeRental}) => {
                     className={`${classes['close-btn']} btn btn-primary`}
                     disabled={rangeDate(new Date(), activeRental.to) > 0}
                     title="Chiudi noleggio al termine"
+                    onClick={handleCloseRental}
                 >
                     Chiudi
                 </button>

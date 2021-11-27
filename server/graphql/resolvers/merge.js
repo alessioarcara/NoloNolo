@@ -43,7 +43,6 @@ const transformUser = user => {
 }
 
 const transformBoat = boat => {
-    console.log(boat)
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
@@ -71,6 +70,7 @@ const transformRental = rental => {
         customer: user.bind(this, rental.customer),
         from: dateToString(rental.fromDate),
         to: dateToString(rental.toDate),
+        redelivery: rental.redeliveryDate && dateToString(rental.redeliveryDate),
         dailyFee: parseFloat(rental.dailyFee),
         fixedFee: parseFloat(rental.fixedFee),
         boat: boat.bind(this, rental.boat),

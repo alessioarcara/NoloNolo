@@ -13,6 +13,7 @@ module.exports = {
         const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
 
         let pipeline = [
+            {$match: {"advertisement": {$exists: true}}},
             {
                 $facet: {
                     "Boats": [

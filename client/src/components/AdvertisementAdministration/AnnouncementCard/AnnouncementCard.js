@@ -63,6 +63,7 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
                 closeModalHandler={() => setOpenDetailsModal(false)}
             >
                 <DetailsModal
+                    handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
                     previousRentals={filterRentals.previous ? filterRentals.previous : []}
                     activeRental={filterRentals.active ? filterRentals.active : []}
                     futureRentals={filterRentals.future ? filterRentals.future : []}

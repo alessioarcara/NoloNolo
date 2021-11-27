@@ -4,7 +4,7 @@ import RentalsPrevious from "../RentalsPrevious/RentalsPrevious";
 import RentalActive from "../RentalActive/RentalActive";
 import RentalsFuture from "../RentalsFuture/RentalsFuture";
 
-const DetailsModal = ({previousRentals, activeRental, futureRentals}) => {
+const DetailsModal = ({previousRentals, activeRental, futureRentals, handleCloseRentalOrDeleteAdvertisement}) => {
     const [rentalsState, setRentalsState] = useState("active")
 
     return (
@@ -14,7 +14,7 @@ const DetailsModal = ({previousRentals, activeRental, futureRentals}) => {
                 <RentalsPrevious previousRentals={previousRentals}/>
             }
             {rentalsState === 'active' &&
-                <RentalActive activeRental={activeRental[0]}/>
+                <RentalActive activeRental={activeRental[0]} handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}/>
             }
             {rentalsState === 'future' &&
                 <RentalsFuture futureRentals={futureRentals}/>
