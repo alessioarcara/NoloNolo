@@ -268,6 +268,7 @@ exports.body_recordBoatReturn = (rentalId) => {
                       fixedFee
                       billNumber
                       createdAt
+                      redelivery
                       boat {
                           _id
                           reviews {
@@ -364,9 +365,9 @@ exports.body_shipownerAdvertisements = {
                 _id
                 from
                 to
+                redelivery
                 dailyFee
                 fixedFee
-                redelivery
                 billNumber
                 createdAt
                 boat {

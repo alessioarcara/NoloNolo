@@ -8,6 +8,8 @@ import HourglassIcon from "../../UI/icons/HourglassIcon";
 import EyeIcon from "../../UI/icons/EyeIcon";
 import DetailsModal from "./DetailsModal/DetailsModal";
 import {useLocation, useNavigate} from "react-router-dom";
+import {body_withdrawAdvertisement} from "../../../helpers/httpConfig";
+import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
 
 const object = {
     model: "Regina IV",
@@ -26,20 +28,33 @@ const object = {
     totalAmount: formatNumber(1200)
 }
 
-const AnnouncementCard = ({advertisementId, model, reviews, images, rentals}) => {
+const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseRentalOrDeleteAdvertisement}) => {
     const [openDetailsModal, setOpenDetailsModal] = useState(false)
+    const [confirmModal, setConfirmModal] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
 
     const goAdvertisementPage = useCallback(() => {
-        navigate(`/boats/${advertisementId}`, {state: {from: location} })
-    }, [navigate, location, advertisementId])
+        navigate(`/boats/${boatId}`, {state: {from: location} })
+    }, [navigate, location, boatId])
 
     const filterRentals = {
-        previous: rentals.filter(rental => !rental.redelivery),
-        active: rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)),
+        previous: rentals.filter(rental => rental.redelivery),
+        active: rentals.filter(rental => new Date () >= new Date(rental.from) && new Date () <= new Date(rental.to)),
         future: rentals.filter(rental => new Date(rental.from) > new Date())
     }
+
+    const handleDeleteAdvertisement = useCallback(() => {
+        handleCloseRentalOrDeleteAdvertisement(
+            body_withdrawAdvertisement({boatId}),
+            (prevAdvertisements, prevAdvertisementId) => {
+                return {
+                    ...prevAdvertisements,
+                    advertisements: prevAdvertisements.advertisements.filter(advertisement => advertisement._id !== prevAdvertisementId)
+                }
+            }
+        )
+    }, [handleCloseRentalOrDeleteAdvertisement, boatId])
 
     return (
         <>
@@ -54,9 +69,24 @@ const AnnouncementCard = ({advertisementId, model, reviews, images, rentals}) =>
                 />
             </Modal>
             }
+            {confirmModal &&
+                <Modal
+                    closeModalHandler={() => setConfirmModal(false)}
+                >
+                    <ConfirmSection
+                        text="Sicuro di eliminare questo annuncio?"
+                        handleClickButton={handleDeleteAdvertisement}
+                    />
+                </Modal>
+            }
             <div className={classes['card-container']}>
                 {/*First element*/}
-                <div className={classes['delete-card']}>&times;</div>
+                <div
+                    className={classes['delete-card']}
+                    onClick={() => setConfirmModal(true)}
+                >
+                    &times;
+                </div>
                 <SlideShow images={images}/>
 
                 {/*Second element*/}

@@ -12,7 +12,7 @@ const Header = ({boatId}) => {
 
     const goBackClickHandler = useCallback(() => {
         state ? navigate(-1) : navigate('/', {replace: true})
-    }, [navigate])
+    }, [navigate, state])
 
     return (
         <div className={classes[`header-bar`]}>

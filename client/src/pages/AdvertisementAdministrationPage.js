@@ -1,18 +1,36 @@
 import Header from "../components/UI/Header/Header";
 import AdvertisementAdministrationList from "../components/AdvertisementAdministration/AdvertisementAdministrationList";
 import useHttp from "../hooks/use-http";
-import {useContext, useEffect} from "react";
+import {useCallback, useContext, useEffect, useState} from "react";
 import AuthContext from "../store/auth-context";
 import {body_shipownerAdvertisements} from "../helpers/httpConfig";
 import BackIcon from "../components/UI/icons/BackIcon";
+import {parseMutationResponse} from "../helpers/Utils/utils";
 
 const AdvertisementAdministrationPage = () => {
     const {token} = useContext(AuthContext)
-    const {data, sendRequest} = useHttp(true)
+    const {sendRequest} = useHttp(true)
+
+    const [{advertisements, rentals}, setAdvertisements] = useState({
+        advertisements: [],
+        rentals: []
+    })
+
+    const handleCloseRentalOrDeleteAdvertisement = useCallback((body, applyData) =>
+        sendRequest({body, token}, parseMutationResponse(setAdvertisements, applyData)),
+        [sendRequest, token])
 
     useEffect(() => {
-        sendRequest({body: body_shipownerAdvertisements, token}, resData => resData)
+        sendRequest({
+            body: body_shipownerAdvertisements,
+            token
+        }, resData => setAdvertisements({
+            advertisements: resData.advertisementsByShipowner ? resData.advertisementsByShipowner : [],
+            rentals: resData.rentalsByShipowner ? resData.rentalsByShipowner : [],
+        }))
     }, [sendRequest, token])
+
+    console.log(advertisements)
 
     return (
         <>
@@ -21,8 +39,9 @@ const AdvertisementAdministrationPage = () => {
                 textTitle="Annunci"
             />
             <AdvertisementAdministrationList
-                advertisements={data ? data.advertisementsByShipowner : []}
-                rentals={data ? data.rentalsByShipowner : []}
+                advertisements={advertisements ? advertisements : []}
+                rentals={rentals ? rentals : []}
+                handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
             />
         </>
     )
