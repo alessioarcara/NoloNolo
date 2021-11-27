@@ -10,13 +10,13 @@ module.exports = {
         try {
             const boat = await Boat.findById(boatId).lean()
             return transformBoat(boat)
-        } catch (err) { throw new Error(`Can't find boat. ${err}`) }
+        } catch (err) {throw new Error(`Can't find boat. ${err}`)}
     },
     boats: async ({filter, skip, take}) => {
         const {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice} = filter
 
         let pipeline = [
-            { $match: {"advertisement": {$exists: true} } },
+            {$match: {"advertisement": {$exists: true}}},
             {
                 $facet: {
                     "Boats": [
@@ -78,22 +78,23 @@ module.exports = {
         try {
             const boats = await Boat.aggregate(pipeline)
             return boats.map(transformBoat)
-        } catch (err) { throw new Error(`Can't find boats. ${err}`) }
+        } catch (err) {throw new Error(`Can't find boats. ${err}`)}
     },
     boatsByUser: authenticated(async (args, {req}) => {
         try {
             const boats = await Boat.find({
                 $and: [
                     {shipowner: req.userId},
-                    {$or: [
-                            {advertisement: { $exists: false } },
-                            {location: { $exists: false } }
+                    {
+                        $or: [
+                            {advertisement: {$exists: false}},
+                            {location: {$exists: false}}
                         ]
                     }
                 ]
             }).lean()
             return boats.map(transformBoat)
-        } catch (err) { throw new Error(`Can't find boats. ${err}`)}
+        } catch (err) {throw new Error(`Can't find boats. ${err}`)}
     }),
     addBoat: authenticated(async (args, {req}) => {
         try {
@@ -117,25 +118,36 @@ module.exports = {
                     setDefaultsOnInsert: false,
                     useFindAndModify: false
                 }
-            ).lean()
-
-            return {addBoatData: transformBoat(boat)}
-        } catch (err) { throw new Error(`Can't add boat. ${err}`) }
+            )
+            return {addBoatData: transformBoat(boat.toObject())}
+        } catch (err) {throw new Error(`Can't add boat. ${err}`)}
     }),
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
             const rentals = await Rental.find({boat: boatId}).lean()
-            if (rentals.length > 0) return { removeBoatProblem: boatWithRentals}
+            if (rentals.length > 0) return {removeBoatProblem: boatWithRentals}
 
-            const {deletedCount} = await Boat.deleteOne({_id: boatId})
-            return deletedCount === 0 ? { removeBoatProblem: boatNotFound} : { removedBoatId: boatId}
-        } catch (err) { throw new Error(`Can't remove boat. ${err}`)}
+            const {deletedCount} = await Boat.deleteOne(
+                {
+                    $and: [
+                        {_id: boatId},
+                        {shipowner: req.userId}
+                    ]
+                }
+            )
+            return deletedCount === 0 ? {removeBoatProblem: boatNotFound} : {removedBoatId: boatId}
+        } catch (err) {throw new Error(`Can't remove boat. ${err}`)}
     }),
     insertBoatLocation: authenticated(async (args, {req}) => {
         try {
             const {boatId, isDocked} = args.inputInsertBoatLocation
-            const boat = await Boat.findByIdAndUpdate(
-                boatId,
+            const boat = await Boat.findOneAndUpdate(
+                {
+                    $and: [
+                        {_id: boatId},
+                        {shipowner: req.userId}
+                    ]
+                },
                 {
                     location: {
                         ...isDocked,
@@ -149,8 +161,9 @@ module.exports = {
                     runValidators: true,
                     useFindAndModify: false
                 }
-            ).lean();
-            return {insertBoatLocationData: transformBoat(boat)}
-        } catch (err) { throw new Error(`Can't insert boat location. ${err}`)}
+            );
+            return boat ?
+                {insertBoatLocationProblem: boatNotFound} : {insertBoatLocationData: transformBoat(boat.toObject())}
+        } catch (err) {throw new Error(`Can't insert boat location. ${err}`)}
     })
 }

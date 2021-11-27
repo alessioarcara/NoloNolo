@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './NavigationBar.module.css';
 import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
@@ -8,15 +8,16 @@ import {throttle} from "../../helpers/Utils/utils";
 
 const NavigationBar = ({authenticated}) => {
     const [showNavbar, setShowNavbar] = useState(true);
+    const timer = useRef(null)
 
     const scrollHandler = useMemo(() => throttle(() => {
         if (showNavbar) { setShowNavbar(false) }
 
-        const timer = setTimeout(() => {
+        timer.current = setTimeout(() => {
             setShowNavbar(true)
         }, 1000)
 
-        if (!showNavbar) { clearTimeout(timer) }
+        if (!showNavbar) { clearTimeout(timer.current) }
     }, 20), [showNavbar])
 
     useEffect(() => {
@@ -34,13 +35,13 @@ const NavigationBar = ({authenticated}) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/favorites' className={navData => navData.isActive ? `${classes.selected} ${classes.item}` : `${classes.item}`}>
+                    <NavLink to='favorites' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <HeartIcon className={classes.heart}/>
                         <div>Preferiti</div>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/profile' className={navData => navData.isActive ? `${classes.selected} ${classes.item}` : `${classes.item}`}>
+                    <NavLink to='profile' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <UserIcon/>
                         {authenticated ? <div>Profilo</div> : <div>Accedi</div>}
                     </NavLink>

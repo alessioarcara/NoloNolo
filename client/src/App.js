@@ -20,7 +20,7 @@ function App() {
 
     return (
         <Routes>
-            <Route element={<NavigationLayout/>}>
+            <Route element={<NavigationLayout authenticated={isLoggedIn}/>}>
                 <Route path='/*' element={<Home/>}/>
                 <Route path='favorites' element={<FavoritesPage/>}/>
                 {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}

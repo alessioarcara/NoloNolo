@@ -19,7 +19,7 @@ const validateRentDates = async (boatId, from, to) => {
      *------------------------------------------------*/
     const rentals = await Rental.find({
         $and: [{boat: boatId}, {fromDate: {$lte: to}}, {toDate: {$gte: from}}]
-    })
+    }).lean()
 
     if (rentals.length > 0) return alreadyRented;
 }
@@ -113,7 +113,6 @@ module.exports = {
                 rental.fixedFee = rental.boat.advertisement.fixedFee;
 
                 await rental.save();
-
                 /* END SEMAPHORE IF SUCCESSFUL */
                 await releaseLock(rental.boat._id)
                 return { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id})};

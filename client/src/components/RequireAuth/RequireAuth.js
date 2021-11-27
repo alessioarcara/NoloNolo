@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import AuthContext from "../../store/auth-context";
 import {Navigate} from "react-router-dom";
 import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
@@ -6,12 +6,14 @@ import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
 const RequireAuth = ({children}) => {
     const [isLoading, setIsLoading] = useState(true)
     const {isLoggedIn} = useContext(AuthContext)
+    const timer = useRef(null)
 
     useEffect(() => {
-        setTimeout(
+        timer.current = setTimeout(
             () => setIsLoading(false),
-            1000
+            500
         )
+        return () => clearTimeout(timer.current)
     }, [])
 
     if (isLoggedIn) return children

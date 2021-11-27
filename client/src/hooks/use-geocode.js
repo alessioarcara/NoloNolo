@@ -16,11 +16,9 @@ const UseGeocode = (region, city, delay = 1000) => {
 
             if (data.lat !== null && data.lon !== null)
                 setCoordinates({lat: parseFloat(data.lat), lon: parseFloat(data.lon)})
-        } catch (err) {
-            setError(err)
-        } finally {
-            setIsLoading(false)
         }
+        catch (err) { setError(err) }
+        finally { setIsLoading(false) }
     }, delay))
 
     useEffect(() => {

@@ -1,11 +1,11 @@
 import Header from "../components/Rentals/Header/Header";
-import {Routes, Route, Navigate} from "react-router-dom";
+import {Routes, Route, Navigate, useNavigationType} from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {body_userRentals} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 import RentalList from "../components/Rentals/RentalList/RentalList";
-import {destructurePayload} from "../helpers/Utils/utils";
+import {parseMutationResponse} from "../helpers/Utils/utils";
 
 const filterRentals = rentals => {
     return {
@@ -26,19 +26,15 @@ const filterRentals = rentals => {
 
 const RentalsPage = () => {
     const {token} = useContext(AuthContext)
+    const navigationType = useNavigationType()
     const [rentals, setRentals] = useState([])
     const {sendRequest} = useHttp(true)
 
     const filteredRentals = useMemo(() => filterRentals(rentals), [rentals])
 
-    const handleUpdateOrDeleteRentals = useCallback((body, applyData) => {
-        sendRequest({body, token}, resData => {
-            const payload = destructurePayload(resData)
-            if (payload[0])
-                setRentals(prevRentals => applyData(prevRentals, payload[0]))
-            return payload[1]
-        })
-    }, [sendRequest, token])
+    const handleUpdateOrDeleteRentals = useCallback((body, applyData) =>
+            sendRequest({body, token}, parseMutationResponse(setRentals, applyData))
+    , [sendRequest, token])
 
     useEffect(() => {
         sendRequest({
@@ -56,7 +52,7 @@ const RentalsPage = () => {
                 <Route path='active' element={<RentalList activeRentals={filteredRentals.active} active/>}/>
                 <Route path='future' element={<RentalList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
                                                           futureRentals={filteredRentals.future} future/>}/>
-                <Route path='/' element={<Navigate to='active'/>}/>
+                <Route path='/' element={navigationType === "PUSH" ? <Navigate to='active'/> : <Navigate to='/profile'/>}/>
             </Routes>
         </>
     );

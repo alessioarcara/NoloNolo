@@ -44,8 +44,9 @@ const RentalList = ({
                         from={rental.from}
                         to={rental.to}
                         city={rental.boat.isDocked.city}
-                        /* TODO: rental.to -> rental.redelivery */
-                        totalAmount={calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to)}
+                        totalAmount={
+                            calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to, rental.redelivery)
+                        }
                         images={rental.boat.hasAdvertisement.images}
                         billNumber={rental.billNumber}
                         boatData={rental.boat}
@@ -64,11 +65,7 @@ const RentalList = ({
             </BoatListLayout>
     }
 
-    return (
-        <>
-            {content}
-        </>
-    );
+    return content
 };
 
 export default RentalList;

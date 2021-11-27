@@ -1,11 +1,11 @@
 import NavigationBar from "../../../Navigation/NavigationBar";
 import {Outlet} from "react-router-dom";
 
-const NavigationLayout = () => {
+const NavigationLayout = ({authenticated}) => {
     return (
         <>
             <Outlet/>
-            <NavigationBar/>
+            <NavigationBar authenticated={authenticated}/>
         </>
     )
 };
