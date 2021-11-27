@@ -39,11 +39,6 @@ const boatType = `
             boatType: BoatType!
         }
         
-        input InsertBoatLocationInput {
-            boatId: ID!
-            isDocked: LocationInput!
-        }
-        
         input BoatFilter {
             city: String
             region: String!
@@ -53,6 +48,11 @@ const boatType = `
             minPrice: Int
             maxPrice: Int
             minCapacity: Int
+        }
+        
+        input InsertBoatLocationInput {
+            boatId: ID!
+            isDocked: LocationInput!
         }
         
         enum BoatType {

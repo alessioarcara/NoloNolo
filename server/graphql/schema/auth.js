@@ -25,24 +25,24 @@ const AuthType = `
             authProblem: String
         }
         
-        type changePasswordPayload {
-            changePasswordData: User
-            changePasswordProblem: String
-        }
-        
         type updateUserPayload {
             updateUserData: User
             updateUserProblem: String
         }
         
+        type changePasswordPayload {
+            changePasswordData: User
+            changePasswordProblem: String
+        }
+        
+       type addAvatarPayload {
+            addAvatarData: User
+            addAvatarProblem: String
+       }
+        
         input UserInput {
             email: String!
             password: String!
-        }
-        
-        input ChangePasswordInput {
-            oldPassword: String!
-            newPassword: String!
         }
         
         input UpdateUserInput {
@@ -50,6 +50,11 @@ const AuthType = `
             city: String
             region: String
             postalCode: Int
+        }
+        
+        input ChangePasswordInput {
+            oldPassword: String!
+            newPassword: String!
         }
         
         enum userType {

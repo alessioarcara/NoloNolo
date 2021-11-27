@@ -3,7 +3,7 @@ import React, {useCallback, useContext, useEffect, useReducer} from "react";
 import AuthContext from "../store/auth-context";
 import {advertisementReducer} from "../reducers/advertisementReducer";
 import useHttp from "../hooks/use-http";
-import {body_informations, body_rentBoat} from "../helpers/httpConfig";
+import {body_advertisement, body_rentBoat} from "../helpers/httpConfig";
 import {formatDate} from "../helpers/Utils/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
@@ -38,7 +38,7 @@ const AdvertisementPage = () => {
     const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
 
     useEffect(() => {
-        fetchBoat({body: body_informations({boatId})}, resData => resData)
+        fetchBoat({body: body_advertisement({boatId})}, resData => resData)
     }, [fetchBoat, boatId])
 
     const handleRentBoat = useCallback(() => {
@@ -83,8 +83,8 @@ const AdvertisementPage = () => {
                 closeModalHandler={showBillHandler}
             >
                 <InvoiceReport
-                    dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                    fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                    dailyFee={boatPayload.advertisement.hasAdvertisement.dailyFee}
+                    fixedFee={boatPayload.advertisement.hasAdvertisement.fixedFee}
                     start={state.startDate}
                     end={state.endDate}
                     statusRental={statusRental}
@@ -98,17 +98,17 @@ const AdvertisementPage = () => {
                     <ContentRight
                         boatId={boatId}
                         dispatch={dispatch}
-                        boatModel={boatPayload.boat.model}
-                        boatReviews={boatPayload.boat.reviews}
-                        place={boatPayload.boat.isDocked}
-                        images={boatPayload.boat.hasAdvertisement.images}
-                        ownerEmail={boatPayload.boat.owner.email}
-                        ownerAvatar={boatPayload.boat.owner.avatar}
-                        boatDescription={boatPayload.boat.hasAdvertisement.description}
-                        boatYard={boatPayload.boat.yard}
-                        boatLength={boatPayload.boat.length}
-                        boatMaxCapacity={boatPayload.boat.maximumCapacity}
-                        boatType={boatPayload.boat.boatType}
+                        boatModel={boatPayload.advertisement.model}
+                        boatReviews={boatPayload.advertisement.reviews}
+                        place={boatPayload.advertisement.isDocked}
+                        images={boatPayload.advertisement.hasAdvertisement.images}
+                        ownerEmail={boatPayload.advertisement.owner.email}
+                        ownerAvatar={boatPayload.advertisement.owner.avatar}
+                        boatDescription={boatPayload.advertisement.hasAdvertisement.description}
+                        boatYard={boatPayload.advertisement.yard}
+                        boatLength={boatPayload.advertisement.length}
+                        boatMaxCapacity={boatPayload.advertisement.maximumCapacity}
+                        boatType={boatPayload.advertisement.boatType}
                         startDate={state.startDate}
                         endDate={state.endDate}
                         alreadyRentedDates={boatPayload.boatRentals}
@@ -117,14 +117,14 @@ const AdvertisementPage = () => {
                 contentLeft={
                     <ContentLeft
                         isVisible={state.visibleContent}
-                        images={boatPayload.boat.hasAdvertisement.images}
-                        boatPosition={boatPayload.boat.isDocked.coordinates}
+                        images={boatPayload.advertisement.hasAdvertisement.images}
+                        boatPosition={boatPayload.advertisement.isDocked.coordinates}
                     />
                 }
                 actions={
                     <AdvertisementActions
-                        dailyFee={boatPayload.boat.hasAdvertisement.dailyFee}
-                        fixedFee={boatPayload.boat.hasAdvertisement.fixedFee}
+                        dailyFee={boatPayload.advertisement.hasAdvertisement.dailyFee}
+                        fixedFee={boatPayload.advertisement.hasAdvertisement.fixedFee}
                         startDate={state.startDate}
                         endDate={state.endDate}
                         onShowBill={showBillHandler}

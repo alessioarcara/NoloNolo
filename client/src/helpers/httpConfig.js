@@ -89,11 +89,11 @@ exports.body_search = (contains) => {
         variables: {filter: {contains}}
     }
 };
-exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
+exports.body_advertisements = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
-            query($filter: BoatFilter! $skip: Int $take: Int) {
-                boats(filter: $filter, skip: $skip, take: $take) {
+            query($filter: AdvertisementFilter! $skip: Int $take: Int) {
+                advertisements(filter: $filter, skip: $skip, take: $take) {
                     _id
                     model
                     totalCount
@@ -114,11 +114,11 @@ exports.body_boats = ({city, region, from, to, minCapacity, boatTypes, minPrice,
         variables: {filter: {region, city, from, to, minCapacity, boatTypes, minPrice, maxPrice}, skip, take}
     }
 };
-exports.body_informations = (boatId) => {
+exports.body_advertisement = (boatId) => {
     return {
         query: `
             query BoatInformations($boatId: ID!) {
-                boat(boatId: $boatId) {
+                advertisement(boatId: $boatId) {
                     model
                     yard
                     length
@@ -336,8 +336,8 @@ exports.body_updateRental = ({rentalId, from, to}) => {
     }
 };
 exports.body_recordBoatReturn = (rentalId) => {
-  return {
-      query: `
+    return {
+        query: `
           mutation($rentalId: ID!) {
               recordBoatReturn(rentalId: $rentalId) {
                   recordBoatReturnData {
@@ -368,8 +368,8 @@ exports.body_recordBoatReturn = (rentalId) => {
               }
           }
       `,
-      variables: rentalId
-  }
+        variables: rentalId
+    }
 };
 exports.body_boatRentals = (boatId) => {
     return {
@@ -398,8 +398,8 @@ exports.body_deleteRental = (rentalId) => {
     }
 };
 exports.body_publishReview = ({rentalId, body, rating}) => {
-        return {
-            query: `
+    return {
+        query: `
             mutation($reviewData: ReviewInput!) {
                 publishReview(inputReview: $reviewData) {
                     publishReviewData {
@@ -415,8 +415,8 @@ exports.body_publishReview = ({rentalId, body, rating}) => {
                 }
             }
         `,
-            variables: {reviewData: {rentalId, body, rating}}
-        }
+        variables: {reviewData: {rentalId, body, rating}}
+    }
 };
 exports.body_shipownerAdvertisements = {
     query: `

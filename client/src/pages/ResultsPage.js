@@ -2,7 +2,8 @@ import Results from "../components/Results/Results";
 import {useEffect, useMemo, useState} from "react";
 import Header from "../components/Results/Header";
 import useHttp from "../hooks/use-http";
-import {body_boats} from "../helpers/httpConfig";
+import {body_advertisements} from "../helpers/httpConfig";
+import {parseQueryResponse} from "../helpers/Utils/utils";
 
 const ResultsPage = () => {
     const [filters, setFilters] = useState({})
@@ -17,8 +18,7 @@ const ResultsPage = () => {
         boats && boats.length > 0 ? boats[0].maxPrice: 10000, [boats])
 
     useEffect(() => {
-        const transformData = resData => resData.boats
-        fetchResults({body: body_boats(
+        fetchResults({body: body_advertisements(
             {
                 region: URL.get('region'),
                 city: URL.get('city'),
@@ -30,7 +30,7 @@ const ResultsPage = () => {
                 minPrice: filters.minPrice,
                 maxPrice: filters.maxPrice,
                 take: 20}
-            )}, transformData)
+            )}, parseQueryResponse)
     }, [fetchResults, currentPage, filters, URL])
 
     return (

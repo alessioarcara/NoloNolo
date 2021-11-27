@@ -13,21 +13,21 @@ const advertisementType = `
             publishAdvertisementProblem: String
         }
         
-        input PublishAdvertisementInput {
-            boatId: ID!
-            publishAdvertisement: AdvertisementInput!
-        }
-        
         type withdrawAdvertisementPayload {
             withdrawnAdvertisementId: ID
             withdrawAdvertisementProblem: String
         }
-
+        
         input AdvertisementInput {
             description: String!
             fixedFee: Float!
             dailyFee: Float!
             images: [String!]
+        }
+        
+        input PublishAdvertisementInput {
+            boatId: ID!
+            publishAdvertisement: AdvertisementInput!
         }
 `
 

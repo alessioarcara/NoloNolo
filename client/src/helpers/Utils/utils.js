@@ -67,6 +67,8 @@ export const calculateTotal = (dailyFee, fixedFee, startDate, endDate, redeliver
 /* -------------------------------- Mutations Utils --------------------------------- */
 export const destructurePayload = resData => Object.values(resData[Object.keys(resData)]);
 
+export const parseQueryResponse = resData => resData[Object.keys(resData)]
+
 export const parseMutationResponse = (setState, applyData) => (resData) => {
     const payload = destructurePayload(resData)
     if (payload[0])

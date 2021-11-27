@@ -6,7 +6,6 @@ const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
 const favoriteType = require("./favorite");
-const imageType = require("./image");
 
 const rootSchema = `
         ${authType}
@@ -16,20 +15,19 @@ const rootSchema = `
         ${favoriteType}
         ${reviewType}
         ${rentalType}
-        ${imageType}
         
         scalar Upload
         
         type RootQuery {
             refreshToken: AuthData!
             user: User!
-            boat(boatId: ID!): Boat!
-            boats(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             boatsByUser: [Boat!]
+            advertisement(boatId: ID!): Boat!
+            advertisements(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
+            advertisementsByShipowner: [Boat!]
             boatRentals(boatId: ID!): [Rental!]
             rentalsByUser: [Rental!]
             rentalsByShipowner: [Rental!]
-            advertisementsByShipowner: [Boat!]
             listAllLocations(filter: LocationFilter!): [Location!]
             favorites: [Boat!]
         }
@@ -37,22 +35,22 @@ const rootSchema = `
         type RootMutation {
             createUser(inputUser: UserInput!): AuthenticationPayload!
             login(inputUser: UserInput!): AuthenticationPayload!
+            invalidateTokens: Boolean!
             updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
-            invalidateTokens: Boolean!
+            addAvatar(upload: Upload!): addAvatarPayload!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             removeBoat(boatId: ID!): removeBoatPayload!
             insertBoatLocation(inputInsertBoatLocation: InsertBoatLocationInput!): insertBoatLocationPayload!
             publishAdvertisement(inputPublishAdvertisement: PublishAdvertisementInput!): publishAdvertisementPayload!
             withdrawAdvertisement(boatId: ID!): withdrawAdvertisementPayload!
-            addFavorite(boatId: ID!): FavoritesPayload!
-            removeFavorite(boatId: ID!): FavoritesPayload!
             rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!
             updateRental(inputUpdateRental: UpdateRentalInput!): updateRentalPayload!
             recordBoatReturn(rentalId: ID!): recordBoatReturnPayload!
             deleteRental(rentalId: ID!): deleteRentalPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
-            addAvatar(upload: Upload!): addAvatarPayload!
+            addFavorite(boatId: ID!): FavoritesPayload!
+            removeFavorite(boatId: ID!): FavoritesPayload!
         }
         
         schema {
