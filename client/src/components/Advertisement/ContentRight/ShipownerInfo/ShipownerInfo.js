@@ -19,9 +19,9 @@ const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation})
             </div>
             {/* Component to show more text */}
             <ReadMoreText
-                text='Ciao a tutti, sono davvero ahahaha sisisi, allora se prendiamo quindi questo sisi sempre
-                così. Ma va bene secondo me perchè sennò sei davvero bravo ma tanto si può fare lo stesso'
-                // text={shipownerPresentation}
+                // text='Ciao a tutti, sono davvero ahahaha sisisi, allora se prendiamo quindi questo sisi sempre
+                // così. Ma va bene secondo me perchè sennò sei davvero bravo ma tanto si può fare lo stesso'
+                text={shipownerPresentation}
             />
             <hr/>
         </>
