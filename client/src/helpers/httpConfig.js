@@ -92,7 +92,7 @@ exports.body_search = (contains) => {
 exports.body_advertisements = ({city, region, from, to, minCapacity, boatTypes, minPrice, maxPrice, skip, take}) => {
     return {
         query: `
-            query($filter: AdvertisementFilter! $skip: Int $take: Int) {
+            query($filter: BoatFilter! $skip: Int $take: Int) {
                 advertisements(filter: $filter, skip: $skip, take: $take) {
                     _id
                     model
