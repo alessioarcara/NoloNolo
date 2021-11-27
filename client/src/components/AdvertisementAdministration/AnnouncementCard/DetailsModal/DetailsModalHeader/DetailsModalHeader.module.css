@@ -1,6 +1,7 @@
 .modal-header-container {
     position: sticky;
     top: 0;
+    background-color: #fff;
     user-select: none;
 }
 

@@ -28,9 +28,15 @@ const object = {
     totalAmount: formatNumber(1200)
 }
 
-const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseRentalOrDeleteAdvertisement}) => {
-    const [openDetailsModal, setOpenDetailsModal] = useState(false)
-    const [confirmModal, setConfirmModal] = useState(false)
+const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy, handleCloseRentalOrDeleteAdvertisement}) => {
+    const [modal, setModal] = useState("")
+    const handleChangeModalState = useCallback(
+        evt => evt.target.dataset.modal
+                    ? setModal(evt.target.dataset.modal)
+                    : setModal(""), [])
+
+
+
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -39,7 +45,7 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
     }, [navigate, location, boatId])
 
     const filterRentals = {
-        previous: rentals.filter(rental => rental.redelivery),
+        previous: rentals.filter(rental => !rental.redelivery),
         active: rentals.filter(rental => new Date () >= new Date(rental.from) && new Date () <= new Date(rental.to)),
         future: rentals.filter(rental => new Date(rental.from) > new Date())
     }
@@ -50,7 +56,8 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
             (prevAdvertisements, prevAdvertisementId) => {
                 return {
                     ...prevAdvertisements,
-                    advertisements: prevAdvertisements.advertisements.filter(advertisement => advertisement._id !== prevAdvertisementId)
+                    advertisements: prevAdvertisements.advertisements.filter(advertisement => advertisement._id !== prevAdvertisementId),
+                    rentals: prevAdvertisements.rentals.filter(rental => rental.boat._id !== boatId)
                 }
             }
         )
@@ -58,33 +65,32 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
 
     return (
         <>
-            {openDetailsModal &&
+            {modal !== "" &&
             <Modal
-                closeModalHandler={() => setOpenDetailsModal(false)}
+                closeModalHandler={handleChangeModalState}
             >
-                <DetailsModal
-                    handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
-                    previousRentals={filterRentals.previous ? filterRentals.previous : []}
-                    activeRental={filterRentals.active ? filterRentals.active : []}
-                    futureRentals={filterRentals.future ? filterRentals.future : []}
-                />
-            </Modal>
-            }
-            {confirmModal &&
-                <Modal
-                    closeModalHandler={() => setConfirmModal(false)}
-                >
+                {modal === 'details' &&
+                    <DetailsModal
+                        handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
+                        previousRentals={filterRentals.previous ? filterRentals.previous : []}
+                        activeRental={filterRentals.active ? filterRentals.active : []}
+                        futureRentals={filterRentals.future ? filterRentals.future : []}
+                    />
+                }
+                {modal === 'delete' &&
                     <ConfirmSection
                         text="Sicuro di eliminare questo annuncio?"
                         handleClickButton={handleDeleteAdvertisement}
                     />
-                </Modal>
+                }
+            </Modal>
             }
             <div className={classes['card-container']}>
                 {/*First element*/}
                 <div
                     className={classes['delete-card']}
-                    onClick={() => setConfirmModal(true)}
+                    data-modal="delete"
+                    onClick={handleChangeModalState}
                 >
                     &times;
                 </div>
@@ -117,9 +123,7 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
                         {/* Number of Favorites */}
                         <div className={classes['grid-elements']}>
                             <div className={classes['eye-icon']}><EyeIcon/></div>
-                            <div>Osservato da: <span
-                                className={classes.parameter}>{object.preferredBy.length} persone</span>
-                            </div>
+                            <div>Osservato da: <span className={classes.parameter}>{preferredBy} persone</span></div>
                         </div>
 
                         {/* Disponibility or Active Rental */}
@@ -142,7 +146,8 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, handleCloseR
                     <div className={classes['option-section']}>
                         <button
                             className={classes['option']}
-                            onClick={() => setOpenDetailsModal(true)}
+                            data-modal="details"
+                            onClick={handleChangeModalState}
                         >
                             Visualizza noleggi
                         </button>
