@@ -6,30 +6,39 @@ import BoatTypes from "../UI/Input/BoatTypes";
 import classes from "./NewBoat.module.css"
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import {body_addBoat} from "../../helpers/httpConfig";
-import {useNavigate} from "react-router-dom";
 
-const NewBoat = ({onChangeUserBoat, boat}) => {
-    const navigate = useNavigate()
+const NewBoat = ({onMutationUserBoat, boat}) => {
     const {formValues, renderFormInputs} = useForm(boat ?
         boatForm(boat.yard, boat.model, boat.length, boat.maximumCapacity) : boatForm()
     )
 
-    const submitFormHandler = evt => {
+    const handleAddUserBoat = evt => {
         evt.preventDefault()
-        onChangeUserBoat(body_addBoat({
-            _id: boat && boat._id,
-            yard: formValues[0],
-            model: formValues[1],
-            length: parseInt(formValues[2]),
-            maximumCapacity: parseInt(formValues[3]),
-            boatType: "dinghy",
-        }))
-        navigate(`../location`)
+        onMutationUserBoat(
+            body_addBoat({
+                _id: boat && boat._id,
+                yard: formValues[0],
+                model: formValues[1],
+                length: parseInt(formValues[2]),
+                maximumCapacity: parseInt(formValues[3]),
+                boatType: "dinghy",
+            }),
+            (prevBoats, newBoat) => {
+                let isAlreadyAdded = false
+                const updatedUserBoats = prevBoats.map(userBoat => {
+                    if (userBoat._id === newBoat._id) {
+                        isAlreadyAdded = true
+                        return newBoat
+                    }
+                    return userBoat
+                })
+                return isAlreadyAdded ? updatedUserBoats : updatedUserBoats.concat(newBoat)
+            })
     }
 
     const title = <h1>Che tipo di barca offrirai?</h1>
     const content = (
-        <form onSubmit={submitFormHandler}>
+        <form onSubmit={handleAddUserBoat}>
             {renderFormInputs()}
             <BoatTypes/>
             <NewAdvertisementFooter stepPosition={1}/>

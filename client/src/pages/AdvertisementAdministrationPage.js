@@ -16,7 +16,7 @@ const AdvertisementAdministrationPage = () => {
         rentals: []
     })
 
-    const handleCloseRentalOrDeleteAdvertisement = useCallback((body, applyData) =>
+    const handleMutationAdvertisement = useCallback((body, applyData) =>
         sendRequest({body, token}, parseMutationResponse(setAdvertisements, applyData)),
         [sendRequest, token])
 
@@ -30,8 +30,6 @@ const AdvertisementAdministrationPage = () => {
         }))
     }, [sendRequest, token])
 
-    console.log(advertisements)
-
     return (
         <>
             <Header
@@ -41,7 +39,7 @@ const AdvertisementAdministrationPage = () => {
             <AdvertisementAdministrationList
                 advertisements={advertisements}
                 rentals={rentals}
-                handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
+                onMutateAdvertisement={handleMutationAdvertisement}
             />
         </>
     )

@@ -1,13 +1,13 @@
-import classes from './RentalActive.module.css';
+import classes from './ActiveRental.module.css';
 import {rangeDate, formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 import CheckInIcon from "../../../UI/icons/CheckInIcon";
 import HourglassIcon from "../../../UI/icons/HourglassIcon";
 import {body_recordBoatReturn} from "../../../../helpers/httpConfig";
 import {useCallback} from "react";
 
-const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) => {
-    const handleCloseRental = useCallback(() => {
-        handleCloseRentalOrDeleteAdvertisement(
+const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
+    const handleRecordBoatReturn = useCallback(() => {
+        onMutateAdvertisement(
             body_recordBoatReturn({rentalId: activeRental._id}),
             (prevAdvertisements, newRental) => {
                 return {
@@ -16,7 +16,7 @@ const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) =>
                 }
             }
         )
-    }, [activeRental])
+    }, [activeRental, onMutateAdvertisement])
 
     return (
         <div className={classes['container']}>
@@ -28,19 +28,19 @@ const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) =>
                     <div className={classes['text-style']}>
                         {`
                             ${rangeDate(new Date(), activeRental.to) !== 0
-                                ? Math.abs(rangeDate(new Date(), activeRental.to))
-                                : ''
-                            }
+                            ? Math.abs(rangeDate(new Date(), activeRental.to))
+                            : ''
+                        }
                             ${rangeDate(new Date(), activeRental.to) === -1
-                                ? "giorno in ritardo"
-                                : rangeDate(new Date(), activeRental.to) < 0
-                                    ? "giorni in ritardo"
-                                    : rangeDate(new Date(), activeRental.to) === 1
-                                        ? "giorno al termine"
-                                        : rangeDate(new Date(), activeRental.to) === 0
-                                            ? "terminato oggi"
-                                            : "giorni al termine"
-                            }
+                            ? "giorno in ritardo"
+                            : rangeDate(new Date(), activeRental.to) < 0
+                                ? "giorni in ritardo"
+                                : rangeDate(new Date(), activeRental.to) === 1
+                                    ? "giorno al termine"
+                                    : rangeDate(new Date(), activeRental.to) === 0
+                                        ? "terminato oggi"
+                                        : "giorni al termine"
+                        }
                         `}
                     </div>
                 </div>
@@ -57,7 +57,7 @@ const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) =>
                     className={`${classes['close-btn']} btn btn-primary`}
                     disabled={rangeDate(new Date(), activeRental.to) > 0}
                     title="Chiudi noleggio al termine"
-                    onClick={handleCloseRental}
+                    onClick={handleRecordBoatReturn}
                 >
                     Chiudi
                 </button>
@@ -67,4 +67,4 @@ const RentalActive = ({activeRental, handleCloseRentalOrDeleteAdvertisement}) =>
     );
 }
 
-export default RentalActive
+export default ActiveRental

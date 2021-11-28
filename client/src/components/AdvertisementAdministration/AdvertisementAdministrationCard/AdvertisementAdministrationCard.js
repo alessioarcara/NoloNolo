@@ -1,5 +1,5 @@
-import React, {useCallback, useState} from "react";
-import classes from './AnnouncementCard.module.css';
+import React, {useCallback, useMemo, useState} from "react";
+import classes from './AdvertisementAdministrationCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/Utils/utils";
 import Modal from "../../UI/Modal/Modal";
@@ -28,30 +28,39 @@ const object = {
     totalAmount: formatNumber(1200)
 }
 
-const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy, handleCloseRentalOrDeleteAdvertisement}) => {
+const AdvertisementAdministrationCard = ({
+                              boatId,
+                              model,
+                              reviews,
+                              images,
+                              rentals,
+                              preferredBy,
+                              onMutateAdvertisement
+                          }) => {
     const [modal, setModal] = useState("")
     const handleChangeModalState = useCallback(
         evt => evt.target.dataset.modal
-                    ? setModal(evt.target.dataset.modal)
-                    : setModal(""), [])
-
+            ? setModal(evt.target.dataset.modal)
+            : setModal(""), [])
 
 
     const navigate = useNavigate()
     const location = useLocation()
 
     const goAdvertisementPage = useCallback(() => {
-        navigate(`/boats/${boatId}`, {state: {from: location} })
+        navigate(`/boats/${boatId}`, {state: {from: location}})
     }, [navigate, location, boatId])
 
-    const filterRentals = {
-        previous: rentals.filter(rental => !rental.redelivery),
-        active: rentals.filter(rental => new Date () >= new Date(rental.from) && new Date () <= new Date(rental.to)),
-        future: rentals.filter(rental => new Date(rental.from) > new Date())
-    }
+    const filteredRentals = useMemo(() => {
+        return {
+            previous: rentals.filter(rental => rental.redelivery),
+            active: rentals.filter(rental => new Date() >= new Date(rental.from) && new Date() <= new Date(rental.to)),
+            future: rentals.filter(rental => new Date(rental.from) > new Date())
+        }
+    }, [rentals])
 
     const handleDeleteAdvertisement = useCallback(() => {
-        handleCloseRentalOrDeleteAdvertisement(
+        onMutateAdvertisement(
             body_withdrawAdvertisement({boatId}),
             (prevAdvertisements, prevAdvertisementId) => {
                 return {
@@ -61,7 +70,7 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy,
                 }
             }
         )
-    }, [handleCloseRentalOrDeleteAdvertisement, boatId])
+    }, [onMutateAdvertisement, boatId])
 
     return (
         <>
@@ -70,18 +79,18 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy,
                 closeModalHandler={handleChangeModalState}
             >
                 {modal === 'details' &&
-                    <DetailsModal
-                        handleCloseRentalOrDeleteAdvertisement={handleCloseRentalOrDeleteAdvertisement}
-                        previousRentals={filterRentals.previous ? filterRentals.previous : []}
-                        activeRental={filterRentals.active ? filterRentals.active : []}
-                        futureRentals={filterRentals.future ? filterRentals.future : []}
-                    />
+                <DetailsModal
+                    onMutateAdvertisement={onMutateAdvertisement}
+                    previousRentals={filteredRentals.previous}
+                    activeRental={filteredRentals.active}
+                    futureRentals={filteredRentals.future}
+                />
                 }
                 {modal === 'delete' &&
-                    <ConfirmSection
-                        text="Sicuro di eliminare questo annuncio?"
-                        handleClickButton={handleDeleteAdvertisement}
-                    />
+                <ConfirmSection
+                    text="Sicuro di eliminare questo annuncio?"
+                    onConfirm={handleDeleteAdvertisement}
+                />
                 }
             </Modal>
             }
@@ -117,7 +126,7 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy,
 
                         {/* Future Rentals */}
                         <div>Prenotazioni future: <span
-                            className={classes.parameter}>{filterRentals.future.length}</span>
+                            className={classes.parameter}>{filteredRentals.future.length}</span>
                         </div>
 
                         {/* Number of Favorites */}
@@ -127,11 +136,12 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy,
                         </div>
 
                         {/* Disponibility or Active Rental */}
-                        {filterRentals.active[0] ?
+                        {filteredRentals.active[0] ?
                             <div className={classes['grid-elements']}>
                                 <div className={classes['hourglass-icon']}><HourglassIcon/></div>
                                 <div>
-                                    Attualmente noleggiato da: <span className={classes.parameter}>{filterRentals.active[0].customer.email.split('@')[0]}</span>
+                                    Attualmente noleggiato da: <span
+                                    className={classes.parameter}>{filteredRentals.active[0].customer.email.split('@')[0]}</span>
                                 </div>
                             </div>
                             :
@@ -158,4 +168,4 @@ const AnnouncementCard = ({boatId, model, reviews, images, rentals, preferredBy,
     )
 }
 
-export default AnnouncementCard
+export default AdvertisementAdministrationCard

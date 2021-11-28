@@ -6,23 +6,16 @@ import classes from "./NewBoatLocation.module.css"
 import useForm from "../../hooks/use-form";
 import {boatLocationForm} from "../../helpers/formConfig";
 import {body_insertBoatLocation} from "../../helpers/httpConfig";
-import {useNavigate} from "react-router-dom";
 import useGeocode from "../../hooks/use-geocode";
 
 const NewBoatLocation = ({onChangeUserBoat, boat}) => {
-    const navigate = useNavigate();
-    const {formValues, renderFormInputs, isFormValid} = useForm(boat && boat.isDocked ?
+    const {formValues, renderFormInputs} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )
     const {coordinates} = useGeocode(formValues[2], formValues[1])
 
     const submitFormHandler = evt => {
         evt.preventDefault()
-
-        // if (!coordinates.lat || !coordinates.lon || !isFormValid()) {
-        //     return
-        // }
-
         onChangeUserBoat(body_insertBoatLocation({
             boatId: boat._id,
             harbour: formValues[0],
@@ -31,8 +24,6 @@ const NewBoatLocation = ({onChangeUserBoat, boat}) => {
             latitude: coordinates.lat,
             longitude: coordinates.lon
         }))
-
-        navigate(`../advertisement`)
     }
 
     const title = (

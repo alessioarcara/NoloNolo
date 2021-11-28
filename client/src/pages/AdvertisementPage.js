@@ -74,7 +74,7 @@ const AdvertisementPage = () => {
         >
             {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
             <Modal title="Errore">
-                Prenotazione già presente
+                {rentalPayload.rentBoatProblem}
             </Modal>
             }
             {state.isBillShow &&
@@ -118,7 +118,7 @@ const AdvertisementPage = () => {
                     <ContentLeft
                         isVisible={state.visibleContent}
                         images={boatPayload.advertisement.hasAdvertisement.images}
-                        boatPosition={boatPayload.advertisement.isDocked.coordinates}
+                        coordinates={boatPayload.advertisement.isDocked.coordinates}
                     />
                 }
                 actions={

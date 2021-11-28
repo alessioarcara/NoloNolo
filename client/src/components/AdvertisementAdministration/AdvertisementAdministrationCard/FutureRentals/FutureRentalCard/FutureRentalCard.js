@@ -1,7 +1,7 @@
-import classes from './RentalsFutureCard.module.css';
+import classes from './FutureRentalCard.module.css';
 import {formatDayMonthYearDate, formatNumber} from "../../../../../helpers/Utils/utils";
 
-const RentalsFutureCard = ({customer, createdAt, start, end, totalAmount}) => {
+const FutureRentalCard = ({customer, createdAt, start, end, totalAmount}) => {
     return (
         <div className={classes['future-container']}>
             <div className={classes['created-at']}>
@@ -23,4 +23,4 @@ const RentalsFutureCard = ({customer, createdAt, start, end, totalAmount}) => {
     );
 }
 
-export default RentalsFutureCard
+export default FutureRentalCard

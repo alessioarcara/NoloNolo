@@ -5,7 +5,7 @@ import BoatListLayout from "../../UI/Layout/BoatListLayout/BoatListLayout";
 import {calculateTotal} from "../../../helpers/Utils/utils";
 
 const RentalsList = ({
-                        onUpdateOrDeleteRentals,
+                        onMutateRentals,
                         previousRentals,
                         activeRentals,
                         futureRentals,
@@ -34,7 +34,7 @@ const RentalsList = ({
             <BoatListLayout>
                 {openedRentals().map(rental =>
                     <RentalCard
-                        onUpdateOrDeleteRentals={onUpdateOrDeleteRentals}
+                        onMutateRentals={onMutateRentals}
                         key={rental._id}
                         rentalId={rental._id}
                         boatId={rental.boat._id}
@@ -47,15 +47,15 @@ const RentalsList = ({
                         totalAmount={
                             calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to, rental.redelivery)
                         }
-                        images={rental.boat.hasAdvertisement.images}
+                        images={rental.boat.hasAdvertisement ? rental.boat.hasAdvertisement.images : []}
                         billNumber={rental.billNumber}
                         boatData={rental.boat}
                         customer={rental.customer}
                         createdAt={rental.createdAt}
                         rentalDailyFee={rental.dailyFee}
                         rentalFixedFee={rental.fixedFee}
-                        advertisementDailyFee={rental.boat.hasAdvertisement.dailyFee}
-                        advertisementFixedFee={rental.boat.hasAdvertisement.fixedFee}
+                        advertisementDailyFee={rental.boat.hasAdvertisement ? rental.boat.hasAdvertisement.dailyFee : 0}
+                        advertisementFixedFee={rental.boat.hasAdvertisement ? rental.boat.hasAdvertisement.fixedFee : 0}
                         review={rental.boat.reviews.filter
                             (review => review.rental === rental._id && review.creator._id === rental.customer._id)[0]
                         }

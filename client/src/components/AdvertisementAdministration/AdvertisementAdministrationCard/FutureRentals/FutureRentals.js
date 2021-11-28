@@ -1,12 +1,15 @@
-import RentalsFutureCard from "./RentalsFutureCard/RentalsFutureCard";
+import FutureRentalCard from "./FutureRentalCard/FutureRentalCard";
 import {calculateTotal, dateSorting} from "../../../../helpers/Utils/utils";
+import {useMemo} from "react";
 
-const RentalsFuture = ({futureRentals}) => {
-    const futureData = dateSorting(futureRentals, true)
+const FutureRentals = ({futureRentals}) => {
+    const futureData = useMemo(() =>
+        dateSorting(futureRentals, true),
+        [futureRentals])
 
     return (
         futureData.map(rental =>
-            <RentalsFutureCard
+            <FutureRentalCard
                 key={rental._id}
                 customer={rental.customer}
                 createdAt={rental.createdAt}
@@ -18,4 +21,4 @@ const RentalsFuture = ({futureRentals}) => {
     );
 }
 
-export default RentalsFuture
+export default FutureRentals

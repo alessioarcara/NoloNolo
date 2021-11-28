@@ -11,7 +11,7 @@ const filterRentals = rentals => {
     return {
         previous: rentals ?
             rentals.reduce((previousRentals, rental) => {
-                if (!rental.redelivery) {
+                if (rental.redelivery) {
                     previousRentals.push(rental.boat.reviews.some(review => review.rental === rental._id && review.creator._id === rental.customer._id) ?
                         {...rental, isReviewed: true} : {...rental, isReviewed: false})
                 }
@@ -32,7 +32,7 @@ const RentalsPage = () => {
 
     const filteredRentals = useMemo(() => filterRentals(rentals), [rentals])
 
-    const handleUpdateOrDeleteRentals = useCallback((body, applyData) =>
+    const handleMutationRentals = useCallback((body, applyData) =>
             sendRequest({body, token}, parseMutationResponse(setRentals, applyData))
     , [sendRequest, token])
 
@@ -47,10 +47,10 @@ const RentalsPage = () => {
         <>
             <RentalsHeader/>
             <Routes>
-                <Route path='previous' element={<RentalsList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                <Route path='previous' element={<RentalsList onMutateRentals={handleMutationRentals}
                                                              previousRentals={filteredRentals.previous} previous/>}/>
                 <Route path='active' element={<RentalsList activeRentals={filteredRentals.active} active/>}/>
-                <Route path='future' element={<RentalsList onUpdateOrDeleteRentals={handleUpdateOrDeleteRentals}
+                <Route path='future' element={<RentalsList onMutateRentals={handleMutationRentals}
                                                            futureRentals={filteredRentals.future} future/>}/>
                 <Route path='/' element={navigationType === "PUSH" ? <Navigate to='active'/> : <Navigate to='/profile'/>}/>
             </Routes>

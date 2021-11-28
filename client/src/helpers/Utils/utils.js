@@ -45,7 +45,9 @@ export const formatDayMonthYearDate = (date, options) => new Date(date).toLocale
 
 /* Date sorting: Così facendo viene ordinato l'array padre, utilizzando slice() prima di sort si ordina solo la variabile */
 export const dateSorting = (object, growing = false) => {
-    return growing ? object.sort((a, b) => new Date(a.from) - new Date(b.from)) : object.sort((a, b) => new Date(b.from) - new Date(a.from))
+    return growing ?
+        object.slice().sort((a, b) => new Date(a.from) - new Date(b.from)) :
+        object.slice().sort((a, b) => new Date(b.from) - new Date(a.from))
 };
 
 export const rangeDate = ((startDate, endDate) => {
@@ -69,9 +71,11 @@ export const destructurePayload = resData => Object.values(resData[Object.keys(r
 
 export const parseQueryResponse = resData => resData[Object.keys(resData)]
 
-export const parseMutationResponse = (setState, applyData) => (resData) => {
+/* apply: functions */
+export const parseMutationResponse = (setState, applyData, navigate, applyWhere) => (resData) => {
     const payload = destructurePayload(resData)
     if (payload[0])
         setState(applyData ? prevState => applyData(prevState, payload[0]) : payload[0])
+        navigate && navigate(applyWhere(payload[0]))
     return payload[1]
 };

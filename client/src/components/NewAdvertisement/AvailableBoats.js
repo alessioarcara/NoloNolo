@@ -2,9 +2,18 @@ import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout"
 import {Link} from "react-router-dom";
 
 import classes from "./AvailableBoats.module.css"
-import Button from "../UI/Button/Button";
+import {body_removeBoat} from "../../helpers/httpConfig";
 
-const AvailableBoats = ({userName, userBoats, onDeleteUserBoat}) => {
+const AvailableBoats = ({userName, userBoats, onMutationUserBoat}) => {
+
+    const handleDeleteUserBoat = e => {
+        e.preventDefault()
+        e.stopPropagation()
+        onMutationUserBoat(
+            body_removeBoat({boatId: e.target.dataset.boatid}),
+            (prevBoats, removedBoatId) => prevBoats.filter(userBoat => userBoat._id !== removedBoatId)
+        )
+    }
 
     let title = <h1>Ciao {userName && userName.split('@')[0]}, siamo felici di rivederti</h1>
     let content = (
@@ -18,16 +27,12 @@ const AvailableBoats = ({userName, userBoats, onDeleteUserBoat}) => {
                             to={`${boat._id}/boat`}
                             className={classes["user-boat"]}>
                                 Barca {id + 1}
-                            <Button
-                                onClick={evt => {
-                                    evt.preventDefault()
-                                    evt.stopPropagation()
-                                    onDeleteUserBoat(boat._id)
-                                }}
-                                type="button"
+                            <button
+                                data-boatid={boat._id}
+                                onClick={handleDeleteUserBoat}
                                 className={`btn ${classes.cross}`}>
                                 &#10060;
-                            </Button>
+                            </button>
                         </Link>) :
                     <p>Ancora nessuna barca inserita</p>}
             </div>
@@ -37,7 +42,9 @@ const AvailableBoats = ({userName, userBoats, onDeleteUserBoat}) => {
             </div>
         </>
     )
-    return <SplitScreenLayout contentLeft={title} rightLayoutContentClassName={classes['new-boat-options']}
+    return <SplitScreenLayout
+                              rightLayoutContentClassName={classes['new-boat-options']}
+                              contentLeft={title}
                               contentRight={content}/>;
 };
 

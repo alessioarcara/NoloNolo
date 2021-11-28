@@ -1,12 +1,13 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {Route, Routes, useParams} from 'react-router-dom';
 import useHttp from "../hooks/use-http";
-import {body_removeBoat, body_userBoats} from "../helpers/httpConfig";
+import {body_userBoats} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
 import NewBoat from "../components/NewAdvertisement/NewBoat";
 import NewBoatLocation from "../components/NewAdvertisement/NewBoatLocation";
 import NewBoatAdvertisement from "../components/NewAdvertisement/NewBoatAdvertisement";
 import AvailableBoats from "../components/NewAdvertisement/AvailableBoats";
+import {parseMutationResponse} from "../helpers/Utils/utils";
 
 const NewAdvertisementPage = () => {
     const [userBoats, setUserBoats] = useState([])
@@ -17,45 +18,36 @@ const NewAdvertisementPage = () => {
     const userBoat = useMemo(() => userBoats.filter(boat => boat._id === boatId)[0], [userBoats, boatId])
 
     useEffect(() => {
-        const transformData = resData => {
+        sendRequest({body: body_userBoats, token}, resData => {
             setUserBoats(resData.boatsByUser)
             return resData.user
-        };
-        sendRequest({body: body_userBoats, token}, transformData)
-    }, [sendRequest, token])
-
-    const handleChangeUserBoat = useCallback(body => {
-        sendRequest({body, token}, resData => {
-            const newBoat = Object.values(resData[Object.keys(resData)])[0]
-            setUserBoats(prevBoats => prevBoats.map(userBoat => userBoat._id === newBoat._id ? newBoat : userBoat));
-            return resData[Object.keys(resData)]
         })
     }, [sendRequest, token])
 
-    const handleDeleteUserBoat = useCallback(boatId => {
-        sendRequest({body: body_removeBoat({boatId}), token}, resData => {
-            setUserBoats(prevBoats => prevBoats.filter(userBoat => userBoat._id !== boatId))
-            return resData.removeBoat
-        })
-    }, [sendRequest, token])
+    const handleMutationUserBoat = useCallback((body, applyData) =>
+        sendRequest(
+            {body, token},
+            parseMutationResponse(setUserBoats, applyData)
+        ),
+        [sendRequest, token])
 
     const stepRoutes = (
         <>
             <Route path={'boat'} element={
                 <NewBoat
                     boat={userBoat}
-                    onChangeUserBoat={handleChangeUserBoat}
+                    onMutationUserBoat={handleMutationUserBoat}
                 />
             }/>
             <Route path={'location'} element={
                 <NewBoatLocation
                     boat={userBoat}
-                    onChangeUserBoat={handleChangeUserBoat}
+                    onMutationUserBoat={handleMutationUserBoat}
                 />
             }/>
             <Route path={'advertisement'} element={
                 <NewBoatAdvertisement
-                    onChangeUserBoat={handleChangeUserBoat}
+                    onMutationUserBoat={handleMutationUserBoat}
                     boatId={boatId}
                 />
             }/>
@@ -68,10 +60,14 @@ const NewAdvertisementPage = () => {
                 <AvailableBoats
                     userName={user ? user.email : 'utente'}
                     userBoats={userBoats}
-                    onDeleteUserBoat={handleDeleteUserBoat}
+                    onMutationUserBoat={handleMutationUserBoat}
                 />
             }/>
-            {stepRoutes}
+            <Route path={'boat'} element={
+                <NewBoat
+                    onMutationUserBoat={handleMutationUserBoat}
+                />
+            }/>
             <Route path={':boatId'}>
                 {stepRoutes}
             </Route>

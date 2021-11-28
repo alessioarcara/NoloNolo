@@ -1,15 +1,13 @@
-import React from "react";
-// import RentalsHeader from "../RentalsHeader";
+import React, {useMemo} from "react";
 import SlideShow from "../../UI/SlideShow/SlideShow";
 import BoatMapPosition from "../../UI/Map/BoatMapPosition";
 import classes from './ContentLeft.module.css';
 
-const ContentLeft = ({isVisible, images, boatPosition}) => {
-    console.log(boatPosition)
+const ContentLeft = ({isVisible, images, coordinates}) => {
+    const boatPosition = useMemo(() =>  coordinates.slice().reverse(), [coordinates])
+
     return (
         <>
-            {/* TO DO: margin-top in classes['container'] */}
-            {/*<div className={classes['mobile-header']}><RentalsHeader/></div>*/}
             <div className={classes['container']}>
                 {!isVisible &&
                 <div className={classes[`map-container`]}>
@@ -22,12 +20,12 @@ const ContentLeft = ({isVisible, images, boatPosition}) => {
                 </div>
                 }
             </div>
-
             <div className={classes['container-desktop']}>
-                <BoatMapPosition boatPosition={boatPosition.reverse()}/>
+                <BoatMapPosition boatPosition={boatPosition}/>
             </div>
         </>
     );
 }
 
 export default ContentLeft;
+

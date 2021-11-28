@@ -1,12 +1,15 @@
-import RentalPreviousCard from "./RentalPreviousCard/RentalPreviousCard";
+import PreviousRentalCard from "./PreviousRentalCard/PreviousRentalCard";
 import {calculateTotal, dateSorting} from "../../../../helpers/Utils/utils";
+import {useMemo} from "react";
 
-const RentalsPrevious = ({previousRentals}) => {
-    const data = dateSorting(previousRentals, true)
+const PreviousRentals = ({previousRentals}) => {
+    const previousData = useMemo(() =>
+            dateSorting(previousRentals, true),
+        [previousRentals])
 
     return (
-        data.map(previous =>
-            <RentalPreviousCard
+        previousData.map(previous =>
+            <PreviousRentalCard
                 key={previous._id}
                 start={previous.from}
                 end={previous.to}
@@ -24,4 +27,4 @@ const RentalsPrevious = ({previousRentals}) => {
     )
 }
 
-export default RentalsPrevious
+export default PreviousRentals

@@ -9,9 +9,10 @@ import BoatBill from "../../Advertisement/BoatBill/BoatBill";
 import ReviewModal from "../RentalCard/ReviewModal/ReviewModal";
 import classes from './RentalCard.module.css';
 import {body_deleteRental} from "../../../helpers/httpConfig";
+import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
 
 const RentalCard = ({
-                        onUpdateOrDeleteRentals,
+                        onMutateRentals,
                         rentalId,
                         boatId,
                         previous,
@@ -43,16 +44,16 @@ const RentalCard = ({
         [])
 
     const handleUpdateRental = useCallback((body, applyData) => {
-        onUpdateOrDeleteRentals(body, applyData)
+        onMutateRentals(body, applyData)
         setModal("")
-    }, [onUpdateOrDeleteRentals])
+    }, [onMutateRentals])
 
     const handleDeleteRental = useCallback(() => {
-        onUpdateOrDeleteRentals(
+        onMutateRentals(
             body_deleteRental({rentalId}),
             (prevRentals, newRentalId) => prevRentals.filter(userRental => userRental._id !== newRentalId)
         )
-    }, [onUpdateOrDeleteRentals, rentalId])
+    }, [onMutateRentals, rentalId])
 
     const goAdvertisementPage = useCallback(() => {
         navigate(`/boats/${boatId}`, {state: {startUrlDate: from, endUrlDate: to}})
@@ -75,15 +76,10 @@ const RentalCard = ({
                 />
                 }
                 {modal === "delete" &&
-                <div className={classes['delete-section']}>
-                    <p>Eliminare questo noleggio?</p>
-                    <button
-                        className={`btn btn-outline-primary ${classes['btn-confirm']}`}
-                        onClick={handleDeleteRental}
-                    >
-                        Conferma
-                    </button>
-                </div>
+                    <ConfirmSection
+                        text="Eliminare questo noleggio?"
+                        onConfirm={handleDeleteRental}
+                    />
                 }
                 {modal === "dates" &&
                 <DatesModal

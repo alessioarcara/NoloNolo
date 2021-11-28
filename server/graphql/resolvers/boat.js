@@ -89,7 +89,7 @@ module.exports = {
                 }
             );
             return boat ?
-                {insertBoatLocationProblem: boatNotFound} : {insertBoatLocationData: transformBoat(boat.toObject())}
+                {insertBoatLocationData: transformBoat(boat.toObject())} : {insertBoatLocationProblem: boatNotFound}
         } catch (err) {throw new Error(`Can't insert boat location. ${err}`)}
     })
 }

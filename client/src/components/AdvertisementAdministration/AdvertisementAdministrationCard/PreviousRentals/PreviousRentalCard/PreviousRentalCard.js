@@ -1,14 +1,13 @@
-import classes from './RentalPreviousCard.module.css';
+import classes from './PreviousRentalCard.module.css';
 import {formatDayMonthYearDate} from "../../../../../helpers/Utils/utils";
 import Vote from "../../../../UI/Vote/Vote";
-import {useContext, useState} from "react";
+import {useState} from "react";
 import BoatBill from "../../../../Advertisement/BoatBill/BoatBill";
 import Modal from "../../../../UI/Modal/Modal";
-import BreakpointContext from "../../../../../store/breakpoint-context";
 
 const stars = [0, 1, 2, 3, 4]
 
-const RentalPreviousCard = ({
+const PreviousRentalCard = ({
                                 billNumber,
                                 start,
                                 end,
@@ -65,4 +64,4 @@ const RentalPreviousCard = ({
     )
 }
 
-export default RentalPreviousCard
+export default PreviousRentalCard
