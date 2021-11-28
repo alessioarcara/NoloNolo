@@ -7,9 +7,10 @@ const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDa
 const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
 const mongoose = require('mongoose');
+const {startOfDay} = require("../../helpers/utils");
 
-const validateRentDates = async (boatId, from, to) => {
-    if (from <= new Date()) return selectedRentDatesTooClose;
+const validateRentDates = async (boatId, from, to, isUpdating) => {
+    if (isUpdating && from <= new Date()) return selectedRentDatesTooClose;
     if (from >= to) return invalidRange;
 
     /* *----------------------------------------------*
@@ -22,9 +23,34 @@ const validateRentDates = async (boatId, from, to) => {
     }).lean()
 
     if (rentals.length > 0) return alreadyRented;
-}
+};
+const rentalAtomicOperation = async (boatId, from, to, rentalWriteOperation, isUpdating = true) => {
+    /* START SEMAPHORE */
+    await acquireLock(boatId)
+    /* READ */
+    const areInvalidSelectedDates = await validateRentDates(boatId, from, to, isUpdating)
+
+    if (!areInvalidSelectedDates) {
+        /* WRITE */
+        const rental = await rentalWriteOperation()
+        /* END SEMAPHORE IF SUCCESSFUL */
+        await releaseLock(boatId)
+        return { rental };
+    }
+
+    /* END SEMAPHORE EVEN IF NOT SUCCESSFUL */
+    await releaseLock(boatId)
+    return {problem: areInvalidSelectedDates }
+};
+
 
 module.exports = {
+    rentals: authenticated(authorization('admin')(async () => {
+        try {
+            const rentals = await Rental.find().lean()
+            return rentals.map(transformRental)
+        } catch (err) { throw new Error(`Can't find rentals. ${err}`)}
+    })),
     boatRentals: async ({boatId}) => {
         try {
             const rentals = await Rental.find({boat: boatId}).lean()
@@ -59,19 +85,15 @@ module.exports = {
     rentBoat: authenticated(async (args, {req}) => {
         try {
             const {boatId} = args.inputRentBoat
-            const from = new Date(args.inputRentBoat.from).setHours(0, 0, 0)
-            const to = new Date(args.inputRentBoat.to).setHours(0, 0, 0)
+            const from = startOfDay(args.inputRentBoat.from)
+            const to = startOfDay(args.inputRentBoat.to)
 
             const boat = await Boat.findOne({_id: boatId}).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
             if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
 
-            /* START SEMAPHORE */
-            await acquireLock(boatId)
-
-            const areInvalidSelectedDates = await validateRentDates(boatId, from, to)
-            if (!areInvalidSelectedDates) {
-                const rental = await Rental.create({
+            const {rental, problem} = await rentalAtomicOperation(boatId, from, to,() =>
+                Rental.create({
                     customer: req.userId,
                     boat: boatId,
                     dailyFee: boat.advertisement.dailyFee,
@@ -79,23 +101,18 @@ module.exports = {
                     fromDate: from,
                     toDate: to
                 })
+            )
 
-                /* END SEMAPHORE IF SUCCESSFUL */
-                await releaseLock(boatId)
-                return { rentBoatData: transformRental(rental._doc) };
-            }
-
-            /* END SEMAPHORE EVEN IF NOT SUCCESSFUL */
-            await releaseLock(boatId)
-            return { rentBoatProblem: areInvalidSelectedDates}
-
+            return rental ?
+                {rentBoatData: transformRental({...rental._doc, boat: rental.boat._id})} :
+                { rentBoatProblem: problem }
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
     }),
     updateRental: authenticated(async (args, {req}) => {
         try {
             const {rentalId} = args.inputUpdateRental
-            const from = new Date(args.inputUpdateRental.from).setHours(0, 0, 0)
-            const to = new Date(args.inputUpdateRental.to).setHours(0, 0, 0)
+            const from = startOfDay(args.inputUpdateRental.from)
+            const to = startOfDay(args.inputUpdateRental.to)
 
             const rental = await Rental.findOne({
                 $and: [
@@ -103,30 +120,42 @@ module.exports = {
                     {customer: req.userId}
                 ]
             }).populate('boat')
-            if (!rental) return {updateRentalProblem: rentalNotFound}
+            if (!rental) return { updateRentalProblem: rentalNotFound }
             if (rental.from <= new Date()) return { updateRentalProblem: isAlreadyStarted }
 
-            /* START SEMAPHORE */
-            await acquireLock(rental.boat._id)
-
-            const areInvalidSelectedDates = await validateRentDates(rental.boat._id, from, to)
-            if (!areInvalidSelectedDates) {
+            const {problem} = await rentalAtomicOperation(rental.boat._id, from, to,() => {
                 rental.fromDate = from;
                 rental.toDate = to;
                 rental.dailyFee = rental.boat.advertisement.dailyFee;
                 rental.fixedFee = rental.boat.advertisement.fixedFee;
+                rental.save();
+            })
 
-                await rental.save();
-                /* END SEMAPHORE IF SUCCESSFUL */
-                await releaseLock(rental.boat._id)
-                return { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id})};
-            }
-
-            /* END SEMAPHORE EVEN IF NOT SUCCESSFUL */
-            await releaseLock(rental.boat._id)
-            return { updateRentalProblem: areInvalidSelectedDates }
+            return problem ?
+                { updateRentalProblem: problem } :
+                { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id}) }
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
+    backdateRental: authenticated(authorization('admin')(async (args) => {
+        try {
+            const {rentalId} = args.inputUpdateRental
+            const from = startOfDay(args.inputUpdateRental.from)
+            const to = startOfDay(args.inputUpdateRental.to)
+
+            const rental = await Rental.findById(rentalId).populate('boat')
+            if (!rental) return { backdateRentalProblem: rentalNotFound }
+
+            const {problem} = await rentalAtomicOperation(rental.boat._id, from, to,() => {
+                rental.fromDate = from;
+                rental.toDate = to;
+                rental.save();
+            })
+
+            return problem ?
+                { backdateRentalProblem: problem } :
+                { backdateRentalData: transformRental({...rental._doc, boat: rental.boat._id}) }
+        } catch(err)  { throw new Error(`Can't update rental. ${err}`)}
+    })),
     recordBoatReturn: authenticated(authorization('shipowner')(async ({rentalId}) => {
         try {
             const rental = await Rental.findOne({
@@ -138,7 +167,7 @@ module.exports = {
             if (!rental) return {recordBoatReturnProblem: rentalNotFound}
             if (rental.toDate > new Date()) return {recordBoatReturnProblem: rentalNotFinished}
 
-            rental.redeliveryDate = new Date().setHours(0,0,0)
+            rental.redeliveryDate = new Date().setUTCHours(0,0,0)
             await rental.save()
 
             return { recordBoatReturnData: transformRental(rental) }
@@ -158,4 +187,4 @@ module.exports = {
             return { deletedRentalId: rental._id }
         } catch (err) { throw new Error(`Can't delete rental. ${err}`)}
     }),
-}
+};
