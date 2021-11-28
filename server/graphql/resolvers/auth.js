@@ -104,6 +104,11 @@ module.exports = {
             return { updateUserData: transformUser(user) }
         } catch (err) { throw new Error(`Can't update user. ${err}`)}
     }),
+    deleteUser: authenticated(async (_, {req}) => {
+        try {
+            const user = await User.deleteOne({_id: req.userId})
+        } catch (err) { throw new Error(`Can't delete user. ${err}`)}
+    }),
     refreshToken: async (_, {req, res}) => {
         const decodedToken = decodeRefreshToken(req)
 

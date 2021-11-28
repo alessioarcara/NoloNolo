@@ -335,39 +335,54 @@ exports.body_updateRental = ({rentalId, from, to}) => {
         variables: {rentalData: {rentalId, from, to}}
     }
 };
+exports.body_backdateRental = ({rentalId, from, to}) => {
+    return {
+        query: `
+            mutation($rentalData: UpdateRentalInput!) {
+                backdateRental(inputUpdateRental: $rentalData) {
+                    backdateRentalData {
+                        _id
+                    }
+                    backdateRentalProblem
+                }
+            }
+        `,
+        variables: {rentalData: {rentalId, from, to}}
+    }
+};
 exports.body_recordBoatReturn = (rentalId) => {
     return {
         query: `
-          mutation($rentalId: ID!) {
-              recordBoatReturn(rentalId: $rentalId) {
-                  recordBoatReturnData {
-                      _id
-                      from
-                      to
-                      dailyFee
-                      fixedFee
-                      billNumber
-                      createdAt
-                      redelivery
-                      boat {
-                          _id
-                          reviews {
-                              rating
-                              rental
-                              creator {
-                                  _id
-                              }
-                          }
-                      }
-                      customer {
-                          _id
-                          email
-                      }
-                  }
-                  recordBoatReturnProblem
-              }
-          }
-      `,
+            mutation($rentalId: ID!) {
+                recordBoatReturn(rentalId: $rentalId) {
+                    recordBoatReturnData {
+                        _id
+                        from
+                        to
+                        dailyFee
+                        fixedFee
+                        billNumber
+                        createdAt
+                        redelivery
+                        boat {
+                            _id
+                            reviews {
+                                rating
+                                rental
+                                creator {
+                                    _id
+                                }
+                            }
+                        }
+                        customer {
+                            _id
+                            email
+                        }
+                    }
+                    recordBoatReturnProblem
+                }
+            }
+        `,
         variables: rentalId
     }
 };
@@ -617,6 +632,13 @@ exports.body_user = {
             }
         }
     `,
+};
+exports.body_rentals = {
+    query: `
+        rentals {
+            _id
+        }
+    `
 };
 exports.body_userRentals = {
     query: `

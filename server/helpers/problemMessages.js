@@ -16,7 +16,7 @@ const isAlreadyPublished = "Already published review for this rental.";
 const rentalNotYours = "You can write a review only on your rentals!";
 const rentalNotClosed = "You cannot write a review on what you have not returned";
 const rentalNotFinished = "You cannot close rental still not finished";
-const boatWithRentals = "You cannot edit or delete boat with active or previous rentals"
+const boatWithRentals = "You cannot edit or delete boat with active or previous rentals";
 
 module.exports = {
     duplicateEmail,
