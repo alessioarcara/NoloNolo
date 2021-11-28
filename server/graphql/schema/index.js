@@ -25,6 +25,7 @@ const rootSchema = `
             advertisement(boatId: ID!): Boat!
             advertisements(filter: BoatFilter!, skip: Int, take: Int): [Boat!]
             advertisementsByShipowner: [Boat!]
+            rentals: [Rental!]
             boatRentals(boatId: ID!): [Rental!]
             rentalsByUser: [Rental!]
             rentalsByShipowner: [Rental!]
@@ -46,6 +47,7 @@ const rootSchema = `
             withdrawAdvertisement(boatId: ID!): withdrawAdvertisementPayload!
             rentBoat(inputRentBoat: RentBoatInput!): rentBoatPayload!
             updateRental(inputUpdateRental: UpdateRentalInput!): updateRentalPayload!
+            backdateRental(inputUpdateRental: UpdateRentalInput!): backdateRentalPayload!
             recordBoatReturn(rentalId: ID!): recordBoatReturnPayload!
             deleteRental(rentalId: ID!): deleteRentalPayload!
             publishReview(inputReview: ReviewInput!): publishReviewPayload!

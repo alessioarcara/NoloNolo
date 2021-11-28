@@ -23,6 +23,11 @@ const RentalType = `
         updateRentalProblem: String
     }
     
+    type backdateRentalPayload {
+        backdateRentalData: Rental
+        backdateRentalProblem: String
+    }
+    
     type recordBoatReturnPayload {
         recordBoatReturnData : Rental
         recordBoatReturnProblem: String

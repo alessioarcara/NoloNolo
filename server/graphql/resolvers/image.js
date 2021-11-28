@@ -13,7 +13,7 @@ const clearAvatar = filePath => {
 const storeFile = async (upload, userId, resize = false) => {
     const {filename, mimetype, createReadStream} = await upload;
 
-    if (!isImage(mimetype)) { return { problem: notImage } }
+    if (!isImage(mimetype)) return { problem: notImage }
 
     const stream = createReadStream();
     const USER_DIR = `./public/images/${userId}`;
@@ -60,9 +60,9 @@ const storeFile = async (upload, userId, resize = false) => {
 module.exports = {
     addAvatar: authenticated(async ({upload, description}, {req}) => {
         try {
-            if (!upload.file) { return { addAvatarProblem: noFileAttached } }
+            if (!upload.file) return { addAvatarProblem: noFileAttached }
             const user = await User.findById(req.userId)
-            if (!user) { return { addAvatarProblem: userNotFound } }
+            if (!user) return { addAvatarProblem: userNotFound }
 
             const pathObj = await storeFile(upload.file, req.userId, true)
             if (pathObj.problem) return { addAvatarProblem: pathObj.problem}
