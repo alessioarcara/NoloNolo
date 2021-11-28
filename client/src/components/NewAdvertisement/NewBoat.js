@@ -12,6 +12,7 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
         boatForm(boat.yard, boat.model, boat.length, boat.maximumCapacity) : boatForm()
     )
 
+
     const handleAddUserBoat = evt => {
         evt.preventDefault()
         onMutationUserBoat(
