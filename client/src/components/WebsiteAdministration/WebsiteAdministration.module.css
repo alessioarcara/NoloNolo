@@ -15,6 +15,7 @@
 }
 
 .exit-btn {
+    font-size: 0.8em;
     background-color: #3f3f3f;
     border-color: #3f3f3f;
     color: #fff;
@@ -39,7 +40,7 @@
 
 @media only screen and (max-width: 768px) {
     .exit-btn {
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 }
 

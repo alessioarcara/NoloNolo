@@ -57,15 +57,15 @@ export const rangeDate = ((startDate, endDate) => {
 });
 
 export const daysLate = (startDate, endDate, redeliveryDate) =>
-    Math.abs(rangeDate(startDate, endDate) - rangeDate(startDate, redeliveryDate))
+    Math.max(0, (rangeDate(startDate, redeliveryDate) - rangeDate(startDate, endDate)))
 
 /* ------------------------------- Components Utils --------------------------------- */
 export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length);
 
 /* Nel caso di ritardo: per ogni giorno di ritardo maggiorazione del 100% */
 export const calculateTotal = (dailyFee, fixedFee, startDate, endDate, redeliveryDate) =>
-    parseFloat(dailyFee) * rangeDate(startDate, endDate) + parseFloat(fixedFee) + daysLate(startDate, endDate, redeliveryDate) * (dailyFee * 2);
-
+    parseFloat(dailyFee) * rangeDate(startDate, endDate) + parseFloat(fixedFee)
+        + daysLate(startDate, endDate, redeliveryDate) * (dailyFee * 2);
 
 export const aggregateBoatsWithRentals = (boats, rentals) =>
     [...boats, ...rentals].reduce(
@@ -93,7 +93,6 @@ export const aggregateAdvertisementsWithRentals = (advertisements, rentals) =>
         },
         {}
     )
-
 
 /* -------------------------------- Mutations Utils --------------------------------- */
 export const destructurePayload = resData => Object.values(resData[Object.keys(resData)]);

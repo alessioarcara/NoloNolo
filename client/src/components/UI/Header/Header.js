@@ -2,7 +2,14 @@ import classes from './Header.module.css';
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
 
-const Header = ({classNameHeader, navigatePath, backElement, textTitle, optionsElement, children}) => {
+const Header = ({
+                    classNameHeader,
+                    navigatePath,
+                    backElement,
+                    textTitle,
+                    optionsElement,
+                    handleOptionsElement,
+                    children}) => {
     const navigate = useNavigate()
 
     const goThroughPage = useCallback(() => {
@@ -20,7 +27,12 @@ const Header = ({classNameHeader, navigatePath, backElement, textTitle, optionsE
                         {backElement}
                     </div>
                     <h1 className={`${classes['second-element']} title`}>{textTitle}</h1>
-                    <div className={classes['third-element']}>{optionsElement}</div>
+                    <div
+                        className={classes['third-element']}
+                        onClick={handleOptionsElement}
+                    >
+                        {optionsElement}
+                    </div>
                 </div>
                 {children}
             </div>

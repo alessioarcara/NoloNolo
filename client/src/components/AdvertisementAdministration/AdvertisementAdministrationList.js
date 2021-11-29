@@ -10,6 +10,7 @@ const AdvertisementAdministrationList = ({advertisements, onMutateAdvertisement}
                     <AdvertisementAdministrationCard
                         key={announcement._id}
                         boatId={announcement._id}
+                        createdAt={announcement.hasAdvertisement.createdAt}
                         images={announcement.hasAdvertisement.images}
                         model={announcement.model}
                         rentals={announcement.rentals}

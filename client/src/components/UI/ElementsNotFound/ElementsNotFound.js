@@ -1,9 +1,9 @@
 import classes from './ElementsNotFound.module.css';
 import {Link} from "react-router-dom";
 
-const ElementsNotFound = ({warningText, warningTextButton, path}) => {
+const ElementsNotFound = ({warningText, warningTextButton, path, hasBackdrop = true}) => {
     return (
-        <div className={classes['not-found-container']}>
+        <div className={`${classes['not-found-container']} ${hasBackdrop ? classes['box-shadow'] : ''}`}>
             <div className={classes['container']}>
                 <div className={classes['not-found-text']}>
                     {warningText}

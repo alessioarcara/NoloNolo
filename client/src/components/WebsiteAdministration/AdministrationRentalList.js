@@ -17,7 +17,7 @@ const AdministrationRentalList = ({handleMutationAdministrationRentals, rentals}
                     city={rental.boat.isDocked.city}
                 />
             )
-        : content = <ElementsNotFound warningText="Non ci sono noleggi futuri presenti!"/>
+        : content = <ElementsNotFound warningText="Non ci sono noleggi futuri presenti!" hasBackdrop={false}/>
     }
     return (
         <>
