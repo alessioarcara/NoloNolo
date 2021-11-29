@@ -1,9 +1,11 @@
 import AdministrationRental from "./Rental/AdministrationRental";
+import ElementsNotFound from "../UI/ElementsNotFound/ElementsNotFound";
 
 const AdministrationRentalList = ({handleMutationAdministrationRentals, rentals}) => {
-    return (
-        <>
-            {rentals && rentals.map(rental =>
+    let content;
+
+    {rentals.length > 0
+        ?   content = rentals.map(rental =>
                 <AdministrationRental
                     key={rental._id}
                     rentalId={rental._id}
@@ -12,7 +14,12 @@ const AdministrationRentalList = ({handleMutationAdministrationRentals, rentals}
                     from={rental.from}
                     to={rental.to}
                 />
-            )}
+            )
+        : content = <ElementsNotFound warningText="Non ci sono noleggi futuri presenti!"/>
+    }
+    return (
+        <>
+            {content}
         </>
     );
 }

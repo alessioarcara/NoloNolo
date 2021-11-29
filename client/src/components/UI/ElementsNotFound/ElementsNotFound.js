@@ -8,6 +8,7 @@ const ElementsNotFound = ({warningText, warningTextButton, path}) => {
                 <div className={classes['not-found-text']}>
                     {warningText}
                 </div>
+                {path &&
                 <Link
                     className='btn btn-primary'
                     to={path}
@@ -15,6 +16,7 @@ const ElementsNotFound = ({warningText, warningTextButton, path}) => {
                 >
                     {warningTextButton}
                 </Link>
+                }
             </div>
         </div>
     );

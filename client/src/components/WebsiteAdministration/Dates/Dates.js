@@ -3,6 +3,7 @@ import searchReducer, {initialState} from "../../../reducers/searchReducer";
 import {useCallback, useReducer} from "react";
 import {body_backdateRental} from "../../../helpers/httpConfig";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../helpers/Utils/constants";
+import {formatDate} from "../../../helpers/Utils/utils";
 
 const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, from, to}) => {
     const [state, dispatch] = useReducer(searchReducer, {
@@ -14,8 +15,8 @@ const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, from, to}) =>
         handleBackDateRentals(
             body_backdateRental({
                 rentalId: rentalId,
-                from: state.startDate.toString(),
-                to: state.endDate.toString()}),
+                from: formatDate(state.startDate).toString(),
+                to: formatDate(state.endDate).toString()}),
             (prevRentals, newRental) => prevRentals.map(rental => rental._id === rentalId ? newRental : rental)
         )
     }

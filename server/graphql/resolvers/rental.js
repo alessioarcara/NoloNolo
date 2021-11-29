@@ -149,7 +149,7 @@ module.exports = {
                 rental.fromDate = from;
                 rental.toDate = to;
                 rental.save();
-            })
+            }, false)
 
             return problem ?
                 { backdateRentalProblem: problem } :
