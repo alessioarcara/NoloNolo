@@ -13,7 +13,7 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
     )
 
 
-    const handleAddUserBoat = evt => {
+    const handleAddBoat = evt => {
         evt.preventDefault()
         onMutationUserBoat(
             body_addBoat({
@@ -34,12 +34,14 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
                     return userBoat
                 })
                 return isAlreadyAdded ? updatedUserBoats : updatedUserBoats.concat(newBoat)
-            })
+            },
+            (newBoat) => `${newBoat._id}/location`
+        )
     }
 
     const title = <h1>Che tipo di barca offrirai?</h1>
     const content = (
-        <form onSubmit={handleAddUserBoat}>
+        <form onSubmit={handleAddBoat}>
             {renderFormInputs()}
             <BoatTypes/>
             <NewAdvertisementFooter stepPosition={1}/>

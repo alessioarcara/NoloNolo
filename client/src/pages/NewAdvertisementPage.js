@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
-import {Route, Routes, useParams} from 'react-router-dom';
+import {Route, Routes, useNavigate, useParams} from 'react-router-dom';
 import useHttp from "../hooks/use-http";
 import {body_userBoats} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
@@ -8,10 +8,12 @@ import NewBoatLocation from "../components/NewAdvertisement/NewBoatLocation";
 import NewBoatAdvertisement from "../components/NewAdvertisement/NewBoatAdvertisement";
 import AvailableBoats from "../components/NewAdvertisement/AvailableBoats";
 import {parseMutationResponse} from "../helpers/Utils/utils";
+import Modal from "../components/UI/Modal/Modal";
 
 const NewAdvertisementPage = () => {
     const [userBoats, setUserBoats] = useState([])
-    const {data: user, sendRequest} = useHttp()
+    const navigate = useNavigate()
+    const {status, error, data: user, sendRequest} = useHttp()
     const {token} = useContext(AuthContext)
 
     const boatId = useParams()['*'].split('/')[0];
@@ -24,12 +26,14 @@ const NewAdvertisementPage = () => {
         })
     }, [sendRequest, token])
 
-    const handleMutationUserBoat = useCallback((body, applyData) =>
+    const handleMutationUserBoat = useCallback((body, applyData, applyWhere) =>
         sendRequest(
             {body, token},
-            parseMutationResponse(setUserBoats, applyData)
+            applyWhere ?
+                parseMutationResponse(setUserBoats, applyData, navigate, applyWhere) :
+                parseMutationResponse(setUserBoats, applyData)
         ),
-        [sendRequest, token])
+        [sendRequest, token, navigate])
 
     const stepRoutes = (
         <>
@@ -54,24 +58,30 @@ const NewAdvertisementPage = () => {
         </>
     )
 
+    console.log(error)
+
     return (
-        <Routes>
-            <Route path={'/*'} element={
-                <AvailableBoats
-                    userName={user ? user.email : 'utente'}
-                    userBoats={userBoats}
-                    onMutationUserBoat={handleMutationUserBoat}
-                />
-            }/>
-            <Route path={'boat'} element={
-                <NewBoat
-                    onMutationUserBoat={handleMutationUserBoat}
-                />
-            }/>
-            <Route path={':boatId'}>
-                {stepRoutes}
-            </Route>
-        </Routes>
+        <>
+            {/*{status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}*/}
+            {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
+            <Routes>
+                <Route path={'/*'} element={
+                    <AvailableBoats
+                        userName={user ? user.email : 'utente'}
+                        userBoats={userBoats}
+                        onMutationUserBoat={handleMutationUserBoat}
+                    />
+                }/>
+                <Route path={'boat'} element={
+                    <NewBoat
+                        onMutationUserBoat={handleMutationUserBoat}
+                    />
+                }/>
+                <Route path={':boatId'}>
+                    {stepRoutes}
+                </Route>
+            </Routes>
+        </>
     );
 }
 

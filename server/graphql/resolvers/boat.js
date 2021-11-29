@@ -5,6 +5,12 @@ const mongoose = require('mongoose');
 const {boatNotFound, boatWithRentals} = require("../../helpers/problemMessages")
 const {authenticated} = require("../../auth/auth");
 
+const validateBoat = async (boatId) => {
+    const rentals = await Rental.find({boat: boatId}).lean()
+    if (rentals.length > 0)
+        return boatWithRentals
+}
+
 module.exports = {
     boatsByUser: authenticated(async (args, {req}) => {
         try {
@@ -50,8 +56,8 @@ module.exports = {
     }),
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
-            const rentals = await Rental.find({boat: boatId}).lean()
-            if (rentals.length > 0) return {removeBoatProblem: boatWithRentals}
+            const isValideBoat = validateBoat(boatId)
+            if (isValideBoat) return {removeBoatProblem: isValideBoat}
 
             const {deletedCount} = await Boat.deleteOne(
                 {

@@ -7,7 +7,7 @@ import {body_publishAdvertisement} from "../../helpers/httpConfig";
 const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
     const {formValues, renderFormInputs} = useForm(boatAdvertisementForm)
 
-    const submitFormHandler = evt => {
+    const handlePublishAdvertisement = evt => {
         evt.preventDefault()
         onMutationUserBoat(
             body_publishAdvertisement({
@@ -16,13 +16,14 @@ const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
                 dailyFee: parseFloat(formValues[1]),
                 fixedFee: parseFloat(formValues[2])
             }),
-
+            undefined,
+            () => `/profile`
         )
     }
 
     const title = <h1>Ora, descrivi il tuo annuncio</h1>
     const content = (
-        <form onSubmit={submitFormHandler}>
+        <form onSubmit={handlePublishAdvertisement}>
             {renderFormInputs()}
             <NewAdvertisementFooter stepPosition={3}/>
         </form>

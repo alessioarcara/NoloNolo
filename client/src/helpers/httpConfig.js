@@ -366,6 +366,14 @@ exports.body_recordBoatReturn = (rentalId) => {
                         redelivery
                         boat {
                             _id
+                            owner {
+                                email
+                            }
+                            isDocked {
+                                city
+                                region
+                                harbour
+                            }
                             reviews {
                                 rating
                                 rental
@@ -645,8 +653,10 @@ exports.body_userBoats = {
 };
 exports.body_rentals = {
     query: `
-        rentals {
-            _id
+        query {
+            rentals {
+                _id
+            }
         }
     `
 };

@@ -54,7 +54,7 @@ const AdvertisementAdministrationCard = ({
     const filteredRentals = useMemo(() => {
         return {
             previous: rentals.filter(rental => rental.redelivery),
-            active: rentals.filter(rental => new Date() >= new Date(rental.from) && new Date() <= new Date(rental.to)),
+            active: rentals.filter(rental => new Date(rental.from) <= new Date() && !rental.redelivery),
             future: rentals.filter(rental => new Date(rental.from) > new Date())
         }
     }, [rentals])

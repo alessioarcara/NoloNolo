@@ -57,7 +57,7 @@ const transformBoat = boat => {
             harbour: boat.location.harbour,
             coordinates: boat.location.geometry.coordinates
         },
-        reviews: boat.reviews && boat.reviews.map(transformReview),
+        reviews: boat.reviews ? boat.reviews.map(transformReview) : [],
         totalCount: boat.totalCount,
         minPrice: parseFloat(boat.minPrice),
         maxPrice: parseFloat(boat.maxPrice)

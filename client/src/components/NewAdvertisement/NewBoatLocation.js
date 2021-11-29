@@ -8,22 +8,26 @@ import {boatLocationForm} from "../../helpers/formConfig";
 import {body_insertBoatLocation} from "../../helpers/httpConfig";
 import useGeocode from "../../hooks/use-geocode";
 
-const NewBoatLocation = ({onChangeUserBoat, boat}) => {
+const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     const {formValues, renderFormInputs} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )
     const {coordinates} = useGeocode(formValues[2], formValues[1])
 
-    const submitFormHandler = evt => {
+    const handleInsertBoatLocation = evt => {
         evt.preventDefault()
-        onChangeUserBoat(body_insertBoatLocation({
-            boatId: boat._id,
-            harbour: formValues[0],
-            city: formValues[1],
-            region: formValues[2],
-            latitude: coordinates.lat,
-            longitude: coordinates.lon
-        }))
+        onMutationUserBoat(
+            body_insertBoatLocation({
+                boatId: boat._id,
+                harbour: formValues[0],
+                city: formValues[1],
+                region: formValues[2],
+                latitude: coordinates.lat,
+                longitude: coordinates.lon
+            }),
+            (prevBoats, newBoat) => prevBoats.map(userBoat => userBoat._id === newBoat._id ? newBoat : userBoat),
+            newBoat => `${newBoat._id}/advertisement`
+        )
     }
 
     const title = (
@@ -34,7 +38,7 @@ const NewBoatLocation = ({onChangeUserBoat, boat}) => {
     )
 
     const content = (
-        <form onSubmit={submitFormHandler}>
+        <form onSubmit={handleInsertBoatLocation}>
             {renderFormInputs(classes.inputs)}
             <NewAdvertisementFooter stepPosition={2}/>
         </form>
