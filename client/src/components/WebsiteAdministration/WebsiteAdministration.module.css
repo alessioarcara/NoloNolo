@@ -23,8 +23,9 @@
 }
 
 .exit-btn:hover {
-    color: #fff;
     background-color: red;
+    color: #fff;
+    border-color: red;
 }
 
 /* Administration Card */
