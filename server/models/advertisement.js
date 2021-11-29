@@ -19,6 +19,10 @@ const advertisementSchema = new Schema({
         type: mongoose.Types.Decimal128,
         required: [true, 'Please provide a fixed fee']
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
     images: [String],
 })
 

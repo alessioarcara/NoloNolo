@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from "react";
 import classes from './AdvertisementAdministrationCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {averageReviews, formatDayMonthYearDate, formatNumber} from "../../../helpers/Utils/utils";
+import {averageReviews} from "../../../helpers/Utils/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
@@ -10,23 +10,6 @@ import DetailsModal from "./DetailsModal/DetailsModal";
 import {useLocation, useNavigate} from "react-router-dom";
 import {body_withdrawAdvertisement} from "../../../helpers/httpConfig";
 import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
-
-const object = {
-    model: "Regina IV",
-    createdAt: formatDayMonthYearDate(new Date(), {day: "numeric", month: "long", year: 'numeric'}),
-    future: 37,
-    average: 4,
-    reviews: 78,
-    customer: "michael.carchesio@test.it",
-    preferredBy: ["Alessio", "Alessia", "Michael"],
-    images: [
-        'https://www.ilmessaggero.it/photos/MED_HIGH/92/67/5519267_1942_foto_340_regina.jpg',
-        'https://www.barchemagazine.com/wp-content/uploads/2021/05/FIM-340-Regina_01-800x600.jpg'
-    ],
-    from: formatDayMonthYearDate(new Date(2021, 11, 17), {year: 'numeric', month: 'short', day: 'numeric'}),
-    to: formatDayMonthYearDate(new Date(2021, 11, 18), {year: 'numeric', month: 'short', day: 'numeric'}),
-    totalAmount: formatNumber(1200)
-}
 
 const AdvertisementAdministrationCard = ({
                               boatId,
@@ -62,13 +45,8 @@ const AdvertisementAdministrationCard = ({
     const handleDeleteAdvertisement = useCallback(() => {
         onMutateAdvertisement(
             body_withdrawAdvertisement({boatId}),
-            (prevAdvertisements, prevAdvertisementId) => {
-                return {
-                    ...prevAdvertisements,
-                    advertisements: prevAdvertisements.advertisements.filter(advertisement => advertisement._id !== prevAdvertisementId),
-                    rentals: prevAdvertisements.rentals.filter(rental => rental.boat._id !== boatId)
-                }
-            }
+            (prevAdvertisements, prevAdvertisementId) =>
+                prevAdvertisements.filter(advertisement => advertisement._id !== prevAdvertisementId)
         )
     }, [onMutateAdvertisement, boatId])
 
@@ -122,7 +100,7 @@ const AdvertisementAdministrationCard = ({
                         </div>
 
                         {/* Announcement Creation Date */}
-                        <div>Creato il: <span className={classes.date}>{object.createdAt}</span></div>
+                        <div>Creato il: <span className={classes.date}>1900</span></div>
 
                         {/* Future Rentals */}
                         <div>Prenotazioni future: <span
