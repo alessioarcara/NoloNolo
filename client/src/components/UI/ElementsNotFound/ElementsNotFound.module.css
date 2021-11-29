@@ -8,13 +8,19 @@
     display: flex;
     align-items: center;
     gap: 0.7rem;
-    justify-content: space-between;
+    justify-content: center;
     padding: 1rem;
 }
 
 .not-found-text {
     font-size: 1em;
     color: #8e9697;
+}
+
+@media only screen and (max-width: 768px) {
+    .not-found-text {
+        font-size: 0.8em;
+    }
 }
 
 @media only screen and (min-width: 769px) {

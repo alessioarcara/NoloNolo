@@ -2,7 +2,6 @@ import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 import BackIcon from "../../UI/icons/BackIcon";
 import DayPicker from "../../UI/DatePicker/DayPicker";
 import classes from "./SelectDates.module.css";
-import {addDays} from "date-fns";
 
 const SelectDates = ({
                          minDate,

@@ -4,9 +4,8 @@ import {useCallback, useContext, useState} from "react";
 import Modal from "../../UI/Modal/Modal";
 import BreakpointContext from "../../../store/breakpoint-context";
 import Dates from "../Dates/Dates";
-import {body_backdateRental} from "../../../helpers/httpConfig";
 
-const AdministrationRental = ({customer, rentalId, from, to, handleMutationAdministrationRentals}) => {
+const AdministrationRental = ({customer, rentalId, boatId, from, to, city, handleMutationAdministrationRentals}) => {
     const [datesModal, setDatesModal] = useState(false)
     const breakpointCtx = useContext(BreakpointContext)
 
@@ -25,6 +24,7 @@ const AdministrationRental = ({customer, rentalId, from, to, handleMutationAdmin
                         handleDatesModal={handleDatesModal}
                         handleBackDateRentals={handleMutationAdministrationRentals}
                         rentalId={rentalId}
+                        boatId={boatId}
                         from={from}
                         to={to}
                     />
@@ -32,11 +32,12 @@ const AdministrationRental = ({customer, rentalId, from, to, handleMutationAdmin
             }
             <div className={classes['rental-container']}>
                 <div className={classes['customer-email']}>{customer.split('@')[0]}</div>
+                <div className={classes['city-name']}>{city}</div>
                 <div className={classes['rental-dates']}>
                     {`
-                    ${formatDayMonthYearDate(from, {day: 'numeric', month: 'short', year: 'numeric'})} -
-                    ${formatDayMonthYearDate(to, {day: 'numeric', month: 'short', year: 'numeric'})}
-                `}
+                        ${formatDayMonthYearDate(from, {day: 'numeric', month: 'short', year: 'numeric'})} -
+                        ${formatDayMonthYearDate(to, {day: 'numeric', month: 'short', year: 'numeric'})}
+                    `}
                 </div>
                 <button
                     className={`${classes['retro-btn']} btn btn-primary`}

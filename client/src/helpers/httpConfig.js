@@ -344,6 +344,12 @@ exports.body_backdateRental = ({rentalId, from, to}) => {
                         _id
                         from
                         to
+                        boat {
+                            _id
+                            isDocked {
+                                city
+                            }
+                        }
                         customer {
                             email
                         }
@@ -663,6 +669,12 @@ exports.body_rentals = {
                 _id
                 from
                 to
+                boat {
+                    _id
+                    isDocked {
+                        city
+                    }
+                }
                 customer {
                     email
                 }

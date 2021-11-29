@@ -1,11 +1,15 @@
 import SelectDates from "../../Search/SelectDates/SelectDates";
 import searchReducer, {initialState} from "../../../reducers/searchReducer";
-import {useCallback, useReducer} from "react";
-import {body_backdateRental} from "../../../helpers/httpConfig";
+import {useCallback, useContext, useEffect, useReducer} from "react";
+import {body_backdateRental, body_boatRentals} from "../../../helpers/httpConfig";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../helpers/Utils/constants";
 import {formatDate} from "../../../helpers/Utils/utils";
+import useHttp from "../../../hooks/use-http";
+import AuthContext from "../../../store/auth-context";
 
-const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, from, to}) => {
+const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, boatId, from, to}) => {
+    const {data: rentedDates, sendRequest: fetchDates} = useHttp(true)
+    const {token} = useContext(AuthContext)
     const [state, dispatch] = useReducer(searchReducer, {
         ...initialState, startDate: new Date(from), endDate: new Date(to)
     })
@@ -33,6 +37,10 @@ const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, from, to}) =>
         dispatch({type: CHANGE_END_DATE, payload: end})
     }, [dispatch])
 
+    useEffect(() => {
+        fetchDates({body: body_boatRentals({boatId}), token}, resData => resData.boatRentals)
+    }, [fetchDates, token, boatId])
+
     return (
         <>
             <SelectDates
@@ -44,6 +52,7 @@ const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, from, to}) =>
                 changeEndDateHandler={changeEndHandler}
                 startDate={state.startDate}
                 endDate={state.endDate}
+                alreadyRentedDates={rentedDates}
             />
         </>
     )

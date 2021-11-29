@@ -1,14 +1,14 @@
 .rental-container {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 2fr 1fr;
     align-items: center;
     justify-items: center;
     gap: 0.3rem;
-    padding: 0.7rem;
+    padding: 1rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.customer-email, .rental-dates, .retro-btn {
+.customer-email, .rental-dates, .city-name, .retro-btn {
     font-size: 0.8em;
 }
 
