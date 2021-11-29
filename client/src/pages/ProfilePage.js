@@ -6,10 +6,11 @@ import {body_user} from "../helpers/httpConfig";
 import ProfileShipowner from "../components/Profile/ProfileShipowner";
 import ProfileCustomer from "../components/Profile/ProfileCustomer";
 import Profile from "../components/Profile/Profile";
+import {Navigate, useNavigationType} from "react-router-dom";
 
 
 const ProfilePage = () => {
-
+    const navigationType = useNavigationType()
     const authCtx = useContext(AuthContext)
 
     const {status, error, data: user, sendRequest: fetchUser} = useHttp(true)
@@ -21,22 +22,22 @@ const ProfilePage = () => {
 
     let content = <LoadingSpinner/>
 
-    if (status === "completed" && user && user.userType === "customer") {
+    if (status === "completed" && user && user.userType === "customer")
         content = <ProfileCustomer/>
-    }
 
-    if (status === "completed" && user && user.userType === "shipowner") {
+    if (status === "completed" && user && user.userType === "shipowner")
         content = (
             <>
                 <ProfileCustomer/>
                 <ProfileShipowner/>
             </>
         )
-    }
 
-    if (status === "completed" && error) {
+    if (status === "completed" && user && user.userType === "admin")
+        content = navigationType === "PUSH" ? <Navigate to="/administration"/> : <Navigate to="/"/>
+
+    if (status === "completed" && error)
         content = <p>User not found.</p>
-    }
 
     return (
         <Profile auth={authCtx}>
