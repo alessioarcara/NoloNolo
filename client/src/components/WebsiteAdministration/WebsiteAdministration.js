@@ -6,7 +6,6 @@ const WebsiteAdministration = () => {
 
     return (
         <div className={classes['administration-container']}>
-
             {/* Administration Header */}
             <Header
                 textTitle="Amministrazione"
@@ -18,7 +17,6 @@ const WebsiteAdministration = () => {
             <div className={classes['administration-card']}>
 
             </div>
-
         </div>
     )
 }
