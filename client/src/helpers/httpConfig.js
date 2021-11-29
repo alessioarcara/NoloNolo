@@ -117,7 +117,7 @@ exports.body_advertisements = ({city, region, from, to, minCapacity, boatTypes, 
 exports.body_advertisement = (boatId) => {
     return {
         query: `
-            query BoatInformations($boatId: ID!) {
+            query AdvertisementDetails($boatId: ID!) {
                 advertisement(boatId: $boatId) {
                     model
                     yard
@@ -461,6 +461,7 @@ exports.body_shipownerAdvertisements = {
                 model
                 hasAdvertisement {
                     images
+                    createdAt
                     preferredBy {
                         _id
                     }
@@ -638,10 +639,10 @@ exports.body_deleteUser = {
             }
         }
     `
-}
+};
 exports.body_userBoats = {
     query: `
-        query {
+        query BoatDetails {
             boatsByUser {
                 _id
                 yard
@@ -658,6 +659,13 @@ exports.body_userBoats = {
             }
             user {
                 email
+            }
+            rentalsByShipowner {
+                from
+                to
+                boat {
+                    _id
+                }
             }
         }
     `

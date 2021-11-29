@@ -5,6 +5,7 @@ const advertisementType = `
             description: String!
             fixedFee: Float!
             dailyFee: Float!
+            createdAt: String!
             images: [String!]
         }
 

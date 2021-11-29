@@ -9,12 +9,14 @@ const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
     const handleRecordBoatReturn = useCallback(() => {
         onMutateAdvertisement(
             body_recordBoatReturn({rentalId: activeRental._id}),
-            (prevAdvertisements, newRental) => {
-                return {
-                    ...prevAdvertisements,
-                    rentals: prevAdvertisements.rentals.map(rental => rental._id === newRental._id ? newRental : rental)
-                }
-            }
+            (prevAdvertisements, newRental) =>
+                prevAdvertisements.map(advertisement => advertisement._id === newRental.boat._id ?
+                    {
+                        ...advertisement,
+                        rentals: advertisement.rentals.map(prevRental => prevRental._id === newRental._id ?
+                            newRental : prevRental)
+                    } :
+                    advertisement)
         )
     }, [activeRental, onMutateAdvertisement])
 

@@ -50,6 +50,7 @@ const transformBoat = boat => {
             ...boat.advertisement,
             dailyFee: parseFloat(boat.advertisement.dailyFee),
             fixedFee: parseFloat(boat.advertisement.fixedFee),
+            createdAt: dateToString(boat.advertisement.createdAt),
         },
         isDocked: boat.location && {
             region: boat.location.region,

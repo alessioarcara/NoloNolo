@@ -57,7 +57,7 @@ module.exports = {
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
             const isValideBoat = validateBoat(boatId)
-            if (isValideBoat) return {removeBoatProblem: isValideBoat}
+            // if (isValideBoat) return {removeBoatProblem: isValideBoat}
 
             const {deletedCount} = await Boat.deleteOne(
                 {

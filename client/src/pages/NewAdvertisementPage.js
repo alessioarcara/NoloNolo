@@ -7,7 +7,7 @@ import NewBoat from "../components/NewAdvertisement/NewBoat";
 import NewBoatLocation from "../components/NewAdvertisement/NewBoatLocation";
 import NewBoatAdvertisement from "../components/NewAdvertisement/NewBoatAdvertisement";
 import AvailableBoats from "../components/NewAdvertisement/AvailableBoats";
-import {parseMutationResponse} from "../helpers/Utils/utils";
+import {aggregateBoatsWithRentals, parseMutationResponse} from "../helpers/Utils/utils";
 import Modal from "../components/UI/Modal/Modal";
 
 const NewAdvertisementPage = () => {
@@ -21,7 +21,9 @@ const NewAdvertisementPage = () => {
 
     useEffect(() => {
         sendRequest({body: body_userBoats, token}, resData => {
-            setUserBoats(resData.boatsByUser)
+            setUserBoats(
+                Object.values(aggregateBoatsWithRentals(resData.boatsByUser, resData.rentalsByShipowner))
+            )
             return resData.user
         })
     }, [sendRequest, token])
