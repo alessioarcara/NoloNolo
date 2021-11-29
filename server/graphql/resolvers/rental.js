@@ -73,11 +73,7 @@ module.exports = {
                     as: 'boat'
                 } },
                 { $unwind: "$boat" },
-                { $match: { $and: [
-                        {"boat.shipowner": mongoose.Types.ObjectId(req.userId)},
-                        {"boat.advertisement": {$exists: true}}
-                    ]
-                } }
+                { $match: {"boat.shipowner": mongoose.Types.ObjectId(req.userId)} }
             ])
             return rentals.map(rental => transformRental({ ...rental, boat: rental.boat._id }))
         } catch (err) { throw new Error(`Can't find shipowner rentals. ${err}`) }

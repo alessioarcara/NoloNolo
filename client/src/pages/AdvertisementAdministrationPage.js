@@ -5,7 +5,7 @@ import {useCallback, useContext, useEffect, useState} from "react";
 import AuthContext from "../store/auth-context";
 import {body_shipownerAdvertisements} from "../helpers/httpConfig";
 import BackIcon from "../components/UI/icons/BackIcon";
-import {aggregateBoatsWithRentals, parseMutationResponse} from "../helpers/Utils/utils";
+import {aggregateAdvertisementsWithRentals, parseMutationResponse} from "../helpers/Utils/utils";
 
 const AdvertisementAdministrationPage = () => {
     const {token} = useContext(AuthContext)
@@ -21,7 +21,9 @@ const AdvertisementAdministrationPage = () => {
         sendRequest(
             {body: body_shipownerAdvertisements, token},
             resData => setAdvertisements(
-                Object.values(aggregateBoatsWithRentals(resData.advertisementsByShipowner, resData.rentalsByShipowner))
+                Object.values(
+                    aggregateAdvertisementsWithRentals(resData.advertisementsByShipowner, resData.rentalsByShipowner)
+                )
             )
         )
     }, [sendRequest, token])

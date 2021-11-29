@@ -1,4 +1,5 @@
 /* ------------------------------ Callbacks Utils --------------------------------- */
+
 export const throttle = (callback, delay) => {
     let wait = false;
     return () => {
@@ -62,14 +63,28 @@ export const daysLate = (startDate, endDate, redeliveryDate) =>
 export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length);
 
 /* Nel caso di ritardo: per ogni giorno di ritardo maggiorazione del 100% */
-export const calculateTotal = (dailyFee, fixedFee, startDate, endDate, redeliveryDate) => {
-    return parseFloat(dailyFee) * rangeDate(startDate, endDate) + parseFloat(fixedFee) + daysLate(startDate, endDate, redeliveryDate) * (dailyFee * 2);
-}
+export const calculateTotal = (dailyFee, fixedFee, startDate, endDate, redeliveryDate) =>
+    parseFloat(dailyFee) * rangeDate(startDate, endDate) + parseFloat(fixedFee) + daysLate(startDate, endDate, redeliveryDate) * (dailyFee * 2);
+
 
 export const aggregateBoatsWithRentals = (boats, rentals) =>
     [...boats, ...rentals].reduce(
         (acc, item, i) => {
             if (i < boats.length) {
+                acc[item._id] = {...item, isRented: false}
+            } else {
+                if (new Date(item.from) <= new Date() && acc[item.boat._id])
+                    acc[item.boat._id].isRented = true
+            }
+            return acc
+        },
+        {}
+    )
+
+export const aggregateAdvertisementsWithRentals = (advertisements, rentals) =>
+    [...advertisements, ...rentals].reduce(
+        (acc, item, i) => {
+            if (i < advertisements.length) {
                 acc[item._id] = {...item, rentals: []}
             } else {
                 acc[item.boat._id] && acc[item.boat._id].rentals.push(item)
@@ -78,6 +93,7 @@ export const aggregateBoatsWithRentals = (boats, rentals) =>
         },
         {}
     )
+
 
 /* -------------------------------- Mutations Utils --------------------------------- */
 export const destructurePayload = resData => Object.values(resData[Object.keys(resData)]);

@@ -24,10 +24,11 @@ const AvailableBoats = ({userName, userBoats, onMutationUserBoat}) => {
                     userBoats.map((boat, id) =>
                         <Link
                             key={boat._id}
-                            to={`${boat._id}/boat`}
+                            to={!boat.isRented ? `${boat._id}/boat` : `${boat._id}/advertisement`}
                             className={classes["user-boat"]}>
                                 Barca {id + 1}
                             <button
+                                disabled={boat.isRented}
                                 data-boatid={boat._id}
                                 onClick={handleDeleteUserBoat}
                                 className={`btn ${classes.cross}`}>
