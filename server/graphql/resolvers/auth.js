@@ -121,7 +121,7 @@ module.exports = {
 
             const USER_DIR = getUserDir(req.userId);
             await promises.access(USER_DIR)
-                .then(() => promises.rmdir(USER_DIR, {recursive: true}))
+                .then(async () => await promises.rmdir(USER_DIR, {recursive: true}))
                 .catch(() => console.log("Can't find user dir"))
 
             return  { deletedUserId: req.userId }

@@ -19,7 +19,9 @@ const storeFile = async (upload, userId, resize = false) => {
     const USER_DIR = getUserDir(userId);
 
     await promises.access(USER_DIR)
-        .catch(() => promises.mkdir(USER_DIR, {recursive: true}))
+        .catch(async () => await promises.mkdir(USER_DIR, {recursive: true}).catch(
+            () => console.log(`Can't create user dir.`)
+        ))
 
     const path = `${USER_DIR}/${Date.now()}-${filename}`
 
