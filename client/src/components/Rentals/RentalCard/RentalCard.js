@@ -30,6 +30,7 @@ const RentalCard = ({
                         rentalFixedFee,
                         advertisementDailyFee,
                         advertisementFixedFee,
+                        redeliveryDate,
                         totalAmount,
                         review,
                         isReviewed
@@ -103,6 +104,7 @@ const RentalCard = ({
                     createdAt={createdAt}
                     dailyFee={rentalDailyFee}
                     fixedFee={rentalFixedFee}
+                    redeliveryDate={redeliveryDate}
                     totalAmount={totalAmount}
                 />
                 }

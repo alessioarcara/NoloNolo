@@ -43,6 +43,7 @@ const RentalsList = ({
                         future={future}
                         from={rental.from}
                         to={rental.to}
+                        redeliveryDate={rental.redelivery}
                         city={rental.boat.isDocked.city}
                         totalAmount={
                             calculateTotal(rental.dailyFee, rental.fixedFee, rental.from, rental.to, rental.redelivery)
