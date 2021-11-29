@@ -30,6 +30,11 @@ const AuthType = `
             updateUserProblem: String
         }
         
+        type deleteUserPayload {
+            deletedUserId: ID
+            deleteUserProblem: String
+        }
+        
         type changePasswordPayload {
             changePasswordData: User
             changePasswordProblem: String
