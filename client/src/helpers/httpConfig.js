@@ -575,29 +575,6 @@ exports.body_removeFavorite = (boatId) => {
         variables: boatId
     }
 };
-exports.body_userBoats = {
-    query: `
-        query {
-            boatsByUser {
-                _id
-                yard
-                model
-                length
-                maximumCapacity
-                boatType
-                isDocked {
-                    harbour
-                    city
-                    region
-                    coordinates
-                }
-            }
-            user {
-                email
-            }
-        }
-    `
-};
 exports.body_refresh = {
     query: `
         query {
@@ -632,6 +609,39 @@ exports.body_user = {
             }
         }
     `,
+};
+exports.body_deleteUser = {
+    query: `
+        mutation {
+            deleteUser {
+                deletedUserId
+                deleteUserProblem
+            }
+        }
+    `
+}
+exports.body_userBoats = {
+    query: `
+        query {
+            boatsByUser {
+                _id
+                yard
+                model
+                length
+                maximumCapacity
+                boatType
+                isDocked {
+                    harbour
+                    city
+                    region
+                    coordinates
+                }
+            }
+            user {
+                email
+            }
+        }
+    `
 };
 exports.body_rentals = {
     query: `

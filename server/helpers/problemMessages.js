@@ -17,6 +17,8 @@ const rentalNotYours = "You can write a review only on your rentals!";
 const rentalNotClosed = "You cannot write a review on what you have not returned";
 const rentalNotFinished = "You cannot close rental still not finished";
 const boatWithRentals = "You cannot edit or delete boat with active or previous rentals";
+const userWithRentals = "You cannot delete account if you have rented something in the past or you have booked up something";
+const userWithBoats = "You cannot delete account if you haven't removed all your boats";
 
 module.exports = {
     duplicateEmail,
@@ -37,5 +39,7 @@ module.exports = {
     rentalNotYours,
     rentalNotClosed,
     rentalNotFinished,
-    boatWithRentals
+    boatWithRentals,
+    userWithRentals,
+    userWithBoats
 };

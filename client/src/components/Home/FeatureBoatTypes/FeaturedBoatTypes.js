@@ -8,7 +8,7 @@ import InflatableBoatIcon from "../../UI/icons/BoatIcons/InflatableBoatIcon";
 const FeaturedBoatTypes = () => {
     return (
         <section>
-            <div className="subtitle">Scegli la tipologia di barca</div>
+            <div className="subtitle">Le barche prenotabili</div>
             <div className={classes['boat-grid']}>
                 <div className={classes.boat}>
                     <MotorBoatIcon/>

@@ -1,6 +1,6 @@
-const {createWriteStream, unlink, existsSync, promises} = require('fs');
+const {createWriteStream, unlink, promises} = require('fs');
 const sharp = require('sharp');
-const {isImage} = require("../../helpers/utils");
+const {isImage, getUserDir} = require("../../helpers/utils");
 const {notImage, userNotFound, noFileAttached} = require("../../helpers/problemMessages");
 const User = require("../../models/user");
 const {transformUser} = require("./merge");
@@ -16,11 +16,10 @@ const storeFile = async (upload, userId, resize = false) => {
     if (!isImage(mimetype)) return { problem: notImage }
 
     const stream = createReadStream();
-    const USER_DIR = `./public/images/${userId}`;
+    const USER_DIR = getUserDir(userId);
 
-    if (!existsSync(USER_DIR)) {
-        await promises.mkdir(USER_DIR, {recursive: true})
-    }
+    await promises.access(USER_DIR)
+        .catch(() => promises.mkdir(USER_DIR, {recursive: true}))
 
     const path = `${USER_DIR}/${Date.now()}-${filename}`
 

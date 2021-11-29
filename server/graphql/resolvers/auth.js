@@ -2,9 +2,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../../models/user');
-const {userNotFound, invalidPassword, duplicateEmail, samePassword} = require("../../helpers/problemMessages");
+const Rental = require('../../models/rental');
+const Boat = require('../../models/boat');
+
+const {promises} = require('fs');
+const {userNotFound, invalidPassword, duplicateEmail, samePassword, userWithRentals, userWithBoats} = require("../../helpers/problemMessages");
 const {transformUser} = require("./merge");
 const {authenticated} = require("../../auth/auth");
+const {getUserDir} = require("../../helpers/utils");
 
 const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
@@ -106,7 +111,20 @@ module.exports = {
     }),
     deleteUser: authenticated(async (_, {req}) => {
         try {
-            const user = await User.deleteOne({_id: req.userId})
+            const rentals = await Rental.find({customer: req.userId}).lean()
+            if (rentals) return {deleteUserProblem: userWithRentals}
+            const boats = await Boat.find({shipowner: req.userId}).lean()
+            if (boats) return {deleteUserProblem: userWithBoats}
+
+            const {deletedCount} = await User.deleteOne({_id: req.userId})
+            if (deletedCount === 0) return {deleteUserProblem: userNotFound}
+
+            const USER_DIR = getUserDir(req.userId);
+            await promises.access(USER_DIR)
+                .then(() => promises.rmdir(USER_DIR, {recursive: true}))
+                .catch(() => console.log("Can't find user dir"))
+
+            return  { deletedUserId: req.userId }
         } catch (err) { throw new Error(`Can't delete user. ${err}`)}
     }),
     refreshToken: async (_, {req, res}) => {

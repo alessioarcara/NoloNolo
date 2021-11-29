@@ -6,7 +6,7 @@ import LeftArrowIcon from "../../UI/icons/LeftArrowIcon";
 import RightArrowIcon from "../../UI/icons/RightArrowIcon";
 
 
-const places = ['Campania', 'Liguria', 'Sardegna', 'Sicilia', 'Toscana', 'Puglia']
+const places = ['Abruzzo', 'Campania', 'Emilia-Romagna', 'Liguria', 'Puglia', 'Sardegna', 'Sicilia', 'Toscana']
 
 const FeaturedPlaces = () => {
     const [start, setStart] = useState(0)

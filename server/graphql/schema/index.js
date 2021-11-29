@@ -38,6 +38,7 @@ const rootSchema = `
             login(inputUser: UserInput!): AuthenticationPayload!
             invalidateTokens: Boolean!
             updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
+            deleteUser: deleteUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
             addAvatar(upload: Upload!): addAvatarPayload!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
