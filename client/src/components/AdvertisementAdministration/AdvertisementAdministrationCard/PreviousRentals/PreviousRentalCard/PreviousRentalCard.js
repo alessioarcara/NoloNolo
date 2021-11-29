@@ -17,6 +17,7 @@ const PreviousRentalCard = ({
                                 fixedFee,
                                 totalAmount,
                                 customer,
+                                redeliveryDate,
                                 review}) => {
     const [bill, setBill] = useState(false)
     const handleBillModal = () => setBill(prevState => !prevState)
@@ -34,6 +35,7 @@ const PreviousRentalCard = ({
                         customer={customer.email}
                         dailyFee={dailyFee}
                         fixedFee={fixedFee}
+                        redeliveryDate={redeliveryDate}
                         totalAmount={totalAmount}
                     />
                 </Modal>

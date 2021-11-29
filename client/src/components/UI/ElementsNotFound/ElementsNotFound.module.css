@@ -1,7 +1,10 @@
 .not-found-container {
     border-radius: 1rem;
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
     margin: 2rem;
+}
+
+.box-shadow {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .container {

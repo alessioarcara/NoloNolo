@@ -13,6 +13,7 @@ const BillBody = ({
                       endDate,
                       dailyFee,
                       fixedFee,
+                      redeliveryDate,
                       totalAmount
                   }) => {
     return (
@@ -52,6 +53,13 @@ const BillBody = ({
                             ${formatDayMonthYearDate(endDate, {day: 'numeric', month: 'short'})}
                         `,
                         cost: formatNumber(dailyFee * rangeDate(startDate, endDate))
+                    },
+                    {
+                        description: `
+                            ${formatDayMonthYearDate(endDate, {day: 'numeric', month: 'short'})} -
+                            ${formatDayMonthYearDate(redeliveryDate, {day: 'numeric', month: 'short'})}
+                        `,
+                        cost: formatNumber(rangeDate(endDate, redeliveryDate) * dailyFee * 2)
                     }
                 ]}
             />

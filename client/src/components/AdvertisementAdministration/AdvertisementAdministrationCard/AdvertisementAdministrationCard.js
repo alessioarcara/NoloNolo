@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from "react";
 import classes from './AdvertisementAdministrationCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {averageReviews} from "../../../helpers/Utils/utils";
+import {averageReviews, formatDate, formatDayMonthYearDate} from "../../../helpers/Utils/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";
@@ -15,6 +15,7 @@ const AdvertisementAdministrationCard = ({
                               boatId,
                               model,
                               reviews,
+                              createdAt,
                               images,
                               rentals,
                               preferredBy,
@@ -100,7 +101,9 @@ const AdvertisementAdministrationCard = ({
                         </div>
 
                         {/* Announcement Creation Date */}
-                        <div>Creato il: <span className={classes.date}>1900</span></div>
+                        <div>Creato il: <span className={classes.date}>
+                                {formatDayMonthYearDate(createdAt, {month: 'short', year: 'numeric'})}</span>
+                        </div>
 
                         {/* Future Rentals */}
                         <div>Prenotazioni future: <span

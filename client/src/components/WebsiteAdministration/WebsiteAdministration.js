@@ -2,7 +2,7 @@ import classes from './WebsiteAdministration.module.css';
 import Header from "../UI/Header/Header";
 import AdministrationRentalList from "./AdministrationRentalList";
 
-const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals}) => {
+const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals, logout}) => {
     const exitButtonElement = <button className={`${classes['exit-btn']} btn btn-primary`}>Esci</button>
     const filteredFutureRentals = () => rentals.filter(rental => new Date(rental.from) > new Date())
 
@@ -12,6 +12,7 @@ const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals}) =
             <Header
                 textTitle="Amministrazione"
                 optionsElement={exitButtonElement}
+                handleOptionsElement={logout}
                 classNameHeader={classes['header-background']}
             />
 

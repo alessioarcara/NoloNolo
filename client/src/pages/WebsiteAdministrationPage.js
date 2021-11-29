@@ -8,7 +8,7 @@ import {parseMutationResponse} from "../helpers/Utils/utils";
 const WebsiteAdministrationPage = () => {
     const [rentals, setRentals] = useState([])
     const {sendRequest} = useHttp(true)
-    const {token} = useContext(AuthContext)
+    const {logout, token} = useContext(AuthContext)
 
     const handleMutationAdministrationRentals = useCallback((body, applyData) =>
             sendRequest({body, token}, parseMutationResponse(setRentals, applyData))
@@ -21,11 +21,14 @@ const WebsiteAdministrationPage = () => {
         }, resData => setRentals(resData.rentals))
     }, [sendRequest, token])
 
+    console.log(rentals)
+
     return (
         <>
             <WebsiteAdministration
                 rentals={rentals}
                 handleMutationAdministrationRentals={handleMutationAdministrationRentals}
+                logout={logout}
             />
         </>
     )
