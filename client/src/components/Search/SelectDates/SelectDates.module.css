@@ -46,7 +46,8 @@
 }
 
 .actions-top button {
-    width: 50%;
+    /*width: 50%;*/
+    width: fit-content;
 }
 
 .actions-bottom {

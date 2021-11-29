@@ -342,6 +342,17 @@ exports.body_backdateRental = ({rentalId, from, to}) => {
                 backdateRental(inputUpdateRental: $rentalData) {
                     backdateRentalData {
                         _id
+                        from
+                        to
+                        boat {
+                            _id
+                            isDocked {
+                                city
+                            }
+                        }
+                        customer {
+                            email
+                        }
                     }
                     backdateRentalProblem
                 }
@@ -664,6 +675,17 @@ exports.body_rentals = {
         query {
             rentals {
                 _id
+                from
+                to
+                boat {
+                    _id
+                    isDocked {
+                        city
+                    }
+                }
+                customer {
+                    email
+                }
             }
         }
     `

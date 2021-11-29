@@ -7,6 +7,7 @@ import {body_boatRentals, body_updateRental} from "../../../../helpers/httpConfi
 import AuthContext from "../../../../store/auth-context";
 import classes from './DatesModal.module.css';
 import {calculateTotal, formatDate, formatNumber, rangeDate} from "../../../../helpers/Utils/utils";
+import {addDays} from "date-fns";
 
 const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateRentalDates, onGoRentalsPage}) => {
     const {token} = useContext(AuthContext)
@@ -47,6 +48,7 @@ const DatesModal = ({boatId, rentalId, start, end, dailyFee, fixedFee, onUpdateR
     return (
         <>
             <SelectDates
+                minDate={addDays(new Date(), 1)}
                 startDate={state.startDate}
                 endDate={state.endDate}
                 moveClickHandler={onGoRentalsPage}

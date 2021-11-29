@@ -1,0 +1,50 @@
+/* Image Container */
+.administration-container {
+    background-image: url("../../assets/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Header */
+.header-background {
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(0.7rem);
+}
+
+.exit-btn {
+    background-color: #3f3f3f;
+    border-color: #3f3f3f;
+    color: #fff;
+}
+
+.exit-btn:hover {
+    background-color: #3f3f3f;
+    border-color: #3f3f3f;
+    color: #FF2267;
+}
+
+/* Administration Card */
+.administration-card {
+    background-color: #fff;
+    width: 70vw;
+    height: 60vh;
+    border-radius: 1rem;
+    margin: 10vh auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+    overflow: scroll;
+}
+
+@media only screen and (max-width: 768px) {
+    .exit-btn {
+        font-size: 0.8em;
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    .administration-card {
+        width: 50vw;
+    }
+}

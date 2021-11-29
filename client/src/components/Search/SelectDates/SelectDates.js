@@ -4,6 +4,7 @@ import DayPicker from "../../UI/DatePicker/DayPicker";
 import classes from "./SelectDates.module.css";
 
 const SelectDates = ({
+                         minDate,
                          moveClickHandler,
                          changeStartDateHandler,
                          changeEndDateHandler,
@@ -40,6 +41,7 @@ const SelectDates = ({
             </div>
             <div className={classes[`day-picker`]}>
                 <DayPicker
+                    minDate={minDate}
                     start={startDate}
                     end={endDate}
                     monthsShown={2}

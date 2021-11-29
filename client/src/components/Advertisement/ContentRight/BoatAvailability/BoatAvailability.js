@@ -4,6 +4,7 @@ import classes from "./BoatAvailability.module.css";
 import Button from "../../../UI/Button/Button";
 import {rangeDate} from "../../../../helpers/Utils/utils";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES} from "../../../../helpers/Utils/constants";
+import {addDays} from "date-fns";
 
 const BoatAvailability = ({
                               startDate,
@@ -31,6 +32,7 @@ const BoatAvailability = ({
             </div>
             <div className={classes.datepicker}>
                 <DayPicker
+                    minDate={addDays(new Date(), 1)}
                     start={startDate}
                     end={endDate}
                     onChangeStartDate={changeStartDateHandler}
