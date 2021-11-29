@@ -5,6 +5,7 @@ import {formatDate} from "../../helpers/Utils/utils";
 import {useNavigate} from "react-router-dom";
 import searchReducer, {initialState} from "../../reducers/searchReducer";
 import {CHANGE_END_DATE, CHANGE_START_DATE, CLEAR_DATES, SWITCH_SEARCH} from "../../helpers/Utils/constants";
+import {addDays} from "date-fns";
 
 
 const Search = ({closeModalHandler}) => {
@@ -35,6 +36,7 @@ const Search = ({closeModalHandler}) => {
         <>
             {!state.isNextPage && <SelectPlaces closeModalHandler={closeModalHandler} moveClickHandler={moveClickHandler}/>}
             {state.isNextPage && <SelectDates
+                minDate={addDays(new Date(), 1)}
                 startDate={state.startDate}
                 endDate={state.endDate}
                 changeStartDateHandler={changeStartDateHandler}

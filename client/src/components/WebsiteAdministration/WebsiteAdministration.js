@@ -1,8 +1,10 @@
 import classes from './WebsiteAdministration.module.css';
 import Header from "../UI/Header/Header";
+import AdministrationRentalList from "./AdministrationRentalList";
 
-const WebsiteAdministration = () => {
+const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals}) => {
     const exitButtonElement = <button className={`${classes['exit-btn']} btn btn-primary`}>Esci</button>
+    const filteredFutureRentals = () => rentals.filter(rental => new Date(rental.from) > new Date())
 
     return (
         <div className={classes['administration-container']}>
@@ -15,7 +17,11 @@ const WebsiteAdministration = () => {
 
             {/* Administation Rentals Card */}
             <div className={classes['administration-card']}>
-
+                <Header textTitle="Noleggi futuri"/>
+                <AdministrationRentalList
+                    rentals={filteredFutureRentals()}
+                    handleMutationAdministrationRentals={handleMutationAdministrationRentals}
+                />
             </div>
         </div>
     )

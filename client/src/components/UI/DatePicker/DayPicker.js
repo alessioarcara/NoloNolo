@@ -10,7 +10,7 @@ import {addDays} from "date-fns";
 
 registerLocale('it', it);
 
-const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown, alreadyRentedDates}) => {
+const DayPicker = ({minDate, start, end, onChangeStartDate, onChangeEndDate, monthsShown, alreadyRentedDates}) => {
     const handleDateChange = (dates) => {
         const [start, end] = dates
         onChangeStartDate(start)
@@ -37,7 +37,7 @@ const DayPicker = ({start, end, onChangeStartDate, onChangeEndDate, monthsShown,
         <DatePicker
             locale="it"
             wrapperClassName={"input-container"}
-            minDate={addDays(new Date(), 1)}
+            minDate={minDate && minDate}
             selected={start}
             startDate={start}
             endDate={end}

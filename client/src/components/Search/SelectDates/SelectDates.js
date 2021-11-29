@@ -2,8 +2,10 @@ import ActionButtons from "../../UI/ActionButtons/ActionButtons";
 import BackIcon from "../../UI/icons/BackIcon";
 import DayPicker from "../../UI/DatePicker/DayPicker";
 import classes from "./SelectDates.module.css";
+import {addDays} from "date-fns";
 
 const SelectDates = ({
+                         minDate,
                          moveClickHandler,
                          changeStartDateHandler,
                          changeEndDateHandler,
@@ -40,6 +42,7 @@ const SelectDates = ({
             </div>
             <div className={classes[`day-picker`]}>
                 <DayPicker
+                    minDate={minDate}
                     start={startDate}
                     end={endDate}
                     monthsShown={2}
