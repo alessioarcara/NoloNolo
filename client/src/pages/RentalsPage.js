@@ -18,7 +18,7 @@ const filterRentals = rentals => {
                 return previousRentals
             }, []) : [],
         active: rentals ?
-            rentals.filter(rental => new Date(rental.from) <= new Date() && new Date() <= new Date(rental.to)) : [],
+            rentals.filter(rental => new Date(rental.from) <= new Date() && !rental.redelivery) : [],
         future: rentals ?
             rentals.filter(rental => new Date(rental.from) > new Date()) : []
     }

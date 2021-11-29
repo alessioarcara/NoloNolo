@@ -104,7 +104,7 @@ module.exports = {
             )
 
             return rental ?
-                {rentBoatData: transformRental({...rental._doc, boat: rental.boat._id})} :
+                {rentBoatData: transformRental(rental._doc)} :
                 { rentBoatProblem: problem }
         } catch (err) { throw new Error(`Can't rent boat. ${err}`) }
     }),
@@ -170,7 +170,7 @@ module.exports = {
             rental.redeliveryDate = new Date().setUTCHours(0,0,0)
             await rental.save()
 
-            return { recordBoatReturnData: transformRental(rental) }
+            return { recordBoatReturnData: transformRental(rental._doc) }
         } catch (err) { throw new Error(`Can't close rental.`)}
     })),
     deleteRental: authenticated(async ({rentalId}, {req}) => {
