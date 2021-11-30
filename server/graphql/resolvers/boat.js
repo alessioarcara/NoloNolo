@@ -30,14 +30,13 @@ module.exports = {
     addBoat: authenticated(async (args, {req}) => {
         try {
             const {yard, model, length, maximumCapacity, boatType} = args.inputBoat
+            let _id = args.inputBoat._id;
 
-            let _id;
-            if (typeof args.inputBoat._id !== "undefined") {
-                _id = args.inputBoat._id
-                const isValidBoat = validateBoat(_id)
-                if (isValidBoat) return {addBoatProblem: isValidBoat}
-            } else {
+            if (typeof _id === "undefined") {
                 _id = new mongoose.Types.ObjectId()
+            } else {
+                const isValidBoat = await validateBoat(_id)
+                if (isValidBoat) return {addBoatProblem: isValidBoat}
             }
 
             const boat = await Boat.findOneAndUpdate(
@@ -63,7 +62,7 @@ module.exports = {
     }),
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
-            const isValidBoat = validateBoat(boatId)
+            const isValidBoat = await validateBoat(boatId)
             if (isValidBoat) return {removeBoatProblem: isValidBoat}
 
             const {deletedCount} = await Boat.deleteOne(
@@ -81,7 +80,7 @@ module.exports = {
         try {
             const {boatId, isDocked} = args.inputInsertBoatLocation
 
-            const isValidBoat = validateBoat(boatId)
+            const isValidBoat = await validateBoat(boatId)
             if (isValidBoat) return {insertBoatLocationProblem: isValidBoat}
 
             const boat = await Boat.findOneAndUpdate(

@@ -22,10 +22,10 @@ const FavoritesPage = () => {
     }
 
     return (
-        <div>
+        <>
             <Header textTitle={"I miei preferiti"}/>
             {content}
-        </div>
+        </>
     )
 }
 

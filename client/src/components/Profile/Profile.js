@@ -3,7 +3,7 @@ import classes from "./Profile.module.css"
 
 const Profile = ({children, auth}) => {
     return (
-        <>
+        <div style={{position: "relative", minHeight: "90vh"}}>
             <h1 className="title">Profilo</h1>
             <section className="centered">
                 <div className={classes.container}>
@@ -13,7 +13,7 @@ const Profile = ({children, auth}) => {
                     <Button className={classes.logout} onClick={auth.logout} type="button">Esci</Button>
                 </div>
             </section>
-        </>
+        </div>
     )
 }
 

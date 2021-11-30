@@ -65,7 +65,7 @@ const NewAdvertisementPage = () => {
             {/*{status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}*/}
             {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
             <Routes>
-                <Route path={'/*'} element={
+                <Route index element={
                     <AvailableBoats
                         userName={user ? user.email : 'utente'}
                         userBoats={userBoats}

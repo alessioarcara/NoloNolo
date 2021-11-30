@@ -1,10 +1,10 @@
+import React from "react";
 import classes from "./Footer.module.css";
-import PencilIcon from "../UI/icons/PencilIcon";
+import PencilIcon from "../icons/PencilIcon";
 
-const Footer = () => {
+const Footer = React.forwardRef((props, ref) => {
     return (
-        <>
-            <div className={classes.footer}>
+            <div className={classes.footer} ref={ref}>
                 <PencilIcon/>
                 <div className={classes['grid-footer']}>
                     <div>Arcara Alessio</div>
@@ -12,8 +12,7 @@ const Footer = () => {
                     <div>Crimaldi Alessia</div>
                 </div>
             </div>
-        </>
     );
-};
+});
 
 export default Footer;

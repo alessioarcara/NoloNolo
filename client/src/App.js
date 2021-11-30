@@ -22,9 +22,9 @@ function App() {
     return (
         <Routes>
             <Route element={<NavigationLayout authenticated={isLoggedIn}/>}>
-                <Route path='/*' element={<Home/>}/>
-                <Route path='favorites' element={<FavoritesPage/>}/>
+                <Route path='/' element={<Home/>}/>
                 {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}
+                <Route path='favorites' element={<RequireAuth><FavoritesPage/></RequireAuth>}/>
                 <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
             </Route>
             <Route path='boats/*' element={<ResultsPage/>}/>

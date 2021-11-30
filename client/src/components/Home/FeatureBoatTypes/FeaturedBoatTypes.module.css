@@ -13,18 +13,7 @@
 
 .boat {
     font-size: 1em;
-    cursor: pointer;
     align-self: center;
-}
-
-.boat:hover {
-    color: black;
-}
-
-.boat:hover svg path,
-.boat:active svg path,
-.boat:hover svg line {
-    fill: black
 }
 
 @media only screen and (max-width: 768px) {
