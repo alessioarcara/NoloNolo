@@ -8,6 +8,7 @@ import Modal from "../components/UI/Modal/Modal";
 import {parseMutationResponse} from "../helpers/Utils/utils";
 import Header from "../components/UI/Header/Header";
 import BackIcon from "../components/UI/icons/BackIcon";
+import UserAccountDelete from "../components/UserDetails/UserAccountDelete/UserAccountDelete";
 
 const UserDetailsPage = () => {
     const {token} = useContext(AuthContext)
@@ -38,6 +39,7 @@ const UserDetailsPage = () => {
                 user={user}
                 sendInfo={sendData}
             />
+            <UserAccountDelete/>
         </>
     );
 };

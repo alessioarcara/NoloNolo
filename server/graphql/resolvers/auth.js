@@ -112,16 +112,16 @@ module.exports = {
     deleteUser: authenticated(async (_, {req}) => {
         try {
             const rentals = await Rental.find({customer: req.userId}).lean()
-            if (rentals) return {deleteUserProblem: userWithRentals}
+            if (rentals.length > 0) return {deleteUserProblem: userWithRentals}
             const boats = await Boat.find({shipowner: req.userId}).lean()
-            if (boats) return {deleteUserProblem: userWithBoats}
+            if (boats.length > 0) return {deleteUserProblem: userWithBoats}
 
             const {deletedCount} = await User.deleteOne({_id: req.userId})
             if (deletedCount === 0) return {deleteUserProblem: userNotFound}
 
             const USER_DIR = getUserDir(req.userId);
             await promises.access(USER_DIR)
-                .then(async () => await promises.rmdir(USER_DIR, {recursive: true}))
+                .then(async () => await promises.rm(USER_DIR, {recursive: true}))
                 .catch(() => console.log("Can't find user dir"))
 
             return { deletedUserId: req.userId }
