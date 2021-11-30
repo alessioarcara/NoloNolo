@@ -1,26 +1,26 @@
 import React, {useContext, useEffect} from "react";
 import AuthContext from "../store/auth-context";
 import useHttp from "../hooks/use-http";
-import LoadingSpinner from "../components/UI/LoadingSpinner/LoadingSpinner";
 import {body_user} from "../helpers/httpConfig";
 import ProfileShipowner from "../components/Profile/ProfileShipowner";
 import ProfileCustomer from "../components/Profile/ProfileCustomer";
 import Profile from "../components/Profile/Profile";
 import {Navigate, useNavigationType} from "react-router-dom";
-
+import {parseQueryResponse} from "../helpers/Utils/utils";
+import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
+import {ProfilePlaceholder} from "../components/Profile/ProfilePlaceholder/ProfilePlaceholder";
 
 const ProfilePage = () => {
     const navigationType = useNavigationType()
-    const authCtx = useContext(AuthContext)
+    const {token, logout} = useContext(AuthContext)
 
     const {status, error, data: user, sendRequest: fetchUser} = useHttp(true)
 
-    useEffect(() => {
-        const transformData = resData => resData.user
-        fetchUser({body: body_user, token: authCtx.token}, transformData)
-    }, [fetchUser, authCtx.token])
+    useEffect(() =>
+            fetchUser({body: body_user, token}, parseQueryResponse),
+        [fetchUser, token])
 
-    let content = <LoadingSpinner/>
+    let content;
 
     if (status === "completed" && user && user.userType === "customer")
         content = <ProfileCustomer/>
@@ -34,15 +34,24 @@ const ProfilePage = () => {
         )
 
     if (status === "completed" && user && user.userType === "admin")
-        content = navigationType === "PUSH" ? <Navigate to="/administration"/> : <Navigate to="/"/>
+        content = navigationType === "PUSH" ?
+            <Navigate to="/administration"/> :
+            <Navigate to="/"/>
 
     if (status === "completed" && error)
         content = <p>User not found.</p>
 
     return (
-        <Profile auth={authCtx}>
-            {content}
-        </Profile>
+        <LetSuspense
+            condition={status === 'completed'}
+            placeholder={ProfilePlaceholder}
+            initialDelay={400}
+            multiplier={1}
+        >
+            <Profile logout={logout}>
+                {content}
+            </Profile>
+        </LetSuspense>
     );
 };
 

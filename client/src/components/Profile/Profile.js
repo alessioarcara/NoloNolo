@@ -1,16 +1,16 @@
 import Button from "../UI/Button/Button";
 import classes from "./Profile.module.css"
 
-const Profile = ({children, auth}) => {
+const Profile = ({children, logout}) => {
     return (
-        <div style={{position: "relative", minHeight: "90vh"}}>
+        <div>
             <h1 className="title">Profilo</h1>
-            <section className="centered">
-                <div className={classes.container}>
+            <section className={classes.centered}>
+                <div className={classes["profile-options"]}>
                     {children}
                 </div>
                 <div className={classes.action}>
-                    <Button className={classes.logout} onClick={auth.logout} type="button">Esci</Button>
+                    <Button onClick={logout} type="button">Esci</Button>
                 </div>
             </section>
         </div>

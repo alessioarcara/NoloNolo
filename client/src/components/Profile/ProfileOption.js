@@ -2,22 +2,22 @@ import {Link} from "react-router-dom";
 import classes from "./ProfileOption.module.css"
 import RightArrowIcon from "../UI/icons/RightArrowIcon";
 
-const ProfileOption = props => {
-
+const ProfileOption = ({link, icon, title, content}) => {
     return (
-        <div className={classes.option}>
-            <Link
-                className={classes.singleop}
-                to={props.link}
-            >
-                {props.icon}
-                <h4>{props.title}</h4>
-                <p>{props.content}</p>
+        <Link
+            to={link}
+            className={classes.option}>
+                {icon}
+                <h4 className={classes.title}>
+                    {title}
+                </h4>
+                <div className={classes.text}>
+                    {content}
+                </div>
                 <div className={classes.arrow}>
                     <RightArrowIcon/>
                 </div>
-            </Link>
-        </div>
+        </Link>
     )
 }
 

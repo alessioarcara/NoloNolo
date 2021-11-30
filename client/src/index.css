@@ -44,15 +44,6 @@ hr {
   letter-spacing: 2px;
 }
 
-/* PROVVISORIO */
-.centered {
-  padding-top: 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* Bottone primario */
 .btn {
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;

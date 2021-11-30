@@ -1,26 +1,29 @@
-.container {
+.centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-options {
     display: grid;
     gap: 0.5rem;
     margin: 1rem 1rem 0 1rem;
 }
 
-.action {
-    border-radius: 13px;
-}
-
 .action button {
-    background-color: #3f3f3f;
-    border: 1px solid #3f3f3f;
-    text-align: center;
-    color: white;
-    width: fit-content;
-    font-size: 1.2em;
+    background-color: white;
+    border: 2px solid rgba(9, 30, 66, 0.2);
+    color: #ff4f38;
+    font-size: 1.1em;
+    border-radius: 2rem;
 }
 
 .action button:hover {
-    border: 1px solid #3f3f3f;
-    background-color: #3f3f3f;
-    color: #ff4d00;
+    border: 2px solid #ff4f38;
+    background-color: #ff4f38;
+    color: white;
 }
 
 
@@ -51,8 +54,8 @@
         margin: 3rem 0 5rem 0;
     }
 
-    .container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-}
+/*    .container {*/
+/*        grid-template-columns: repeat(2, 1fr);*/
+/*        gap: 1rem;*/
+/*    }*/
+/*}*/
