@@ -1,7 +1,7 @@
 import React, {useCallback, useMemo, useState} from "react";
 import classes from './AdvertisementAdministrationCard.module.css';
 import SlideShow from "../../UI/SlideShow/SlideShow";
-import {averageReviews, formatDate, formatDayMonthYearDate} from "../../../helpers/Utils/utils";
+import {averageReviews, formatDayMonthYearDate} from "../../../helpers/Utils/utils";
 import Modal from "../../UI/Modal/Modal";
 import StarIcon from "../../UI/icons/StarIcon";
 import HourglassIcon from "../../UI/icons/HourglassIcon";

@@ -84,7 +84,12 @@ module.exports = {
             const from = startOfDay(args.inputRentBoat.from)
             const to = startOfDay(args.inputRentBoat.to)
 
-            const boat = await Boat.findOne({_id: boatId}).lean()
+            const boat = await Boat.findOne({
+                $and: [
+                    {_id: boatId},
+                    {"advertisement": {$exists: true}}
+                ]
+            }).lean()
             if (!boat) return { rentBoatProblem: boatNotFound }
             if (boat.shipowner.equals(req.userId)) return { rentBoatProblem: itsYourBoat }
 

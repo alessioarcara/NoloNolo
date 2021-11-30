@@ -60,8 +60,6 @@ const NewAdvertisementPage = () => {
         </>
     )
 
-    console.log(error)
-
     return (
         <>
             {/*{status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}*/}

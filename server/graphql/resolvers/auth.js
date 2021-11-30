@@ -124,7 +124,7 @@ module.exports = {
                 .then(async () => await promises.rmdir(USER_DIR, {recursive: true}))
                 .catch(() => console.log("Can't find user dir"))
 
-            return  { deletedUserId: req.userId }
+            return { deletedUserId: req.userId }
         } catch (err) { throw new Error(`Can't delete user. ${err}`)}
     }),
     refreshToken: async (_, {req, res}) => {

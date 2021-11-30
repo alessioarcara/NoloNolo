@@ -7,8 +7,7 @@ const {authenticated} = require("../../auth/auth");
 
 const validateBoat = async (boatId) => {
     const rentals = await Rental.find({boat: boatId}).lean()
-    if (rentals.length > 0)
-        return boatWithRentals
+    if (rentals.length > 0) return boatWithRentals
 }
 
 module.exports = {
@@ -31,7 +30,16 @@ module.exports = {
     addBoat: authenticated(async (args, {req}) => {
         try {
             const {yard, model, length, maximumCapacity, boatType} = args.inputBoat
-            const _id = typeof args.inputBoat._id === "undefined" ? new mongoose.Types.ObjectId() : args.inputBoat._id
+
+            let _id;
+            if (typeof args.inputBoat._id !== "undefined") {
+                _id = args.inputBoat._id
+                const isValidBoat = validateBoat(_id)
+                if (isValidBoat) return {addBoatProblem: isValidBoat}
+            } else {
+                _id = new mongoose.Types.ObjectId()
+            }
+            // const _id = typeof args.inputBoat._id === "undefined" ? new mongoose.Types.ObjectId() : args.inputBoat._id
 
             const boat = await Boat.findOneAndUpdate(
                 {_id},
@@ -56,8 +64,8 @@ module.exports = {
     }),
     removeBoat: authenticated(async ({boatId}, {req}) => {
         try {
-            const isValideBoat = validateBoat(boatId)
-            // if (isValideBoat) return {removeBoatProblem: isValideBoat}
+            const isValidBoat = validateBoat(boatId)
+            if (isValidBoat) return {removeBoatProblem: isValidBoat}
 
             const {deletedCount} = await Boat.deleteOne(
                 {
@@ -73,6 +81,10 @@ module.exports = {
     insertBoatLocation: authenticated(async (args, {req}) => {
         try {
             const {boatId, isDocked} = args.inputInsertBoatLocation
+
+            const isValidBoat = validateBoat(boatId)
+            if (isValidBoat) return {insertBoatLocationProblem: isValidBoat}
+
             const boat = await Boat.findOneAndUpdate(
                 {
                     $and: [

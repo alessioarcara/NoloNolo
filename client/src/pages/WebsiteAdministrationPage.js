@@ -21,8 +21,6 @@ const WebsiteAdministrationPage = () => {
         }, resData => setRentals(resData.rentals))
     }, [sendRequest, token])
 
-    console.log(rentals)
-
     return (
         <>
             <WebsiteAdministration

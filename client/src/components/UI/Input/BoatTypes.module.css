@@ -17,7 +17,7 @@ input[type="radio"]{
 }
 
 .boatTypes label {
-    border: 1px solid rgba(0, 0, 0, 0.5);
+    border: 2px solid #ccc;
     display: flex;
     border-radius: 2rem;
     cursor: pointer;
@@ -30,7 +30,15 @@ input[type="radio"]{
     width: 5rem;
 }
 
-.boatTypes label svg path {
-    fill: rgba(0, 0, 0, 0.5);
+.boatTypes label:hover {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.boatTypes label svg path, .boatTypes label svg line {
+    fill: rgba(0, 0, 0, 0.4);
     transition: all 0.325s ease;
+}
+
+.boatTypes label svg path:hover, .boatTypes label svg line:hover {
+    stroke: rgb(0,0,0);
 }

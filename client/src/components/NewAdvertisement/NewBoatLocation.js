@@ -7,15 +7,12 @@ import useForm from "../../hooks/use-form";
 import {boatLocationForm} from "../../helpers/formConfig";
 import {body_insertBoatLocation} from "../../helpers/httpConfig";
 import useGeocode from "../../hooks/use-geocode";
-import {Navigate} from "react-router-dom";
 
 const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     const {formValues, renderFormInputs} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )
     const {coordinates} = useGeocode(formValues[2], formValues[1])
-
-    console.log(boat)
 
     const handleInsertBoatLocation = evt => {
         evt.preventDefault()
@@ -48,8 +45,6 @@ const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     )
 
     return (
-        boat.isRented ?
-            <Navigate to="../../"/> :
             <SplitScreenLayout
                 contentLeft={title}
                 rightLayoutContentClassName={classes.map}

@@ -13,9 +13,6 @@ const NewAdvertisementFooter = ({stepPosition}) => {
     const goBackHandler = () => {
         navigate(-1)
     }
-    // const goForwardHandler = () => {
-    //     navigate(`../${steps[stepPosition].toLowerCase()}`)
-    // }
 
     return (
         <div className={classes["newAdvertisement-footer"]}>
