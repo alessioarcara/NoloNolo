@@ -5,15 +5,23 @@ import Modal from "../../UI/Modal/Modal";
 import React, {useContext, useState} from "react";
 import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
 import AuthContext from "../../../store/auth-context";
+import {destructurePayload} from "../../../helpers/Utils/utils";
 
 const UserAccountDelete = () => {
-    const {token} = useContext(AuthContext)
-    const {data, status, sendRequest} = useHttp(true)
+    const {token, logout} = useContext(AuthContext)
+    const {status, data: problem, error, sendRequest} = useHttp(true)
     const [modal, setModal] = useState(false)
 
     const handleDeleteAccount = () => {
-        handleMutationModal()
-        sendRequest({body: body_deleteUser, token}, resData => resData.deleteUser)
+        sendRequest({body: body_deleteUser, token}, resData => {
+            const payload = destructurePayload(resData)
+            if (payload[0])
+                logout()
+            else {
+                handleMutationModal()
+                return payload[1]
+            }
+        })
     }
 
     const handleMutationModal = () => {
@@ -22,9 +30,8 @@ const UserAccountDelete = () => {
 
     return (
         <>
-            {status === 'completed' && data && data.deleteUserProblem &&
-                <Modal title="Errore">{data.deleteUserProblem}</Modal>
-            }
+            {status === 'completed' && error && <Modal title="Errore">{error}</Modal>}
+            {status === 'completed' && problem && <Modal title="Errore">{problem}</Modal>}
             {modal &&
                 <Modal closeModalHandler={handleMutationModal}>
                     <ConfirmSection
@@ -41,7 +48,7 @@ const UserAccountDelete = () => {
                     className={classes['delete-btn']}
                     onClick={handleMutationModal}
                 >
-                    Procedi ora!
+                    Procedi ora
                 </button>
             </div>
         </>
