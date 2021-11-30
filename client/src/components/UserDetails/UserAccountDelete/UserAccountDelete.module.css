@@ -6,11 +6,12 @@
 }
 
 .warning-text {
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: #8d8989;
 }
 
 .delete-btn {
+    font-size: 0.8em;
     border: 0;
     background-color: #fff;
     color: #FF2267;
@@ -22,4 +23,10 @@
 
 .delete-btn:hover {
     color: black;
+}
+
+@media only screen and (max-width: 768px) {
+    .delete-account-container {
+        margin-top: 5rem;
+    }
 }
