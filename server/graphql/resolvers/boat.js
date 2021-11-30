@@ -39,7 +39,6 @@ module.exports = {
             } else {
                 _id = new mongoose.Types.ObjectId()
             }
-            // const _id = typeof args.inputBoat._id === "undefined" ? new mongoose.Types.ObjectId() : args.inputBoat._id
 
             const boat = await Boat.findOneAndUpdate(
                 {_id},
