@@ -28,12 +28,12 @@ nav ul {
 
 .show {
     bottom: 0;
-    transition: 0.2s;
+    transition: all 0.325s ease;
 }
 
 .hide {
     bottom: -4rem;
-    transition: 0.2s;
+    transition: all 0.325s ease;
 }
 
 .item {
