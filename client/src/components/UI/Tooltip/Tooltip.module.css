@@ -1,0 +1,26 @@
+.tooltip-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 200px;
+    margin-left: -100px;
+    left: 50%;
+    bottom: calc(100% + 0.3rem);
+    pointer-events: none;
+}
+
+.tooltip-container {
+    background-color: #3f3f3f;
+    color: #fff;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.9em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
