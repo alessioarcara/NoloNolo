@@ -1,41 +1,44 @@
-import AuthPage from "./pages/AuthPage";
-import Home from "./pages/Home";
-import {useContext} from "react";
+import React, {useContext, Suspense} from "react";
 import AuthContext from "./store/auth-context";
-import ProfilePage from "./pages/ProfilePage";
-import RentalsPage from "./pages/RentalsPage";
-import FavoritesPage from "./pages/FavoritesPage";
-import NewAdvertisementPage from "./pages/NewAdvertisementPage";
-import AdvertisementPage from "./pages/AdvertisementPage";
 import {Routes, Route, Navigate} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
-import UserDetailsPage from "./pages/UserDetailsPage";
-import ResultsPage from "./pages/ResultsPage";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
-import AdvertisementAdministrationPage from "./pages/AdvertisementAdministrationPage";
-import WebsiteAdministrationPage from "./pages/WebsiteAdministrationPage";
 
+const Home = React.lazy(() => import('./pages/Home'));
+const Favorites = React.lazy(() => import('./pages/FavoritesPage'));
+const Auth = React.lazy(() => import('./pages/AuthPage'))
+const Profile = React.lazy(() => import('./pages/ProfilePage'));
+const Results = React.lazy(() => import('./pages/ResultsPage'));
+const Advertisement = React.lazy(() => import('./pages/AdvertisementPage'));
+const UserDetails = React.lazy(() => import('./pages/UserDetailsPage'));
+const Rentals = React.lazy(() => import('./pages/RentalsPage'));
+const NewAdvertisement = React.lazy(() => import('./pages/NewAdvertisementPage'));
+const AdvertisementAdministration = React.lazy(() => import('./pages/AdvertisementAdministrationPage'));
+const WebsiteAdministration = React.lazy(() => import('./pages/WebsiteAdministrationPage'));
 
 function App() {
     const {isLoggedIn} = useContext(AuthContext)
 
     return (
-        <Routes>
-            <Route element={<NavigationLayout authenticated={isLoggedIn}/>}>
-                <Route path='/' element={<Home/>}/>
-                {!isLoggedIn && <Route path='auth' element={<AuthPage/>}/>}
-                <Route path='favorites' element={<RequireAuth><FavoritesPage/></RequireAuth>}/>
-                <Route path='profile' element={<RequireAuth><ProfilePage/></RequireAuth>}/>
-            </Route>
-            <Route path='boats/*' element={<ResultsPage/>}/>
-            <Route path='boats/:boatId' element={<AdvertisementPage/>}/>
-            <Route path='profile/user-info' element={<RequireAuth><UserDetailsPage/></RequireAuth>}/>
-            <Route path='profile/rentals/*' element={<RequireAuth><RentalsPage/></RequireAuth>}/>
-            <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisementPage/></RequireAuth>}/>
-            <Route path='profile/your-advertisements' element={<RequireAuth><AdvertisementAdministrationPage/></RequireAuth>}/>
-            <Route path='administration' element={<RequireAuth><WebsiteAdministrationPage/></RequireAuth>}/>
-            <Route path='*' element={<Navigate replace to="/"/>}/>
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+                <Route element={<NavigationLayout authenticated={isLoggedIn}/>}>
+                    <Route path='/' element={<Home/>}/>
+                    {!isLoggedIn && <Route path='auth' element={<Auth/>}/>}
+                    <Route path='favorites' element={<RequireAuth><Favorites/></RequireAuth>}/>
+                    <Route path='profile' element={<RequireAuth><Profile/></RequireAuth>}/>
+                </Route>
+                <Route path='boats/*' element={<Results/>}/>
+                <Route path='boats/:boatId' element={<Advertisement/>}/>
+                <Route path='profile/user-info' element={<RequireAuth><UserDetails/></RequireAuth>}/>
+                <Route path='profile/rentals/*' element={<RequireAuth><Rentals/></RequireAuth>}/>
+                <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisement/></RequireAuth>}/>
+                <Route path='profile/your-advertisements'
+                       element={<RequireAuth><AdvertisementAdministration/></RequireAuth>}/>
+                <Route path='administration' element={<RequireAuth><WebsiteAdministration/></RequireAuth>}/>
+                <Route path='*' element={<Navigate replace to="/"/>}/>
+            </Routes>
+        </Suspense>
     )
 }
 
