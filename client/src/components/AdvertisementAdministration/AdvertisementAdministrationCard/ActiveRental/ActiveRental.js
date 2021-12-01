@@ -60,7 +60,7 @@ const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
                     <Tooltip text="Chiudi noleggio attivo">
                         <button
                             className={`${classes['close-btn']} btn btn-primary`}
-                            disabled={true}
+                            disabled={rangeDate(new Date(), activeRental.to) > 0}
                             title="Chiudi noleggio al termine"
                             onClick={handleRecordBoatReturn}
                         >
