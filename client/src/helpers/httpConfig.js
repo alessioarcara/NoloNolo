@@ -377,6 +377,8 @@ exports.body_recordBoatReturn = (rentalId) => {
                         redelivery
                         boat {
                             _id
+                            model
+                            yard
                             owner {
                                 email
                             }
