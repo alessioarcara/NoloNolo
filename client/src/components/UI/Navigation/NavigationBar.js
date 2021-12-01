@@ -40,7 +40,7 @@ const NavigationBar = forwardRef(({authenticated, isIntersecting}, navigationRef
                 <li>
                     <NavLink to='profile' className={navData => navData.isActive ? `${classes.active} ${classes.item}` : `${classes.item}`}>
                         <UserIcon/>
-                        {authenticated ? <div>Profilo</div> : <div>Accedi</div>}
+                        {authenticated ? <div>Account</div> : <div>Accedi</div>}
                     </NavLink>
                 </li>
             </ul>
