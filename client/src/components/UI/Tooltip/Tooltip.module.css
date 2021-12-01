@@ -1,5 +1,5 @@
 .tooltip-wrapper {
-    display: inline-flex;
+    display: flex;
     position: relative;
 }
 
@@ -11,29 +11,16 @@
     width: 200px;
     margin-left: -100px;
     left: 50%;
-    bottom: calc(100% + 5px);
+    bottom: calc(100% + 0.3rem);
     pointer-events: none;
 }
 
 .tooltip-container {
-    position: relative;
-    background-color: #000;
+    background-color: #3f3f3f;
     color: #fff;
     text-align: center;
     border-radius: 0.5rem;
-    padding: 0.8rem 0.5rem;
+    padding: 0.7rem 0.5rem;
     font-size: 0.9em;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
-
-/*.tooltip-container::after {*/
-/*    content: "";*/
-/*    position: absolute;*/
-/*    width: 1px;*/
-/*    height: 1px;*/
-/*    border-width: 5px;*/
-/*    border-style: solid;*/
-/*    border-color: #000 transparent transparent transparent;*/
-/*    left: calc(50% - 5px);*/
-/*    top: 100%;*/
-/*}*/

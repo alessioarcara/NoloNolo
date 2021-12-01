@@ -1,8 +1,16 @@
 import classes from './Tooltip.module.css';
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 const Tooltip = ({text, children}) => {
     const [isHover, setIsHover] = useState(false)
+
+    const handleMutationEnterMouse = useCallback(()  => {
+        setIsHover(true)
+    }, [])
+
+    const handleMutationLeaveMouse = useCallback(() => {
+        setIsHover(false)
+    }, [])
 
     return (
         <div className={classes['tooltip-wrapper']}>
@@ -13,7 +21,12 @@ const Tooltip = ({text, children}) => {
                     </div>
                 </div>
             }
-            <div onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>{children}</div>
+            <div
+                onMouseEnter={handleMutationEnterMouse}
+                onMouseLeave={handleMutationLeaveMouse}
+            >
+                {children}
+            </div>
         </div>
     );
 
