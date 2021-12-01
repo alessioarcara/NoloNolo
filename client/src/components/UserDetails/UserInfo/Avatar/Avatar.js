@@ -1,13 +1,12 @@
 import classes from './Avatar.module.css';
 import LoadingSpinner from "../../../UI/LoadingSpinner/LoadingSpinner";
-import {DEFAULT_AVATAR, IMAGE_PATH} from "../../../../helpers/Utils/constants";
+import {DEFAULT_AVATAR} from "../../../../helpers/Utils/constants";
 import {body_addAvatar} from "../../../../helpers/httpConfig";
 import {useState} from "react";
 import PencilIcon from "../../../UI/icons/PencilIcon";
 import CheckIcon from "../../../UI/icons/CheckIcon";
 import Button from "../../../UI/Button/Button";
-
-const getImagePath = (userObject) => `${IMAGE_PATH}${userObject.avatar.substring(1)}`
+import {getImagePath} from "../../../../helpers/Utils/utils";
 
 const Avatar = ({status, user, sendFile}) => {
     const [file, setFile] = useState(null)
@@ -28,7 +27,7 @@ const Avatar = ({status, user, sendFile}) => {
             {status === "pending" ? <LoadingSpinner/> :
                 <img
                     className={classes.avatar}
-                    src={user && (user.avatar ? getImagePath(user) : DEFAULT_AVATAR)}
+                    src={user && (user.avatar ? getImagePath(user.avatar) : DEFAULT_AVATAR)}
                     onError={event => event.target.src = DEFAULT_AVATAR}
                     alt={''}
                 />

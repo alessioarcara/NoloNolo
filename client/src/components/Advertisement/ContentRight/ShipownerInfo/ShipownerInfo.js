@@ -1,7 +1,10 @@
 import classes from "./ShipownerInfo.module.css";
 import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
+import {DEFAULT_AVATAR} from "../../../../helpers/Utils/constants";
+import {getImagePath} from "../../../../helpers/Utils/utils";
 
 const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation}) => {
+
     return (
         <>
             {/* Container of name, harbour and shipowner avatar */}
@@ -11,16 +14,14 @@ const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation})
                 </div>
                 <div className={classes[`shipowner-avatar`]}>
                     <img
-                        src={'https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png'}
-                        // src={shipownerAvatar}
-                        alt={''}
+                        src={shipownerAvatar ? getImagePath(shipownerAvatar) : DEFAULT_AVATAR}
+                        onError={event => event.target.src = DEFAULT_AVATAR}
+                        alt="foto profilo"
                     />
                 </div>
             </div>
             {/* Component to show more text */}
             <ReadMoreText
-                // text='Ciao a tutti, sono davvero ahahaha sisisi, allora se prendiamo quindi questo sisi sempre
-                // così. Ma va bene secondo me perchè sennò sei davvero bravo ma tanto si può fare lo stesso'
                 text={shipownerPresentation}
             />
             <hr/>

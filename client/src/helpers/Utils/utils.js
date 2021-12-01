@@ -1,5 +1,7 @@
 /* ------------------------------ Callbacks Utils --------------------------------- */
 
+import {IMAGE_PATH} from "./constants";
+
 export const throttle = (callback, delay) => {
     let wait = false;
     return () => {
@@ -107,3 +109,8 @@ export const parseMutationResponse = (setState, applyData, navigate, applyWhere)
     navigate && navigate(applyWhere(payload[0]))
     return payload[1]
 };
+
+/* ----------------------------------- Image Utils ---------------------------------- */
+
+export const getImagePath = (userObject) => `${IMAGE_PATH}${userObject.substring(1)}`
+

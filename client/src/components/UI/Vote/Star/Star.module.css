@@ -1,5 +1,6 @@
-.star input[type=radio] {
+input[type=radio] {
     display: none;
+    -webkit-appearance: none;
 }
 
 .star-container {

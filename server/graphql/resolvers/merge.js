@@ -23,7 +23,9 @@ const boat = async boatsId => {
 
 const user = async userId => {
     try {
-        return await userLoader.load(userId.toString());
+        const user = await userLoader.load(userId.toString());
+        userLoader.clear(userId.toString())
+        return user
     } catch (err) {
         throw err
     }
