@@ -14,30 +14,13 @@
     backdrop-filter: blur(0.7rem);
 }
 
-.rentals-list-title {
-    border-radius: 1rem 1rem 0 0;
-}
-
-.rentals-container {
-    overflow-y: scroll;
-}
-
-.rentals-container::-webkit-scrollbar {
-    display: none;
-}
-
-.exit-btn {
-    background-color: white;
-    border: 3px solid #ff4f38;
-    color: #ff4f38;
-    font-size: 1.1em;
-    border-radius: 2rem;
-}
-
-.exit-btn:hover {
-    border: 3px solid #ff4f38;
-    background-color: #ff4f38;
-    color: white;
+/* Inside Container (administration card + exit button) */
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 2rem;
 }
 
 /* Administration Card */
@@ -46,14 +29,50 @@
     width: 90%;
     height: 60vh;
     border-radius: 1rem;
-    margin: 10vh auto;
-    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.15);
+    margin: 7vh auto 0 auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     transition: all 0.425s ease;
+    overflow-y: scroll;
+}
+
+.rentals-title {
+    font-size: 1.5em;
+}
+
+.rentals-list-title {
+    border-radius: 1rem 1rem 0 0;
+}
+
+.administration-card::-webkit-scrollbar {
+    display: none;
+}
+
+/* Exit Button */
+.exit-btn button {
+    background-color: white;
+    border: 2px solid #ff4f38;
+    color: #ff4f38;
+    font-size: 1.1em;
+    border-radius: 2rem;
+}
+
+.exit-btn button:hover {
+    border: 2px solid #ff4f38;
+    background-color: #ff4f38;
+    color: white;
 }
 
 @media only screen and (max-width: 768px) {
-    .header-title {
+    .administration-title {
         font-size: 1.7em;
+    }
+
+    .rentals-title {
+        font-size: 1.4em;
+    }
+
+    .exit-btn button {
+        font-size: 0.9em;
     }
 }
 
