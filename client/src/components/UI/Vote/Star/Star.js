@@ -8,16 +8,7 @@ const Star = ({index, quoteIndex, changeQuote, isSelected, placeholderQuote = fa
     }
 
     return (
-        <label
-            className={!quoteIndex
-                ? placeholderQuote
-                    ? classes['no-review']
-                    : `${classes['no-review']} ${classes['star-container-pointer']}`
-                : placeholderQuote
-                    ? classes['star-container']
-                    : classes['star-container-pointer']
-            }
-        >
+        <label className={placeholderQuote ? classes['star-container'] : classes['star-container-pointer']}>
             {/*If modifyQuote then change quote*/}
             {!placeholderQuote &&
             <input
@@ -27,7 +18,10 @@ const Star = ({index, quoteIndex, changeQuote, isSelected, placeholderQuote = fa
                 onClick={changeStarHandler}
             />
             }
-            <div className={isSelected ? classes['star-active-color'] : classes['star-color']}>
+            <div className={typeof quoteIndex === "undefined" ?
+                classes['no-review']
+                : isSelected ? classes['star-active-color'] : classes['star-color']}
+            >
                 <StarIcon/>
             </div>
         </label>

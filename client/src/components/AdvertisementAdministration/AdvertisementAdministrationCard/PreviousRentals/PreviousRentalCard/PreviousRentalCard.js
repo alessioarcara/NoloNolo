@@ -45,7 +45,7 @@ const PreviousRentalCard = ({
                 <div className={classes['stars-container']}>
                     <Vote
                         votes={stars}
-                        quoteIndex={review && review.rating - 1}
+                        quoteIndex={review && (review.rating - 1)}
                         placeholder={true}
                     />
                 </div>
