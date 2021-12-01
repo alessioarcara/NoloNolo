@@ -70,7 +70,7 @@ hr {
   background-color: #ccc;
   color: #3f3f3f;
   border: 1px solid #ccc;
-  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-primary {

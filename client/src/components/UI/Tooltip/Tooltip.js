@@ -4,7 +4,7 @@ import {useCallback, useState} from "react";
 const Tooltip = ({text, children}) => {
     const [isHover, setIsHover] = useState(false)
 
-    const handleMutationEnterMouse = useCallback(()  => {
+    const handleMutationEnterMouse = useCallback(() => {
         setIsHover(true)
     }, [])
 
