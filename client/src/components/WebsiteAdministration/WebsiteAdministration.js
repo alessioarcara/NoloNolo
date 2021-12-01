@@ -18,11 +18,15 @@ const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals, lo
 
             {/* Administation Rentals Card */}
             <div className={classes['administration-card']}>
-                <Header textTitle="Noleggi futuri"/>
-                <AdministrationRentalList
-                    rentals={filteredFutureRentals()}
-                    handleMutationAdministrationRentals={handleMutationAdministrationRentals}
-                />
+                <Header textTitle="Noleggi futuri"
+                        classNameHeader={classes["rentals-list-title"]}
+                        classNameTitle={classes["header-title"]}/>
+                <div className={classes["rentals-container"]}>
+                    <AdministrationRentalList
+                        rentals={filteredFutureRentals()}
+                        handleMutationAdministrationRentals={handleMutationAdministrationRentals}
+                    />
+                </div>
             </div>
         </div>
     )

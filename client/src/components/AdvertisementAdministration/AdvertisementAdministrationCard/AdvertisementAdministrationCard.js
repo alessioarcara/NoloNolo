@@ -12,15 +12,15 @@ import {body_withdrawAdvertisement} from "../../../helpers/httpConfig";
 import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
 
 const AdvertisementAdministrationCard = ({
-                              boatId,
-                              model,
-                              reviews,
-                              createdAt,
-                              images,
-                              rentals,
-                              preferredBy,
-                              onMutateAdvertisement
-                          }) => {
+                                             boatId,
+                                             model,
+                                             reviews,
+                                             createdAt,
+                                             images,
+                                             rentals,
+                                             preferredBy,
+                                             onMutateAdvertisement
+                                         }) => {
     const [modal, setModal] = useState("")
     const handleChangeModalState = useCallback(
         evt => evt.target.dataset.modal
@@ -54,24 +54,24 @@ const AdvertisementAdministrationCard = ({
     return (
         <>
             {modal !== "" &&
-            <Modal
-                closeModalHandler={handleChangeModalState}
-            >
-                {modal === 'details' &&
-                <DetailsModal
-                    onMutateAdvertisement={onMutateAdvertisement}
-                    previousRentals={filteredRentals.previous}
-                    activeRental={filteredRentals.active}
-                    futureRentals={filteredRentals.future}
-                />
-                }
-                {modal === 'delete' &&
-                <ConfirmSection
-                    text="Sicuro di eliminare questo annuncio?"
-                    onConfirm={handleDeleteAdvertisement}
-                />
-                }
-            </Modal>
+                <Modal
+                    closeModalHandler={handleChangeModalState}
+                >
+                    {modal === 'details' &&
+                        <DetailsModal
+                            onMutateAdvertisement={onMutateAdvertisement}
+                            previousRentals={filteredRentals.previous}
+                            activeRental={filteredRentals.active}
+                            futureRentals={filteredRentals.future}
+                        />
+                    }
+                    {modal === 'delete' &&
+                        <ConfirmSection
+                            text="Sicuro di eliminare questo annuncio?"
+                            onConfirm={handleDeleteAdvertisement}
+                        />
+                    }
+                </Modal>
             }
             <div className={classes['card-container']}>
                 {/*First element*/}
@@ -83,7 +83,6 @@ const AdvertisementAdministrationCard = ({
                     &times;
                 </div>
                 <SlideShow images={images}/>
-
                 {/*Second element*/}
                 <div className={classes['details-container']}>
                     <div
@@ -99,23 +98,19 @@ const AdvertisementAdministrationCard = ({
                                 <span>{`(${reviews.length})`}</span>
                             </div>
                         </div>
-
                         {/* Announcement Creation Date */}
                         <div>Creato il: <span className={classes.date}>
                                 {formatDayMonthYearDate(createdAt, {month: 'short', year: 'numeric'})}</span>
                         </div>
-
                         {/* Future Rentals */}
                         <div>Prenotazioni future: <span
                             className={classes.parameter}>{filteredRentals.future.length}</span>
                         </div>
-
                         {/* Number of Favorites */}
                         <div className={classes['grid-elements']}>
                             <div className={classes['eye-icon']}><EyeIcon/></div>
                             <div>Osservato da: <span className={classes.parameter}>{preferredBy} persone</span></div>
                         </div>
-
                         {/* Disponibility or Active Rental */}
                         {filteredRentals.active[0] ?
                             <div className={classes['grid-elements']}>
@@ -132,16 +127,9 @@ const AdvertisementAdministrationCard = ({
                             </div>
                         }
                     </div>
-
                     {/*Third element*/}
-                    <div className={classes['option-section']}>
-                        <button
-                            className={classes['option']}
-                            data-modal="details"
-                            onClick={handleChangeModalState}
-                        >
-                            Visualizza noleggi
-                        </button>
+                    <div className={classes['option-section']} data-modal="details" onClick={handleChangeModalState}>
+                        Visualizza noleggi
                     </div>
                 </div>
             </div>

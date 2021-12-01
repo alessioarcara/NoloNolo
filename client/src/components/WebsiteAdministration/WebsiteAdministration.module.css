@@ -10,42 +10,42 @@
 
 /* Header */
 .header-background {
-    background-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.2) !important;
     backdrop-filter: blur(0.7rem);
 }
 
 .exit-btn {
-    font-size: 0.8em;
-    background-color: #3f3f3f;
-    border-color: #3f3f3f;
-    color: #fff;
+    background-color: white;
+    border: 3px solid #ff4f38;
+    color: #ff4f38;
+    font-size: 1.1em;
+    border-radius: 2rem;
 }
 
 .exit-btn:hover {
-    background-color: #3f3f3f;
-    border-color: #3f3f3f;
-    color: #FF2267;
+    border: 3px solid #ff4f38;
+    background-color: #ff4f38;
+    color: white;
 }
 
 /* Administration Card */
 .administration-card {
     background-color: #fff;
-    width: 70vw;
+    width: 90%;
     height: 60vh;
     border-radius: 1rem;
     margin: 10vh auto;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 1px 3px, rgba(0, 0, 0, 0.25) 0 1px 2px;
-    overflow: scroll;
+    box-shadow:  0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 @media only screen and (max-width: 768px) {
-    .exit-btn {
-        font-size: 0.7em;
+    .header-title {
+        font-size: 1.7em;
     }
 }
 
 @media only screen and (min-width: 1366px) {
     .administration-card {
-        width: 50vw;
+        width: 50%;
     }
 }

@@ -1,9 +1,11 @@
-.centered {
-    text-align: center;
+.profile-container {
     display: flex;
     flex-direction: column;
+    min-height: 80vh;
+    text-align: center;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .profile-options {
@@ -34,6 +36,18 @@
 
     .container {
         grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-height: 1080px) {
+    .profile-container {
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-height: 720px) {
+    .profile-container {
+        gap: 0;
     }
 }
 

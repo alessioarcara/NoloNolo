@@ -26,7 +26,7 @@ const Header = ({
                     >
                         {backElement}
                     </div>
-                    <h1 className={`${classes['second-element']} title`}>{textTitle}</h1>
+                    <h1 className={`${classes['second-element']} ${classNameTitle} title`}>{textTitle}</h1>
                     <div
                         className={classes['third-element']}
                         onClick={handleOptionsElement}

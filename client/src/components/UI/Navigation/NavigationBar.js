@@ -11,7 +11,7 @@ const NavigationBar = forwardRef(({authenticated, isIntersecting}, navigationRef
     const { userFavorites } = useStore()[0];
 
     useEffect(() => {
-        if (userFavorites) return;
+        if (!userFavorites || userFavorites.length === 0) return;
 
         setBtnIsClicked(true);
         const bumpTimer = setTimeout(() => setBtnIsClicked(false), 300)
