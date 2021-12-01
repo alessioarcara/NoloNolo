@@ -5,8 +5,7 @@
     justify-items: center;
     background-color: rgb(250, 250, 250);
     box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
-    border-radius: 16px;
-    width: 100%;
+    border-radius: 1rem;
     padding: 1rem;
 }
 
@@ -21,9 +20,7 @@
 
 .option {
     color: rgba(0, 0, 0, 0.7);
-    animation-name: animation;
-    animation-duration: 0.9s;
-    animation-fill-mode: forwards;
+    transition: all 0.425s ease;
 }
 
 @media only screen and (max-width: 768px) {
@@ -61,14 +58,8 @@
         width: 1rem;
     }
 
-    @keyframes animation {
-        from {
-            top: 15px;
-            color: rgba(189, 190, 189, 0.2);
-        }
-        to {
-            top: 0;
-        }
+    .text {
+        display: none;
     }
 
     .text, .title, .option svg, .arrow {
@@ -86,21 +77,10 @@
     }
 }
 
-@media only screen and (min-width:569px) and (max-width: 768px) {
-    .option > a > svg {
-        width: 45%;
-    }
-
-    .arrow {
-        display: none;
-    }
-}
-
 @media only screen and (min-width: 769px) {
-    .option > a > svg {
-        width: 10rem;
+    .option {
+        height: 25vh;
     }
-
     .arrow {
         display: none;
     }

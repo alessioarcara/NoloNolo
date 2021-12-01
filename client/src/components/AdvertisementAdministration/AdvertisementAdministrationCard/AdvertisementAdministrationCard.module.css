@@ -94,17 +94,15 @@
     align-items: center;
     background-color: #efefef;
     color: rgba(0, 0, 0, 0.6);
-}
-.option {
+    cursor: pointer;
     color: #000;
-    background-color: #efefef;
+    font-size: 0.9em;
     text-transform: uppercase;
     font-weight: bold;
-    border: 0;
 }
-.option:hover {
+
+.option-section:hover {
     color: #F20574;
-    cursor: pointer;
 }
 
 /* modal header */

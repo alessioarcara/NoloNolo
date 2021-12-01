@@ -14,9 +14,9 @@ const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals, lo
                 optionsElement={exitButtonElement}
                 handleOptionsElement={logout}
                 classNameHeader={classes['header-background']}
+                classNameTitle={classes['header-title']}
             />
-
-            {/* Administation Rentals Card */}
+            {/* Administration Rentals Card */}
             <div className={classes['administration-card']}>
                 <Header textTitle="Noleggi futuri"
                         classNameHeader={classes["rentals-list-title"]}

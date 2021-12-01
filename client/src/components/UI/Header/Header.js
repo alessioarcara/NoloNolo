@@ -4,6 +4,7 @@ import {useCallback} from "react";
 
 const Header = ({
                     classNameHeader,
+                    classNameTitle,
                     navigatePath,
                     backElement,
                     textTitle,

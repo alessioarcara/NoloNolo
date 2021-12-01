@@ -10,8 +10,11 @@
 
 .profile-options {
     display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
-    margin: 1rem 1rem 0 1rem;
+    padding: 1rem;
 }
 
 .action button {
@@ -28,14 +31,16 @@
     color: white;
 }
 
-
-@media only screen and (max-width: 568px) {
-    .action {
-        margin: 3vh 0;
+@media only screen and (max-width: 768px) {
+    .profile-options {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 0;
     }
+}
 
-    .container {
-        grid-template-columns: 1fr;
+@media only screen and (min-width: 1440px) {
+    .profile-options {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -50,26 +55,3 @@
         gap: 0;
     }
 }
-
-@media only screen and (min-width: 569px) and (max-width: 768px) {
-    .action {
-        margin: 1rem 0 5rem 0;
-    }
-
-    .container {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin: 2rem 3rem;
-    }
-}
-
-@media only screen and (min-width: 769px) {
-    .action {
-        margin: 3rem 0 5rem 0;
-    }
-
-/*    .container {*/
-/*        grid-template-columns: repeat(2, 1fr);*/
-/*        gap: 1rem;*/
-/*    }*/
-/*}*/

@@ -1,12 +1,13 @@
 import classes from './ProfilePlaceholder.module.css';
 
-const ProfilePlaceholder = () => {
+export const ProfilePlaceholder = () => {
     return (
         <div className={classes['profile-placeholder']}>
             <div className={classes['card-container']}>
-                {Array(4).fill(
+                {Array(4).fill().map((_, index) =>
                     <div
-                        className={`${classes.loading} ${classes['card-board']}`}
+                        key={index}
+                        className={classes.loading}
                         style={{width: "100%", height: "100%", borderRadius: "1rem"}}
                     />
                 )}
@@ -24,5 +25,3 @@ const ProfilePlaceholder = () => {
         </div>
     );
 }
-
-export default ProfilePlaceholder
