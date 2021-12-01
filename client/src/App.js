@@ -3,6 +3,7 @@ import AuthContext from "./store/auth-context";
 import {Routes, Route, Navigate} from "react-router-dom";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import NavigationLayout from "./components/UI/Layout/NavigationLayout/NavigationLayout";
+import Fallback from "./components/UI/Fallback/Fallback";
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Favorites = React.lazy(() => import('./pages/FavoritesPage'));
@@ -20,7 +21,7 @@ function App() {
     const {isLoggedIn} = useContext(AuthContext)
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Fallback/>}>
             <Routes>
                 <Route element={<NavigationLayout authenticated={isLoggedIn}/>}>
                     <Route path='/' element={<Home/>}/>
@@ -33,8 +34,7 @@ function App() {
                 <Route path='profile/user-info' element={<RequireAuth><UserDetails/></RequireAuth>}/>
                 <Route path='profile/rentals/*' element={<RequireAuth><Rentals/></RequireAuth>}/>
                 <Route path='become-shipowner/*' element={<RequireAuth><NewAdvertisement/></RequireAuth>}/>
-                <Route path='profile/your-advertisements'
-                       element={<RequireAuth><AdvertisementAdministration/></RequireAuth>}/>
+                <Route path='profile/your-advertisements' element={<RequireAuth><AdvertisementAdministration/></RequireAuth>}/>
                 <Route path='administration' element={<RequireAuth><WebsiteAdministration/></RequireAuth>}/>
                 <Route path='*' element={<Navigate replace to="/"/>}/>
             </Routes>
