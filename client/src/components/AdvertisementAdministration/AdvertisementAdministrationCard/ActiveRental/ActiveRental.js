@@ -3,7 +3,7 @@ import {rangeDate, formatDayMonthYearDate} from "../../../../helpers/Utils/utils
 import CheckInIcon from "../../../UI/icons/CheckInIcon";
 import HourglassIcon from "../../../UI/icons/HourglassIcon";
 import {body_recordBoatReturn} from "../../../../helpers/httpConfig";
-import {useCallback} from "react";
+import {useCallback, useMemo} from "react";
 import ElementsNotFound from "../../../UI/ElementsNotFound/ElementsNotFound";
 import Tooltip from "../../../UI/Tooltip/Tooltip";
 
@@ -21,6 +21,8 @@ const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
                     advertisement)
         )
     }, [activeRental, onMutateAdvertisement])
+
+    const isFinished =  useMemo(() => rangeDate(new Date(), activeRental.to) > 0, [activeRental])
 
     return (
         <div className={classes['container']}>
@@ -57,10 +59,10 @@ const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
                                 `}
                         </div>
                     </div>
-                    <Tooltip text="Chiudi noleggio attivo">
+                    <Tooltip text="Puoi chiudere il noleggio solo dopo il termine." isShownTooltip={isFinished}>
                         <button
                             className={`${classes['close-btn']} btn btn-primary`}
-                            disabled={rangeDate(new Date(), activeRental.to) > 0}
+                            disabled={isFinished}
                             title="Chiudi noleggio al termine"
                             onClick={handleRecordBoatReturn}
                         >

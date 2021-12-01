@@ -1,6 +1,5 @@
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import {Link} from "react-router-dom";
-
 import classes from "./AvailableBoats.module.css"
 import {body_removeBoat} from "../../helpers/httpConfig";
 
@@ -27,13 +26,14 @@ const AvailableBoats = ({userName, userBoats, onMutationUserBoat}) => {
                             to={!boat.isRented ? `${boat._id}/boat` : `${boat._id}/advertisement`}
                             className={classes["user-boat"]}>
                                 Barca {id + 1}
-                            <button
-                                disabled={boat.isRented}
-                                data-boatid={boat._id}
-                                onClick={handleDeleteUserBoat}
-                                className={`btn ${classes.cross}`}>
-                                &#10060;
-                            </button>
+                                <button
+                                    disabled={boat.isRented}
+                                    data-boatid={boat._id}
+                                    onClick={handleDeleteUserBoat}
+                                    className={`btn ${classes.cross}`}
+                                >
+                                    &#10060;
+                                </button>
                         </Link>) :
                     <p>Ancora nessuna barca inserita</p>}
             </div>
