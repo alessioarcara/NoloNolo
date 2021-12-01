@@ -5,6 +5,7 @@ import BoatListLayout from "../components/UI/Layout/BoatListLayout/BoatListLayou
 import AuthContext from "../store/auth-context";
 import ElementsNotFound from "../components/UI/ElementsNotFound/ElementsNotFound";
 import Header from "../components/UI/Header/Header";
+import Spacer from "../components/UI/Spacer/Spacer";
 
 const FavoritesPage = () => {
     const store = useStore()[0]
@@ -25,6 +26,7 @@ const FavoritesPage = () => {
         <>
             <Header textTitle={"I miei preferiti"}/>
             {content}
+            <Spacer heightVh="15"/>
         </>
     )
 }

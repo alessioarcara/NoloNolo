@@ -8,7 +8,7 @@ export const BreakpointContextProvider = ({children}) => {
     const [breakpoint, setBreakpoint] = useState(window.innerWidth > 768 ? "desktop" : "smartphone")
 
     useEffect(() => {
-        let mediaQuery = window.matchMedia("(min-width: 768px)");
+        let mediaQuery = window.matchMedia("(min-width: 769px)");
 
         const handleQueryListener = event => {
             if (event.matches) { setBreakpoint("desktop") }

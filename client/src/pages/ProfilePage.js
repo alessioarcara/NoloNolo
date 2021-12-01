@@ -9,6 +9,7 @@ import {Navigate, useNavigationType} from "react-router-dom";
 import {parseQueryResponse} from "../helpers/Utils/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {ProfilePlaceholder} from "../components/Profile/ProfilePlaceholder/ProfilePlaceholder";
+import Spacer from "../components/UI/Spacer/Spacer";
 
 const ProfilePage = () => {
     const navigationType = useNavigationType()
@@ -51,6 +52,7 @@ const ProfilePage = () => {
             <Profile logout={logout}>
                 {content}
             </Profile>
+            <Spacer heightVh="15"/>
         </LetSuspense>
     );
 };

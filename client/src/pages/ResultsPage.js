@@ -46,7 +46,6 @@ const ResultsPage = () => {
                 switchPage={setCurrentPage}
                 numberPage={currentPage}
             />
-            <div style={{marginBottom:"5rem"}}/>
         </>
     );
 };
