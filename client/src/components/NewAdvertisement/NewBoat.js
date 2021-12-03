@@ -47,7 +47,7 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
 
     const title = <h1>Che tipo di barca offrirai?</h1>
     const content = (
-        <form onSubmit={handleAddBoat}>
+        <form className={classes['container']} onSubmit={handleAddBoat}>
             {renderFormInputs()}
             <BoatTypes boatType={boatType} onCheckBoatType={handleCheckBoatType}/>
             <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={1}/>

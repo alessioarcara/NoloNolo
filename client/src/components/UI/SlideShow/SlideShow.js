@@ -30,7 +30,6 @@ const SlideShow = ({images, children, classNameSlideShowSlider}) => {
                     <Images
                         key={index}
                         images={place}
-                        imageLoadedHandler={imageLoadedHandler}
                     />
                 )) : <Images images={DEFAULT_BOAT_IMAGE}/>
                 }

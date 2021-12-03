@@ -8,6 +8,7 @@
     height: 6rem;
     background-color: #fff;
     width: 50%;
+    padding: 0 0.5rem;
     z-index: 1;
 }
 
@@ -15,7 +16,7 @@
     width: 20%;
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .newAdvertisement-footer {
         width: 100%;
     }

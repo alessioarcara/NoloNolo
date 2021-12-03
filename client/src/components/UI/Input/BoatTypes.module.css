@@ -1,3 +1,8 @@
+.control {
+    display: flex;
+    flex-direction: column;
+}
+
 .control div {
     font-weight: bold;
     flex: 1;
@@ -5,18 +10,19 @@
     margin-bottom: 0.5rem;
 }
 
-input[type="radio"]{
+.boatTypes input[type=radio]{
     display: none;
 }
 
 .boatTypes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    align-items: center;
     justify-items: center;
     gap: 1rem;
 }
 
-.boatTypes label {
+.boat-label {
     border: 2px solid #ccc;
     display: flex;
     border-radius: 2rem;
@@ -25,22 +31,28 @@ input[type="radio"]{
     align-items: center;
 }
 
-.boatTypes svg {
+.boat-label svg {
     height: 5rem;
     width: 5rem;
 }
 
-.boatTypes label:hover {
-    border: 2px solid rgb(0, 0, 0);
+.boatTypes .boat-label:hover {
+    border: 2px solid #3A3FF0;
+    background-color: #e9efff;
 }
 
-.boatTypes label svg path, .boatTypes label svg line {
+.boat-label svg path, .boat-label svg line {
     fill: rgba(0, 0, 0, 0.4);
     transition: all 0.325s ease;
 }
 
-.boatTypes label svg path:hover, .boatTypes label svg line:hover {
-    stroke: rgb(0,0,0);
+.boatTypes .boat-label:hover svg path, .boatTypes .boat-label:hover svg line {
+    fill: #000;
+}
+
+input[type=radio]:checked + .boat-label svg path,
+input[type=radio]:checked + .boat-label svg line {
+    fill: #000;
 }
 
 input[type=radio]:checked + .boat-label {
