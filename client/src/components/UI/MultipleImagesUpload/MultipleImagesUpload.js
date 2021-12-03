@@ -40,4 +40,4 @@ const MultipleImagesUpload = ({files, onSelectFiles, onUnselectFile}) => {
     )
 }
 
-export default MultipleImagesUpload;
+export default React.memo(MultipleImagesUpload)

@@ -41,7 +41,7 @@ const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     )
 
     const content = (
-        <form onSubmit={handleInsertBoatLocation}>
+        <form className={classes.container} onSubmit={handleInsertBoatLocation}>
             {renderFormInputs(classes.inputs)}
             <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={2}/>
         </form>

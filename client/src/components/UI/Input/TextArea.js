@@ -1,4 +1,5 @@
-import classes from "./Input.module.css";
+import style from "./Input.module.css";
+import classes from "./TextArea.module.css";
 
 const TextArea = (props) => {
     const {
@@ -18,7 +19,7 @@ const TextArea = (props) => {
     const inputClasses = hasErrors ? `${classNames} ${classes.invalid}` : `${classNames}`
 
     return (
-        <div className={`${inputClasses} ${classes.control}`}>
+        <div className={`${inputClasses} ${style.control}`}>
             <label htmlFor={id || name}>{label}</label>
             <textarea
                 id={id}
@@ -26,6 +27,7 @@ const TextArea = (props) => {
                 value={value}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                className={classes['text-area']}
             />
             {hasErrors && (<span className={classes["error-text"]}>{errorMessage}</span>)}
         </div>
