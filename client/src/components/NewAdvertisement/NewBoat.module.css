@@ -1,7 +1,19 @@
-/*.newBoat {*/
-/*    width: 30rem;*/
-/*}*/
-
-.container {
+.rightLayout {
     padding: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .layout {
+        height: 100%;
+        font-size: 0.8em;
+    }
+
+    .leftLayout {
+        height: 25vh;
+        font-size: 0.9em;
+    }
+
+    .rightLayout {
+        padding: 1rem;
+    }
 }

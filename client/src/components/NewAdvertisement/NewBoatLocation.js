@@ -7,13 +7,18 @@ import useForm from "../../hooks/use-form";
 import {boatLocationForm} from "../../helpers/formConfig";
 import {body_insertBoatLocation} from "../../helpers/httpConfig";
 import useGeocode from "../../hooks/use-geocode";
+import Spacer from "../UI/Spacer/Spacer";
+import {useContext} from "react";
+import breakpointContext from "../../store/breakpoint-context";
 
 const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     const {formValues, renderFormInputs, isFormValid} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )
-    const {coordinates} = useGeocode(formValues[2], formValues[1])
-    console.log(boat)
+
+    const initialCoordinates = (boat && boat.isDocked) ?
+        {lat: boat.isDocked.coordinates[1], lon: boat.isDocked.coordinates[0]} : undefined
+    const {coordinates} = useGeocode(formValues[2], formValues[1], initialCoordinates)
 
     const handleInsertBoatLocation = evt => {
         evt.preventDefault()
@@ -33,25 +38,24 @@ const NewBoatLocation = ({onMutationUserBoat, boat}) => {
 
     const formIsValid = isFormValid() && coordinates.lat && coordinates.lon
 
-    const title = (
-        <>
-            <h1 className={classes.title}> Dove si trova la tua barca?</h1>
-            <BoatMapPosition boatPosition={[coordinates.lat, coordinates.lon]}/>
-        </>
-    )
-
-    const content = (
-        <form className={classes.container} onSubmit={handleInsertBoatLocation}>
-            {renderFormInputs(classes.inputs)}
-            <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={2}/>
-        </form>
-    )
-
     return (
             <SplitScreenLayout
-                contentLeft={title}
-                rightLayoutContentClassName={classes.map}
-                contentRight={content}
+                layoutClassName={classes.layout}
+                leftLayoutClassName={classes.leftLayout}
+                rightLayoutClassName={classes.rightLayout}
+                contentLeft={
+                    <>
+                        <h1 className={classes.title}> Dove si trova la tua barca?</h1>
+                        <BoatMapPosition boatPosition={[coordinates.lat, coordinates.lon]}/>
+                    </>
+                }
+                contentRight={
+                    <form className={classes.inputs} onSubmit={handleInsertBoatLocation}>
+                        {renderFormInputs()}
+                        {breakpoint === 'smartphone' && <Spacer heightVh={10}/>}
+                        <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={2}/>
+                    </form>
+                }
             />
     );
 };

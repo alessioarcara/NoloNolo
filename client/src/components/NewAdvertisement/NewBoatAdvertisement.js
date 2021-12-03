@@ -7,13 +7,16 @@ import {body_addBoatImages, body_publishAdvertisement} from "../../helpers/httpC
 import MultipleImagesUpload from "../UI/MultipleImagesUpload/MultipleImagesUpload";
 
 import classes from "./NewBoatAdvertisement.module.css";
+import Spacer from "../UI/Spacer/Spacer";
+import breakpointContext from "../../store/breakpoint-context";
 
 const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
     const [files, setFiles] = useState([])
+    const [error, setError] = useState("")
     const {formValues, renderFormInputs, isFormValid} = useForm(boatAdvertisementForm)
 
     const handleSelectMultipleFiles = useCallback(({target: {files}}) => {
-        // if (files.length > 3) return alert("Non puoi aggiungere più di tre immagini")
+        if (files.length > 3) return setError("Non puoi aggiungere più di tre immagini")
         setFiles(Object.values(files))
     }, [])
 
@@ -21,16 +24,17 @@ const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
             setFiles(prevFiles => prevFiles.filter((item, idx) => idx !== parseInt(file))),
         [])
 
-    const handleAddBoatImages = () => {
+    const handleAddBoatImages = useCallback((publishedBoatId) => {
+        if (files.length === 0) return;
         const formData = new FormData()
-        formData.append("operations", body_addBoatImages.operations(boatId))
+        formData.append("operations", body_addBoatImages.operations(publishedBoatId))
         formData.append("map", body_addBoatImages.map)
 
         files.forEach((file, idx) => formData.append(idx.toString(), file))
-        onMutationUserBoat(formData)
-    }
+        onMutationUserBoat(formData, prevBoats => prevBoats)
+    }, [files, onMutationUserBoat])
 
-    const handlePublishAdvertisement = (evt) => {
+    const handlePublishAdvertisement = useCallback(evt => {
         evt.preventDefault()
         onMutationUserBoat(
             body_publishAdvertisement({
@@ -39,31 +43,34 @@ const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
                 dailyFee: parseFloat(formValues[1]),
                 fixedFee: parseFloat(formValues[2])
             }),
-            resData => {
-                handleAddBoatImages()
-                // return ()
-            },
-            // () => `/profile`
+            (prevBoats, publishedBoat) => {
+                handleAddBoatImages(publishedBoat._id)
+                return prevBoats.filter(userBoat => userBoat._id !== publishedBoat._id)
+            }
         )
-    }
-
-    const title = <h1>Ora, descrivi il tuo annuncio</h1>
-    const content = (
-        <form className={classes.container} onSubmit={handlePublishAdvertisement}>
-            {renderFormInputs()}
-            <MultipleImagesUpload
-                files={files}
-                onSelectFiles={handleSelectMultipleFiles}
-                onUnselectFile={handleUnselectFile}
-            />
-            <NewAdvertisementFooter isDisabledNextStep={!isFormValid()} stepPosition={3}/>
-        </form>
-    )
+    }, [formValues, boatId, handleAddBoatImages, onMutationUserBoat])
 
     return (
         <SplitScreenLayout
-            contentLeft={title}
-            contentRight={content}
+            layoutClassName={classes.layout}
+            leftLayoutClassName={classes.leftLayout}
+            rightLayoutClassName={classes.rightLayout}
+            contentLeft={
+                <h1>Ora, descrivi il tuo annuncio</h1>
+            }
+            contentRight={
+                <form onSubmit={handlePublishAdvertisement}>
+                    {renderFormInputs()}
+                    <MultipleImagesUpload
+                        files={files}
+                        errorMessage={error}
+                        onSelectFiles={handleSelectMultipleFiles}
+                        onUnselectFile={handleUnselectFile}
+                    />
+                    {breakpoint === 'smartphone' && <Spacer heightVh={20}/>}
+                    <NewAdvertisementFooter isDisabledNextStep={!isFormValid()} stepPosition={3}/>
+                </form>
+            }
         />
     );
 }

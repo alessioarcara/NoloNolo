@@ -8,16 +8,19 @@
     height: 6rem;
     background-color: #fff;
     width: 50%;
-    padding: 0 0.5rem;
     z-index: 1;
 }
 
-.newAdvertisement-actions {
-    width: 20%;
+.newAdvertisement-actionFirst {
+    color: black;
 }
 
 @media only screen and (max-width: 768px) {
     .newAdvertisement-footer {
         width: 100%;
+    }
+
+    .newAdvertisement-footer button {
+        width: 25%;
     }
 }

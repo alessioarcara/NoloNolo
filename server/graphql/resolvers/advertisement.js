@@ -114,15 +114,19 @@ module.exports = {
                     useFindAndModify: false
                 }
             )
-
             if (!boat) return {publishAdvertisementProblem: boatNotFound}
-            const user = await User.findById(req.userId)
-
-            user.userType = 'shipowner'
-            user.save()
+            await User.updateOne(
+                {$and:
+                        [
+                            {_id: req.userId},
+                            {userType: 'customer'}
+                    ]
+                },
+                {userType: 'shipowner'}
+            )
 
             return {publishAdvertisementData: transformBoat(boat._doc)}
-        } catch (err) { throw new Error(`Can't publish advertisement. ${err}`)}
+        } catch (err) {throw new Error(`Can't publish advertisement. ${err}`)}
     }),
     withdrawAdvertisement: authenticated(authorization('shipowner')(async ({boatId}, {req}) => {
         try {

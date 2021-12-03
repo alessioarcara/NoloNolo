@@ -1,7 +1,7 @@
 import classes from './Tooltip.module.css';
 import {useCallback, useState} from "react";
 
-const Tooltip = ({text, children, isShownTooltip = false}) => {
+const Tooltip = ({text, children, isShownTooltip = false, positionTop = true}) => {
     const [isHover, setIsHover] = useState(false)
 
     const handleMutationEnterMouse = useCallback(() => {
@@ -17,7 +17,7 @@ const Tooltip = ({text, children, isShownTooltip = false}) => {
     return (
         <div className={classes['tooltip-wrapper']}>
             {isHover &&
-                <div className={classes['container']}>
+                <div className={`${classes['container']} ${positionTop ? classes["position-top"] : classes['position-left']}`} >
                     <div className={classes['tooltip-container']}>
                         {text}
                     </div>

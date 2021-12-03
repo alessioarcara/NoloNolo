@@ -33,9 +33,9 @@
     font-size: 0.8em;
 }
 
-.cross:hover {
-    background-color: #efefef;
-    border-radius: 50%;
+.cross:disabled {
+    color: transparent;
+    text-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
 }
 
 .add-boat, .user-boat {

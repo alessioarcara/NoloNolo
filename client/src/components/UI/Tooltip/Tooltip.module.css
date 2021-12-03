@@ -9,10 +9,32 @@
     align-items: center;
     position: absolute;
     width: 200px;
+    pointer-events: none;
+    z-index: 1;
+    bottom: calc(100% + 0.3rem);
+}
+
+.position-top {
     margin-left: -100px;
     left: 50%;
     bottom: calc(100% + 0.3rem);
-    pointer-events: none;
+}
+
+.position-bottom {
+    margin-left: -100px;
+    left: 50%;
+    top: calc(100% + 0.3rem);
+}
+
+.position-right {
+    top: 50%;
+    left: calc(100% + 0.3rem);
+
+}
+
+.position-left {
+    top: 50%;
+    right: calc(100% + 0.3rem);
 }
 
 .tooltip-container {

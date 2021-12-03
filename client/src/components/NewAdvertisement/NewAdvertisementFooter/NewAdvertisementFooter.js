@@ -21,8 +21,8 @@ const NewAdvertisementFooter = ({isDisabledNextStep, stepPosition}) => {
                 firstButtonText="Indietro"
                 secondButtonText="Avanti"
                 firstButtonClickHandler={goBackHandler}
-                firstButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-secondary`}
-                secondButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-outline-primary`}
+                firstButtonClassName={`${classes["newAdvertisement-actionFirst"]} btn btn-secondary`}
+                secondButtonClassName={`${classes["newAdvertisement-actionSecond"]} btn btn-outline-primary`}
                 secondButtonDisabled={isDisabledNextStep}
                 secondButtonType="submit"
             />

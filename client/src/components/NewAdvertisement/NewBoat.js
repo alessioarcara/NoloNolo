@@ -6,18 +6,21 @@ import BoatTypes from "../UI/Input/BoatTypes";
 import classes from "./NewBoat.module.css"
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import {body_addBoat} from "../../helpers/httpConfig";
-import {useCallback, useState} from "react";
+import {useCallback, useContext, useState} from "react";
+import Spacer from "../UI/Spacer/Spacer";
+import breakpointContext from "../../store/breakpoint-context";
 
 const NewBoat = ({onMutationUserBoat, boat}) => {
     const [boatType, setBoatType] = useState(boat ? boat.boatType : "")
     const {formValues, renderFormInputs, isFormValid} = useForm(boat ?
         boatForm(boat.yard, boat.model, boat.length, boat.maximumCapacity) : boatForm()
     )
+    const {breakpoint} = useContext(breakpointContext)
 
     const handleCheckBoatType = useCallback(({target: {value}}) =>
         setBoatType(value), [])
 
-    const handleAddBoat = evt => {
+    const handleAddBoat = useCallback((evt) => {
         evt.preventDefault()
         onMutationUserBoat(
             body_addBoat({
@@ -41,23 +44,26 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
             },
             (newBoat) => `${newBoat._id}/location`
         )
-    }
+    }, [formValues, boatType, boat, onMutationUserBoat])
 
     const formIsValid = isFormValid() && boatType
 
-    const title = <h1>Che tipo di barca offrirai?</h1>
-    const content = (
-        <form className={classes['container']} onSubmit={handleAddBoat}>
-            {renderFormInputs()}
-            <BoatTypes boatType={boatType} onCheckBoatType={handleCheckBoatType}/>
-            <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={1}/>
-        </form>
-    )
-
     return (
         <SplitScreenLayout
-            contentLeft={title}
-            contentRight={content}
+            layoutClassName={classes.layout}
+            leftLayoutClassName={classes.leftLayout}
+            rightLayoutClassName={classes.rightLayout}
+            contentLeft={
+                <h1>Che tipo di barca offrirai?</h1>
+            }
+            contentRight={
+                <form onSubmit={handleAddBoat}>
+                    {renderFormInputs()}
+                    <BoatTypes boatType={boatType} onCheckBoatType={handleCheckBoatType}/>
+                    {breakpoint === "smartphone" && <Spacer heightVh={20}/>}
+                    <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={1}/>
+                </form>
+            }
         />
     );
 };

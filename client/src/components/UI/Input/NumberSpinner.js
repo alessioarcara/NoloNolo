@@ -66,7 +66,7 @@ const NumberSpinner = (props) => {
                     &#43;
                 </button>
             </div>
-            {hasErrors && (<span className={classes["error-text"]}>{errorMessage}</span>)}
+            {/*{hasErrors && (<span className={classes["error-text"]}>{errorMessage}</span>)}*/}
         </div>
     )
 }

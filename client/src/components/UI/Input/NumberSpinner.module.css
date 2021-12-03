@@ -30,3 +30,8 @@
     color: rgba(0, 0, 0, 0.725);
     border-color: rgba(0, 0, 0, 0.725);
 }
+
+.error-text {
+    margin: 0 !important;
+    color: #b40e0e;
+}
