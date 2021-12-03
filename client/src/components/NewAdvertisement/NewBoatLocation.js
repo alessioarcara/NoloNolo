@@ -9,10 +9,11 @@ import {body_insertBoatLocation} from "../../helpers/httpConfig";
 import useGeocode from "../../hooks/use-geocode";
 
 const NewBoatLocation = ({onMutationUserBoat, boat}) => {
-    const {formValues, renderFormInputs} = useForm(boat && boat.isDocked ?
+    const {formValues, renderFormInputs, isFormValid} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )
     const {coordinates} = useGeocode(formValues[2], formValues[1])
+    console.log(boat)
 
     const handleInsertBoatLocation = evt => {
         evt.preventDefault()
@@ -30,6 +31,8 @@ const NewBoatLocation = ({onMutationUserBoat, boat}) => {
         )
     }
 
+    const formIsValid = isFormValid() && coordinates.lat && coordinates.lon
+
     const title = (
         <>
             <h1 className={classes.title}> Dove si trova la tua barca?</h1>
@@ -40,7 +43,7 @@ const NewBoatLocation = ({onMutationUserBoat, boat}) => {
     const content = (
         <form onSubmit={handleInsertBoatLocation}>
             {renderFormInputs(classes.inputs)}
-            <NewAdvertisementFooter stepPosition={2}/>
+            <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={2}/>
         </form>
     )
 

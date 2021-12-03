@@ -1,27 +1,22 @@
-const {createWriteStream, unlink, promises} = require('fs');
+const {createWriteStream, unlink} = require('fs');
 const sharp = require('sharp');
-const {isImage, getUserDir} = require("../../helpers/utils");
-const {notImage, userNotFound, noFileAttached} = require("../../helpers/problemMessages");
+const {notImage, userNotFound, boatNotFound, noFileAttached} = require("../../helpers/problemMessages");
 const User = require("../../models/user");
-const {transformUser} = require("./merge");
+const Boat = require("../../models/boat");
+const {transformUser, transformBoat} = require("./merge");
 const {authenticated} = require("../../auth/auth");
+const {mkDir, rmDir, rmFile, isImage, getUserDir} = require("../../helpers/fileHandlers");
 
-const clearAvatar = filePath => {
-    unlink(filePath, err => err && console.log(`unlink failed: ${err}`))
-}
 
-const storeFile = async (upload, userId, resize = false) => {
+const storeFile = async (upload, filePath, resize = false) => {
     const {filename, mimetype, createReadStream} = await upload;
 
     if (!isImage(mimetype)) return { problem: notImage }
 
     const stream = createReadStream();
-    const USER_DIR = getUserDir(userId);
+    const USER_DIR = getUserDir(filePath);
 
-    await promises.access(USER_DIR)
-        .catch(async () => await promises.mkdir(USER_DIR, {recursive: true}).catch(
-            () => console.log(`Can't create user dir.`)
-        ))
+    await mkDir(USER_DIR)
 
     const path = `${USER_DIR}/${Date.now()}-${filename}`
 
@@ -59,7 +54,7 @@ const storeFile = async (upload, userId, resize = false) => {
 
 
 module.exports = {
-    addAvatar: authenticated(async ({upload, description}, {req}) => {
+    addAvatar: authenticated(async ({upload}, {req}) => {
         try {
             if (!upload.file) return { addAvatarProblem: noFileAttached }
             const user = await User.findById(req.userId)
@@ -67,13 +62,43 @@ module.exports = {
 
             const pathObj = await storeFile(upload.file, req.userId, true)
             if (pathObj.problem) return { addAvatarProblem: pathObj.problem}
-            if (user.avatar) clearAvatar(user.avatar)
+            if (user.avatar) await rmFile(user.avatar)
             user.avatar = pathObj.path
 
             await user.save()
             return { addAvatarData: transformUser(user) }
         } catch (err) { throw new Error(`Can't add avatar. ${err}`); }
     }),
-    addBoatImages: async () => {
-    }
+    addBoatImages: authenticated(async ({files, boatId}, {req}) => {
+        try {
+            if (files.length === 0) return {addBoatImagesProblem: noFileAttached}
+            const boat = await Boat.findOne({
+                    $and: [
+                        {_id: boatId},
+                        {shipowner: req.userId},
+                        {advertisement: {$exists: true}}
+                    ]
+                }
+            )
+            if (!boat) return {addBoatImagesProblem: boatNotFound}
+
+            const userBoatPath = `${req.userId}/${boatId}`
+            await rmDir(getUserDir(userBoatPath))
+
+            const results = await Promise.allSettled(files.map(({promise}) => storeFile(promise, userBoatPath)))
+
+            let imagesPath = [];
+            for (let i=0; i < results.length; i++) {
+                if (results[i].status === "fulfilled") {
+                    if (results[i].value.problem) return {addBoatImagesProblem: results[i].value.problem}
+                    imagesPath.push(results[i].value.path)
+                }
+            }
+
+            boat.advertisement.images = imagesPath;
+            await boat.save()
+
+            return {addBoatImagesData: transformBoat(boat.toObject())}
+        } catch (err) { throw new Error(`Can't add boat images. ${err}`)}
+    })
 }

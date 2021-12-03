@@ -7,7 +7,7 @@ const {boatNotFound, rentalNotFound, invalidRange, alreadyRented, selectedRentDa
 const {authenticated, authorization} = require("../../auth/auth");
 const {acquireLock, releaseLock} = require("../../helpers/lockHandlers")
 const mongoose = require('mongoose');
-const {startOfDay} = require("../../helpers/utils");
+const {startOfDay} = require("../../helpers/dateHandlers");
 
 const validateRentDates = async (boatId, from, to, isUpdating) => {
     if (isUpdating && from <= new Date()) return selectedRentDatesTooClose;
@@ -63,7 +63,7 @@ module.exports = {
             return rentals.map(transformRental)
         } catch (err) { throw new Error(`Can't find user rentals. ${err}`) }
     }),
-    rentalsByShipowner: authenticated(authorization('shipowner')(async (_, {req}) => {
+    rentalsByShipowner: authenticated(authorization('customer', 'shipowner')(async (_, {req}) => {
         try {
             const rentals = await Rental.aggregate([
                 { $lookup: {

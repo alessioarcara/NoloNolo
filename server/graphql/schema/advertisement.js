@@ -10,7 +10,7 @@ const advertisementType = `
         }
 
         type publishAdvertisementPayload {
-            publishAdvertisementData: Advertisement
+            publishAdvertisementData: Boat
             publishAdvertisementProblem: String
         }
         

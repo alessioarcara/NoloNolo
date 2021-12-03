@@ -6,11 +6,16 @@ import BoatTypes from "../UI/Input/BoatTypes";
 import classes from "./NewBoat.module.css"
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import {body_addBoat} from "../../helpers/httpConfig";
+import {useCallback, useState} from "react";
 
 const NewBoat = ({onMutationUserBoat, boat}) => {
-    const {formValues, renderFormInputs} = useForm(boat ?
+    const [boatType, setBoatType] = useState(boat ? boat.boatType : "")
+    const {formValues, renderFormInputs, isFormValid} = useForm(boat ?
         boatForm(boat.yard, boat.model, boat.length, boat.maximumCapacity) : boatForm()
     )
+
+    const handleCheckBoatType = useCallback(({target: {value}}) =>
+        setBoatType(value), [])
 
     const handleAddBoat = evt => {
         evt.preventDefault()
@@ -21,7 +26,7 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
                 model: formValues[1],
                 length: parseInt(formValues[2]),
                 maximumCapacity: parseInt(formValues[3]),
-                boatType: "dinghy",
+                boatType,
             }),
             (prevBoats, newBoat) => {
                 let isAlreadyAdded = false
@@ -38,12 +43,14 @@ const NewBoat = ({onMutationUserBoat, boat}) => {
         )
     }
 
+    const formIsValid = isFormValid() && boatType
+
     const title = <h1>Che tipo di barca offrirai?</h1>
     const content = (
         <form onSubmit={handleAddBoat}>
             {renderFormInputs()}
-            <BoatTypes/>
-            <NewAdvertisementFooter stepPosition={1}/>
+            <BoatTypes boatType={boatType} onCheckBoatType={handleCheckBoatType}/>
+            <NewAdvertisementFooter isDisabledNextStep={!formIsValid} stepPosition={1}/>
         </form>
     )
 

@@ -40,11 +40,6 @@ const AuthType = `
             changePasswordProblem: String
         }
         
-       type addAvatarPayload {
-            addAvatarData: User
-            addAvatarProblem: String
-       }
-        
         input UserInput {
             email: String!
             password: String!

@@ -15,7 +15,7 @@ function createFormFieldConfig(label, name, type, defaultValue = '', extension =
         },
         label,
         value: defaultValue,
-        valid: false,
+        valid: !!defaultValue,
         errorMessage: '',
         touched: false,
     };
@@ -94,26 +94,26 @@ export const newPasswordForm = {
 export const boatForm = (yard = '', model = '', length = 0, maximumCapacity = 0) => {
     return {
         yard: {
-            ...createFormFieldConfig('Yard', 'yard', 'text', yard),
+            ...createFormFieldConfig('Cantiere', 'yard', 'text', yard),
             validationRules: [
                 requiredRule("yard")
             ]
         },
         model: {
-            ...createFormFieldConfig('Model', 'model', 'text', model),
+            ...createFormFieldConfig('Modello', 'model', 'text', model),
             validationRules: [
                 requiredRule("model")
             ]
         },
         length: {
-            ...createFormFieldConfig('Length', 'length', 'text', length, renderNumberSpinner),
+            ...createFormFieldConfig('Lunghezza', 'length', 'text', length, renderNumberSpinner),
             validationRules: [
                 requiredRule("length"),
                 isNumberRule("length")
             ]
         },
         maximumCapacity: {
-            ...createFormFieldConfig('Maximum Capacity', 'maximumCapacity', 'text', maximumCapacity, renderNumberSpinner),
+            ...createFormFieldConfig('Capacità massima', 'maximumCapacity', 'text', maximumCapacity, renderNumberSpinner),
             validationRules: [
                 requiredRule("maximum capacity"),
                 isNumberRule("maximum capacity")

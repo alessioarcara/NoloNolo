@@ -1,10 +1,8 @@
+import React from "react";
 import {boats} from "../../../helpers/elements";
-import Input from "./Input";
-
 import classes from "./BoatTypes.module.css"
 
-const BoatTypes = () => {
-
+const BoatTypes = ({boatType, onCheckBoatType}) => {
     return (
         <div className={classes.control}>
             <div>Boat type</div>

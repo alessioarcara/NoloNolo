@@ -42,3 +42,14 @@ input[type="radio"]{
 .boatTypes label svg path:hover, .boatTypes label svg line:hover {
     stroke: rgb(0,0,0);
 }
+
+input[type=radio]:checked + .boat-label {
+    border: 2px solid #3A3FF0;
+    background-color: #e9efff;
+}
+
+@media only screen and (min-width: 768px) {
+    .control {
+        gap: 0.5rem;
+    }
+}

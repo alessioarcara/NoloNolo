@@ -22,7 +22,7 @@ const ActiveRental = ({activeRental, onMutateAdvertisement}) => {
         )
     }, [activeRental, onMutateAdvertisement])
 
-    const isFinished =  useMemo(() => rangeDate(new Date(), activeRental.to) > 0, [activeRental])
+    const isFinished =  useMemo(() => activeRental && rangeDate(new Date(), activeRental.to) > 0, [activeRental])
 
     return (
         <div className={classes['container']}>

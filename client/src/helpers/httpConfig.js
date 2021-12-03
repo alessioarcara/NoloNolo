@@ -744,3 +744,7 @@ exports.body_addAvatar = {
     operations: `{ "query": "mutation ($file: Upload!) { addAvatar(upload: $file) { addAvatarData { email avatar createdAt address { street city region postalCode } } addAvatarProblem }  }", "variables": { "file": null } }`,
     map: `{"0": ["variables.file"]}`,
 };
+exports.body_addBoatImages = {
+    operations: (boatId) => `{ "query": "mutation ($boatId: ID!, $files: [Upload!]!) { addBoatImages(boatId: $boatId, files: $files) { addBoatImagesData { _id } addBoatImagesProblem }  }", "variables": { "boatId": "${boatId}", "files": [null, null, null] } }`,
+    map: `{"0": ["variables.files.0"], "1": ["variables.files.1"], "2": ["variables.files.2"]}`,
+};

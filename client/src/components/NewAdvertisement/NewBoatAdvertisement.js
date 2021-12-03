@@ -1,13 +1,36 @@
+import React, {useCallback, useState} from "react";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import useForm from "../../hooks/use-form";
 import {boatAdvertisementForm} from "../../helpers/formConfig";
-import {body_publishAdvertisement} from "../../helpers/httpConfig";
+import {body_addBoatImages, body_publishAdvertisement} from "../../helpers/httpConfig";
+import MultipleImagesUpload from "../UI/MultipleImagesUpload/MultipleImagesUpload";
+
+import classes from "./NewBoatAdvertisement.module.css";
 
 const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
-    const {formValues, renderFormInputs} = useForm(boatAdvertisementForm)
+    const [files, setFiles] = useState([])
+    const {formValues, renderFormInputs, isFormValid} = useForm(boatAdvertisementForm)
 
-    const handlePublishAdvertisement = evt => {
+    const handleSelectMultipleFiles = useCallback(({target: {files}}) => {
+        // if (files.length > 3) return alert("Non puoi aggiungere più di tre immagini")
+        setFiles(Object.values(files))
+    }, [])
+
+    const handleUnselectFile = useCallback(({target: {dataset: {file}}}) =>
+            setFiles(prevFiles => prevFiles.filter((item, idx) => idx !== parseInt(file))),
+        [])
+
+    const handleAddBoatImages = () => {
+        const formData = new FormData()
+        formData.append("operations", body_addBoatImages.operations(boatId))
+        formData.append("map", body_addBoatImages.map)
+
+        files.forEach((file, idx) => formData.append(idx.toString(), file))
+        onMutationUserBoat(formData)
+    }
+
+    const handlePublishAdvertisement = (evt) => {
         evt.preventDefault()
         onMutationUserBoat(
             body_publishAdvertisement({
@@ -16,16 +39,24 @@ const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
                 dailyFee: parseFloat(formValues[1]),
                 fixedFee: parseFloat(formValues[2])
             }),
-            undefined,
-            () => `/profile`
+            resData => {
+                handleAddBoatImages()
+                // return ()
+            },
+            // () => `/profile`
         )
     }
 
     const title = <h1>Ora, descrivi il tuo annuncio</h1>
     const content = (
-        <form onSubmit={handlePublishAdvertisement}>
+        <form className={classes.container} onSubmit={handlePublishAdvertisement}>
             {renderFormInputs()}
-            <NewAdvertisementFooter stepPosition={3}/>
+            <MultipleImagesUpload
+                files={files}
+                onSelectFiles={handleSelectMultipleFiles}
+                onUnselectFile={handleUnselectFile}
+            />
+            <NewAdvertisementFooter isDisabledNextStep={!isFormValid()} stepPosition={3}/>
         </form>
     )
 

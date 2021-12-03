@@ -5,11 +5,10 @@ const User = require('../../models/user');
 const Rental = require('../../models/rental');
 const Boat = require('../../models/boat');
 
-const {promises} = require('fs');
 const {userNotFound, invalidPassword, duplicateEmail, samePassword, userWithRentals, userWithBoats} = require("../../helpers/problemMessages");
 const {transformUser} = require("./merge");
 const {authenticated} = require("../../auth/auth");
-const {getUserDir} = require("../../helpers/utils");
+const {getUserDir, rmDir} = require("../../helpers/fileHandlers");
 
 const ACCESS_EXPIRE_TIME = '1m'
 const REFRESH_EXPIRE_TIME = '7d'
@@ -119,10 +118,7 @@ module.exports = {
             const {deletedCount} = await User.deleteOne({_id: req.userId})
             if (deletedCount === 0) return {deleteUserProblem: userNotFound}
 
-            const USER_DIR = getUserDir(req.userId);
-            await promises.access(USER_DIR)
-                .then(async () => await promises.rm(USER_DIR, {recursive: true}))
-                .catch(() => console.log("Can't find user dir"))
+            await rmDir(getUserDir(req.userId))
 
             return { deletedUserId: req.userId }
         } catch (err) { throw new Error(`Can't delete user. ${err}`)}

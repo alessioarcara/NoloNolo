@@ -121,7 +121,7 @@ module.exports = {
             user.userType = 'shipowner'
             user.save()
 
-            return {publishAdvertisementData: transformBoat(boat)}
+            return {publishAdvertisementData: transformBoat(boat._doc)}
         } catch (err) { throw new Error(`Can't publish advertisement. ${err}`)}
     }),
     withdrawAdvertisement: authenticated(authorization('shipowner')(async ({boatId}, {req}) => {

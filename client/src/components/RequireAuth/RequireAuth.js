@@ -1,7 +1,7 @@
 import {useContext, useEffect, useRef, useState} from "react";
 import AuthContext from "../../store/auth-context";
 import {Navigate} from "react-router-dom";
-import LoadingSpinner from "../UI/LoadingSpinner/LoadingSpinner";
+import Fallback from "../UI/Fallback/Fallback";
 
 const RequireAuth = ({children}) => {
     const [isLoading, setIsLoading] = useState(true)
@@ -19,9 +19,7 @@ const RequireAuth = ({children}) => {
     if (isLoggedIn) return children
     return (
         isLoading ?
-            <div style={{position: "absolute", top: "50%", left: "50%"}}>
-                <LoadingSpinner/>
-            </div> :
+            <Fallback/> :
             isLoggedIn ?
                 children :
                 <Navigate to="/auth" replace/>

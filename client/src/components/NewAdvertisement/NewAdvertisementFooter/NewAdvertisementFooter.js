@@ -5,9 +5,9 @@ import {useNavigate} from "react-router-dom";
 
 import classes from "./NewAdvertisementFooter.module.css"
 
-const steps = ["Boat", "Location", "Advertisement"]
+const steps = ["Barca", "Posizione", "Annuncio"]
 
-const NewAdvertisementFooter = ({stepPosition}) => {
+const NewAdvertisementFooter = ({isDisabledNextStep, stepPosition}) => {
     const navigate = useNavigate();
 
     const goBackHandler = () => {
@@ -23,6 +23,7 @@ const NewAdvertisementFooter = ({stepPosition}) => {
                 firstButtonClickHandler={goBackHandler}
                 firstButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-secondary`}
                 secondButtonClassName={`${classes["newAdvertisement-actions"]} btn btn-outline-primary`}
+                secondButtonDisabled={isDisabledNextStep}
                 secondButtonType="submit"
             />
         </div>

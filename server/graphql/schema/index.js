@@ -6,6 +6,7 @@ const advertisementType = require('./advertisement')
 const reviewType = require('./review')
 const rentalType = require('./rental')
 const favoriteType = require("./favorite");
+const imageType = require("./image");
 
 const rootSchema = `
         ${authType}
@@ -15,6 +16,7 @@ const rootSchema = `
         ${favoriteType}
         ${reviewType}
         ${rentalType}
+        ${imageType}
         
         scalar Upload
         
@@ -40,7 +42,6 @@ const rootSchema = `
             updateUser(inputUpdateUser: UpdateUserInput!): updateUserPayload!
             deleteUser: deleteUserPayload!
             changePassword(inputChangePassword: ChangePasswordInput!): changePasswordPayload!
-            addAvatar(upload: Upload!): addAvatarPayload!
             addBoat(inputBoat: BoatInput!): addBoatPayload!
             removeBoat(boatId: ID!): removeBoatPayload!
             insertBoatLocation(inputInsertBoatLocation: InsertBoatLocationInput!): insertBoatLocationPayload!
@@ -54,6 +55,8 @@ const rootSchema = `
             publishReview(inputReview: ReviewInput!): publishReviewPayload!
             addFavorite(boatId: ID!): FavoritesPayload!
             removeFavorite(boatId: ID!): FavoritesPayload!
+            addAvatar(upload: Upload!): addAvatarPayload!
+            addBoatImages(files: [Upload!]! boatId: ID!): addBoatImagesPayload!
         }
         
         schema {

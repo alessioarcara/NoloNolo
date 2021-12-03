@@ -1,14 +1,17 @@
-import React, {useCallback, useContext, useEffect, useMemo, useState} from "react";
+import React, {Suspense, useCallback, useContext, useEffect, useMemo, useState} from "react";
 import {Route, Routes, useNavigate, useParams} from 'react-router-dom';
 import useHttp from "../hooks/use-http";
 import {body_userBoats} from "../helpers/httpConfig";
 import AuthContext from "../store/auth-context";
-import NewBoat from "../components/NewAdvertisement/NewBoat";
-import NewBoatLocation from "../components/NewAdvertisement/NewBoatLocation";
-import NewBoatAdvertisement from "../components/NewAdvertisement/NewBoatAdvertisement";
-import AvailableBoats from "../components/NewAdvertisement/AvailableBoats";
 import {aggregateBoatsWithRentals, parseMutationResponse} from "../helpers/Utils/utils";
 import Modal from "../components/UI/Modal/Modal";
+import Fallback from "../components/UI/Fallback/Fallback";
+
+const UserBoats = React.lazy(() => import('../components/NewAdvertisement/AvailableBoats'));
+const NewBoat = React.lazy(() => import('../components/NewAdvertisement/NewBoat'));
+const NewLocation = React.lazy(() => import('../components/NewAdvertisement/NewBoatLocation'));
+const NewAdvertisement = React.lazy(() => import('../components/NewAdvertisement/NewBoatAdvertisement'));
+
 
 const NewAdvertisementPage = () => {
     const [userBoats, setUserBoats] = useState([])
@@ -17,7 +20,7 @@ const NewAdvertisementPage = () => {
     const {token} = useContext(AuthContext)
 
     const boatId = useParams()['*'].split('/')[0];
-    const userBoat = useMemo(() => userBoats.filter(boat => boat._id === boatId)[0], [userBoats, boatId])
+    const userBoat = useMemo(() => userBoats && userBoats.filter(boat => boat._id === boatId)[0], [userBoats, boatId])
 
     useEffect(() => {
         sendRequest({body: body_userBoats, token}, resData => {
@@ -42,17 +45,19 @@ const NewAdvertisementPage = () => {
             <Route path={'boat'} element={
                 <NewBoat
                     boat={userBoat}
+                    key={userBoat ? userBoat._id : undefined}
                     onMutationUserBoat={handleMutationUserBoat}
                 />
             }/>
             <Route path={'location'} element={
-                <NewBoatLocation
+                <NewLocation
                     boat={userBoat}
+                    key={userBoat ? userBoat._id : undefined}
                     onMutationUserBoat={handleMutationUserBoat}
                 />
             }/>
             <Route path={'advertisement'} element={
-                <NewBoatAdvertisement
+                <NewAdvertisement
                     onMutationUserBoat={handleMutationUserBoat}
                     boatId={boatId}
                 />
@@ -61,12 +66,12 @@ const NewAdvertisementPage = () => {
     )
 
     return (
-        <>
+        <Suspense fallback={<Fallback/>}>
             {/*{status === 'completed' && payload && payload.authProblem && <Modal title="Error">{payload.authProblem}</Modal>}*/}
             {status === 'completed' && error && <Modal title="Error">{error}</Modal>}
             <Routes>
                 <Route index element={
-                    <AvailableBoats
+                    <UserBoats
                         userName={user ? user.email : 'utente'}
                         userBoats={userBoats}
                         onMutationUserBoat={handleMutationUserBoat}
@@ -81,7 +86,7 @@ const NewAdvertisementPage = () => {
                     {stepRoutes}
                 </Route>
             </Routes>
-        </>
+        </Suspense>
     );
 }
 

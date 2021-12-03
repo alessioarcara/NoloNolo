@@ -2,7 +2,7 @@ const DataLoader = require('dataloader');
 
 const User = require('../../models/user');
 const Boat = require('../../models/boat');
-const {dateToString} = require("../../helpers/utils");
+const {dateToString} = require("../../helpers/dateHandlers");
 
 
 const userLoader = new DataLoader(userIds => {
@@ -24,7 +24,7 @@ const boat = async boatsId => {
 const user = async userId => {
     try {
         const user = await userLoader.load(userId.toString());
-        userLoader.clear(userId.toString())
+        // userLoader.clear(userId.toString())
         return user
     } catch (err) {
         throw err
