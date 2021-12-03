@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import useForm from "../../hooks/use-form";
@@ -14,6 +14,7 @@ const NewBoatAdvertisement = ({boatId, onMutationUserBoat}) => {
     const [files, setFiles] = useState([])
     const [error, setError] = useState("")
     const {formValues, renderFormInputs, isFormValid} = useForm(boatAdvertisementForm)
+    const {breakpoint} = useContext(breakpointContext)
 
     const handleSelectMultipleFiles = useCallback(({target: {files}}) => {
         if (files.length > 3) return setError("Non puoi aggiungere più di tre immagini")

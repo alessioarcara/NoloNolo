@@ -1,10 +1,28 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin: 1rem 0;}
+
+.input > div {
+    font-weight: bold;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0.5rem;
+}
+
+.error-text {
+    color: #b40e0e;
+}
+
 .multiple-images-upload {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.3rem;
-    border: 1px solid #000;
+    border-radius: 6px;
+    border: 1px solid #ccc;
     padding: 1rem;
 }
 
@@ -12,15 +30,7 @@
     display: none;
 }
 
-.images-preview {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
 .container {
-    flex: 1 1 10rem;
     position: relative;
 }
 
@@ -57,7 +67,7 @@
 }
 
 .add-images-container svg {
-    width: 50%;
+    width: 4rem;
 }
 
 .add-images-container:hover {

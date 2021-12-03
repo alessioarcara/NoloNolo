@@ -65,3 +65,9 @@ input[type=radio]:checked + .boat-label {
         gap: 0.5rem;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .boatTypes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

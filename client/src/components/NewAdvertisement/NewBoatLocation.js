@@ -12,6 +12,7 @@ import {useContext} from "react";
 import breakpointContext from "../../store/breakpoint-context";
 
 const NewBoatLocation = ({onMutationUserBoat, boat}) => {
+    const {breakpoint} = useContext(breakpointContext)
     const {formValues, renderFormInputs, isFormValid} = useForm(boat && boat.isDocked ?
         boatLocationForm(boat.isDocked.harbour, boat.isDocked.city, boat.isDocked.region) : boatLocationForm()
     )

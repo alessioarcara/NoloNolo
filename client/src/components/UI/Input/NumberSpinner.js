@@ -26,8 +26,8 @@ const NumberSpinner = (props) => {
                 name,
                 value:
                     isNaN(value) ? valueChange :
-                    value + valueChange > valueChange * 100 ? value :
-                    value + valueChange
+                        value + valueChange > valueChange * 100 ? value :
+                            value + valueChange
             }
         })
     }, [handleChange, name, valueChange])
@@ -38,8 +38,8 @@ const NumberSpinner = (props) => {
                 name,
                 value:
                     isNaN(value) ? 0 :
-                    value - valueChange < 0 ? 0 :
-                    value - valueChange
+                        value - valueChange < 0 ? 0 :
+                            value - valueChange
             }
         })
     }, [handleChange, name, valueChange])
@@ -48,23 +48,26 @@ const NumberSpinner = (props) => {
     return (
         <div className={`${classes.control} ${inputClasses}`}>
             <label htmlFor={name}>{label}</label>
-            <div className={numberSpinnerClasses.numberSpinner}>
-                <button type="button"
-                        disabled={value <= 0}
-                        className={numberSpinnerClasses["decrease-btn"]}
-                        onClick={handleDecrease.bind(this, parseInt(value))}>&#45;
-                </button>
-                <input type={type}
-                       name={name}
-                       value={value}
-                       onChange={handleChange}
-                       onBlur={handleBlur}/>
-                <button type="button"
-                        disabled={value >= valueChange * 100}
-                        className={numberSpinnerClasses["increase-btn"]}
-                        onClick={handleIncrease.bind(this, parseInt(value))}>
-                    &#43;
-                </button>
+            <div className={numberSpinnerClasses['number-spinner-container']}>
+                <div className={numberSpinnerClasses.numberSpinner}>
+                    <button type="button"
+                            disabled={value <= 0}
+                            className={numberSpinnerClasses["decrease-btn"]}
+                            onClick={handleDecrease.bind(this, parseInt(value))}>&#45;
+                    </button>
+                    <input type={type}
+                           name={name}
+                           value={value}
+                           onChange={handleChange}
+                           onBlur={handleBlur}/>
+                    <button type="button"
+                            disabled={value >= valueChange * 100}
+                            className={numberSpinnerClasses["increase-btn"]}
+                            onClick={handleIncrease.bind(this, parseInt(value))}>
+                        &#43;
+                    </button>
+                </div>
+                {hasErrors && (<span className={numberSpinnerClasses["error-text"]}>{errorMessage}</span>)}
             </div>
             {/*{hasErrors && (<span className={classes["error-text"]}>{errorMessage}</span>)}*/}
         </div>

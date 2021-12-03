@@ -11,9 +11,6 @@
 
 .inputs {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 2rem;
 }
 

@@ -3,7 +3,7 @@ import useForm from "../../hooks/use-form";
 import {boatForm} from "../../helpers/formConfig";
 import BoatTypes from "../UI/Input/BoatTypes";
 
-import classes from "./NewBoat.module.css"
+import classes from "./NewBoat.module.css";
 import NewAdvertisementFooter from "./NewAdvertisementFooter/NewAdvertisementFooter";
 import {body_addBoat} from "../../helpers/httpConfig";
 import {useCallback, useContext, useState} from "react";

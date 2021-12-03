@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+}
+
+.number-spinner-container {
+    display: flex;
+    flex-direction: column;
 }
 
 .numberSpinner input {
