@@ -9,6 +9,11 @@
     text-align: center;
 }
 
+.numberSpinner input::-webkit-outer-spin-button,
+.numberSpinner input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .increase-btn, .decrease-btn {
     border-radius: 40%;
