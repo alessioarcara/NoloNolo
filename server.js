@@ -52,7 +52,7 @@ mongoose.connect(process.env.DATABASE_URL, {
     useUnifiedTopology: true,
     useCreateIndex: true })
     .then(() => {
-        app.listen(process.env.PORT); })
+        app.listen(process.env.PORT || 3010); })
     .catch(err => {
         console.log(err) }
     )
