@@ -16,22 +16,18 @@ const boatLoader = new DataLoader(boatIds => {
 const boat = async boatsId => {
     try {
         const boat = await boatLoader.load(boatsId.toString())
-        boatLoader.clear(boatsId.toString())
         return transformBoat(boat);
     } catch (err) {throw err}
 }
 
 const user = async userId => {
     try {
-        const user = await userLoader.load(userId.toString());
-        // userLoader.clear(userId.toString())
-        return user
-    } catch (err) {
-        throw err
-    }
+        return await userLoader.load(userId.toString())
+    } catch (err) {throw err}
 }
 
-const transformUser = user => {
+const transformUser = (user, clearCache = false) => {
+    if (clearCache) userLoader.clear(user._id.toString())
     return {
         ...user,
         email: user.email,
@@ -44,7 +40,8 @@ const transformUser = user => {
     }
 }
 
-const transformBoat = boat => {
+const transformBoat = (boat, clearCache = false) => {
+    if (clearCache) boatLoader.clear(boat._id.toString())
     return {
         ...boat,
         owner: user.bind(this, boat.shipowner),
@@ -67,7 +64,7 @@ const transformBoat = boat => {
     }
 }
 
-const transformRental = rental => {
+const transformRental = (rental) => {
     return {
         ...rental,
         customer: user.bind(this, rental.customer),
@@ -82,7 +79,8 @@ const transformRental = rental => {
     }
 }
 
-const transformReview = review => {
+const transformReview = (review, boatIdCacheToClear) => {
+    if (boatIdCacheToClear) boatLoader.clear(boatIdCacheToClear.toString())
     return {
         ...review,
         creator: user.bind(this, review.customer)
