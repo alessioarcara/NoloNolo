@@ -56,7 +56,7 @@ const storeFile = async (upload, filePath, resize = false) => {
 module.exports = {
     addAvatar: authenticated(async ({upload}, {req}) => {
         try {
-            if (!upload.file) return { addAvatarProblem: noFileAttached }
+            if (!upload.promise) return { addAvatarProblem: noFileAttached }
             const user = await User.findById(req.userId)
             if (!user) return { addAvatarProblem: userNotFound }
 
