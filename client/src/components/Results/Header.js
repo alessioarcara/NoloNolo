@@ -1,57 +1,48 @@
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import classes from './Header.module.css';
 import BackIcon from "../UI/icons/BackIcon";
-import {useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import FiltersIcon from "../UI/icons/FiltersIcon";
 import Filter from "./Filters/Filter";
 import Modal from "../UI/Modal/Modal";
 
 const Header = ({onSubmitFilters, boatsNumber, boatsMaxPrice}) => {
     /* useState per gestire la visualizzazione del menù */
-    const [show, setShow] = useState(false)
+    const [isShownModal, setIsShownModal] = useState(false)
 
-    /* navigate per tornare alla pagina precedente */
-    const navigate = useNavigate()
-
-    /* Function per tornare alla pagina precedente */
-    const backPage = () => {
-        navigate(-1)
-    }
-
-    const showHandler = () => {
-        setShow(prevState => !prevState)
-    }
+    const showOrHideModalHandler = useCallback(() => {
+        setIsShownModal(prevState => !prevState)
+    }, [])
 
     return (
         <>
+            {isShownModal &&
+                <Modal title='Filtra i tuoi risultati' closeModalHandler={showOrHideModalHandler}>
+                    <Filter
+                        onSubmitFilters={onSubmitFilters} onClose={showOrHideModalHandler} boatsMaxPrice={boatsMaxPrice}
+                    />
+                </Modal>
+            }
             <header className={classes['results-header']}>
-                <button
-                    type='button'
+                <Link
+                    to={-1}
                     className={classes['btn-back']}
-                    onClick={backPage}
                 >
                     <BackIcon/>
-                </button>
+                </Link>
                 <div className='subtitle'>{!boatsNumber ?
                     "Caricamento risultati ..." :
                     typeof(boatsNumber) === "number" ? `${boatsNumber} barche trovate` : boatsNumber}</div>
                 <button
                     type='button'
                     className={classes['btn-filters']}
-                    onClick={showHandler}
+                    onClick={showOrHideModalHandler}
                 >
                     <FiltersIcon/>
                 </button>
             </header>
-            {show &&
-            <Modal title='Filtra i tuoi risultati' closeModalHandler={showHandler}>
-                <Filter
-                    onSubmitFilters={onSubmitFilters} onClose={showHandler} boatsMaxPrice={boatsMaxPrice}
-                />
-            </Modal>
-            }
         </>
     );
 };
 
-export default Header;
+export default React.memo(Header);

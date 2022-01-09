@@ -48,4 +48,4 @@ const NavigationBar = forwardRef(({authenticated, isIntersecting}, navigationRef
     );
 });
 
-export default NavigationBar;
+export default React.memo(NavigationBar);

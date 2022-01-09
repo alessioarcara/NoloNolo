@@ -18,8 +18,9 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        navigate({replace: true})
-    }, [navigate])
+        if (location.state)
+            navigate({replace: true})
+    }, [location.state, navigate])
 
     return (
         <>

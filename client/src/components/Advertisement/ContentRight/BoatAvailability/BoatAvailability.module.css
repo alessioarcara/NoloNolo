@@ -13,6 +13,7 @@
 .delete-dates {
     width: fit-content;
     padding-left: 0;
+    color: black;
 }
 
 .delete-dates:disabled, .delete-dates:disabled:hover {

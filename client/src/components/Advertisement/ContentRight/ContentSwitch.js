@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './ContentSwitch.module.css'
 import {useCallback} from "react";
 import {SHOW_VISIBLE_CONTENT} from "../../../helpers/Utils/constants";
@@ -26,4 +27,4 @@ const ContentSwitch = ({dispatch}) => {
     );
 }
 
-export default ContentSwitch;
+export default React.memo(ContentSwitch);

@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './Header.module.css';
 import {useNavigate} from "react-router-dom";
 import {useCallback} from "react";
@@ -41,4 +42,4 @@ const Header = ({
     )
 }
 
-export default Header
+export default React.memo(Header)

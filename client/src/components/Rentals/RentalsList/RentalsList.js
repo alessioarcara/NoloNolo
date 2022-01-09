@@ -1,3 +1,4 @@
+import React from "react";
 import RentalCard from "../RentalCard/RentalCard";
 import {useCallback, useMemo} from "react";
 import ElementsNotFound from "../../UI/ElementsNotFound/ElementsNotFound";
@@ -13,7 +14,7 @@ const RentalsList = ({
                         active,
                         future
                     }) => {
-    let content
+    let content;
     const openedRentals = useCallback(() => {
         return previousRentals || activeRentals || futureRentals
     }, [previousRentals, activeRentals, futureRentals])
@@ -69,4 +70,4 @@ const RentalsList = ({
     return content
 };
 
-export default RentalsList;
+export default React.memo(RentalsList);

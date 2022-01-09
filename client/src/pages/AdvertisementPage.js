@@ -8,7 +8,7 @@ import {formatDate} from "../helpers/Utils/utils";
 import LetSuspense from "../components/UI/LetSuspense/LetSuspense";
 import {AdvertisementPlaceholder} from "../components/Advertisement/AdvertisementPlaceholder/AdvertisementPlaceholder";
 import Modal from "../components/UI/Modal/Modal";
-import InvoiceReport from "../components/Advertisement/BoatBill/InvoiceReport/InvoiceReport";
+import InvoiceReport from "../components/BoatBill/InvoiceReport/InvoiceReport";
 import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
 import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
@@ -70,7 +70,7 @@ const AdvertisementPage = () => {
             placeholder={AdvertisementPlaceholder}
             multiplier={1}
             checkOnce={true}
-            delay={2000}
+            initialDelay={400}
         >
             {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
             <Modal title="Errore">

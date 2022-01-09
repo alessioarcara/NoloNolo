@@ -23,15 +23,14 @@ const boat = async boatsId => {
 
 const user = async userId => {
     try {
-        const user = await userLoader.load(userId.toString());
-        // userLoader.clear(userId.toString())
-        return user
+        return await userLoader.load(userId.toString())
     } catch (err) {
         throw err
     }
 }
 
-const transformUser = user => {
+const transformUser = (user, clearCache = false) => {
+    if (clearCache) userLoader.clear(user._id.toString())
     return {
         ...user,
         email: user.email,

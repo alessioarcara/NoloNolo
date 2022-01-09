@@ -1,5 +1,5 @@
 import classes from './BillHeader.module.css';
-import ShipyardIcon from "../../../UI/icons/ShipyardIcon";
+import ShipyardIcon from "../../UI/icons/ShipyardIcon";
 
 const BillHeader = ({shipowner, city, region, harbour}) => {
     return (

@@ -4,8 +4,10 @@ import Vote from "../../../UI/Vote/Vote";
 import {body_publishReview} from "../../../../helpers/httpConfig";
 import {formatDayMonthYearDate} from "../../../../helpers/Utils/utils";
 
+
+const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
+
 const ReviewModal = ({rentalId, review, isReviewed, onPublishReview}) => {
-    const votes = ['Scadente', 'Non buono', 'Buono', 'Ottimo', 'Eccellente']
     const [quoteIndex, setQuoteIndex] = useState()
     const [textArea, setTextArea] = useState('')
 

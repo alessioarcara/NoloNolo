@@ -27,5 +27,5 @@ const ContentLeft = ({isVisible, images, coordinates}) => {
     );
 }
 
-export default ContentLeft;
+export default React.memo(ContentLeft);
 

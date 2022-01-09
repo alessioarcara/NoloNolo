@@ -4,11 +4,11 @@ import {useCallback, useState} from "react";
 const Tooltip = ({text, children, isShownTooltip = false, positionTop = true}) => {
     const [isHover, setIsHover] = useState(false)
 
-    const handleMutationEnterMouse = useCallback(() => {
+    const handleEnterMouse = useCallback(() => {
         setIsHover(true)
     }, [])
 
-    const handleMutationLeaveMouse = useCallback(() => {
+    const handleLeaveMouse = useCallback(() => {
         setIsHover(false)
     }, [])
 
@@ -24,8 +24,8 @@ const Tooltip = ({text, children, isShownTooltip = false, positionTop = true}) =
                 </div>
             }
             <div
-                onMouseEnter={handleMutationEnterMouse}
-                onMouseLeave={handleMutationLeaveMouse}
+                onMouseEnter={handleEnterMouse}
+                onMouseLeave={handleLeaveMouse}
             >
                 {children}
             </div>

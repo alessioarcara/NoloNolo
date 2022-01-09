@@ -1,42 +1,36 @@
 import classes from './UserAccountDelete.module.css';
-import useHttp from "../../../hooks/use-http";
 import {body_deleteUser} from "../../../helpers/httpConfig";
 import Modal from "../../UI/Modal/Modal";
-import React, {useContext, useState} from "react";
+import React, {useCallback, useState} from "react";
 import ConfirmSection from "../../UI/ConfirmSection/ConfirmSection";
-import AuthContext from "../../../store/auth-context";
 import {destructurePayload} from "../../../helpers/Utils/utils";
 
-const UserAccountDelete = () => {
-    const {token, logout} = useContext(AuthContext)
-    const {status, data: problem, error, sendRequest} = useHttp(true)
-    const [modal, setModal] = useState(false)
+const UserAccountDelete = ({sendDelete, logout}) => {
+    const [isShowModal, setIsShowModal] = useState(false)
 
-    const handleDeleteAccount = () => {
-        sendRequest({body: body_deleteUser, token}, resData => {
+    const showOrHideModalHandler = useCallback(() => {
+        setIsShowModal(prevState => !prevState)
+    }, [])
+
+    const deleteAccountHandler = useCallback(() => {
+        sendDelete(body_deleteUser, resData => {
             const payload = destructurePayload(resData)
             if (payload[0])
                 logout()
             else {
-                handleMutationModal()
+                showOrHideModalHandler()
                 return payload[1]
             }
         })
-    }
-
-    const handleMutationModal = () => {
-        setModal(prevState => !prevState)
-    }
+    }, [sendDelete, showOrHideModalHandler, logout])
 
     return (
         <>
-            {status === 'completed' && error && <Modal title="Errore">{error}</Modal>}
-            {status === 'completed' && problem && <Modal title="Errore">{problem}</Modal>}
-            {modal &&
-                <Modal closeModalHandler={handleMutationModal}>
+            {isShowModal &&
+                <Modal closeModalHandler={showOrHideModalHandler}>
                     <ConfirmSection
                         text="Sei sicuro di voler eliminare definitivamente il tuo account?"
-                        onConfirm={handleDeleteAccount}
+                        onConfirm={deleteAccountHandler}
                     />
                 </Modal>
             }
@@ -46,7 +40,7 @@ const UserAccountDelete = () => {
                 </div>
                 <button
                     className={classes['delete-btn']}
-                    onClick={handleMutationModal}
+                    onClick={showOrHideModalHandler}
                 >
                     Procedi ora
                 </button>
@@ -55,4 +49,4 @@ const UserAccountDelete = () => {
     );
 }
 
-export default UserAccountDelete;
+export default React.memo(UserAccountDelete);

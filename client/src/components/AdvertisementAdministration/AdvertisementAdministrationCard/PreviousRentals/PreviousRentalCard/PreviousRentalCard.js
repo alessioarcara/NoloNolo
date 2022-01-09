@@ -2,7 +2,7 @@ import classes from './PreviousRentalCard.module.css';
 import {formatDayMonthYearDate} from "../../../../../helpers/Utils/utils";
 import Vote from "../../../../UI/Vote/Vote";
 import {useState} from "react";
-import BoatBill from "../../../../Advertisement/BoatBill/BoatBill";
+import BoatBill from "../../../../BoatBill/BoatBill";
 import Modal from "../../../../UI/Modal/Modal";
 
 const stars = [0, 1, 2, 3, 4]

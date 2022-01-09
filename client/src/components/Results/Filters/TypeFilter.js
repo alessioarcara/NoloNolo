@@ -34,4 +34,4 @@ const TypeFilter = ({dispatch, types}) => {
     );
 };
 
-export default TypeFilter;
+export default React.memo(TypeFilter);

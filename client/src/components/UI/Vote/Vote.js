@@ -1,3 +1,4 @@
+import React from "react";
 import Star from "./Star/Star";
 
 const Vote = ({votes, quoteIndex, changeQuoteIndex, placeholder = false}) => {
@@ -15,4 +16,4 @@ const Vote = ({votes, quoteIndex, changeQuoteIndex, placeholder = false}) => {
     )
 }
 
-export default Vote
+export default React.memo(Vote)

@@ -25,4 +25,4 @@ const BoatTypes = ({boatType, onCheckBoatType}) => {
     );
 }
 
-export default BoatTypes;
+export default React.memo(BoatTypes);

@@ -1,3 +1,4 @@
+import React from "react";
 import AdvertisementAdministrationCard from "./AdvertisementAdministrationCard/AdvertisementAdministrationCard";
 import AnnouncementListLayout from "../UI/Layout/AnnouncementListLayout/AnnouncementListLayout";
 import ElementsNotFound from "../UI/ElementsNotFound/ElementsNotFound";
@@ -28,4 +29,4 @@ const AdvertisementAdministrationList = ({advertisements, onMutateAdvertisement}
     )
 }
 
-export default AdvertisementAdministrationList
+export default React.memo(AdvertisementAdministrationList)

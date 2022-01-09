@@ -1,3 +1,5 @@
+import React from "react";
+
 const UserIcon = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
@@ -13,4 +15,4 @@ const UserIcon = () => {
     );
 };
 
-export default UserIcon;
+export default React.memo(UserIcon);

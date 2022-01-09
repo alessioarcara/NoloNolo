@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./ShipownerInfo.module.css";
 import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
 import {DEFAULT_AVATAR} from "../../../../helpers/Utils/constants";
@@ -29,4 +30,4 @@ const ShipownerInfo = ({shipownerEmail, shipownerAvatar, shipownerPresentation})
     );
 }
 
-export default ShipownerInfo;
+export default React.memo(ShipownerInfo);

@@ -25,4 +25,4 @@ const CapacityFilter = ({guests, dispatch}) => {
     );
 }
 
-export default CapacityFilter;
+export default React.memo(CapacityFilter);

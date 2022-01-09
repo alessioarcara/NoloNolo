@@ -1,4 +1,4 @@
-import {useCallback, useState} from "react";
+import React, {useCallback, useState} from "react";
 import classes from './BoatReviews.module.css';
 import StarIcon from "../../../UI/icons/StarIcon";
 import {averageReviews} from "../../../../helpers/Utils/utils";
@@ -57,4 +57,4 @@ const BoatReviews = ({reviews}) => {
     );
 }
 
-export default BoatReviews
+export default React.memo(BoatReviews)

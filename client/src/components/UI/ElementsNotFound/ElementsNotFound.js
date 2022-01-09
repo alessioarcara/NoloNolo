@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './ElementsNotFound.module.css';
 import {Link} from "react-router-dom";
 
@@ -22,4 +23,4 @@ const ElementsNotFound = ({warningText, warningTextButton, path, hasBackdrop = t
     );
 }
 
-export default ElementsNotFound
+export default React.memo(ElementsNotFound)

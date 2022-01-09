@@ -1,11 +1,13 @@
+import React from "react";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import classes from "./Fallback.module.css"
 
 const Fallback = () => {
     return (
-        <div style={{display: "flex", width:"100%", height:"100vh", alignItems: "center"}}>
+        <div className={classes.fallback}>
             <LoadingSpinner/>
         </div>
     )
 }
 
-export default Fallback
+export default React.memo(Fallback)

@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './Review.module.css';
 import ReadMoreText from "../../../UI/ReadMoreText/ReadMoreText";
 import {formatDayMonthYearDate, getImagePath} from "../../../../helpers/Utils/utils";
@@ -27,4 +28,4 @@ const Review = ({avatar, creator, createdAt, body}) => {
     );
 }
 
-export default Review;
+export default React.memo(Review);

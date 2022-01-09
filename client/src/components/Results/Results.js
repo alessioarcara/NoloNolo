@@ -1,3 +1,4 @@
+import React from "react";
 import LetSuspense from "../UI/LetSuspense/LetSuspense";
 import './BoatPlaceholder/BoatPlaceholder.module.css';
 import {BoatPlaceholder} from "./BoatPlaceholder/BoatPlaceholder";
@@ -10,7 +11,7 @@ const Results = ({status, boats, switchPage, numberPage}) => {
 
     const store = useStore()[0]
 
-    const updatedBoats = boats && store.userFavorites && boats.map(boat => {
+    const updatedBoats = store.userFavorites && boats?.map(boat => {
         if (store.userFavorites.some(userFav => userFav._id === boat._id)) {
             return {
                 ...boat,
@@ -29,14 +30,14 @@ const Results = ({status, boats, switchPage, numberPage}) => {
                 <LetSuspense
                     condition={status === 'completed'}
                     placeholder={BoatPlaceholder}
-                    initialDelay={2000}
+                    initialDelay={400}
                     checkOnce={true}
                     multiplier={20}
                 >
                     <BoatList boats={updatedBoats || boats}/>
                 </LetSuspense>
             </BoatListLayout>
-            {boats && boats.length > 0 &&
+            {boats?.length > 0 &&
             <Pagination
                 dataCount={boats[0].totalCount}
                 dataLimit={20}
@@ -48,4 +49,4 @@ const Results = ({status, boats, switchPage, numberPage}) => {
     );
 };
 
-export default Results;
+export default React.memo(Results);

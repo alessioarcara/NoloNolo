@@ -1,3 +1,4 @@
+import React from "react";
 import AdministrationRental from "./Rental/AdministrationRental";
 import ElementsNotFound from "../UI/ElementsNotFound/ElementsNotFound";
 
@@ -27,4 +28,4 @@ const AdministrationRentalList = ({handleMutationAdministrationRentals, rentals}
     );
 }
 
-export default AdministrationRentalList;
+export default React.memo(AdministrationRentalList);

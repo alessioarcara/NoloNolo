@@ -1,3 +1,4 @@
+import React from "react";
 import SplitScreenLayout from "../UI/Layout/SplitScreenLayout/SplitScreenLayout";
 import {Link} from "react-router-dom";
 import classes from "./AvailableBoats.module.css"
@@ -66,4 +67,4 @@ const AvailableBoats = ({userName, userBoats, onMutationUserBoat}) => {
     );
 };
 
-export default AvailableBoats;
+export default React.memo(AvailableBoats);

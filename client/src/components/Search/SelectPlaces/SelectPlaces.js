@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import classes from "./SelectPlaces.module.css";
-import SearchBar from "../../Home/SearchBar";
+import SearchBar from "../../UI/SearchBar/SearchBar";
 import Location from "./Location";
 import useHttp from "../../../hooks/use-http";
 import {debounce} from "../../../helpers/Utils/utils";
@@ -33,7 +33,7 @@ const SelectPlaces = ({closeModalHandler, moveClickHandler}) => {
     if (status === "completed" && !error && locations.length > 0) {
         content = locations.map(location =>
             <Location
-                onClick={moveClickHandler.bind(this, location.city, location.region )}
+                moveClickHandler={moveClickHandler}
                 key={location.city}
                 city={location.city}
                 region={location.region}

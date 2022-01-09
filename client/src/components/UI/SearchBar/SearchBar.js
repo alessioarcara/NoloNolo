@@ -1,11 +1,8 @@
-import React, {useImperativeHandle, useMemo, useRef} from "react";
+import React, {useImperativeHandle, useRef} from "react";
 import classes from './SearchBar.module.css';
-import SearchIcon from "../UI/icons/MenuIcons/SearchIcon";
-import {useEffect, useState } from "react";
-import {throttle} from "../../helpers/Utils/utils";
+import SearchIcon from "../icons/MenuIcons/SearchIcon";
 
 const SearchBar = React.forwardRef((props, ref) => {
-    const [isWhite, setIsWhite] = useState(props.isWhite);
     const inputRef = useRef()
 
     useImperativeHandle(ref, () => ({
@@ -14,21 +11,8 @@ const SearchBar = React.forwardRef((props, ref) => {
         }
     }));
 
-    const listenToScroll = useMemo(() => throttle(() => {
-        if (window.scrollY >= 60) {
-            setIsWhite(true);
-        } else {
-            setIsWhite(false);
-        }
-    }, 20), [])
-
-    useEffect(() => {
-        window.addEventListener('scroll', listenToScroll, { passive: true });
-        return () => window.removeEventListener('scroll', listenToScroll);
-    }, [listenToScroll])
-
     const searchClasses =
-        props.isShow || isWhite
+        props.isShow || props.isWhite
             ? `${classes['background-searchbar']} ${classes['search-active']}`
             : `${classes['background-searchbar']} ${classes['search']}`
 
@@ -48,4 +32,4 @@ const SearchBar = React.forwardRef((props, ref) => {
     );
 });
 
-export default SearchBar;
+export default React.memo(SearchBar);

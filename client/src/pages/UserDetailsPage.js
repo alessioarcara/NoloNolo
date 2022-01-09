@@ -11,15 +11,17 @@ import BackIcon from "../components/UI/icons/BackIcon";
 import UserAccountDelete from "../components/UserDetails/UserAccountDelete/UserAccountDelete";
 
 const UserDetailsPage = () => {
-    const {token} = useContext(AuthContext)
+    const {token, logout} = useContext(AuthContext)
     const [user, setUser] = useState(null)
     const {error, status, data: problem, sendRequest} = useHttp(false)
 
-    const sendData = useCallback(body => sendRequest({body, token}, parseMutationResponse(setUser)),
-        [sendRequest, token])
+    const sendData = useCallback((body, applyData = parseMutationResponse(setUser)) => {
+        sendRequest({body, token}, applyData)
+    }, [sendRequest, token])
 
-    useEffect(() => sendRequest({body: body_user, token}, resData => setUser(resData.user)),
-        [sendRequest, token])
+    useEffect(() => {
+        sendRequest({body: body_user, token}, resData => setUser(resData.user))
+    }, [sendRequest, token] )
 
     return (
         <>
@@ -39,7 +41,10 @@ const UserDetailsPage = () => {
                 user={user}
                 sendInfo={sendData}
             />
-            <UserAccountDelete/>
+            <UserAccountDelete
+                sendDelete={sendData}
+                logout={logout}
+            />
         </>
     );
 };

@@ -28,7 +28,6 @@ export const circularSlice = (arr, start, end) =>
     end < start ? arr.slice(start).concat(arr.slice(0, end + 1)) : arr.slice(start, end + 1);
 
 /* -------------------------------- Format Utils ---------------------------------- */
-
 /* Settiamo lo style come valuta e prendiamo la valuta Euro. de-DE sta per Germania */
 export const formatNumber = (number) =>
     new Intl.NumberFormat('de-DE', {

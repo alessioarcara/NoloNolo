@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import Modal from "../../UI/Modal/Modal";
 import BreakpointContext from "../../../store/breakpoint-context";
 import DatesModal from "./DatesModal/DatesModal";
-import BoatBill from "../../Advertisement/BoatBill/BoatBill";
+import BoatBill from "../../BoatBill/BoatBill";
 import ReviewModal from "../RentalCard/ReviewModal/ReviewModal";
 import classes from './RentalCard.module.css';
 import {body_deleteRental} from "../../../helpers/httpConfig";

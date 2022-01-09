@@ -38,4 +38,4 @@ const ActionButtons = props => {
     )
 }
 
-export default ActionButtons;
+export default React.memo(ActionButtons);

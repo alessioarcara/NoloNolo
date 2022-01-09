@@ -38,4 +38,4 @@ const RentalsHeader = () => {
     )
 }
 
-export default RentalsHeader
+export default React.memo(RentalsHeader)

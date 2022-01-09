@@ -27,9 +27,9 @@ const FeaturedPlaces = () => {
             <div className="subtitle">Naviga nelle nostre località</div>
             <div
                 className={classes.list}>
-                {circularSlice(places, start, end).map((place, index) => (
+                {circularSlice(places, start, end).map(place => (
                     <PlaceCard
-                        key={index}
+                        key={place}
                         title={place}
                     />)
                 )}

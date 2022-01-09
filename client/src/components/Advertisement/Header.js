@@ -1,3 +1,4 @@
+import React from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import BackIcon from "../UI/icons/BackIcon";
 import classes from './Header.module.css';
@@ -27,4 +28,4 @@ const Header = ({boatId}) => {
     );
 }
 
-export default Header;
+export default React.memo(Header);

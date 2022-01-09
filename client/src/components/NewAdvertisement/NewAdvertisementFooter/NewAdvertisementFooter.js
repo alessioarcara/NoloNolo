@@ -30,4 +30,4 @@ const NewAdvertisementFooter = ({isDisabledNextStep, stepPosition}) => {
     );
 };
 
-export default NewAdvertisementFooter;
+export default React.memo(NewAdvertisementFooter);

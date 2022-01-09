@@ -1,7 +1,7 @@
 import classes from './InvoiceReport.module.css'
-import {formatNumber, formatDayMonthYearDate, rangeDate} from "../../../../helpers/Utils/utils";
+import {formatNumber, formatDayMonthYearDate, rangeDate} from "../../../helpers/Utils/utils";
 import {useMemo} from "react";
-import Button from "../../../UI/Button/Button";
+import Button from "../../UI/Button/Button";
 
 const InvoiceReport = ({dailyFee, fixedFee, start, end, statusRental, handleRentBoat}) => {
     const range = useMemo(() => rangeDate(start, end), [start, end])

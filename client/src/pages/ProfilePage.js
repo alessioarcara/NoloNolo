@@ -46,7 +46,7 @@ const ProfilePage = () => {
         <LetSuspense
             condition={status === 'completed'}
             placeholder={ProfilePlaceholder}
-            initialDelay={400}
+            initialDelay={200}
             multiplier={1}
         >
             <Profile logout={logout}>

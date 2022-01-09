@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import Button from "../UI/Button/Button";
 import classes from "./AuthForm.module.css"
 import useForm from "../../hooks/use-form";
@@ -17,9 +17,9 @@ const AuthForm = () => {
 
     const authCtx = useContext(AuthContext)
 
-    const switchAuthModeHandler = () => {
+    const switchAuthModeHandler = useCallback(() => {
         setIsLogin(prevState => !prevState);
-    };
+    }, []);
 
     const submitHandler = event => {
         event.preventDefault();
@@ -38,7 +38,7 @@ const AuthForm = () => {
     }
 
     useEffect(() => {
-        if (payload && payload["authData"])
+        if (payload?.authData)
             authCtx.login(payload.authData.token)
     }, [authCtx, payload])
 

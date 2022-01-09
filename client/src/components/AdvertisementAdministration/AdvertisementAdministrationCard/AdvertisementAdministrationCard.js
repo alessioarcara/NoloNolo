@@ -27,7 +27,6 @@ const AdvertisementAdministrationCard = ({
             ? setModal(evt.target.dataset.modal)
             : setModal(""), [])
 
-
     const navigate = useNavigate()
     const location = useLocation()
 

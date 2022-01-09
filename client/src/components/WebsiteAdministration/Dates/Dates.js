@@ -42,7 +42,6 @@ const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, boatId, from,
     }, [fetchDates, token, boatId])
 
     return (
-        <>
             <SelectDates
                 moveClickHandler={handleDatesModal}
                 searchClickHandler={handleBackDate}
@@ -54,7 +53,6 @@ const Dates = ({handleDatesModal, handleBackDateRentals, rentalId, boatId, from,
                 endDate={state.endDate}
                 alreadyRentedDates={rentedDates}
             />
-        </>
     )
 }
 

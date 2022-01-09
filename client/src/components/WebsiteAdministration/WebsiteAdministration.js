@@ -2,9 +2,12 @@ import classes from './WebsiteAdministration.module.css';
 import Header from "../UI/Header/Header";
 import AdministrationRentalList from "./AdministrationRentalList";
 import Button from "../UI/Button/Button";
+import {useMemo} from "react";
 
 const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals, logout}) => {
-    const filteredFutureRentals = () => rentals.filter(rental => new Date(rental.from) > new Date())
+    const filteredFutureRentals = useMemo(
+        () => rentals.filter(rental => new Date(rental.from) > new Date()),
+        [rentals])
 
     return (
         <div className={classes['administration-container']}>
@@ -23,7 +26,7 @@ const WebsiteAdministration = ({rentals, handleMutationAdministrationRentals, lo
                             classNameHeader={classes["rentals-list-title"]}
                             classNameTitle={classes["rentals-title"]}/>
                     <AdministrationRentalList
-                        rentals={filteredFutureRentals()}
+                        rentals={filteredFutureRentals}
                         handleMutationAdministrationRentals={handleMutationAdministrationRentals}
                     />
                 </div>

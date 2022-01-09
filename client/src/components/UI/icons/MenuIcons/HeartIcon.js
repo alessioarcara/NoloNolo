@@ -1,3 +1,5 @@
+import React from "react";
+
 const HeartIcon = props => {
     return (
         <svg
@@ -12,4 +14,4 @@ const HeartIcon = props => {
     );
 };
 
-export default HeartIcon;
+export default React.memo(HeartIcon);

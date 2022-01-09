@@ -3,15 +3,17 @@ import {Map, Marker, ZoomControl} from "pigeon-maps"
 import { maptiler } from 'pigeon-maps/providers'
 import BreakpointContext from "../../../store/breakpoint-context";
 
+const defaultCenter = [42.384, 12.613]
+
 const BoatMapPosition = ({boatPosition}) => {
     const maptilerProvider = maptiler('DcfLwyTnMIbhKLG6aqVn', 'streets')
     const breakpointCtx = useContext(BreakpointContext)
-
+    
     return (
         <Map
             provider={maptilerProvider}
             dprs={[1, 2]}
-            defaultCenter={[42.384, 12.613]}
+            defaultCenter={!boatPosition.includes(null) ? boatPosition : defaultCenter}
             defaultZoom={6}
             mouseEvents={false}
             touchEvents={false}
@@ -28,4 +30,4 @@ const BoatMapPosition = ({boatPosition}) => {
     )
 }
 
-export default BoatMapPosition;
+export default React.memo(BoatMapPosition);

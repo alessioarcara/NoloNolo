@@ -17,4 +17,4 @@ const PriceFilter = ({minPrice, maxPrice, maxValue, dispatch}) => {
     );
 }
 
-export default PriceFilter;
+export default React.memo(PriceFilter);

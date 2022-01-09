@@ -1,3 +1,4 @@
+import React from "react";
 import RegionIcon from "../../../UI/icons/RegionIcon";
 import classes from "./BoatInfo.module.css";
 import CityIcon from "../../../UI/icons/CityIcon";
@@ -21,4 +22,4 @@ const BoatInfo = ({model, place}) => {
     );
 }
 
-export default BoatInfo;
+export default React.memo(BoatInfo);

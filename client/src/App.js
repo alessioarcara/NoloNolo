@@ -7,7 +7,7 @@ import Fallback from "./components/UI/Fallback/Fallback";
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Favorites = React.lazy(() => import('./pages/FavoritesPage'));
-const Auth = React.lazy(() => import('./pages/AuthPage'))
+const Auth = React.lazy(() => import('./pages/AuthPage'));
 const Profile = React.lazy(() => import('./pages/ProfilePage'));
 const Results = React.lazy(() => import('./pages/ResultsPage'));
 const Advertisement = React.lazy(() => import('./pages/AdvertisementPage'));

@@ -15,4 +15,4 @@ const Footer = React.forwardRef((props, ref) => {
     );
 });
 
-export default Footer;
+export default React.memo(Footer);

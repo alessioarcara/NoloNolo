@@ -1,3 +1,4 @@
+import React from "react";
 import {useNavigate} from 'react-router-dom';
 import classes from './PlaceCard.module.css';
 
@@ -19,4 +20,4 @@ const PlaceCard = (props) => {
     );
 };
 
-export default PlaceCard;
+export default React.memo(PlaceCard);

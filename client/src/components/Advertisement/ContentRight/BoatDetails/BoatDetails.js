@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './BoatDetails.module.css';
 import GroupIcon from "../../../UI/icons/GroupIcon";
 import RulerIcon from "../../../UI/icons/RulerIcon";
@@ -7,15 +8,15 @@ import Sailboat from "../../../UI/icons/BoatIcons/SailBoatIcon";
 import Catamaran from "../../../UI/icons/BoatIcons/CatamaranIcon";
 import ShipyardIcon from "../../../UI/icons/ShipyardIcon";
 
+
+const boatTypes = {
+    motorboat: <Motorboat/>,
+    sailboat: <Sailboat/>,
+    catamaran: <Catamaran/>,
+    dinghy: <Dinghy/>
+}
+
 const BoatDetails = ({yard, length, maximumCapacity, type}) => {
-
-    const boatTypes = {
-        motorboat: <Motorboat/>,
-        sailboat: <Sailboat/>,
-        catamaran: <Catamaran/>,
-        dinghy: <Dinghy/>
-    }
-
     return (
         <>
             <div className={classes[`details-title`]}>Specifiche</div>
@@ -30,4 +31,4 @@ const BoatDetails = ({yard, length, maximumCapacity, type}) => {
     );
 }
 
-export default BoatDetails
+export default React.memo(BoatDetails)
