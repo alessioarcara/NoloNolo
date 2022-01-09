@@ -1,4 +1,4 @@
-import {useLocation, useParams} from "react-router-dom";
+import {Navigate, useLocation, useParams} from "react-router-dom";
 import React, {useCallback, useContext, useEffect, useReducer} from "react";
 import AuthContext from "../store/auth-context";
 import {advertisementReducer} from "../reducers/advertisementReducer";
@@ -32,9 +32,8 @@ const AdvertisementPage = () => {
         dispatch({type: SHOW_BILL})
     }, [])
 
-
     /* Requests to the server */
-    const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat} = useHttp(true)
+    const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat, error: fetchBoatError} = useHttp(true)
     const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
 
     useEffect(() => {
@@ -63,6 +62,10 @@ const AdvertisementPage = () => {
         /* setState instead of handlers for batching */
         dispatch({type: CLEAR_RENTAL})
     }, [boatId, rentBoat, boatPayload, state.startDate, state.endDate, token])
+
+    if (statusBoat === 'completed' && fetchBoatError) {
+        return <Navigate to={-1} replace/>
+    }
 
     return (
         <LetSuspense

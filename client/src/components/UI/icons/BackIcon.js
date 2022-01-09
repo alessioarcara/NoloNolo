@@ -1,3 +1,5 @@
+import React from "react";
+
 const BackIcon = () => {
     return (
         <svg
@@ -18,4 +20,4 @@ const BackIcon = () => {
     );
 };
 
-export default BackIcon;
+export default React.memo(BackIcon);

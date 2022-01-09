@@ -26,9 +26,9 @@ const SlideShow = ({images, children, classNameSlideShowSlider}) => {
         <div className={classes.slideshow}>
             <div className={`${classes.slideshowSlider} ${classNameSlideShowSlider ? classNameSlideShowSlider : ''}`}>
                 {images.length > 0 ?
-                circularSlice(images, start, end).map((place, index) => (
+                circularSlice(images, start, end).map((place) => (
                     <Images
-                        key={index}
+                        key={place}
                         images={place}
                     />
                 )) : <Images images={DEFAULT_BOAT_IMAGE}/>

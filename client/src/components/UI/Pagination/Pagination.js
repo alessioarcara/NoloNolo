@@ -76,4 +76,4 @@ const Pagination = ({dataCount, dataLimit = 10, currentPage, setCurrentPage}) =>
     );
 }
 
-export default Pagination;
+export default React.memo(Pagination);

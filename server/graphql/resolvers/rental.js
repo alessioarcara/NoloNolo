@@ -134,7 +134,7 @@ module.exports = {
 
             return problem ?
                 { updateRentalProblem: problem } :
-                { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id}) }
+                { updateRentalData: transformRental({...rental._doc, boat: rental.boat._id}, true) }
         } catch (err) { throw new Error(`Can't update rental. ${err}`)}
     }),
     backdateRental: authenticated(authorization('admin')(async (args) => {

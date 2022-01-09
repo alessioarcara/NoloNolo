@@ -17,4 +17,4 @@ const Images = ({images, imageLoadedHandler}) => {
     );
 };
 
-export default Images;
+export default React.memo(Images);

@@ -37,8 +37,7 @@ module.exports = {
                 },
             )
             if (!boat) return {publishReviewProblem: isAlreadyPublished}
-
-            return {publishReviewData: transformReview(boat.reviews.toObject().slice(-1)[0])}
+            return {publishReviewData: transformReview(boat.reviews.toObject().slice(-1)[0], rental.boat)}
         } catch (err) {
             throw new Error(`Can't publish review. ${err}`)
         }
