@@ -90,8 +90,12 @@
 }
 
 @media only screen and (max-width: 768px) {
+    .header-datepicker {
+        position: static;
+    }
     .day-picker {
-        margin-top: 8rem;
+        overflow-y: scroll;
+        max-height: 65vh;
     }
 }
 
