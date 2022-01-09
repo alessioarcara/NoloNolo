@@ -1,7 +1,6 @@
-/* ------------------------------ Callbacks Utils --------------------------------- */
-
 import {IMAGE_PATH} from "./constants";
 
+/* ------------------------------ Callbacks Utils --------------------------------- */
 export const throttle = (callback, delay) => {
     let wait = false;
     return () => {
@@ -44,7 +43,6 @@ export const formatDate = (date) =>
 export const formatDayMonthYearDate = (date, options) => new Date(date).toLocaleDateString("it-IT", options);
 
 /* ---------------------------------- Dates Utils ---------------------------------- */
-
 /* Date sorting: Così facendo viene ordinato l'array padre, utilizzando slice() prima di sort si ordina solo la variabile */
 export const dateSorting = (object, growing = false) => {
     return growing ?
@@ -59,6 +57,9 @@ export const rangeDate = ((startDate, endDate) => {
 
 export const daysLate = (startDate, endDate, redeliveryDate) =>
     Math.max(0, (rangeDate(startDate, redeliveryDate) - rangeDate(startDate, endDate)))
+
+export const rentedDatesExceptUserDates = (rentedDates, userStartDate, userEndDate) =>
+    rentedDates ? rentedDates.filter(rentedDate => rentedDate.from !== userStartDate && rentedDate.to !== userEndDate) : []
 
 /* ------------------------------- Components Utils --------------------------------- */
 export const averageReviews = (reviews => reviews.reduce((sum, {rating}) => sum + rating, 0) / reviews.length);
@@ -110,6 +111,5 @@ export const parseMutationResponse = (setState, applyData, navigate, applyWhere)
 };
 
 /* ----------------------------------- Image Utils ---------------------------------- */
-
 export const getImagePath = (userObject) => `${IMAGE_PATH}${userObject.substring(1)}`
 

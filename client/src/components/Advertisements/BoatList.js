@@ -1,7 +1,7 @@
 import Boat from "./Boat";
 
 const BoatList = ({boats}) => {
-    return boats?.map(boat => (
+    return boats && boats?.map(boat => (
         <Boat
             key={boat._id}
             id={boat._id}

@@ -93,7 +93,7 @@ const AdvertisementAdministrationCard = ({
                             <span className="card-title">{model}</span>
                             <div className={classes['average-reviews-container']}>
                                 <StarIcon/>
-                                <span>{reviews.length > 0 && averageReviews(reviews)}</span>
+                                <span>{reviews.length > 0 && averageReviews(reviews).toFixed(2)}</span>
                                 <span>{`(${reviews.length})`}</span>
                             </div>
                         </div>

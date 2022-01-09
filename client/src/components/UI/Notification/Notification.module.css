@@ -1,0 +1,52 @@
+.notification {
+    position: fixed;
+    bottom: 1rem;
+    width: 50%;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    animation: slide-down 0.5s ease-out forwards;
+    z-index: 100;
+    left: 25%;
+    right: 25%;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 90%;
+}
+
+.default {
+    color: #FF2267;
+    box-shadow: rgba(255, 34, 103, 0.65) 0 0 0 2px;
+    background-color: white;
+}
+
+.error {
+    color: #962727;
+    box-shadow: rgba(150, 39, 39, 0.65) 0 0 0 2px;
+    background-color: #fda5a5;
+}
+
+.success {
+    color: #3e8317;
+    box-shadow: rgba(62, 131, 23, 0.65) 0 0 0 2px;
+    background-color: #b5dea8;
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .notification {
+        width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}

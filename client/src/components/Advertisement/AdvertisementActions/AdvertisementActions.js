@@ -5,7 +5,7 @@ import {useContext, useMemo} from "react";
 import AuthContext from "../../../store/auth-context";
 import Tooltip from "../../UI/Tooltip/Tooltip";
 
-const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowBill}) => {
+const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowConfirm}) => {
     const { isLoggedIn: isLogged } = useContext(AuthContext)
     const rangeDates = useMemo(() => rangeDate(startDate, endDate), [startDate, endDate])
 
@@ -24,7 +24,7 @@ const AdvertisementActions = ({dailyFee, fixedFee, startDate, endDate, onShowBil
             <Tooltip text="Prima di effettuare una prenotazione devi accedere" isShownTooltip={!isLogged} positionTop={false}>
                 <Button
                     className={`btn btn-outline-primary ${classes['confirm-btn']}`}
-                    onClick={onShowBill}
+                    onClick={onShowConfirm}
                     disabled={!startDate || !endDate || !isLogged || rangeDates === 0}
                 >
                     Prenota

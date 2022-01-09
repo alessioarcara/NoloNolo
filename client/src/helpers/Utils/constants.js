@@ -19,7 +19,7 @@ export const CHANGE_END_DATE = "CHANGE_END_DATE"
 export const CLEAR_DATES = "CLEAR_DATES"
 
 /* Constants advertisementReducer */
-export const SHOW_BILL = "SHOW_BILL"
+export const SHOW_CONFIRM = "SHOW_CONFIRM"
 export const SHOW_VISIBLE_CONTENT = "SHOW_VISIBLE_CONTENT"
 export const CLEAR_RENTAL = "CLEAR_RENTAL"
 

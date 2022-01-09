@@ -13,7 +13,8 @@ import SplitScreenLayout from "../components/UI/Layout/SplitScreenLayout/SplitSc
 import ContentRight from "../components/Advertisement/ContentRight/ContentRight";
 import ContentLeft from "../components/Advertisement/ContentLeft/ContentLeft";
 import AdvertisementActions from "../components/Advertisement/AdvertisementActions/AdvertisementActions";
-import {CLEAR_RENTAL, SHOW_BILL} from "../helpers/Utils/constants";
+import {CLEAR_RENTAL, SHOW_CONFIRM} from "../helpers/Utils/constants";
+import Notification from "../components/UI/Notification/Notification";
 
 const AdvertisementPage = () => {
     /* Data recovery */
@@ -23,18 +24,18 @@ const AdvertisementPage = () => {
 
     const [state, dispatch] = useReducer(advertisementReducer, {
         visibleContent: false,
-        isBillShow: false,
+        isConfirming: false,
         startDate: location.state && location.state.startUrlDate ? new Date(location.state.startUrlDate) : null,
         endDate: location.state && location.state.endUrlDate ? new Date(location.state.endUrlDate) : null
     })
 
-    const showBillHandler = useCallback(() => {
-        dispatch({type: SHOW_BILL})
+    const showConfirmHandler = useCallback(() => {
+        dispatch({type: SHOW_CONFIRM})
     }, [])
 
     /* Requests to the server */
     const {status: statusBoat, data: boatPayload, sendRequest: fetchBoat, error: fetchBoatError} = useHttp(true)
-    const {status: statusRental, data: rentalPayload, sendRequest: rentBoat} = useHttp(false)
+    const {status: statusRental, data: rentalPayload, sendRequest: rentBoat, error: rentBoatError} = useHttp(false)
 
     useEffect(() => {
         fetchBoat({body: body_advertisement({boatId})}, resData => resData)
@@ -68,6 +69,28 @@ const AdvertisementPage = () => {
     }
 
     return (
+        <>
+            {statusRental === 'completed' && !rentBoatError && !rentalPayload?.rentBoatProblem &&
+                <Notification message="Prenotazione riuscita" status="success"/>
+            }
+            {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
+                <Modal title="Errore"> {rentalPayload.rentBoatProblem} </Modal>
+            }
+            {state.isConfirming &&
+                <Modal
+                    title="Conferma prenotazione"
+                    closeModalHandler={showConfirmHandler}
+                >
+                    <InvoiceReport
+                        dailyFee={boatPayload.advertisement.hasAdvertisement.dailyFee}
+                        fixedFee={boatPayload.advertisement.hasAdvertisement.fixedFee}
+                        start={state.startDate}
+                        end={state.endDate}
+                        statusRental={statusRental}
+                        handleRentBoat={handleRentBoat}
+                    />
+                </Modal>
+            }
         <LetSuspense
             condition={statusBoat === 'completed'}
             placeholder={AdvertisementPlaceholder}
@@ -75,26 +98,6 @@ const AdvertisementPage = () => {
             checkOnce={true}
             initialDelay={400}
         >
-            {statusRental === 'completed' && rentalPayload && rentalPayload.rentBoatProblem &&
-            <Modal title="Errore">
-                {rentalPayload.rentBoatProblem}
-            </Modal>
-            }
-            {state.isBillShow &&
-            <Modal
-                title="Conferma prenotazione"
-                closeModalHandler={showBillHandler}
-            >
-                <InvoiceReport
-                    dailyFee={boatPayload.advertisement.hasAdvertisement.dailyFee}
-                    fixedFee={boatPayload.advertisement.hasAdvertisement.fixedFee}
-                    start={state.startDate}
-                    end={state.endDate}
-                    statusRental={statusRental}
-                    handleRentBoat={handleRentBoat}
-                />
-            </Modal>
-            }
             {boatPayload &&
             <SplitScreenLayout
                 contentRight={
@@ -130,12 +133,13 @@ const AdvertisementPage = () => {
                         fixedFee={boatPayload.advertisement.hasAdvertisement.fixedFee}
                         startDate={state.startDate}
                         endDate={state.endDate}
-                        onShowBill={showBillHandler}
+                        onShowConfirm={showConfirmHandler}
                     />
                 }
             />
             }
         </LetSuspense>
+        </>
     );
 };
 

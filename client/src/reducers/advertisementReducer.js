@@ -3,7 +3,7 @@ import {
     CHANGE_START_DATE,
     CLEAR_DATES,
     CLEAR_RENTAL,
-    SHOW_BILL,
+    SHOW_CONFIRM,
     SHOW_VISIBLE_CONTENT
 } from "../helpers/Utils/constants";
 
@@ -25,10 +25,10 @@ export const advertisementReducer = (state, {type, payload}) => {
                 startDate: null,
                 endDate: null
             }
-        case SHOW_BILL:
+        case SHOW_CONFIRM:
             return {
                 ...state,
-                isBillShow: !state.isBillShow
+                isConfirming: !state.isConfirming
             }
         case SHOW_VISIBLE_CONTENT:
             return {
@@ -40,12 +40,12 @@ export const advertisementReducer = (state, {type, payload}) => {
                 ...state,
                 startDate: null,
                 endDate: null,
-                isBillShow: false
+                isConfirming: false
             }
         default:
             return {
                 visibleContent: false,
-                isBillShow: false,
+                isConfirming: false,
                 startDate: null,
                 endDate: null,
             }
