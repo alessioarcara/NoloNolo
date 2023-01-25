@@ -1,0 +1,52 @@
+.avatar-container {
+    position: relative;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    box-shadow: 0.2rem 0.2rem 0.3rem rgba(0,0,0,0.5);
+}
+
+.avatar {
+    object-fit: cover;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.icon-container {
+    background-color: #efefef;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0.1rem;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    box-shadow: 0.15rem 0.15rem 0.3rem rgba(0,0,0,0.5);
+}
+
+.icon-container svg {
+    stroke: #3f3f3f;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.upload svg {
+    padding: 0;
+    stroke: lawngreen;
+    fill: lawngreen;
+}
+
+.upload {
+    border: 0;
+    background-color: transparent;
+    padding: 0.1rem;
+}
+
+@media only screen and (max-width: 568px) {
+    .avatar-container {
+        width: 4rem;
+        height: 4rem;
+    }
+}

@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Verdana', sans-serif;
+}
+
+html {
+  background-color: white;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.border-space {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.title {
+  font-family: 'Lobster', cursive;
+  font-size: 30px;
+  text-align: center;
+}
+
+.subtitle {
+  font-family: 'Lobster', cursive;
+  font-size: 1.55em;
+  margin-left: 1rem;
+  z-index: 2;
+  margin-top: 1rem;
+}
+
+.card-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: 2px;
+}
+
+/* Bottone primario */
+.btn {
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.425rem 1rem;
+  cursor: pointer;
+  transition: all 0.425s ease;
+}
+
+.btn:disabled,
+.btn:disabled:hover,
+.btn:disabled:active {
+  background-color: #ccc;
+  color: #3f3f3f;
+  border: 1px solid #ccc;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #FF2677;
+  border: 1px solid #FF2677;
+}
+
+.btn-primary:hover {
+  background-color: #FF2677;
+  color: #fff;
+  border: 1px solid;
+}
+
+.btn-outline-primary {
+  background-color: #FF2677;
+  color: #fff;
+  border: 1px solid #FF2677;
+}
+
+.btn-outline-primary:hover {
+  background-color: white;
+  color: #FF2677;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  text-decoration: underline;
+  border: 1px solid transparent;
+}
+
+/* Letter spacing subtitle generico */
+.filter-subtitle {
+  letter-spacing: 0.08rem;
+  font-size: 0.9rem;
+}
+
+/* Hide elements */
+.hide {
+  display: none !important;
+}

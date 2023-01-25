@@ -1,0 +1,41 @@
+.wrapper {
+    background-color: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-items: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.first-element {
+    grid-column: 1 / 2;
+    justify-self: start;
+    cursor: pointer;
+}
+
+.header-container svg {
+    width: 1.7rem;
+}
+
+.second-element {
+    grid-column: 2 / 3;
+}
+
+.third-element {
+    grid-column: 3 / 4;
+    justify-self: end;
+}

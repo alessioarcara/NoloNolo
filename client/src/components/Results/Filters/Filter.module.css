@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 4rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        overflow-y: scroll;
+        max-height: 350px;
+    }
+
+    .modal-footer > button {
+        width: 40%;
+    }
+}

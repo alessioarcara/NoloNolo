@@ -1,0 +1,73 @@
+.control {
+    display: flex;
+    flex-direction: column;
+}
+
+.control div {
+    font-weight: bold;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0.5rem;
+}
+
+.boatTypes input[type=radio]{
+    display: none;
+}
+
+.boatTypes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    justify-items: center;
+    gap: 1rem;
+}
+
+.boat-label {
+    border: 2px solid #ccc;
+    display: flex;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.325s ease;
+    align-items: center;
+}
+
+.boat-label svg {
+    height: 5rem;
+    width: 5rem;
+}
+
+.boatTypes .boat-label:hover {
+    border: 2px solid #3A3FF0;
+    background-color: #e9efff;
+}
+
+.boat-label svg path, .boat-label svg line {
+    fill: rgba(0, 0, 0, 0.4);
+    transition: all 0.325s ease;
+}
+
+.boatTypes .boat-label:hover svg path, .boatTypes .boat-label:hover svg line {
+    fill: #000;
+}
+
+input[type=radio]:checked + .boat-label svg path,
+input[type=radio]:checked + .boat-label svg line {
+    fill: #000;
+}
+
+input[type=radio]:checked + .boat-label {
+    border: 2px solid #3A3FF0;
+    background-color: #e9efff;
+}
+
+@media only screen and (min-width: 768px) {
+    .control {
+        gap: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .boatTypes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,30 @@
+.actions {
+    display: flex;
+    justify-content: space-evenly;
+    /*margin-top: 4rem;*/
+}
+
+.btn-first , .btn-second {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    font-size: 1em;
+    font-weight: bold;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+.btn-first:disabled,
+.btn-second:disabled {
+    background-color: #ccc;
+    color: #3f3f3f;
+    text-decoration: none;
+    border-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-first {
+    color: #000;
+    background-color: transparent;
+    text-decoration: underline;
+    border: 0;
+}

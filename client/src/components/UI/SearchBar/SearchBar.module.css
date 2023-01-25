@@ -1,0 +1,72 @@
+.search-active {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(6px);
+}
+
+.search-active > div {
+    border: 1px solid #DDDDDDFF;
+}
+
+.search-active > div > input[type=search],
+.search-active > div {
+    background-color: #F7F7F7FF;
+}
+
+.search {
+    background: linear-gradient(90deg, #F9FDFF, #B2DAF4, #CBEAFE, #5EBAE3, #83C5E8, #9ACCE7, #67BDDE, #008EAC, #0185AC, #048CB4);
+}
+
+.background-searchbar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0.03rem;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.search-bar {
+    display: flex;
+    flex: 1;
+    font-size: 14px;
+    height: 3rem;
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);*/
+    background-color: #fff;
+    border-radius: 2rem;
+    margin: 0.8rem;
+    padding: 0.05rem 0.05rem 0.05rem 1rem;
+}
+
+.search-bar > svg {
+    color: #b1a4a4;
+    width: 1.6rem;
+}
+
+div > input[type=search] {
+    color: black;
+    flex: 8;
+    border: none;
+    margin: 0.7rem;
+    outline: none;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+div > input[type=search]::-webkit-search-cancel-button {
+    position: relative;
+    right: 6px;
+/*    -webkit-appearance: none;*/
+/*    height: 20px;*/
+/*    width: 20px;*/
+/*    color: #9e9d9d;*/
+/*    border-radius:10px;*/
+/*    background: red;*/
+}
+
+@media only screen and (max-width: 768px) {
+    .search {
+        background: linear-gradient(90deg, #CDE7F6, #54ADD9, #72BCDF, #9ED0EB, #68B4D6);
+    }
+}

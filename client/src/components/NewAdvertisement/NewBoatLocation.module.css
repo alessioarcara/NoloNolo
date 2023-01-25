@@ -1,0 +1,39 @@
+.title {
+    background-color: black;
+    color: white;
+    border-radius: 0.5rem;
+    box-shadow: rgba(3, 102, 214, 0.3) 0 0 0 3px;
+    position: absolute;
+    padding: 0.5rem;
+    z-index: 1;
+    transform: translateY(100%);
+}
+
+.inputs {
+    height: 100%;
+    padding: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .layout {
+        height: 100%;
+        font-size: 0.8em;
+    }
+
+    .inputs {
+        padding: 1rem;
+    }
+
+    .leftLayout {
+        height: 45vh;
+        font-size: 0.8em;
+    }
+
+    .rightLayout {
+        width: 100%;
+        height: 55vh;
+        justify-content: flex-start;
+        margin-top: -1.2rem;
+        z-index: 1;
+    }
+}

@@ -1,0 +1,32 @@
+.delete-account-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.warning-text {
+    font-size: 0.9em;
+    color: #8d8989;
+}
+
+.delete-btn {
+    font-size: 0.9em;
+    border: 0;
+    background-color: #fff;
+    color: #FF2267;
+    text-decoration: underline;
+    width: fit-content;
+    cursor: pointer;
+    transition: color 0.425s ease-out;
+}
+
+.delete-btn:hover {
+    color: black;
+}
+
+@media only screen and (max-width: 768px) {
+    .delete-account-container {
+        margin-top: 5rem;
+    }
+}

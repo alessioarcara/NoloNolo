@@ -1,0 +1,59 @@
+.reviews-title {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0.5rem;
+}
+
+.reviews-info {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.list-container {
+    overflow-x: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.left-arrow, .right-arrow {
+    position: absolute;
+    width: 1.7rem;
+    height: 1.7rem;
+    top: 50%;
+    bottom: 50%;
+    border-radius: 50%;
+    background-color: #efefef;
+    cursor: pointer;
+    transition: all 0.325s ease;
+    z-index: 1;
+}
+
+.left-arrow {
+    left: -1rem;
+}
+
+.right-arrow {
+    right: -1rem;
+}
+
+.left-arrow:hover, .right-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.left-arrow svg, .right-arrow svg {
+    width: 1.7rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .left-arrow, .right-arrow {
+        display: none;
+    }
+}

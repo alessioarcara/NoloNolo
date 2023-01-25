@@ -1,0 +1,27 @@
+input[type=radio] {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.star-container {
+    pointer-events: none;
+}
+
+.star-container-pointer {
+    cursor: pointer;
+}
+
+.star-active-color svg {
+    fill: #FF2267;
+    stroke: #FF2267;
+}
+
+.star-color svg {
+    fill: #fff;
+    stroke: #FF2267;
+}
+
+.no-review svg {
+    fill: #d0cece;
+    stroke: #d0cece;
+}

@@ -1,0 +1,27 @@
+.passengers-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.passengers-count {
+    font-size: 0.8rem;
+}
+
+.add-btn, .rmv-btn {
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.325);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.325s ease;
+}
+
+.add-btn:hover, .rmv-btn:hover {
+    color: rgba(0, 0, 0, 0.725);
+    border-color: rgba(0, 0, 0, 0.725);
+}

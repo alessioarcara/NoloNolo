@@ -1,0 +1,24 @@
+.footer {
+    background-color: #efefef;
+    width: 100%;
+    padding: 1.5rem 0 1.5rem 0;
+    border-top: 2px solid rgb(221, 221, 221);
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.footer svg {
+    width: 1.2rem;
+}
+
+.grid-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    color: #8d8989;
+}
+
+@media only screen and (max-width: 768px) {
+    .grid-footer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

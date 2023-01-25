@@ -1,0 +1,65 @@
+.auth {
+    width: 95%;
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 50rem;
+}
+
+.auth h1 {
+    text-align: center;
+}
+
+.actions {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.actions button {
+    cursor: pointer;
+    font: inherit;
+    color: #FF2677;
+    background-color: white;
+    border: 1px solid #FF2677;
+    border-radius: 6px;
+    padding: 0.5rem 2.5rem;
+    width: 100%;
+}
+
+.actions button:hover {
+    background-color: #FF2677;
+    color: white;
+}
+
+.actions .toggle {
+    margin-top: 2rem;
+    background-color: transparent;
+    color: #FF2677;
+    border: none;
+    padding: 0.15rem 1.5rem;
+    text-decoration: underline;
+}
+
+.actions .toggle:hover {
+    background-color: transparent;
+    color: #FF2677;
+    opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+    .auth {
+        margin: 4rem auto;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    }
+
+    .auth h1 {
+        text-align: left;
+    }
+
+    .actions button {
+        width: auto;
+        flex-direction: row;
+    }
+}

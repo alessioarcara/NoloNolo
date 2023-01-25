@@ -1,0 +1,90 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin: 1rem 0;}
+
+.input > div {
+    font-weight: bold;
+    flex: 1;
+    color: #464646;
+    margin-bottom: 0.5rem;
+}
+
+.error-text {
+    color: #b40e0e;
+}
+
+.multiple-images-upload {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.multiple-images-upload input[type=file] {
+    display: none;
+}
+
+.container {
+    position: relative;
+}
+
+.image-container {
+    width: 10rem;
+    height: 10rem;
+}
+
+.image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    border: 0;
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.add-images-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(0, 0, 0, 0.5);
+    width: 10rem;
+    height: 10rem;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.add-images-container svg {
+    width: 4rem;
+}
+
+.add-images-container:hover {
+    border-color: #3A3FF0;
+    background: #e9efff;
+}
+
+.add-images-container:hover svg {
+    animation: growing 0.725s forwards;
+}
+
+@keyframes growing {
+    0% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
