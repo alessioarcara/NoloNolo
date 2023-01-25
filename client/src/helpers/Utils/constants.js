@@ -1,5 +1,5 @@
-export const GRAPHQL_API_URL = "http://localhost:3010/api"
-export const IMAGE_PATH = "http://localhost:3010"
+export const GRAPHQL_API_URL = "https://nolonolo.herokuapp.com:3010/api"
+export const IMAGE_PATH = "https://nolonolo.herokuapp.com:3010"
 export const NOMINATIM_BASE_URL = 'https://nominatim.openstreetmap.org/search?format=json&'
 export const DEFAULT_BOAT_IMAGE = `${IMAGE_PATH}/public/images/default-boat.png`
 export const DEFAULT_AVATAR = `${IMAGE_PATH}/public/images/default.jpg`
